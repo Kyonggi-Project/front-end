@@ -1,23 +1,28 @@
+import "./Signup.css";
+
 function Signup() {
-  return(
-    <div>
-        <div>
-        <h1>Create an account</h1>
-        <p>Choose one of the option to go</p>
-        <div>
-            <input type="text" placeholder="id" className="input-field"/>
+    return (
+        <div className="signup-form">
+            <div>
+                <h1 className="signup-title">Create an account</h1>
+                <p className="option">Choose one of the option to go</p>
+                <div>
+                    <input type="text" placeholder="Name" className="input-box" />
+                </div>
+                <div>
+                    <input type="text" placeholder="Nickname" className="input-box" />
+                </div>
+                <div>
+                    <input type="email" placeholder="Email" className="input-box" />
+                </div>
+                <div>
+                    <input type="password" placeholder="Password" className="input-box" />
+                </div>
+                <p className="a-text">Already have an account? <a href='/login' className="login-link">Login</a></p>
+                <button className="button">Signup</button>
+            </div>
         </div>
-        <div>
-            <input type="email" placeholder="email" className="input-field"/>
-        </div>
-        <div>
-            <input type="password" placeholder="password" className="input-field"/>
-        </div>
-        <p>Already have an account? <a href='/login'>Login</a></p>
-        <button>Signup</button>
-        </div>
-    </div>
-);
+    );
 }
 
 export default Signup;
