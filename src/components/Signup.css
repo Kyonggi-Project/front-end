@@ -80,6 +80,10 @@ body {
   color: #FFFFFF;
 }
 
+.button:hover {
+  background-color: #8AC0FF;
+}
+
 /* Create account */
 .c-text {
   font-size: 3vw; /* 상대적인 크기로 변경 */
