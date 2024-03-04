@@ -1,30 +1,22 @@
-import './App.css';
-import Signup from './components/Signup';
-import { RouterProvider, createBrowserRouter, Outlet } from 'react-router-dom';
-function App() {
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Header from "./components/Header.jsx";
+import Main from "./components/Main.jsx";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
 
-  const router = createBrowserRouter([
-    {
-      path: '/',
-      element: <Outlet />,
-      children: [
-        {
-          path: '',
-          element: <p>Home</p>,
-        },
-        {
-          path: 'signup',
-          element: <Signup />,
-        },
-        {
-          path: 'login',
-          element: <p>Login Page</p>,
-        }
-      ],
-    },
-  ]);
+function App() {
   return (
-    <RouterProvider router={router} />
+    <Router>
+      <div>
+        <Header />
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
