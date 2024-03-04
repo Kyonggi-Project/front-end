@@ -2,8 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header.jsx";
 import Main from "./components/Main.jsx";
-import Login from "./components/Login.jsx";
-import Signup from "./components/Signup.jsx";
+import Login from './components/Login';
+import Signup from './components/Signup';
 import { AuthProvider } from "./components/AuthContext";
 
 function App() {

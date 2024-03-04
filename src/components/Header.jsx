@@ -1,12 +1,9 @@
-import React from "react";
-import styles from "./Header.module.css";
-import logoImage from "../logo.png";
-import { Link } from "react-router-dom";
-import { useAuth } from "./AuthContext";
+import React from 'react';
+import styles from './Header.module.css'; 
+import logoImage from '../logo.png';
+import { Link } from 'react-router-dom';
 
 function Header() {
-  const { isLoggedIn, logout } = useAuth();
-
   return (
     <header>
       <div className={styles.logo}>
@@ -16,34 +13,15 @@ function Header() {
       </div>
       <nav>
         <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/services">Services</Link>
-          </li>
-          <li>
-            <Link to="/contact">Contact</Link>
-          </li>
-          <li>
-            <Link to="/blog">Blog</Link>
-          </li>
+          <li><a href="/">Home</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/services">Services</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/blog">Blog</a></li>
         </ul>
       </nav>
       <div className={styles.userActions}>
-        {isLoggedIn ? (
-          <>
-            <span>Welcome, User!</span>
-            <button onClick={logout}>Logout</button>
-          </>
-        ) : (
-          <>
-            <Link to="/login">Log-in </Link> | <Link to="/mypage"> Mypage</Link>
-          </>
-        )}
+        <a href="/login">Log-in</a> / <a href="/mypage">Mypage</a>
       </div>
     </header>
   );
