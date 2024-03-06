@@ -1,4 +1,4 @@
-Figma
+## Figma
 https://www.figma.com/file/D5zXtbjMYi2EbXCnHFl2dS/%EC%8B%AC%EC%BA%A1?type=design&node-id=1669-162202&mode=design&t=eaVc0f4TEDNhpPWt-0
 
 # Getting Started with Create React App
