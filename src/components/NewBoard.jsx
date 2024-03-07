@@ -31,7 +31,7 @@ export default function NewBoard() {
     console.log(formData);
 
     //post 요청
-    axios.post(/*백엔드 요청 주소*/'http://localhost:8080/newboard', formData)
+    axios.post(/*백엔드 요청 주소*/'http://localhost:8080/write', formData)
       .then(response => {
         console.log('응답 데이터:', response.data);
         alert("입력되었습니다.");
