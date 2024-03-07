@@ -78,6 +78,7 @@ body {
   background: #0366FF;
   border-radius: 8px;
   color: #FFFFFF;
+  border: none;
 }
 
 .button:hover {
