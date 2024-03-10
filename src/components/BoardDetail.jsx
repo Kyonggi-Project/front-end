@@ -31,9 +31,9 @@ export default function BoardDetail() {
   return (
     <div className='board_details'>
       <p className='text'>Title</p>
-      <p>{details_dummy.title}</p>
+      <p className='text-box'>{details_dummy.title}</p>
       <p className='text'>Content</p>
-      <p>{details_dummy.content}</p>
+      <p className='text-box'>{details_dummy.content}</p>
       <button className='buttons'>Edit</button>
       <button className='buttons'>Delete</button>
     </div>

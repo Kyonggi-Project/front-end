@@ -35,28 +35,12 @@
   background-color: #8AC0FF;
 }
 
-/* input-box */
-.input-box1 {
-  box-sizing: border-box;
-
-  width: 100%;
-  background: #FFFFFF;
-  border: 2px solid #E5E5E5;
+/* text-box */
+.text-box {
+  background-color: #FFFFFF;
   border-radius: 7px;
-  height: 2rem;
-  margin-bottom: 2rem;
+  padding-bottom: 2rem;
 }
-
-.input-box2 {
-  box-sizing: border-box;
-
-  width: 100%;
-  background: #FFFFFF;
-  border: 2px solid #E5E5E5;
-  border-radius: 7px;
-  height: 20rem;
-}
-
 
 /* Title, Content */
 .text {
