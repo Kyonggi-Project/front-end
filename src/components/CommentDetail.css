@@ -1,0 +1,280 @@
+/* 9 */
+.body {
+  position: flex;
+  width: 100%;
+  height: 100vh;
+  background: #EEF2F5;
+}
+
+.board_details {
+  position: relative;
+  width: 90%;
+  margin: auto;
+  margin-top: 70px;
+}
+
+/* edit, delete button */
+.user_buttons {
+  background: #0366FF;
+  border-radius: 5px;
+  width: 90px;
+  border: none;
+
+  font-family: 'IBM Plex Serif';
+  font-style: normal;
+  font-weight: 40;
+  font-size: 22px;
+  line-height: 25px;
+  text-align: center;
+  color: #FFFFFF;
+  margin-left: 10px;
+  float: right;
+  text-decoration: none;
+}
+
+.buttons:hover {
+  background-color: #8AC0FF;
+}
+
+/* text-box */
+.text-box {
+  font-family: 'Inter';
+  font-style: normal;
+  background-color: #FFFFFF;
+  border-radius: 7px;
+  padding-bottom: 2rem;
+  color: #4A4A4A;
+  font-size: 15px;
+}
+
+
+/* Title, Content */
+.text {
+
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 25px;
+  line-height: 19px;
+  display: flex;
+  align-items: center;
+
+  color: #000000;
+  margin-bottom: 1rem;
+}
+
+
+/* Link → 정영훈 */
+.profile_link {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 6px;
+  line-height: 16px;
+  /* identical to box height, or 267% */
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.2px;
+
+  color: #4A4A4A;
+}
+
+
+/* Link 사이트 링크 사진*/
+.link_img1 {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  left: 39.56px;
+  top: calc(50% - 12px/2 - 40px);
+}
+
+
+/* Link → 5 years ago */
+.text1 {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 9.75px;
+  line-height: 16px;
+  /* identical to box height, or 164% */
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.2px;
+
+  color: #787878;
+}
+
+
+/* Link 프로필 사진*/
+/*
+box-sizing: border-box;
+
+position: absolute;
+width: 20px;
+height: 20px;
+left: 0px;
+top: calc(50% - 20px/2 - 40px);
+
+border: 1px solid rgba(0, 0, 0, 0.08);
+border-radius: 10px;
+*/
+
+/* div.css-1jf0gpy-ProfilePhotoImage-ProfilePhotoImage 프로필 사진*/
+.profile_img {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  left: calc(50% - 18px/2);
+  top: calc(50% - 18px/2);
+
+  /*background: url(.jpg);*/
+}
+
+
+/* Link → Harry Potter and the Prisoner of Azkaban */
+.movie_name {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13.5px;
+  line-height: 21px;
+  /* identical to box height, or 156% */
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.6px;
+
+  color: #000000;
+}
+
+
+/* Link → Movies · 2004 */
+.movie_release {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 10.125px;
+  line-height: 16px;
+  /* identical to box height, or 158% */
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.2px;
+
+  color: #787878;
+}
+
+
+/* div.css-a5x33s-StyledUserActionStatus-makeTypeFunction 평점 박스 */
+.movie_grade_box {
+  box-sizing: border-box;
+  background: #FFFFFF;
+  border: 1px solid #EAEAEA;
+  border-radius: 13px;
+}
+
+/* 5.0 */
+.movie_grade_box p {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 11.0703px;
+  line-height: 16px;
+  /* identical to box height, or 145% */
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.3px;
+
+  color: #4A4A4A;
+}
+
+
+/* Section → Link 영화 이미지 링크*/
+.movie_image {
+  box-sizing: border-box;
+  background: #F8F8F8;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  border-radius: 3px;
+  /*background: url(.jpg);*/
+}
+
+
+
+
+
+.totals_box {
+  display: flex;
+}
+/* Section → 101 likes */
+.totals {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 11.0625px;
+  line-height: 16px;
+  /* identical to box height, or 145% */
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.2px;
+  margin-right: 1rem;
+
+  color: #787878;
+}
+
+.button2_box {
+  display: flex;
+}
+/* Section → Section → Button → Like */
+/*like, share, comment button*/
+.button2 {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 25px;
+  /* identical to box height, or 126% */
+  text-align: center;
+  width: calc(100% / 3);
+  border: none;
+  background-color: #EEF2F5;
+}
+
+.button2:hover {
+  background-color: #e5e5e5;
+  font-weight: bold;
+}
+
+
+/* Section → Section → Button */
+/*
+position: absolute;
+width: 1px;
+height: 14px;
+right: 746px;
+top: 301.5px;
+
+background: #F0F0F0;
+*/
+
+
+/* Section → Section → Separator */
+.separator {
+  box-sizing: border-box;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+.separator2 {
+  border-right: 1px solid #e1e1e1;
+}
+
+/* Section → List → replyEmptyMessage */
+.empty_msg_text {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  /* identical to box height, or 157% */
+  text-align: center;
+
+  color: #A0A0A0;
+}

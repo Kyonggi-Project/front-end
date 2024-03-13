@@ -5,7 +5,7 @@ import Main from "./components/Main.jsx";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 import NewBoard from "./components/NewBoard.jsx";
-import BoardDetail from "./components/BoardDetail.jsx";
+import BoardDetail from "./components/CommentDetail.jsx";
 
 function App() {
   return (
@@ -17,7 +17,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/write" element={<NewBoard />}/>
-          <Route path="/board" element={<BoardDetail />} />
+          <Route path="/comments" element={<BoardDetail />} />
         </Routes>
       </div>
     </Router>
