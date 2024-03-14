@@ -72,3 +72,16 @@
   color: #000000;
   margin-bottom: 1rem;
 }
+
+.rating {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 19px;
+  display: flex;
+  align-items: center;
+
+  color: #000000;
+  margin-bottom: 1rem;
+}

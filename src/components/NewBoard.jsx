@@ -2,18 +2,20 @@ import { useState } from 'react';
 import './NewBoard.css';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import StarRating from './stars/Star';
 
 export default function NewBoard() {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [rating, setRating] = useState(0);
   const navigate = useNavigate();
-
-  function handleTitle(event) {
-    setTitle(event.target.value);
-  }
 
   function handleContent(event) {
     setContent(event.target.value);
+  }
+
+  function handleRating(value) {
+    setRating(value);
   }
 
   function handleCancel() {
@@ -25,8 +27,8 @@ export default function NewBoard() {
 
     // 폼 데이터 수집
     const formData = {
-      title: event.target.elements.title.value,
       content: event.target.elements.content.value,
+      rating: rating,
     };
     console.log(formData);
 
@@ -35,7 +37,7 @@ export default function NewBoard() {
       .then(response => {
         console.log('응답 데이터:', response.data);
         alert("입력되었습니다.");
-        navigate('..');
+        navigate('/board');
       })
       .catch(error => {
         alert("오류");
@@ -46,19 +48,13 @@ export default function NewBoard() {
   return (
     <div>
       <form onSubmit={handleSbumit} className='newboard-form'>
+        <h2>영화 제목</h2>
         <div>
-          <label className='text'>Title</label>
-          <input
-            type="text"
-            name="title"
-            value={title}
-            onChange={handleTitle}
-            required
-            className='input-box1'
-          />
+          <label className='rating'>평점</label>
+          <StarRating onChange={handleRating} />
         </div>
         <div>
-          <label className='text'>Content</label>
+          <label className='text'>Comment</label>
           <textarea
             name="content"
             value={content}

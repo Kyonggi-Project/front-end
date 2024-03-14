@@ -1,0 +1,29 @@
+.star-rating-container {
+  display: flex;
+  padding-bottom: 1rem;
+}
+
+.star-container {
+  position: relative;
+  overflow: hidden;
+  padding-right: 0.5rem;
+}
+
+.left-half, .right-half {
+  position: relative;
+  width: 50%;
+  height: 100%;
+}
+
+.left-half {
+  left: 0;
+}
+
+.right-half {
+  left: 50%;
+}
+
+.star {
+  position: relative;
+  font-size: 30px;
+}

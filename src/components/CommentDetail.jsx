@@ -12,7 +12,7 @@ export default function BoardDetail() {
   const navigate = useNavigate();
 
   const [isUser, setIsUser] = useState(false);
-  const [isEmptyText, setIsEmptyText] = useState(true);
+  const [isEmptyText, setIsEmptyText] = useState(false);
 
   const id = param.boardId;
 
@@ -46,6 +46,7 @@ export default function BoardDetail() {
   return (
     <div className='board_details'>
       <div>
+        <img src="" alt="영화 이미지" />
         <p className='text'>{details_dummy.title}</p>
         <p className='movie_release'>2013</p>
       </div>
