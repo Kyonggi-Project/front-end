@@ -45,10 +45,19 @@ export default function BoardDetail() {
 
   return (
     <div className='board_details'>
-      <p className='text'>{details_dummy.title}</p>
+      <div>
+        <p className='text'>{details_dummy.title}</p>
+        <p className='movie_release'>2013</p>
+      </div>
+      <div className='profile'>
+        <img src="" alt="작성자 프로필" className='profile_img' />
+        <p className='profile_name'>작성자 이름</p>
+      </div>
+
+      <p className='movie_grade_box'>4.5</p>
       <p className='text-box'>{details_dummy.content}</p>
       {/* 해당 글을 쓴 사람이면 보이게*/}
-      { isUser &&
+      {isUser &&
         <>
           <button className='user_buttons' onClick={DeleteHandler}>Delete</button>
           <Link to="edit" className='user_buttons'>Edit</Link>
@@ -70,12 +79,12 @@ export default function BoardDetail() {
       <div className='separator'></div>
 
       {/* 댓글 없을 시 */}
-      { isEmptyText &&
+      {isEmptyText &&
         <p className='empty_msg_text'>댓글 없음</p>
       }
 
       {/* 댓글 있을 시 */}
-      { !isEmptyText && 
+      {!isEmptyText &&
         <CommentList />
       }
     </div>
