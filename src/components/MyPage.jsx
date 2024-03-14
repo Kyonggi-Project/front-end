@@ -16,7 +16,7 @@ function MyPage() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8081/userinfo")
+      .get("http://localhost:8088/userinfo")
       .then((response) => {
         const data = response.data;
         setUserInfo({
@@ -38,7 +38,7 @@ function MyPage() {
     formData.append("userId", userInfo.userId);
 
     axios
-      .post("http://localhost:8081/upload", formData)
+      .post("http://localhost:8088/upload", formData)
       .then(() => {
         const imageUrl = URL.createObjectURL(newProfilePicture);
         setUserInfo((prevUserInfo) => ({
@@ -81,7 +81,7 @@ function MyPage() {
         newPassword: password,
       };
       axios
-        .post("http://localhost:8081/change-password", formData)
+        .post("http://localhost:8088/change-password", formData)
         .then((response) => {
           alert("Password changed successfully.");
         })
