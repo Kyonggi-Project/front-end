@@ -1,6 +1,9 @@
 ## Figma
 https://www.figma.com/file/D5zXtbjMYi2EbXCnHFl2dS/%EC%8B%AC%EC%BA%A1?type=design&node-id=1669-162202&mode=design&t=eaVc0f4TEDNhpPWt-0
 
+## react-icons
+npm install react-icons --save
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
