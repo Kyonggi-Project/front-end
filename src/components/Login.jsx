@@ -2,6 +2,8 @@ import React from 'react';
 import './Login.css';
 import { useState } from 'react';
 import axios from "axios";
+import { GoogleLogin } from "@react-oauth/google";
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 export default function Login() {
   const [enteredValues, setEnteredValues] = useState({
@@ -31,18 +33,6 @@ export default function Login() {
     }))
   }
 
-  function handleGoogleLogin() {
-    const googleAuthUrl = 'https://accounts.google.com/o/oauth2/v2/auth?' + new URLSearchParams({
-      response_type: 'token',
-      client_id: 'YOUR_CLIENT_ID', // Google 개발자 콘솔에서 생성한 클라이언트 ID
-      redirect_uri: window.location.origin, // 로그인 후 리다이렉트될 URL
-      scope: 'profile email', // 요청할 권한(scope) 설정
-    });
-
-    // Google OAuth 페이지로 리다이렉트
-    window.location.href = googleAuthUrl;
-  }
-
   return (
     <div className='rectangle-1'>
       <div className='rectangle-2'>
@@ -68,7 +58,16 @@ export default function Login() {
             />
           </div>
           <p className='additional-text'>Don't you have a account? <a href='/signup'>Sign up</a></p>
-          <button className='oauth-button' onClick={handleGoogleLogin}><img src='../google.png' width='30px' alt='google' /></button>
+          <GoogleOAuthProvider clientId='{clientId}'>
+                <GoogleLogin
+                    onSuccess={(res) => {
+                        console.log(res);
+                    }}
+                    onFailure={(err) => {
+                        console.log(err);
+                    }}
+                />
+          </GoogleOAuthProvider>
           <button className="login-button" onClick={handleSubmit}>Login</button>
         </form>
       </div>

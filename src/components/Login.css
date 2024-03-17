@@ -117,6 +117,7 @@ body {
     font-weight: 40;
     font-size: 15px; /* 폰트 사이즈 조정 */
     line-height: 20px;
+    margin-bottom: 10%;
     color: #545454;
 }
 
@@ -164,4 +165,5 @@ body {
     border-radius: 5px;
     cursor: pointer;
     box-sizing: border-box;
+    margin-top: 5%;
 }
