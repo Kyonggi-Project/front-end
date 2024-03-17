@@ -13,7 +13,15 @@ export default function Login() {
     event.preventDefault();
 
     console.log(enteredValues);
-    axios.post('https://localhost:3000/login', enteredValues).then((res) => { console.log(res.data) })
+    axios.post('http://localhost:8080/login', JSON.stringify(enteredValues), {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then((res) => { console.log(res.data) })
+    .catch(error => {
+      alert("로그인에 실패했습니다.");
+      console.error('데이터 전송 오류:', error);
+    });
   }
 
   function handlelInputChange(identifier, value) {
