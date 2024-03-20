@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios"
-import profilePicture from '../images/profilePicture.png';
+import profilePicture from '../../images/profilePicture.png';
 
 
 import "./MyPage.css";

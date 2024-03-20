@@ -2,10 +2,10 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header.jsx";
 import Main from "./components/Main.jsx";
-import Login from "./components/Login";
-import Signup from "./components/Signup";
-import UserProfile from "./components/UserProfile.jsx";
-import MyPage from "./components/MyPage.jsx";
+import Login from "./pages/login/Login.jsx";
+import Signup from "./pages/signup/Signup.jsx";
+import UserProfile from "./pages/profile/UserProfile.jsx";
+import MyPage from "./pages/mypage/MyPage.jsx";
 
 import Board from './components/Board.jsx'
 import NewBoard from "./components/NewBoard.jsx";
