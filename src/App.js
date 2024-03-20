@@ -8,6 +8,9 @@ import UserProfile from "./components/UserProfile.jsx";
 import MyPage from "./components/MyPage.jsx";
 
 import Board from './components/Board.jsx'
+import NewBoard from "./components/NewBoard.jsx";
+import CommentDetail from "./components/CommentDetail.jsx";
+import MovieDetail from "./components/MovieDetail.jsx";
 
 function App() {
   return (
@@ -21,6 +24,9 @@ function App() {
           <Route path="/userprofile" element={<UserProfile />} />
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/board" element={<Board />} />
+          <Route path="/write" element={<NewBoard />}/>
+          <Route path="/comments" element={<CommentDetail />} />
+          <Route path="/details" element={<MovieDetail />}/>
         </Routes>
       </div>
     </Router>
