@@ -4,9 +4,10 @@ import Header from "./components/Header.jsx";
 import Main from "./components/Main.jsx";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
-// import MyPage from "./components/MyPage.jsx";
 import UserProfile from "./components/UserProfile.jsx";
 import MyPage from "./components/MyPage.jsx";
+
+import Board from './components/Board.jsx'
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/userprofile" element={<UserProfile />} />
           <Route path="/mypage" element={<MyPage />} />
+          <Route path="/board" element={<Board />} />
         </Routes>
       </div>
     </Router>

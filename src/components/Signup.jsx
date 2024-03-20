@@ -12,19 +12,23 @@ function Signup() {
   
     // 폼 데이터 수집
     const formData = {
-      name: event.target.elements.name.value,
-      nickname: event.target.elements.nickname.value,
+      //name: event.target.elements.name.value,
       email: event.target.elements.email.value,
-      password: event.target.elements.password.value
+      password: event.target.elements.password.value,
+      nickname: event.target.elements.nickname.value,
     };
     console.log(formData);
   
     // axios를 사용하여 POST 요청 보내기
-    axios.post(/*백엔드 요청 주소*/'http://localhost:8080/signup', formData)
+    axios.post(/*백엔드 요청 주소*/'http://localhost:8080/api/user/signup', JSON.stringify(formData), {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
       .then(response => {
         console.log('응답 데이터:', response.data);
         alert("회원가입 되었습니다.");
-        navigate('/');
+        navigate('/login');
       })
       .catch(error => {
         alert("아이디, 비밀번호 혹은 이메일을 확인해주세요.");
