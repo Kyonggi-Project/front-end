@@ -4,6 +4,8 @@ import Header from "./components/Header.jsx";
 import Main from "./components/Main.jsx";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+// import MyPage from "./components/MyPage.jsx";
+import UserProfile from "./components/UserProfile.jsx";
 import MyPage from "./components/MyPage.jsx";
 
 function App() {
@@ -15,6 +17,7 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/userprofile" element={<UserProfile />} />
           <Route path="/mypage" element={<MyPage />} />
         </Routes>
       </div>

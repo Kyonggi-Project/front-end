@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import defaultProfilePicture from "../defaultprofile.png";
+import axios from "axios"
+import profilePicture from '../images/profilePicture.png';
+
+
 import "./MyPage.css";
 
 function MyPage() {
@@ -8,7 +10,7 @@ function MyPage() {
     name: "",
     birthday: "",
     email: "",
-    profilePicture: defaultProfilePicture,
+    profilePicture: profilePicture,
   });
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
