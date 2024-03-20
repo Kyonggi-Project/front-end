@@ -1,0 +1,121 @@
+.ll {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+/* Section → List → Item */
+.comment_board {
+  position: relative;
+  background: #ffffff;
+  border-radius: 6px;
+  width: 19rem;
+  height: 18.5rem;
+}
+
+
+/* div.css-jqudug */
+.user_info_box {
+  border-bottom: 1px solid #E5E5E5;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 2.5rem;
+}
+
+
+/* mingi */
+.name {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 22px;
+  letter-spacing: -0.7px;
+  margin-left: 0.3rem;
+  color: #1F1F1F;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+
+
+/* div.css-k8a4hh */
+.user_img {
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  margin-left: 1rem;
+  width: 18px;
+  height: 18px;
+}
+
+
+/* div.css-31ods0 */
+.rating_box {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  background: #FFFFFF;
+  border: 3px solid #EAEAEA;
+  border-radius: 13px;
+  margin-left: 7rem;
+  height: 1.5rem;
+  width: 2.5rem;
+}
+
+/* 2.5 */
+.rating3 {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 19px;
+  /* identical to box height, or 162% */
+  letter-spacing: -0.3px;
+  margin-left: 0.6rem;
+  color: #4A4A4A;
+}
+
+
+/* div.css-kt2ht6 */
+.like_reply_box {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
+  border-width: 1px 0px;
+  border-style: solid;
+  border-color: #E5E5E5;
+  display: flex;
+}
+
+
+/* Emphasis → 0 */
+.like_number {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13.2344px;
+  line-height: 19px;
+  /* identical to box height, or 144% */
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.3px;
+  color: #787878;
+  margin-left: 1rem;
+}
+
+
+/* 원작에 비해 실망스러웠다 */
+.comment2 {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 24px;
+  /* identical to box height, or 160% */
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.2px;
+  color: #000000;
+  margin-left: 1rem;
+}

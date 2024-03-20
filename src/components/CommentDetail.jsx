@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import './CommentDetail.css';
 import axios from 'axios';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import CommentList from './CommentList';
+import ReplyList from './ReplyList';
 
-export default function BoardDetail() {
+export default function CommentDetail() {
 
   const [details, setDetails] = useState();
   const param = useParams();
@@ -86,7 +86,7 @@ export default function BoardDetail() {
 
       {/* 댓글 있을 시 */}
       {!isEmptyText &&
-        <CommentList />
+        <ReplyList />
       }
     </div>
   );

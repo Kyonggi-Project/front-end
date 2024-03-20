@@ -1,11 +1,22 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 /*npm install react-icons --save 이거 해야 적용됨*/
 import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';
 import './Star.css';
+import { useLocation } from 'react-router-dom';
 
 export default function StarRating() {
   const [score, setScore] = useState(0);
   const [scoreFixed, setScoreFixed] = useState(score);
+
+  const [isScoreVisible, setIsScoreVisible] = useState(false);
+  const location = useLocation();
+  useEffect(() => {
+    if (location.pathname === '/write') {
+      setIsScoreVisible(true);
+    } else {
+      setIsScoreVisible(false);
+    }
+  }, [location.pathname]);
 
   const handleStarEnter = (idx, clientX) => {
     const rect = document.getElementById(`star-${idx}`).getBoundingClientRect();
@@ -45,7 +56,9 @@ export default function StarRating() {
           </div>
         </div>
       ))}
-      <span className="current-score">{score}</span>
+      {isScoreVisible &&
+        <span className="current-score">{score}</span>
+      }
     </div>
   );
 }
