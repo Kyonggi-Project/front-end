@@ -4,22 +4,28 @@ import { useState } from 'react';
 import axios from "axios";
 import { GoogleLogin } from "@react-oauth/google";
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { redirect } from 'react-router-dom';
 
 export default function Login() {
   const [enteredValues, setEnteredValues] = useState({
-    email: '',
+    username: '',
     password: '',
   });
+
+  const formData = new FormData();
+  formData.append('username', enteredValues.username);
+  formData.append('password', enteredValues.password);
 
   function handleSubmit(event) {
     event.preventDefault();
 
     console.log(enteredValues);
-    axios.post('http://localhost:8080/login', JSON.stringify(enteredValues), {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then((res) => { console.log(res.data) })
+    axios.post('http://localhost:8080/login', formData)
+    .then((res) => { 
+      console.log(res.data); 
+      alert("로그인");
+      redirect("..");
+    })
     .catch(error => {
       alert("로그인에 실패했습니다.");
       console.error('데이터 전송 오류:', error);
@@ -41,11 +47,11 @@ export default function Login() {
         <form>
           <div>
             <input
-              type="email"
-              placeholder="email"
+              type="username"
+              placeholder="username"
               className="input-field"
-              onChange={(event) => handlelInputChange('email', event.target.value)}
-              value={enteredValues.email}
+              onChange={(event) => handlelInputChange('username', event.target.value)}
+              value={enteredValues.username}
             />
           </div>
           <div>
