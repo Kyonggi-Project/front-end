@@ -21,7 +21,7 @@ function Header() {
         </ul>
       </nav>
       <div className={styles.userActions}>
-      <Link to="/login">Login</Link> / <Link to="/mypage">Mypage</Link>
+      <Link to="/login">Login</Link> / <Link to="/userprofile">Mypage</Link>
       </div>
     </header>
   );
