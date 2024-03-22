@@ -1,6 +1,6 @@
 import { useState } from "react";
 import StarRating from "./stars/Star";
-import CommentList from "./CommentList";
+import CommentList from "../pages/comment/CommentList";
 import './MovieDetail.css'
 
 export default function MovieDetail() {

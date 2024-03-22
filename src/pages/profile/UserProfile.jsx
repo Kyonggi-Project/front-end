@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./UserProfile.css";
-import EditModal from "../../components/EditModal";
+import EditModal from "../profile/EditModal";
 import defaultProfile from "../../images/profilePicture.png";
 
 const UserProfile = () => {

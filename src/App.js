@@ -9,7 +9,7 @@ import MyPage from "./pages/mypage/MyPage.jsx";
 
 import Board from './components/Board.jsx'
 import NewBoard from "./components/NewBoard.jsx";
-import CommentDetail from "./components/CommentDetail.jsx";
+import CommentDetail from "./pages/comment//CommentDetail.jsx";
 import MovieDetail from "./components/MovieDetail.jsx";
 
 function App() {
