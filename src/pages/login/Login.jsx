@@ -4,9 +4,10 @@ import { useState } from 'react';
 import axios from "axios";
 import { GoogleLogin } from "@react-oauth/google";
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import { redirect } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
 
 export default function Login() {
+  const navigate = useNavigate();
   const [enteredValues, setEnteredValues] = useState({
     username: '',
     password: '',
@@ -20,11 +21,11 @@ export default function Login() {
     event.preventDefault();
 
     console.log(enteredValues);
-    axios.post('http://localhost:8080/login', formData)
+    axios.post('http://localhost:8080/login', formData, {withCredentials: true})
     .then((res) => { 
       console.log(res.data); 
       alert("로그인");
-      redirect("..");
+      window.location.href = res.data.redirectUrl;
     })
     .catch(error => {
       alert("로그인에 실패했습니다.");
