@@ -67,7 +67,7 @@ body {
 }
 
 /* Rectangle 7 */
-.button {
+.button1 {
   width: 100%; /* 상대적인 크기로 변경 */
   max-width: 800px; /* 최대 너비 지정 */
   margin: 20px auto; /* 수평 가운데 정렬 및 간격 추가 */

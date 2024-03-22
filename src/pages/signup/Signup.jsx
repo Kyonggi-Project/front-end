@@ -55,9 +55,9 @@ function Signup() {
         </div>
         <p className="a-text">
           Already have an account?
-          <Link to="/login"className="login-link">Login</Link>
+          <Link to="/login" className="login-link">Login</Link>
         </p>
-        <button className="button" type="submit">
+        <button className="button1" type="submit">
           Signup
         </button>
       </div>
