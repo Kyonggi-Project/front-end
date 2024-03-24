@@ -1,12 +1,12 @@
 import React, { useState,useEffect } from 'react';
 import './Main.css';
-import Pamyo from '../image/pamyo.jpg';
-import Spyfamily from '../image/spyfamily.jpg';
-import Dune from '../image/dune.jpg';
-import Malo from '../image/malo.jpg';
-import Mukspark from '../image/mukspark.jpg';
-import Concert from '../image/concert.jpg';
-import Whatslove from '../image/whatslove.jpg';
+import Pamyo from '../images/pamyo.jpg';
+import Spyfamily from '../images/spyfamily.jpg';
+import Dune from '../images/dune.jpg';
+import Malo from '../images/malo.jpg';
+import Mukspark from '../images/mukspark.jpg';
+import Concert from '../images/concert.jpg';
+import Whatslove from '../images/whatslove.jpg';
 import JsonData from './movie.json';
 
 const imagePaths = [Pamyo, Spyfamily, Dune, Malo, Mukspark, Concert, Whatslove];
