@@ -13,7 +13,7 @@ export default function MovieDetail() {
       </div>
       <div className="all">
         <section className="section1">
-          <img src="pamyo.jpg" alt="포스터" className="poster" />
+          <img src="logo192.png" alt="포스터" className="poster" />
           <p className="avg">평균 : {1}</p>
         </section>
         <section className="section3">

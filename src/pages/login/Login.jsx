@@ -5,6 +5,7 @@ import axios from "axios";
 import { GoogleLogin } from "@react-oauth/google";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const [enteredValues, setEnteredValues] = useState({
@@ -43,13 +44,13 @@ export default function Login() {
     <form className="login-form">
       <div>
         <h1 className="login-title">Login to your account</h1>
-        <p className='option-text'>enter email and password</p>
+        <p className='option'>enter email and password</p>
         <form>
           <div>
             <input
               type="username"
               placeholder="username"
-              className="input-field"
+              className="input-box"
               onChange={(event) => handlelInputChange('username', event.target.value)}
               value={enteredValues.username}
             />
@@ -58,12 +59,12 @@ export default function Login() {
             <input
               type="password"
               placeholder="password"
-              className="input-field"
+              className="input-box"
               onChange={(event) => handlelInputChange('password', event.target.value)}
               value={enteredValues.password}
             />
           </div>
-          <p className='additional-text'>Don't you have a account? <a href='/signup'>Sign up</a></p>
+          <p className='a-text'>Don't you have a account? <Link to="/signup" className="signup-link">Sign up</Link></p>
           <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
             <GoogleLogin
               onSuccess={(res) => {
