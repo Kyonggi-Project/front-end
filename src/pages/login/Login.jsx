@@ -4,10 +4,9 @@ import { useState } from 'react';
 import axios from "axios";
 import { GoogleLogin } from "@react-oauth/google";
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import { redirect, useNavigate } from 'react-router-dom';
+import { jwtDecode } from 'jwt-decode';
 
 export default function Login() {
-  const navigate = useNavigate();
   const [enteredValues, setEnteredValues] = useState({
     username: '',
     password: '',
@@ -21,23 +20,23 @@ export default function Login() {
     event.preventDefault();
 
     console.log(enteredValues);
-    axios.post('http://localhost:8080/login', formData, {withCredentials: true})
-    .then((res) => { 
-      console.log(res.data); 
-      alert("로그인");
-      window.location.href = res.data.redirectUrl;
-    })
-    .catch(error => {
-      alert("로그인에 실패했습니다.");
-      console.error('데이터 전송 오류:', error);
-    });
+    axios.post('http://localhost:8080/login', formData, { withCredentials: true })
+      .then((res) => {
+        console.log(res.data);
+        alert("로그인");
+        window.location.href = res.data.redirectUrl;
+      })
+      .catch(error => {
+        alert("로그인에 실패했습니다.");
+        console.error('데이터 전송 오류:', error);
+      });
   }
 
   function handlelInputChange(identifier, value) {
     setEnteredValues(prevValues => ({
       ...prevValues,
       [identifier]: value
-    }))
+    }));
   }
 
   return (
@@ -65,15 +64,16 @@ export default function Login() {
             />
           </div>
           <p className='additional-text'>Don't you have a account? <a href='/signup'>Sign up</a></p>
-          <GoogleOAuthProvider clientId='{clientId}'>
-                <GoogleLogin
-                    onSuccess={(res) => {
-                        console.log(res);
-                    }}
-                    onFailure={(err) => {
-                        console.log(err);
-                    }}
-                />
+          <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
+            <GoogleLogin
+              onSuccess={(res) => {
+                console.log(res);
+                console.log(jwtDecode(res.credential)); //credential 디코딩
+              }}
+              onFailure={(err) => {
+                console.log(err);
+              }}
+            />
           </GoogleOAuthProvider>
           <button className="login-button" onClick={handleSubmit}>Login</button>
         </form>
