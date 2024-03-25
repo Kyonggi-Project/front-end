@@ -1,169 +1,109 @@
-/* 로그인 페이지 */
+/* 회원가입 페이지 */
 body {
     position: flex;
-    width: 100%; /* 전체 화면 너비에 맞춤 */
-    height: 100vh; /* 전체 화면 높이 */
+    width: 100%;
+    min-height: 100vh; /*크기 설정 */
     background: #EEF2F5;
-    margin: 0;
-}
-
-/* Rectangle 1 */
-.rectangle-1 {
-    position: absolute;
-    margin-top: 30px;
-    width: 30%; /* 너비 */
-    height: 70vh; /* 높이 */
-    left: 35%; /* 가운데 정렬 */
-    top: 15%; /* 가운데 정렬 */
+  }
+  
+  /* Rectangle 1 */
+  .login-form {
+    position: relative;
+    width: 30%; /* 상대적인 크기로 변경 */
+    max-width: 800px; /* 최대 너비 지정 */
+    height: 70vh;
+    margin: 100px auto; /* 수평 가운데 정렬 */
+    padding: 20px; /* 내부 여백 추가 */
     background: #FFFFFF;
     box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
     border-radius: 15px;
-}
-
-/* Back to your digital life */
-.login-title {
+  }
+  
+  /* Create an account */
+  .login-title {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 700;
-    font-size: 2rem; /* 폰트 사이즈 조정 */
-    line-height: 1px;
+    font-size: 2rem; /* 상대적인 크기로 변경 */
+    line-height: 1.2;
     color: #292929;
     opacity: 0.7;
-}
-@media screen and (max-width: 1300px) and (min-width: 1201px) {
-    .login-title {
-        font-size: 1.5rem; /* 작은 화면에 맞게 글꼴 크기 줄임 */
-    }
-}
-@media screen and (max-width: 1200px) and (min-width: 1030px) {
-    .login-title {
-        font-size: 1.3rem; /* 작은 화면에 맞게 글꼴 크기 줄임 */
-    }
-    .input-field {
-        max-width: 85%;
-    }
-    .login-button {
-        max-width: 85%;
-    }
-}
-@media screen and (max-width: 1030px) and (min-width: 670px) {
-    .login-title {
-        font-size: 1rem; /* 작은 화면에 맞게 글꼴 크기 줄임 */
-    }
-    .input-field {
-        max-width: 75%;
-    }
-    .login-button {
-        max-width: 75%;
-    }
-}
-@media screen and (max-width: 670px){
-    .login-title {
-        font-size: 0.9rem; /* 작은 화면에 맞게 글꼴 크기 줄임 */
-    }
-    .input-field {
-        max-width: 65%;
-    }
-    .login-button {
-        max-width: 75%;
-    }
-}
-
-/* Choose one of the option to go */
-.option-text {
+  }
+  
+  /* Choose one of the option to go */
+  .option {
     font-family: 'IBM Plex Serif';
-    margin-bottom: 40px;
     font-style: normal;
     font-weight: 40;
-    font-size: 15px; /* 폰트 사이즈 조정 */
-    line-height: 20px;
+    font-size: 15px; /* 상대적인 크기로 변경 */
+    line-height: 1.2;
     color: #545454;
-}
-
-/* Rectangle 2, Rectangle 3 */
-.rectangle {
-    box-sizing: border-box;
-    margin: auto;
-    width: 70%; /* 너비 */
-    height: 10vh; /* 높이 */
-    
+  }
+  
+  /* Rectangle 2, Rectangle 3 */
+  .input-box {
+    width: 90%; /* 상대적인 크기로 변경 */
+    max-width: 800px; /* 최대 너비 지정 */
+    margin: 5px auto; /* 수평 가운데 정렬 및 간격 추가 */
+    padding: 10px; /* 내부 여백 추가 */
     background: #FFFFFF;
+    border: 1px solid #4e8195;
     border-radius: 10px;
-}
-
-.rectangle-2 {
-    position: absolute;
-    top: 5%;
-    left: 7%;
-    right: 7%;
-}
-
-/* get@ziontutorial.com, Password */
-.input-field {
-    width: 100%;
-    margin-bottom: 20px;
-    padding: 15px;
-    font-size: 1.2rem;
-    color: #4F4F4F;
-    border: 1px solid #E6E6E6;
-    border-radius: 5px;
-    box-sizing: border-box;
-}
-
-/* Don`t have an account? */
-.additional-text {
-    font-family: 'IBM Plex Serif';
+    font-size: 15px;
     font-style: normal;
     font-weight: 40;
-    font-size: 15px; /* 폰트 사이즈 조정 */
-    line-height: 20px;
-    margin-bottom: 10%;
-    color: #545454;
-}
-
-/* Following */
-.following-text {
-    font-family: 'Poppins';
+  }
+  
+  .input-box2 {
+    border: 1px solid #E6E6E6;
+  }
+  
+  /* Line 1 */
+  .line {
+    width: 90%; /* 상대적인 크기로 변경 */
+    max-width: 800px; /* 최대 너비 지정 */
+    margin: 20px auto; /* 수평 가운데 정렬 및 간격 추가 */
+    border: 0.5px solid #E7E7E7;
+  }
+  
+  /* Rectangle 7 */
+  .login-button {
+    width: 100%; /* 상대적인 크기로 변경 */
+    max-width: 800px; /* 최대 너비 지정 */
+    margin: 20px auto; /* 수평 가운데 정렬 및 간격 추가 */
+    height: 53px; /* 높이 자동 조정 */
+    font-family: "IBM Plex Serif";
     font-style: normal;
-    font-weight: 600;
-    font-size: 2rem; /* 폰트 사이즈 조정 */
-    line-height: 24px;
-    text-align: center;
-    letter-spacing: 0.1px;
-    color: #0062FF;
-}
-
-.oauth-button {
-    font-family: 'IBM Plex Serif';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 1rem; /* 폰트 사이즈 조정 */
-    line-height: 43px;
-    margin-bottom: 15px;
-    padding-top: 15px;
-    width: 30%;
-    text-align: center;
-    color: #FFFFFF;
-    background-color: #FFFFFF;
-    border-color: #292929;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-/* Log in */
-.login-button {
-    font-family: 'IBM Plex Serif';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 1rem; /* 폰트 사이즈 조정 */
-    line-height: 53px;
-    width: 100%;
-    text-align: center;
-    color: #FFFFFF;
-    background-color: #0366FF;
+    font-weight:  bold;
+    background: #4e8195;
+    border-radius: 8px;
+    color: #E6F6FF;
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    box-sizing: border-box;
-    margin-top: 5%;
-}
+    font-size: 15px;
+  }
+  .button:hover {
+    background-color: #8AC0FF;
+  }
+  
+  /* Create account */
+  .c-text {
+    font-size: 3vw; /* 상대적인 크기로 변경 */
+  }
+  
+  /* Already have an account? */
+  .a-text {
+    font-family: Poppins;
+    color: #969AB8;
+    font-style: normal;
+    font-size: 1rem; /* 상대적인 크기로 변경 */
+    margin-top: 20px; /* 간격 추가 */
+    font-weight: 40;
+  }
+  
+  /* Following */
+  .signup-link {
+    font-family: Poppins;
+    color: #4e8195; /* 상대적인 크기로 변경 */
+    font-style: normal;
+    font-weight: 400;
+  }

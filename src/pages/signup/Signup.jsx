@@ -54,8 +54,7 @@ function Signup() {
           <input type="password" placeholder="Password" className="input-box" required name="password"/>
         </div>
         <p className="a-text">
-          Already have an account?
-          <Link to="/login" className="login-link">Login</Link>
+          Already have an account? <Link to="/login" className="login-link">Login</Link>
         </p>
         <button className="button1" type="submit">
           Signup

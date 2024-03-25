@@ -11,6 +11,7 @@ import Board from './components/Board.jsx'
 import NewBoard from "./components/NewBoard.jsx";
 import CommentDetail from "./pages/comment//CommentDetail.jsx";
 import MovieDetail from "./components/MovieDetail.jsx";
+import './App.css';
 
 function App() {
   return (

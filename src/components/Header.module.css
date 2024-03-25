@@ -2,15 +2,16 @@
 
 /* 전체 헤더 스타일 */
 header {
-    padding: 10px 20px;
+    padding: 8px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #4e8195;
   }
   
   /* 로고 이미지 스타일 */
   .logo img {
-    width: 100px; /* 로고 이미지의 너비 조정 */
+    width: 140px; /* 로고 이미지의 너비 조정 */
     height: auto; /* 로고 이미지의 높이 자동 조정 */
   }
   
@@ -27,7 +28,7 @@ header {
   }
   
   nav ul li a {
-    color: #464646;
+    color: #E6F6FF;
     font-weight: bold;
     text-decoration: none;
     
@@ -39,7 +40,7 @@ header {
   
   /* 로그인/마이페이지 메뉴 스타일 */
   .userActions a {
-    color: #464646;
+    color: #E6F6FF;
     font-weight: bold;
     text-decoration: none;
   }

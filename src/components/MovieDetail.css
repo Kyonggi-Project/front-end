@@ -2,7 +2,10 @@
 .movie_img {
   position: relative;
   height: 40vh;
-  background: url(../../public/logo192.png);
+  background: url(../images/pamyo.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 40% 50%; 
   background-color: black;
   text-align: left;
   display: flex;
@@ -42,13 +45,14 @@
 
 /* div.e1dnb43p0 */
 .poster {
+  margin-left: 30px;
   box-sizing: border-box;
-  width: 30%;
+  width: 50%;
   background: #F8F8F8;
   border: 1px solid #D4D4D4;
   border-radius: 2px;
 
-  /* background: url(); */
+  background: url(../images/pamyo.jpg);
 }
 
 /* Section → Avg */
@@ -96,7 +100,7 @@
   font-weight: 400;
   font-size: 10px;
   line-height: 12px;
-  color: #8C8C8C;
+  color: #E6F6FF;
 }
 
 .avg_rating {
@@ -111,7 +115,7 @@
   font-size: 30px;
   line-height: 42px;
   margin-top: 0;
-  color: #888888;
+  color: #E6F6FF;
   margin-bottom: 0;
 }
 
@@ -123,12 +127,11 @@
   font-weight: 500;
   font-size: 10px;
   line-height: 12px;
-  color: #8C8C8C;
+  color: #E6F6FF;
 }
 
 .separator {
   box-sizing: border-box;
-  border-top: 1px solid #e1e1e1;
   width: 90%;
 
 }
@@ -150,9 +153,10 @@
 .buttons_icon {
   width: 50%;
   font-size: 14px;
-  line-height: 25px;
+  line-height: 40px;
   border: none;
-  background-color: #EEF2F5;
+  background-color: #4e8195;
+  color: #E6F6FF ;
 
 }
 
@@ -171,7 +175,7 @@
   display: flex;
   align-items: center;
 
-  color: #8C8C8C;
+  color: #E6F6FF;
   margin-top: 3rem;
 }
 
@@ -191,5 +195,5 @@
 }
 
 .list {
-  width: 95%;
+  width: 100%;
 }

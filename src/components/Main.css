@@ -5,6 +5,7 @@
     align-items: flex-start; /* 수직 상단 정렬 */
     padding: 0 10%; /* 좌우 10%의 패딩 적용 */
     box-sizing: border-box;
+    color: aliceblue;
   }
 
   .image-list {

@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Header.module.css'; 
-import logoImage from '../logo.png';
+import logoImage from '../logo9.png';
 import { Link } from 'react-router-dom';
 
 function Header() {
@@ -21,7 +21,7 @@ function Header() {
         </ul>
       </nav>
       <div className={styles.userActions}>
-      <Link to="/login">Login</Link> / <Link to="/userprofile">Mypage</Link>
+      <Link to="/login" style={{ marginRight: '10px' }}>Login</Link> <Link to="/userprofile">Mypage</Link>
       </div>
     </header>
   );

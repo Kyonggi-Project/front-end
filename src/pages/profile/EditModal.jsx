@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./EditModal.css"; // EditModal.css 파일에 위의 CSS를 복사하여 붙여넣어주세요
 
 const EditModal = ({ userInfo, closeModal, onSubmit }) => {
-  const [name, setName] = useState(userInfo.name || ""); 
+  const [name, setName] = useState(userInfo.name || "");
   const [nickname, setNickname] = useState(userInfo.nickname || "");
   const [password, setPassword] = useState(userInfo.password || "");
   const [birthday, setBirthday] = useState(userInfo.birthday || "");
@@ -16,9 +16,9 @@ const EditModal = ({ userInfo, closeModal, onSubmit }) => {
   return (
     <div className="modal">
       <div className="modal-content">
-        <span className="close" onClick={closeModal}>
-          &times;
-        </span>
+        <button type="button" className="close-button" onClick={closeModal}>
+          X
+        </button>
         <h2>Edit Profile Information</h2>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
@@ -57,7 +57,7 @@ const EditModal = ({ userInfo, closeModal, onSubmit }) => {
               onChange={(e) => setBirthday(e.target.value)}
             />
           </div>
-          <button type="submit" className="button">
+          <button type="submit" className="edit-button">
             Save Changes
           </button>
         </form>
