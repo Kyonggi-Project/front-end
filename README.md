@@ -7,6 +7,10 @@ npm install react-icons --save
 ## google o-auth
 npm install @react-oauth/google@latest
 
+## env 파일 생성
+root 디렉토리에 .env 파일 생성
+REACT_APP_CLIENT_ID = 클라이언트 주소
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
