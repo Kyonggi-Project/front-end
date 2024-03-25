@@ -8,6 +8,39 @@
     color: aliceblue;
   }
 
+  .titlepage{
+    height: 25vh;
+    background: rgb(172,207,231);
+    background: linear-gradient(90deg, rgba(172,207,231,1) 0%, rgba(238,242,245,1) 35%, rgba(164,220,237,1) 88%, rgba(164,220,237,1) 90%, rgba(164,220,237,1) 94%, rgba(164,220,237,1) 100%);
+  }
+
+  .titlepage h1{
+    display: flex;
+    justify-content: center;
+    padding-top: 6vh;
+  }
+
+  .buttonbox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2vh;
+  }
+
+  .buttonbox button{
+    width: 25vh;
+    height: 7vh;
+    font-size: x-large;
+    border-radius: 4px;
+    font-weight: bold;
+    background-color: #0062FF;
+    border: none;
+    color: #eef2f5;
+  }
+  .buttonbox button:hover{
+    background-color: #0256df;
+  }
+
   .image-list {
     list-style-type: none;
     padding: 0;

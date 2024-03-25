@@ -3,11 +3,10 @@ import "./Login.css";
 import { useState } from "react";
 import axios from "axios";
 import { GoogleLogin } from "@react-oauth/google";
-import { GoogleOAuthProvider } from "@react-oauth/google";
-import { Link, redirect, useNavigate } from "react-router-dom";
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { jwtDecode } from 'jwt-decode';
 
 export default function Login() {
-  const navigate = useNavigate();
   const [enteredValues, setEnteredValues] = useState({
     username: "",
     password: "",
@@ -21,23 +20,22 @@ export default function Login() {
     event.preventDefault();
 
     console.log(enteredValues);
-    axios
-      .post("http://localhost:8080/login", formData, { withCredentials: true })
+    axios.post('http://localhost:8080/login', formData, { withCredentials: true })
       .then((res) => {
         console.log(res.data);
         alert("로그인");
         window.location.href = res.data.redirectUrl;
       })
-      .catch((error) => {
+      .catch(error => {
         alert("로그인에 실패했습니다.");
-        console.error("데이터 전송 오류:", error);
+        console.error('데이터 전송 오류:', error);
       });
   }
 
   function handlelInputChange(identifier, value) {
     setEnteredValues((prevValues) => ({
       ...prevValues,
-      [identifier]: value,
+      [identifier]: value
     }));
   }
 
@@ -45,45 +43,40 @@ export default function Login() {
     <form className="login-form">
       <div>
         <h1 className="login-title">Login to your account</h1>
-        <p className="option">enter email and password</p>
-        <div>
-          <input
-            type="username"
-            placeholder="username"
-            className="input-box"
-            onChange={(event) =>
-              handlelInputChange("username", event.target.value)
-            }
-            value={enteredValues.username}
-          />
-        </div>
-        <div>
-          <input
-            type="password"
-            placeholder="password"
-            className="input-box"
-            onChange={(event) =>
-              handlelInputChange("password", event.target.value)
-            }
-            value={enteredValues.password}
-          />
-        </div>
-        <p className="a-text">
-          Don't you have a account? <Link to="/signup" className="signup-link">Sign up</Link>
-        </p>
-        <GoogleOAuthProvider clientId="{clientId}" className="google-button">
-          <GoogleLogin
-            onSuccess={(res) => {
-              console.log(res);
-            }}
-            onFailure={(err) => {
-              console.log(err);
-            }}
-          />
-        </GoogleOAuthProvider>
-        <button className="login-button" onClick={handleSubmit}>
-          Login
-        </button>
+        <p className='option-text'>enter email and password</p>
+        <form>
+          <div>
+            <input
+              type="username"
+              placeholder="username"
+              className="input-field"
+              onChange={(event) => handlelInputChange('username', event.target.value)}
+              value={enteredValues.username}
+            />
+          </div>
+          <div>
+            <input
+              type="password"
+              placeholder="password"
+              className="input-field"
+              onChange={(event) => handlelInputChange('password', event.target.value)}
+              value={enteredValues.password}
+            />
+          </div>
+          <p className='additional-text'>Don't you have a account? <a href='/signup'>Sign up</a></p>
+          <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
+            <GoogleLogin
+              onSuccess={(res) => {
+                console.log(res);
+                console.log(jwtDecode(res.credential)); //credential 디코딩
+              }}
+              onFailure={(err) => {
+                console.log(err);
+              }}
+            />
+          </GoogleOAuthProvider>
+          <button className="login-button" onClick={handleSubmit}>Login</button>
+        </form>
       </div>
     </form>
   );
