@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect, useRef } from 'react';
 import './Main.css';
 import Pamyo from '../images/pamyo.jpg';
 import Spyfamily from '../images/spyfamily.jpg';
@@ -21,6 +21,16 @@ function Main() {
 
   const [recstartIndex, setRecstartIndex] = useState(0);
   const [recshowIndex, setRecshowIndex] = useState(0);
+
+  const modalRef = useRef(null);
+
+  const openModal = () => {
+      modalRef.current.style.display = 'block';
+  };
+
+  const closeModal = () => {
+      modalRef.current.style.display = 'none';
+  };
 
   const adjustNumImagesToShow = () => {
     const screenWidth = window.innerWidth;
@@ -71,6 +81,18 @@ function Main() {
 
   return (
     <>
+      <div className='titlepage'>
+        <h1>자신만의 작품을 추천받아보세요</h1>
+        <div className='buttonbox'>
+          <button onClick={openModal}>추천받기</button>
+        </div>
+      </div>
+      <dialog ref={modalRef} className="modal">
+          <div className="modal-content">
+              <span className="close" onClick={closeModal}>close</span>
+              <p>모달 내용</p>
+          </div>
+      </dialog>
       <div className="gallery-container">
       <div className="image-list-container">
       <h1 className='h1-name'>Ranking</h1>
@@ -81,9 +103,9 @@ function Main() {
             <a href="#">
               <div className="image-wrapper">
                 <span className="image-number">{startIndex+index+ 1}</span>
-                <img src={image.imagePath} alt={`Image ${startIndex + index + 1}`}/>
+                <a href={`/details?index=${index}`}><img src={image.imagePath} alt={`Image ${startIndex + index + 1}`}/></a>
               </div>
-              <div className='data-info'>{image.data.title}</div>
+              <div className='data-info'>{image.data.title}</div> 
               <div className='data-count'>{image.data.date} - {image.data.count}만명</div>
             </a>
           </li>
@@ -103,7 +125,7 @@ function Main() {
           <li key={index}>
             <a href="#">
               <div className="image-wrapper1"> 
-                <img src={image.imagePath} alt={`Image ${recstartIndex + index + 1}`} />
+                <a href={`/details?index=${index}`}><img src={image.imagePath} alt={`Image ${recstartIndex + index + 1}`} /></a>
               </div>
               <div className='data-info'>{image.data.title}</div>
               <div className='data-count'>{image.data.date} - {image.data.count}만명</div>
