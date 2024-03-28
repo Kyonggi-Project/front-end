@@ -1,7 +1,8 @@
 import { useState } from "react";
 import StarRating from "./stars/Star";
-import CommentList from "../pages/comment/CommentList";
+import CommentList from "../pages/comment/CommentList1";
 import './MovieDetail.css'
+import pamyo from '../images/pamyo.jpg';
 
 export default function MovieDetail() {
   return (
@@ -13,7 +14,7 @@ export default function MovieDetail() {
       </div>
       <div className="all">
         <section className="section1">
-          <img src="logo192.png" alt="포스터" className="poster" />
+          <img src={pamyo} alt="포스터" className="poster" />
           <p className="avg">평균 : {1}</p>
         </section>
         <section className="section3">

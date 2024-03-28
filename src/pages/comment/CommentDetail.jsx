@@ -3,6 +3,8 @@ import './CommentDetail.css';
 import axios from 'axios';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import ReplyList from './ReplyList';
+import profilePicture from "../../images/profilePicture.png";
+import SpyFamily from "../../images/spyfamily.jpg";
 
 export default function CommentDetail() {
 
@@ -38,6 +40,10 @@ export default function CommentDetail() {
     comments: 1,
   }
 
+  function EditHandler() {
+    navigate("/edit");
+  }
+
   function DeleteHandler() {
     navigate("..");
   }
@@ -45,13 +51,11 @@ export default function CommentDetail() {
 
   return (
     <div className='board_details'>
-      <div>
-        <img src="" alt="영화 이미지" />
-        <p className='text'>{details_dummy.title}</p>
-        <p className='movie_release'>2013</p>
-      </div>
+        <img src={SpyFamily} alt="영화 이미지" className='movie_image' />
+          <p className='text'>{details_dummy.title}</p>
+          <p className='movie_release'>2013</p>
       <div className='profile'>
-        <img src="" alt="작성자 프로필" className='profile_img' />
+        <img src={profilePicture} alt="작성자 프로필" className='profile_img' />
         <p className='profile_name'>작성자 이름</p>
       </div>
 
@@ -61,7 +65,7 @@ export default function CommentDetail() {
       {isUser &&
         <>
           <button className='user_buttons' onClick={DeleteHandler}>Delete</button>
-          <Link to="edit" className='user_buttons'>Edit</Link>
+          <button className='user_buttons' onClick={EditHandler}>Edit</button>
         </>
       }
 

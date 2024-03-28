@@ -1,5 +1,10 @@
+.wid {
+  max-width: 90%;
+  margin: auto;
+}
 .ll {
   display: flex;
+  flex-wrap: wrap;
   gap: 2rem;
   margin-bottom: 3rem;
 }
@@ -8,8 +13,8 @@
   position: relative;
   background: #ffffff;
   border-radius: 6px;
-  width: 19rem;
-  height: 18.5rem;
+  width: 17rem;
+  height: 16.5rem;
 }
 
 
@@ -54,10 +59,11 @@
   box-sizing: border-box;
   display: flex;
   align-items: center;
+  justify-content: center;
   background: #FFFFFF;
   border: 3px solid #EAEAEA;
   border-radius: 13px;
-  margin-left: 7rem;
+  margin-left: 9rem;
   height: 1.5rem;
   width: 2.5rem;
 }
@@ -71,7 +77,6 @@
   line-height: 19px;
   /* identical to box height, or 162% */
   letter-spacing: -0.3px;
-  margin-left: 0.6rem;
   color: #4A4A4A;
 }
 
@@ -118,4 +123,15 @@
   letter-spacing: -0.2px;
   color: #000000;
   margin-left: 1rem;
+}
+
+.more_button {
+  margin-top: 1rem;
+  margin-right: 2rem;
+  text-align: right;
+}
+
+.btn {
+  background-color: #4e8195;
+  color: #E6F6FF;
 }
