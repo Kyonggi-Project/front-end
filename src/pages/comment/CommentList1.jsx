@@ -21,29 +21,28 @@ export default function CommentList() {
     // map 함수로 구현
     <div className='wid'>
       <div className='more_button'>
-        <Link to="/">
+        <Link to="/list">
         <button className='btn'>더보기</button>
         </Link>
       </div>
-      <ul className='ll'>
-        {commentList.map((commentList, index) => (
+      <ul className='lli'>
+        {commentList.map((commentList) => (
           <>
-            <section className='comment_board' key={commentList.id}>
-              <div className='user_info_box'>
-                <img src={profilePicture} alt="프로필" className='user_img' />
-                <p className='name'>{commentList.author}</p>
-                <div className='rating_box'>
-                  <p className='rating3'>{commentList.rating}</p>
+            <section className='comment_board1' key={commentList.id}>
+              <div className='user_info_box1'>
+                <img src={profilePicture} alt="프로필" className='user_img1' />
+                <p className='name1'>{commentList.author}</p>
+                <div className='rating_box1'>
+                  <p className='rating31'>{commentList.rating}</p>
                 </div>
               </div>
-              <p className='comment2'>
+              <Link to={`/comments?index=${commentList.id}`} className='comment21'>
                 {commentList.content}
-              </p>
-              <div className='like_reply_box'>
-                <p className='like_number'>Like {commentList.like}</p>
-                <p className='like_number'>Reply {commentList.reply}</p>
+              </Link>
+              <div className='like_reply_box1'>
+                <p className='like_number1'>Like {commentList.like}</p>
+                <p className='like_number1'>Reply {commentList.reply}</p>
               </div>
-              {(index + 1) % 3 === 0 && <br />}
             </section>
           </>
         ))}

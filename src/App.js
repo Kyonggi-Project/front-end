@@ -9,9 +9,10 @@ import MyPage from "./pages/mypage/MyPage.jsx";
 
 import Board from './components/Board.jsx'
 import NewBoard from "./components/NewBoard.jsx";
-import CommentDetail from "./pages/comment//CommentDetail.jsx";
+import CommentDetail from "./pages/comment/CommentDetail.jsx";
 import MovieDetail from "./components/MovieDetail.jsx";
 import './App.css';
+import CommentApp from "./pages/CommentList/CommentList.jsx";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/write" element={<NewBoard />}/>
           <Route path="/comments" element={<CommentDetail />} />
           <Route path="/details" element={<MovieDetail />}/>
+          <Route path="/list" element={<CommentApp />}/>
         </Routes>
       </div>
     </Router>

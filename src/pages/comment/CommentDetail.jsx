@@ -51,9 +51,9 @@ export default function CommentDetail() {
 
   return (
     <div className='board_details'>
-        <img src={SpyFamily} alt="영화 이미지" className='movie_image' />
-          <p className='text'>{details_dummy.title}</p>
-          <p className='movie_release'>2013</p>
+      <img src={SpyFamily} alt="영화 이미지" className='movie_image' />
+      <p className='text'>{details_dummy.title}</p>
+      <p className='movie_release'>2013</p>
       <div className='profile'>
         <img src={profilePicture} alt="작성자 프로필" className='profile_img' />
         <p className='profile_name'>작성자 이름</p>
@@ -73,15 +73,15 @@ export default function CommentDetail() {
         <p className='totals'>좋아요 {details_dummy.likes}</p>
         <p className='totals'>댓글 {details_dummy.comments}</p>
       </div>
-      <div className='separator'></div>
-      <div className='button2_box'>
-        <button className='button2'>좋아요</button>
-        <hr className='separator2' />
-        <button className='button2'>댓글</button>
-        <hr className='separator2' />
-        <button className='button2'>공유</button>
-      </div>
-      <div className='separator'></div>
+        <div className='separator11' />
+        <div className='button2_box1'>
+          <button className='button2'>좋아요</button>
+          <hr className='separator22' />
+          <button className='button2'>댓글</button>
+          <hr className='separator22' />
+          <button className='button2'>공유</button>
+        </div>
+        <div className='separator11' />
 
       {/* 댓글 없을 시 */}
       {isEmptyText &&

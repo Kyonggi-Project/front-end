@@ -2,14 +2,16 @@
   max-width: 90%;
   margin: auto;
 }
-.ll {
+
+.lli {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
   margin-bottom: 3rem;
 }
+
 /* Section → List → Item */
-.comment_board {
+.comment_board1 {
   position: relative;
   background: #ffffff;
   border-radius: 6px;
@@ -19,7 +21,7 @@
 
 
 /* div.css-jqudug */
-.user_info_box {
+.user_info_box1 {
   border-bottom: 1px solid #E5E5E5;
   display: flex;
   align-items: center;
@@ -29,7 +31,7 @@
 
 
 /* mingi */
-.name {
+.name1 {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
@@ -44,7 +46,7 @@
 
 
 /* div.css-k8a4hh */
-.user_img {
+.user_img1 {
   box-sizing: border-box;
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 16px;
@@ -55,7 +57,7 @@
 
 
 /* div.css-31ods0 */
-.rating_box {
+.rating_box1 {
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -69,7 +71,7 @@
 }
 
 /* 2.5 */
-.rating3 {
+.rating31 {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
@@ -82,7 +84,7 @@
 
 
 /* div.css-kt2ht6 */
-.like_reply_box {
+.like_reply_box1 {
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -95,7 +97,7 @@
 
 
 /* Emphasis → 0 */
-.like_number {
+.like_number1 {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
@@ -111,7 +113,7 @@
 
 
 /* 원작에 비해 실망스러웠다 */
-.comment2 {
+.comment21 {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;

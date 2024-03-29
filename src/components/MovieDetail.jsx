@@ -1,6 +1,6 @@
 import { useState } from "react";
 import StarRating from "./stars/Star";
-import CommentList from "../pages/comment/CommentList1";
+import CommentList from "../pages/comment/CommentList1.jsx";
 import './MovieDetail.css'
 import pamyo from '../images/pamyo.jpg';
 
