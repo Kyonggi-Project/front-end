@@ -5,11 +5,11 @@ const EditModal = ({ userInfo, closeModal, onSubmit }) => {
   const [name, setName] = useState(userInfo.name || "");
   const [nickname, setNickname] = useState(userInfo.nickname || "");
   const [password, setPassword] = useState(userInfo.password || "");
-  const [birthday, setBirthday] = useState(userInfo.birthday || "");
+  const [confirmPassword, setConfirmPassword] = useState(userInfo.password || "");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSubmit({ name, nickname, password, birthday });
+    onSubmit({ name, nickname, password, confirmPassword });
     closeModal();
   };
 
@@ -49,12 +49,12 @@ const EditModal = ({ userInfo, closeModal, onSubmit }) => {
             />
           </div>
           <div className="form-group">
-            <label htmlFor="birthday">Birthday:</label>
+            <label htmlFor="confirm_password">Confirm Password:</label>
             <input
-              type="date"
-              id="birthday"
-              value={birthday}
-              onChange={(e) => setBirthday(e.target.value)}
+              type="password"
+              id="confirm_password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </div>
           <button type="submit" className="edit-button">

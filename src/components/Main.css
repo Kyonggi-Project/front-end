@@ -1,170 +1,183 @@
 .gallery-container {
-    width: 100%;
-    display: flex;
-    justify-content: center; /* 수평 가운데 정렬 */
-    align-items: flex-start; /* 수직 상단 정렬 */
-    padding: 0 10%; /* 좌우 10%의 패딩 적용 */
-    box-sizing: border-box;
-    color: aliceblue;
-  }
+  width: 100%;
+  display: flex;
+  justify-content: center; /* 수평 가운데 정렬 */
+  align-items: flex-start; /* 수직 상단 정렬 */
+  padding: 0 10%; /* 좌우 10%의 패딩 적용 */
+  box-sizing: border-box;
+  color: aliceblue;
+}
 
-  .titlepage{
-    height: 25vh;
-    background: rgb(172,207,231);
-    background: linear-gradient(90deg, rgba(172,207,231,1) 0%, rgba(238,242,245,1) 35%, rgba(164,220,237,1) 88%, rgba(164,220,237,1) 90%, rgba(164,220,237,1) 94%, rgba(164,220,237,1) 100%);
-  }
+.titlepage {
+  height: 30vh;
+  background: rgb(172, 207, 231);
+  background: linear-gradient(
+    90deg,
+    rgb(57, 97, 124) 0%,
+    rgb(158, 173, 184) 35%,
+    rgb(128, 173, 186) 88%,
+    rgb(133, 180, 195) 90%,
+    rgb(125, 168, 181) 94%,
+    rgb(98, 132, 143) 100%
+  );
+}
 
-  .titlepage h1{
-    display: flex;
-    justify-content: center;
-    padding-top: 6vh;
-  }
+.titlepage h1 {
+  display: flex;
+  justify-content: center;
+  padding-top: 6vh;
+  color: #f3fbff;
+}
 
-  .buttonbox{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 2vh;
-  }
+.buttonbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2vh;
+}
 
-  .buttonbox button{
-    width: 25vh;
-    height: 7vh;
-    font-size: x-large;
-    border-radius: 4px;
-    font-weight: bold;
-    background-color: #0062FF;
-    border: none;
-    color: #eef2f5;
-  }
-  .buttonbox button:hover{
-    background-color: #0256df;
-  }
+.buttonbox button {
+  width: 25vh;
+  height: 7vh;
+  font-family: "IBM Plex Serif";
+  font-style: normal;
+  font-weight: bold;
+  background: #4e8195;
+  border-radius: 8px;
+  color: #e6f6ff;
+  border: none;
+  font-size: 15px;
+}
+.buttonbox button:hover {
+  background-color: #193642;
+}
 
-  .image-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    justify-content: center;
-    align-items: flex-start; /* 수직 상단 정렬 */
-    margin-top: 20px;
-    transition: margin-left 0.3s ease;
-  }
+.image-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  justify-content: center;
+  align-items: flex-start; /* 수직 상단 정렬 */
+  margin-top: 20px;
+  transition: margin-left 0.3s ease;
+}
 
-  .image-list li {
-    transition: transform 0.5s ease;
-  }
+.image-list li {
+  transition: transform 0.5s ease;
+}
 
-  .hidden{
-    display: none;
-  }
+.hidden {
+  display: none;
+}
 
-  .image-number {
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    font-size: 16px;
-    padding: 2px 6px;
-    border-radius: 4px;
-  }  
+.image-number {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 16px;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
 
-  .image-list-container {
-    position: relative;
-    width: calc(100% - 100px); /* 이미지 리스트 옆에 버튼이 위치하므로 전체 너비에서 버튼 너비를 뺍니다. */
-    overflow: hidden;
-    transition: transform 0.3s ease;
-  }
-  
-  .image-list li {
-    scroll-snap-align: start;
-    flex: 0 0 auto;
-    margin-right: 10px; /* 이미지 간격 조정을 위해 마진 추가 */
-  }
-  
-  .image-wrapper {
-    position: relative;
-    overflow: hidden;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .image-wrapper img {
-    width: 300px; /* 이미지 너비 조정을 원하는 크기로 지정하세요 */
-    height: auto;
-    display: block;
-    border-radius: 8px;
-    transition: transform 0.3s ease-in-out;
-  }
+.image-list-container {
+  position: relative;
+  width: calc(
+    100% - 100px
+  ); /* 이미지 리스트 옆에 버튼이 위치하므로 전체 너비에서 버튼 너비를 뺍니다. */
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
 
-  .image-wrapper1 {
-    position: relative;
-    overflow: hidden;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .image-wrapper1 img {
-    width: 200px; /* 이미지 너비 조정을 원하는 크기로 지정하세요 */
-    height: auto;
-    display: block;
-    border-radius: 8px;
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .image-wrapper img:hover {
-    opacity: 0.95;
-  }
+.image-list li {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+  margin-right: 10px; /* 이미지 간격 조정을 위해 마진 추가 */
+}
 
-  .h1-name{
-    padding-left: 5%;
-  }
-  .h2-name{
-    padding-left: 5%;
-  }
+.image-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-  .scroll-button {
-    position: absolute;
-    top: 55%;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    border: none;
-    border-radius: 50%;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .scroll-button:hover {
-    background-color: rgba(0, 0, 0, 0.7);
-  }
-  
-  .scroll-button.prev {
-    left: 5px;
-  }
-  
-  .scroll-button.next {
-    right: 5px;
-  }
-  
-  .data-info {
-    font-size: 15px;
-    color: #666;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-top: 5px;
-  }
-  .data-count {
-    font-size: 12px;
-    color: #888;
-    font-style: italic;
-    margin-top: 5px;
-  }
+.image-wrapper img {
+  width: 300px; /* 이미지 너비 조정을 원하는 크기로 지정하세요 */
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.image-wrapper1 {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.image-wrapper1 img {
+  width: 200px; /* 이미지 너비 조정을 원하는 크기로 지정하세요 */
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.image-wrapper img:hover {
+  opacity: 0.95;
+}
+
+.h1-name {
+  padding-left: 5%;
+}
+.h2-name {
+  padding-left: 5%;
+}
+
+.scroll-button {
+  position: absolute;
+  top: 55%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.scroll-button:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.scroll-button.prev {
+  left: 5px;
+}
+
+.scroll-button.next {
+  right: 5px;
+}
+
+.data-info {
+  font-size: 15px;
+  color: #666;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 5px;
+}
+.data-count {
+  font-size: 12px;
+  color: #888;
+  font-style: italic;
+  margin-top: 5px;
+}
