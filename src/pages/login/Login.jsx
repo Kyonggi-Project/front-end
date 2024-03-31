@@ -41,7 +41,7 @@ export default function Login() {
   }
 
   return (
-    <form className="login-form">
+    <section className="login-form">
       <div>
         <h1 className="login-title">Login to your account</h1>
         <p className='option'>enter email and password</p>
@@ -65,7 +65,10 @@ export default function Login() {
             />
           </div>
           <p className='a-text'>Don't you have a account? <Link to="/signup" className="signup-link">Sign up</Link></p>
-          <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
+          <a href={process.env.REACT_APP_GOOGLE_OAUTH}>
+            <img src="../google.png" width="30px" alt="google"></img>
+          </a>
+          {/* <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
             <GoogleLogin
               onSuccess={(res) => {
                 console.log(res);
@@ -75,10 +78,10 @@ export default function Login() {
                 console.log(err);
               }}
             />
-          </GoogleOAuthProvider>
+          </GoogleOAuthProvider> */}
           <button className="login-button" onClick={handleSubmit}>Login</button>
         </form>
       </div>
-    </form>
+    </section>
   );
 }
