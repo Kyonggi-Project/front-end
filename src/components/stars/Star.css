@@ -28,3 +28,7 @@
   position: relative;
   font-size: 30px;
 }
+
+.current-score {
+  color: #f5f5f5;
+}

@@ -41,7 +41,7 @@ export default function CommentDetail() {
   }
 
   function EditHandler() {
-    navigate("/edit");
+    navigate(`/write/${id}`);
   }
 
   function DeleteHandler() {
@@ -73,15 +73,15 @@ export default function CommentDetail() {
         <p className='totals'>좋아요 {details_dummy.likes}</p>
         <p className='totals'>댓글 {details_dummy.comments}</p>
       </div>
-        <div className='separator11' />
-        <div className='button2_box1'>
-          <button className='button2'>좋아요</button>
-          <hr className='separator22' />
-          <button className='button2'>댓글</button>
-          <hr className='separator22' />
-          <button className='button2'>공유</button>
-        </div>
-        <div className='separator11' />
+      <div className='separator11' />
+      <div className='button2_box1'>
+        <button className='button2'>좋아요</button>
+        <hr className='separator22' />
+        <button className='button2'>댓글</button>
+        <hr className='separator22' />
+        <button className='button2'>공유</button>
+      </div>
+      <div className='separator11' />
 
       {/* 댓글 없을 시 */}
       {isEmptyText &&

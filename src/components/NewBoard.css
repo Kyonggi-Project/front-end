@@ -59,7 +59,7 @@
 
 
 /* Title, Content */
-.text {
+.texta {
 
   font-family: 'Inter';
   font-style: normal;
@@ -69,7 +69,7 @@
   display: flex;
   align-items: center;
 
-  color: #000000;
+  color: #f5f5f5;
   margin-bottom: 1rem;
 }
 
@@ -82,6 +82,6 @@
   display: flex;
   align-items: center;
 
-  color: #000000;
+  color: #f5f5f5;
   margin-bottom: 1rem;
 }

@@ -4,7 +4,7 @@ import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';
 import './Star.css';
 import { useLocation } from 'react-router-dom';
 
-export default function StarRating() {
+export default function StarRating({ onChange }) {
   const [score, setScore] = useState(0);
   const [scoreFixed, setScoreFixed] = useState(score);
 
@@ -27,6 +27,9 @@ export default function StarRating() {
 
   const handleStarClick = () => {
     setScoreFixed(score);
+    if (onChange) {
+      onChange(score); // 점수를 변경 시 부모 컴포넌트로 전달
+    }
     console.log("점수:", score);
   };
 
