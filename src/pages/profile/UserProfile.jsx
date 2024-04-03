@@ -7,36 +7,30 @@ import defaultProfile from "../../images/profilePicture.png";
 
 const UserProfile = () => {
   const [userInfo, setUserInfo] = useState({
-    // profilePicture: "/static/images/profilePicture.png", // 경로 수정
     name: "Name",
     followers: 0,
     following: 0,
     likedWorks: 0,
   });
   const [comments, setComments] = useState([]);
-  const [showModal, setShowModal] = useState(false); // 모달 표시 여부
-  const [updatedInfo, setUpdatedInfo] = useState({
-    name: "",
-    nickname: "",
-    password: "",
-    birthday: "",
-  });
+  const [showModal, setShowModal] = useState(false);
+
+  const nickname = userInfo.nickname; // 예시로 userInfo의 nickname을 사용
 
   useEffect(() => {
+    // 유저 정보 가져오기 엔드포인트 수정
     axios
-      .get("http://localhost:8080/api/userinfo")
+      .get(`http://localhost:8080/api/user/profile/nickname/${nickname}`)
       .then((response) => {
-        // 백엔드로부터 받은 데이터를 사용하되, profilePicture 경로는 서버 설정에 맞게 고정
         setUserInfo({
           ...response.data,
-          profilePicture: "/static/images/profilePicture.png", // 서버의 정적 경로 사용
+          profilePicture: "/static/images/profilePicture.png",
         });
       })
       .catch((error) => {
         console.error("Error fetching user info:", error);
       });
 
-    // 백엔드로부터 사용자의 코멘트 가져오기
     axios
       .get("http://localhost:8080/api/comments")
       .then((response) => {
@@ -45,7 +39,7 @@ const UserProfile = () => {
       .catch((error) => {
         console.error("Error fetching comments:", error);
       });
-  }, []);
+  }, [nickname]);
 
   // 모달 표시 함수
   const handleEditProfileClick = () => {
@@ -58,24 +52,29 @@ const UserProfile = () => {
     setShowModal(false);
   };
 
-// 수정된 정보를 백엔드로 전송하는 함수
-const handleSubmitUpdatedInfo = (updatedInfo) => {
-  axios
-    .put("http://localhost:8080/api/userinfo", updatedInfo)
-    .then((response) => {
-      console.log("Updated info sent to server:", response.data);
-      // 백엔드로부터 받은 새로운 사용자 정보로 상태 업데이트
-      setUserInfo(prevState => ({
-        ...prevState,
-        ...response.data,
-      }));
-      handleCloseModal(); // 모달 닫기
-    })
-    .catch((error) => {
-      console.error("Error sending updated info to server:", error);
-    });
-};
+  // 수정된 정보를 백엔드로 전송하는 함수
+  const handleSubmitUpdatedInfo = (updatedInfo) => {
+    // confirmPassword는 백엔드로 전송하지 않음
+    const { confirmPassword, ...infoToSend } = updatedInfo;
+    if (infoToSend.password !== confirmPassword) {
+      console.error("Passwords do not match");
+      return;
+    }
 
+    axios
+      .put("http://localhost:8080/api/user/update", infoToSend)
+      .then((response) => {
+        console.log("Updated info sent to server:", response.data);
+        setUserInfo((prevState) => ({
+          ...prevState,
+          ...response.data,
+        }));
+        handleCloseModal();
+      })
+      .catch((error) => {
+        console.error("Error sending updated info to server:", error);
+      });
+  };
 
   return (
     <div>
@@ -123,7 +122,6 @@ const handleSubmitUpdatedInfo = (updatedInfo) => {
           userInfo={userInfo}
           closeModal={handleCloseModal}
           onSubmit={handleSubmitUpdatedInfo}
-          setUpdatedInfo={setUpdatedInfo}
           showModal={showModal} // showModal 상태를 EditModal에 전달
         />
       )}

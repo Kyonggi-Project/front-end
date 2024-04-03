@@ -2,14 +2,13 @@ import React, { useState } from "react";
 import "./EditModal.css"; // EditModal.css 파일에 위의 CSS를 복사하여 붙여넣어주세요
 
 const EditModal = ({ userInfo, closeModal, onSubmit }) => {
-  const [name, setName] = useState(userInfo.name || "");
   const [nickname, setNickname] = useState(userInfo.nickname || "");
   const [password, setPassword] = useState(userInfo.password || "");
   const [confirmPassword, setConfirmPassword] = useState(userInfo.password || "");
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onSubmit({ name, nickname, password, confirmPassword });
+    onSubmit({ nickname, password, confirmPassword });
     closeModal();
   };
 
@@ -21,15 +20,6 @@ const EditModal = ({ userInfo, closeModal, onSubmit }) => {
         </button>
         <h2>Edit Profile Information</h2>
         <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="name">Name:</label>
-            <input
-              type="text"
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
           <div className="form-group">
             <label htmlFor="nickname">Nickname:</label>
             <input
