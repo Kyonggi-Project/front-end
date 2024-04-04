@@ -8,10 +8,10 @@ export default function ReplyList() {
   useEffect(() => {
     //임시 데이터
     const tempComments = [
-      { id: 1, author: 'User1', content: 'Comment 1' },
-      { id: 2, author: 'User2', content: 'Comment 2' },
-      { id: 3, author: 'User3', content: 'Comment 3' },
-      { id: 4, author: 'User4', content: 'Comment 4' }
+      { id: 1, author: 'User1', content: 'Reply 1' },
+      { id: 2, author: 'User2', content: 'Reply 2' },
+      { id: 3, author: 'User3', content: 'Reply 3' },
+      { id: 4, author: 'User4', content: 'Reply 4' }
     ];
     setComments(tempComments);
     //    axios.get('/comments')

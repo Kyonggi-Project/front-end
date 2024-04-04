@@ -3,8 +3,13 @@ import StarRating from "./stars/Star";
 import CommentList from "../pages/comment/CommentList1.jsx";
 import './MovieDetail.css'
 import pamyo from '../images/pamyo.jpg';
+import { useNavigate } from "react-router-dom";
 
 export default function MovieDetail() {
+  const navigate = useNavigate();
+  function handleAddComment() {
+    navigate('/write');
+  }
   return (
     <div>
       <div className="movie_img">
@@ -32,7 +37,7 @@ export default function MovieDetail() {
           <div className="button2_box">
             <button className="buttons_icon">watchlist 추가</button>
             <hr className='separator2' />
-            <button className="buttons_icon">리뷰 추가</button>
+            <button className="buttons_icon" onClick={handleAddComment}>코멘트 추가</button>
           </div>
           <div className="separator"></div>
           <div className="movie_details">줄거리</div>
