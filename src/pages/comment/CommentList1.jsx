@@ -1,10 +1,22 @@
 import { useEffect, useState } from 'react';
 import './CommentList1.css';
 import profilePicture from '../../images/profilePicture.png';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function CommentList() {
   const [commentList, setCommentList] = useState([]);
+  const [moreButton, setMoreButton] = useState(true);
+  const location = useLocation();
+
+  useEffect(() => {
+    // 경로가 '/userprofile'인 경우에만 버튼을 숨깁니다.
+    if (location.pathname === '/userprofile') {
+      setMoreButton(false);
+    } else {
+      setMoreButton(true);
+    }
+  }, [location]);
+
   useEffect(() => {
     //임시 데이터
     const tempComments = [
@@ -20,11 +32,13 @@ export default function CommentList() {
   return (
     // map 함수로 구현
     <div className='wid'>
-      <div className='more_button'>
-        <Link to="/list">
-        <button className='btn'>더보기</button>
-        </Link>
-      </div>
+      {moreButton &&
+        <div className='more_button'>
+          <Link to="/list">
+            <button className='btn'>더보기</button>
+          </Link>
+        </div>
+      }
       <ul className='lli'>
         {commentList.map((commentList) => (
           <>

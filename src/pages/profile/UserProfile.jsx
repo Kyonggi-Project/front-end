@@ -4,10 +4,12 @@ import axios from "axios";
 import "./UserProfile.css";
 import EditModal from "../profile/EditModal";
 import defaultProfile from "../../images/profilePicture.png";
+import CommentApp from "../CommentList/CommentList";
+import CommentList from "../comment/CommentList1";
 
 const UserProfile = () => {
   const [userInfo, setUserInfo] = useState({
-    name: "Name",
+    nickname: "Name",
     followers: 0,
     following: 0,
     likedWorks: 0,
@@ -85,7 +87,7 @@ const UserProfile = () => {
             <img src={defaultProfile} alt="Profile" />
           </div>
           <div className="user-details">
-            <p>{userInfo.name}</p>
+            <p>{userInfo.nickname}</p>
           </div>
           <div className="user-stats">
             <div className="stat-item">
@@ -114,6 +116,9 @@ const UserProfile = () => {
             {comments.map((comment) => (
               <li key={comment.id}>{comment.text}</li>
             ))}
+            <div>
+              <CommentList />
+            </div>
           </ul>
         </div>
       </div>
