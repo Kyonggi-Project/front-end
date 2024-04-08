@@ -1,9 +1,17 @@
-import React from 'react';
-import styles from './Header.module.css'; 
+import React, { useEffect, useState } from 'react';
+import styles from './Header.module.css';
 import logoImage from '../logo9.png';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../util/auth';
 
 function Header() {
+  const {isLogin, setIsLogin} = useAuth();
+
+  function logoutHandler() {
+    localStorage.removeItem('access_token');
+    setIsLogin(false);
+  }
+
   return (
     <header>
       <div className={styles.logo}>
@@ -21,7 +29,11 @@ function Header() {
         </ul>
       </nav>
       <div className={styles.userActions}>
-      <Link to="/login" style={{ marginRight: '10px' }}>Login</Link> <Link to="/userprofile">Mypage</Link>
+        {!isLogin ?
+          <Link to="/login" style={{ marginRight: '10px' }}>Login</Link> :
+          <Link to="/" style={{ marginRight: '10px' }} onClick={logoutHandler}>Logout</Link>
+        }
+        <Link to="/userprofile">Mypage</Link>
       </div>
     </header>
   );

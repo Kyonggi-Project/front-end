@@ -4,8 +4,8 @@ import axios from "axios";
 import "./UserProfile.css";
 import EditModal from "../profile/EditModal";
 import defaultProfile from "../../images/profilePicture.png";
-import CommentApp from "../CommentList/CommentList";
 import CommentList from "../comment/CommentList1";
+import { useSearchParams } from "react-router-dom";
 
 const UserProfile = () => {
   const [userInfo, setUserInfo] = useState({
@@ -17,8 +17,13 @@ const UserProfile = () => {
   const [comments, setComments] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
-  const nickname = userInfo.nickname; // 예시로 userInfo의 nickname을 사용
+  const [searchParams, setSearchParams] = useSearchParams();
+  const token = searchParams.get('token');
+  if(token) {
+    localStorage.setItem('access_token',token);
+  }
 
+  const nickname = userInfo.nickname; // 예시로 userInfo의 nickname을 사용
   useEffect(() => {
     // 유저 정보 가져오기 엔드포인트 수정
     axios

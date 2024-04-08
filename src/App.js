@@ -13,26 +13,29 @@ import CommentDetail from "./pages/comment/CommentDetail.jsx";
 import MovieDetail from "./components/MovieDetail.jsx";
 import './App.css';
 import CommentApp from "./pages/CommentList/CommentList.jsx";
+import { AuthProvider } from "./util/auth.js";
 
 function App() {
   return (
-    <Router>
-      <div>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/userprofile" element={<UserProfile />} />
-          <Route path="/mypage" element={<MyPage />} />
-          <Route path="/board" element={<Board />} />
-          <Route path="/write" element={<NewBoard />}/>
-          <Route path="/comments" element={<CommentDetail />} />
-          <Route path="/details" element={<MovieDetail />}/>
-          <Route path="/list" element={<CommentApp />}/>
-        </Routes>
-      </div>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <div>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/userprofile" element={<UserProfile />} />
+            <Route path="/mypage" element={<MyPage />} />
+            <Route path="/board" element={<Board />} />
+            <Route path="/write" element={<NewBoard />} />
+            <Route path="/comments" element={<CommentDetail />} />
+            <Route path="/details" element={<MovieDetail />} />
+            <Route path="/list" element={<CommentApp />} />
+          </Routes>
+        </div>
+      </Router>
+    </AuthProvider>
   );
 }
 
