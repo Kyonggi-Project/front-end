@@ -19,15 +19,17 @@ const UserProfile = () => {
 
   const [searchParams, setSearchParams] = useSearchParams();
   const token = searchParams.get('token');
-  if(token) {
-    localStorage.setItem('access_token',token);
+  if (token) {
+    localStorage.setItem('access_token', token);
   }
 
   const nickname = userInfo.nickname; // 예시로 userInfo의 nickname을 사용
   useEffect(() => {
     // 유저 정보 가져오기 엔드포인트 수정
     axios
-      .get(`http://localhost:8080/api/user/profile/nickname/${nickname}`)
+      .get(`http://localhost:8080/api/user/profile/nickname/${nickname}`, {
+        withCredentials: true,
+      })
       .then((response) => {
         setUserInfo({
           ...response.data,

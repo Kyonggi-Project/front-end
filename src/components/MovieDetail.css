@@ -10,6 +10,11 @@
   justify-content: flex-end;
 }
 
+.movie_img2 {
+  object-fit: cover;
+  max-height: 40vh;
+}
+
 .movie_img p {
   font-family: 'Inter';
   font-style: normal;
@@ -193,4 +198,12 @@
 
 .list {
   width: 100%;
+}
+
+.overlay {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  color: white; /* 텍스트 색상 설정 */
+  padding: 20px;
 }

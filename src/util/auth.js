@@ -17,8 +17,15 @@ export function AuthProvider({children}) {
     }
   }, []);
 
+  const isloginHandler = (event) => {
+    if (!isLogin) {
+      event.preventDefault();
+      alert('로그인을 해주세요');
+    }
+  }
+
   return (
-    <AuthContext.Provider value={{isLogin, setIsLogin}}>
+    <AuthContext.Provider value={{isLogin, setIsLogin, isloginHandler}}>
       {children}
     </AuthContext.Provider>
   );

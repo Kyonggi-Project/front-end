@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';
 import './Star.css';
 import { useLocation } from 'react-router-dom';
+import { useAuth } from '../../util/auth';
 
 export default function StarRating({ onChange }) {
   const [score, setScore] = useState(0);
@@ -10,6 +11,8 @@ export default function StarRating({ onChange }) {
 
   const [isScoreVisible, setIsScoreVisible] = useState(false);
   const location = useLocation();
+  const { isLogin, isloginHandler } = useAuth();
+
   useEffect(() => {
     if (location.pathname === '/write') {
       setIsScoreVisible(true);
@@ -25,12 +28,17 @@ export default function StarRating({ onChange }) {
     setScore(calculatedScore);
   };
 
-  const handleStarClick = () => {
-    setScoreFixed(score);
-    if (onChange) {
-      onChange(score); // 점수를 변경 시 부모 컴포넌트로 전달
+  const handleStarClick = (event) => {
+    if (!isLogin) {
+      isloginHandler(event);
     }
-    console.log("점수:", score);
+    else {
+      setScoreFixed(score);
+      if (onChange) {
+        onChange(score); // 점수를 변경 시 부모 컴포넌트로 전달
+      }
+      console.log("점수:", score);
+    }
   };
 
   const handleStarLeave = () => {

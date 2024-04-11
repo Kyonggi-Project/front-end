@@ -6,6 +6,7 @@ import ReplyList from './ReplyList';
 import profilePicture from "../../images/profilePicture.png";
 import SpyFamily from "../../images/spyfamily.jpg";
 import ReplyModal from './ReplyModal';
+import { useAuth } from '../../util/auth';
 
 export default function CommentDetail() {
 
@@ -17,6 +18,8 @@ export default function CommentDetail() {
   const [isUser, setIsUser] = useState(false);
   const [isEmptyText, setIsEmptyText] = useState(false);
   const [showModal, setShowModal] = useState(false);
+
+  const { isLogin, isloginHandler } = useAuth();
 
   const id = param.boardId;
 
@@ -50,14 +53,36 @@ export default function CommentDetail() {
     navigate("..");
   }
 
-  function handleReplyModal() {
-    setShowModal(true);
+  function handleReplyModal(event) {
+    if (!isLogin) {
+      isloginHandler(event);
+    }
+    else {
+      setShowModal(true);
+    }
   }
 
   function handleCloseModal() {
     setShowModal(false);
   }
 
+  const handleLike = (event) => {
+    if (!isLogin) {
+      isloginHandler(event);
+    }
+    else {
+
+    }
+  }
+
+  const handleShare = (event) => {
+    if (!isLogin) {
+      isloginHandler(event);
+    }
+    else {
+
+    }
+  }
 
   return (
     <div className='board_details'>
@@ -85,11 +110,11 @@ export default function CommentDetail() {
       </div>
       <div className='separator11' />
       <div className='button2_box1'>
-        <button className='button2'>좋아요</button>
+        <button className='button2' onClick={handleLike}>좋아요</button>
         <hr className='separator22' />
         <button className='button2' onClick={handleReplyModal}>댓글</button>
         <hr className='separator22' />
-        <button className='button2'>공유</button>
+        <button className='button2' onClick={handleShare}>공유</button>
       </div>
       <div className='separator11' />
 
