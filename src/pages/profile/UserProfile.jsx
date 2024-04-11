@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./UserProfile.css";
 import EditModal from "../profile/EditModal";
+import LikedMoviesModal from "../profile/Modal/LikedMoviesModal.jsx";
 import defaultProfile from "../../images/profilePicture.png";
 import CommentList from "../comment/CommentList1";
 import { useSearchParams } from "react-router-dom";
@@ -15,12 +16,13 @@ const UserProfile = () => {
     likedWorks: 0,
   });
   const [comments, setComments] = useState([]);
-  const [showModal, setShowModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showLikedMoviesModal, setShowLikedMoviesModal] = useState(false);
 
   const [searchParams, setSearchParams] = useSearchParams();
-  const token = searchParams.get('token');
-  if(token) {
-    localStorage.setItem('access_token',token);
+  const token = searchParams.get("token");
+  if (token) {
+    localStorage.setItem("access_token", token);
   }
 
   const nickname = userInfo.nickname; // 예시로 userInfo의 nickname을 사용
@@ -50,13 +52,15 @@ const UserProfile = () => {
 
   // 모달 표시 함수
   const handleEditProfileClick = () => {
-    console.log("Edit profile button clicked");
-    setShowModal(true);
+    setShowEditModal(true);
   };
-
+  const handleLikedMoviesModal = () => {
+    setShowLikedMoviesModal(!showLikedMoviesModal);
+  };
   // 모달 닫기 함수
   const handleCloseModal = () => {
-    setShowModal(false);
+    setShowEditModal(false);
+    setShowLikedMoviesModal(false);
   };
 
   // 수정된 정보를 백엔드로 전송하는 함수
@@ -105,7 +109,7 @@ const UserProfile = () => {
             </div>
             <div className="stat-item">
               <p>Liked</p>
-              <p>{userInfo.likedWorks}</p>
+              <p onClick={handleLikedMoviesModal}>{userInfo.likedWorks}</p>
             </div>
           </div>
 
@@ -127,12 +131,18 @@ const UserProfile = () => {
           </ul>
         </div>
       </div>
-      {showModal && (
+      {showEditModal && (
         <EditModal
           userInfo={userInfo}
           closeModal={handleCloseModal}
           onSubmit={handleSubmitUpdatedInfo}
-          showModal={showModal} // showModal 상태를 EditModal에 전달
+          showModal={showEditModal} // showModal 상태를 EditModal에 전달
+        />
+      )}
+      {showLikedMoviesModal && (
+        <LikedMoviesModal
+          closeModal={handleLikedMoviesModal}
+          showModal={showLikedMoviesModal}
         />
       )}
     </div>
