@@ -29,7 +29,7 @@ const ReModal = ({ closeModal }) => {
         </>)
         :(<>
           <h2 className="modal-main-title">
-            <p>영화는 어디서 주로 시청하시나요? 🧐</p>
+            <p>어떤 분위기의 영화를 보고 싶으신가요? 🧐</p>
           </h2>
           <form className="input-group">
             <input type="text" value={feeling} onChange={(e) => setFeeling(e.target.value)}/>
