@@ -5,6 +5,8 @@ import './MovieDetail.css'
 import pamyo from '../images/pamyo.jpg';
 import { useNavigate } from "react-router-dom";
 
+const genre = ["액션", "로맨스", "SF"];
+
 export default function MovieDetail() {
   const navigate = useNavigate();
   function handleAddComment() {
@@ -15,7 +17,7 @@ export default function MovieDetail() {
       <div className="movie_img">
         <p className="title">영화 제목</p>
         <p className="release_date">출시 년도</p>
-        <p className="time">런타임</p>
+        <p className="time"><a href={`/movie?genre=${genre[0]}`}>#{genre[0]}</a><a href={`/movie?genre=${genre[1]}`}>#{genre[1]}</a></p>
       </div>
       <div className="all">
         <section className="section1">

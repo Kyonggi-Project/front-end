@@ -13,6 +13,7 @@ import CommentDetail from "./pages/comment/CommentDetail.jsx";
 import MovieDetail from "./components/MovieDetail.jsx";
 import './App.css';
 import CommentApp from "./pages/CommentList/CommentList.jsx";
+import MovieList from "./pages/MovieList/MovieList.jsx";
 import { AuthProvider } from "./util/auth.js";
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
             <Route path="/comments" element={<CommentDetail />} />
             <Route path="/details" element={<MovieDetail />} />
             <Route path="/list" element={<CommentApp />} />
+            <Route path="/movie" element={<MovieList />}/>
           </Routes>
         </div>
       </Router>
