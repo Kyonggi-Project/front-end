@@ -10,7 +10,7 @@ import { useAuth } from '../../util/auth';
 
 export default function CommentDetail() {
 
-  const [details, setDetails] = useState();
+  const [details, setDetails] = useState([]);
   const param = useParams();
   // const { id } = useParams();
   const navigate = useNavigate();
@@ -19,23 +19,33 @@ export default function CommentDetail() {
   const [isEmptyText, setIsEmptyText] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
-  const { isLogin, isloginHandler } = useAuth();
+  const { isLogin, isloginHandler, token } = useAuth();
 
   const id = param.boardId;
 
   useEffect(() => {
     // 게시글 정보를 가져오는 함수
-    const fetchPost = async () => {
-      try {
-        const response = await axios.get(/*백엔드 url*/`http://localhost:8080/comments${id}`);
-        setDetails(response.data);
-      } catch (error) {
+    axios
+      .get(/*백엔드 url*/`http://localhost:8080/comments?id=${id}`)
+      .then((response) => setDetails(response.data))
+      .catch((error) => {
         console.error('게시글 정보를 가져오는데 실패했습니다:', error);
-      }
-    };
+      });
 
-    fetchPost();
   }, [id]);
+
+  useEffect(() => {
+    // 서버로부터 현재 사용자 정보를 가져오는 함수
+    axios
+      .get('http://localhost:8080/api/user', {
+        headers: {
+          Authorization: `Bearer ${token}` // JWT 토큰을 Authorization 헤더에 추가
+        }
+      })
+      .then((response) => console.log(response.data))
+      .catch((error) => console.error('게시글 정보를 가져오는데 실패했습니다:', error));
+
+  }, []);
 
   //임시 데이터
   const details_dummy = {

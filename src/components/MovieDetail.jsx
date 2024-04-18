@@ -41,7 +41,6 @@ export default function MovieDetail() {
       <div className="all">
         <section className="section1">
           <img src={pamyo} alt="포스터" className="poster" />
-          <p className="avg">평균 : {1}</p>
         </section>
         <section className="section3">
           <div className="section2">
