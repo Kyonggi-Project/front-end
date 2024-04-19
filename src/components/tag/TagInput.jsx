@@ -1,7 +1,7 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import './Tag.css';
 
-const TagInput = ({ addTag }) => { // addTag를 props로 받음
+const TagInput = ({ onUpdateTags }) => {
 
   const [tags, setTags] = useState([]);
   const inputRef = useRef(null);
@@ -11,12 +11,15 @@ const TagInput = ({ addTag }) => { // addTag를 props로 받음
     setTags(filter);
   };
 
+  useEffect(() => {
+    onUpdateTags(tags); // 태그가 변경될 때마다 업데이트된 태그 전달
+  }, [tags, onUpdateTags]);
+
   const addTags = () => {
     const inputVal = inputRef.current.value;
     if (inputVal !== '' && !tags.includes(inputVal)) {
       setTags([...tags, inputVal]);
       inputRef.current.value = '';
-      addTag(inputVal); // 입력한 태그를 부모 컴포넌트로 전달
     }
   };
 

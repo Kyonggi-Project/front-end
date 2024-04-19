@@ -14,7 +14,17 @@ export default function NewBoard() {
   const { id } = useParams();
 
   const [inputTags, setInputTags] = useState([]);
-  const [tags, setTags] = useState([]);
+  const [selectedTags, setSelectedTags] = useState([]);
+
+  // 자식 컴포넌트로부터 선택된 태그를 업데이트하는 콜백 함수
+  const updateSelectedTags = (tags) => {
+    setSelectedTags(tags);
+  };
+
+    // 태그 업데이트 함수
+    const handleInputTagUpdate = (updatedInputTags) => {
+      setInputTags(updatedInputTags);
+    };
 
   useEffect(() => {
     if (id) {
@@ -43,14 +53,6 @@ export default function NewBoard() {
   function handleCancel() {
     navigate('/board');
   }
-  // 태그를 추가하는 함수
-  const addInputTag = (tag) => {
-    setInputTags([...inputTags, tag]);
-  };
-
-  const addTag = (tag) => {
-    setTags([...tags, tag]);
-  };
 
   function handleSbumit(event) {
     event.preventDefault();
@@ -61,7 +63,7 @@ export default function NewBoard() {
       content: content,
       rating: rating,
       inputTags: inputTags,
-      tags: tags,
+      tags: selectedTags,
     };
     console.log(formData);
 
@@ -107,8 +109,8 @@ export default function NewBoard() {
             onChange={handleContent}
             className='input-box2'
           />
-          <TagList addTags={addTag} />
-          <TagInput addTag={addInputTag} />
+          <TagList updateSelectedTags={updateSelectedTags} />
+          <TagInput onUpdateTags={handleInputTagUpdate} />
         </div>
         <button type='button' onClick={handleCancel} className='buttons'>Cancel</button>
         <button type='submit' className='buttons'>{id ? 'Edit' : 'Save'}</button>
