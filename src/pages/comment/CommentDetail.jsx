@@ -6,10 +6,11 @@ import ReplyList from './ReplyList';
 import profilePicture from "../../images/profilePicture.png";
 import SpyFamily from "../../images/spyfamily.jpg";
 import ReplyModal from './ReplyModal';
+import { useAuth } from '../../util/auth';
 
 export default function CommentDetail() {
 
-  const [details, setDetails] = useState();
+  const [details, setDetails] = useState([]);
   const param = useParams();
   // const { id } = useParams();
   const navigate = useNavigate();
@@ -18,21 +19,33 @@ export default function CommentDetail() {
   const [isEmptyText, setIsEmptyText] = useState(false);
   const [showModal, setShowModal] = useState(false);
 
+  const { isLogin, isloginHandler, token } = useAuth();
+
   const id = param.boardId;
 
   useEffect(() => {
     // 게시글 정보를 가져오는 함수
-    const fetchPost = async () => {
-      try {
-        const response = await axios.get(/*백엔드 url*/`http://localhost:8080/comments${id}`);
-        setDetails(response.data);
-      } catch (error) {
+    axios
+      .get(/*백엔드 url*/`http://localhost:8080/comments?id=${id}`)
+      .then((response) => setDetails(response.data))
+      .catch((error) => {
         console.error('게시글 정보를 가져오는데 실패했습니다:', error);
-      }
-    };
+      });
 
-    fetchPost();
   }, [id]);
+
+  useEffect(() => {
+    // 서버로부터 현재 사용자 정보를 가져오는 함수
+    axios
+      .get('http://localhost:8080/api/user', {
+        headers: {
+          Authorization: `Bearer ${token}` // JWT 토큰을 Authorization 헤더에 추가
+        }
+      })
+      .then((response) => console.log(response.data))
+      .catch((error) => console.error('게시글 정보를 가져오는데 실패했습니다:', error));
+
+  }, []);
 
   //임시 데이터
   const details_dummy = {
@@ -50,14 +63,36 @@ export default function CommentDetail() {
     navigate("..");
   }
 
-  function handleReplyModal() {
-    setShowModal(true);
+  function handleReplyModal(event) {
+    if (!isLogin) {
+      isloginHandler(event);
+    }
+    else {
+      setShowModal(true);
+    }
   }
 
   function handleCloseModal() {
     setShowModal(false);
   }
 
+  const handleLike = (event) => {
+    if (!isLogin) {
+      isloginHandler(event);
+    }
+    else {
+
+    }
+  }
+
+  const handleShare = (event) => {
+    if (!isLogin) {
+      isloginHandler(event);
+    }
+    else {
+
+    }
+  }
 
   return (
     <div className='board_details'>
@@ -85,11 +120,11 @@ export default function CommentDetail() {
       </div>
       <div className='separator11' />
       <div className='button2_box1'>
-        <button className='button2'>좋아요</button>
+        <button className='button2' onClick={handleLike}>좋아요</button>
         <hr className='separator22' />
         <button className='button2' onClick={handleReplyModal}>댓글</button>
         <hr className='separator22' />
-        <button className='button2'>공유</button>
+        <button className='button2' onClick={handleShare}>공유</button>
       </div>
       <div className='separator11' />
 

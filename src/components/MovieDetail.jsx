@@ -6,28 +6,51 @@ import pamyo from '../images/pamyo.jpg';
 import { useNavigate } from "react-router-dom";
 
 const genre = ["액션", "로맨스", "SF"];
+import { useAuth } from '../util/auth';
 
 export default function MovieDetail() {
   const navigate = useNavigate();
-  function handleAddComment() {
-    navigate('/write');
+  const { isLogin, isloginHandler } = useAuth();
+
+  const handleAddComment = (event) => {
+    if(!isLogin) {
+      isloginHandler(event);
+    }
+    else {
+      navigate('/write');
+    }
   }
+
+  const handleWatchlist = (event) => {
+    if(!isLogin) {
+      isloginHandler(event);
+    }
+    else {
+
+    }
+  }
+
   return (
     <div>
       <div className="movie_img">
         <p className="title">영화 제목</p>
         <p className="release_date">출시 년도</p>
         <p className="time"><a href={`/movie?genre=${genre[0]}`}>#{genre[0]}</a><a href={`/movie?genre=${genre[1]}`}>#{genre[1]}</a></p>
+        <img src={pamyo} alt="" className="movie_img2"/>
+        <div className="overlay">
+          <p className="title">영화 제목</p>
+          <p className="release_date">출시 년도</p>
+          <p className="time">런타임</p>
+        </div>
       </div>
       <div className="all">
         <section className="section1">
           <img src={pamyo} alt="포스터" className="poster" />
-          <p className="avg">평균 : {1}</p>
         </section>
         <section className="section3">
           <div className="section2">
             <div>
-              <StarRating/>
+              <StarRating />
               <label className="r">평가하기</label>
             </div>
             <div className="avg_rating">
@@ -37,7 +60,7 @@ export default function MovieDetail() {
           </div>
           <div className="separator"></div>
           <div className="button2_box">
-            <button className="buttons_icon">watchlist 추가</button>
+            <button className="buttons_icon" onClick={handleWatchlist}>watchlist 추가</button>
             <hr className='separator2' />
             <button className="buttons_icon" onClick={handleAddComment}>코멘트 추가</button>
           </div>
@@ -45,7 +68,7 @@ export default function MovieDetail() {
           <div className="movie_details">줄거리</div>
         </section>
       </div>
-      <div className="separator" style={{marginTop: '3rem', width: '100%'}}></div>
+      <div className="separator" style={{ marginTop: '3rem', width: '100%' }}></div>
       <section className="list">
         <header className="comment">Comment</header>
         <CommentList />

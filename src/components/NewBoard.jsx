@@ -3,6 +3,8 @@ import './NewBoard.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import StarRating from './stars/Star';
+import TagInput from './tag/TagInput';
+import TagList from './tag/TagList';
 
 export default function NewBoard() {
   const [title, setTitle] = useState('');
@@ -10,6 +12,19 @@ export default function NewBoard() {
   const [rating, setRating] = useState(0);
   const navigate = useNavigate();
   const { id } = useParams();
+
+  const [inputTags, setInputTags] = useState([]);
+  const [selectedTags, setSelectedTags] = useState([]);
+
+  // 자식 컴포넌트로부터 선택된 태그를 업데이트하는 콜백 함수
+  const updateSelectedTags = (tags) => {
+    setSelectedTags(tags);
+  };
+
+    // 태그 업데이트 함수
+    const handleInputTagUpdate = (updatedInputTags) => {
+      setInputTags(updatedInputTags);
+    };
 
   useEffect(() => {
     if (id) {
@@ -47,6 +62,8 @@ export default function NewBoard() {
       title: title,
       content: content,
       rating: rating,
+      inputTags: inputTags,
+      tags: selectedTags,
     };
     console.log(formData);
 
@@ -74,7 +91,6 @@ export default function NewBoard() {
           console.error('게시글 수정 오류:', error);
         });
     }
-
   }
 
   return (
@@ -93,6 +109,8 @@ export default function NewBoard() {
             onChange={handleContent}
             className='input-box2'
           />
+          <TagList updateSelectedTags={updateSelectedTags} />
+          <TagInput onUpdateTags={handleInputTagUpdate} />
         </div>
         <button type='button' onClick={handleCancel} className='buttons'>Cancel</button>
         <button type='submit' className='buttons'>{id ? 'Edit' : 'Save'}</button>
