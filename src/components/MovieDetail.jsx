@@ -4,9 +4,9 @@ import CommentList from "../pages/comment/CommentList1.jsx";
 import './MovieDetail.css'
 import pamyo from '../images/pamyo.jpg';
 import { useNavigate } from "react-router-dom";
+import { useAuth } from '../util/auth';
 
 const genre = ["액션", "로맨스", "SF"];
-import { useAuth } from '../util/auth';
 
 export default function MovieDetail() {
   const navigate = useNavigate();
