@@ -33,14 +33,11 @@ export default function MovieDetail() {
   return (
     <div>
       <div className="movie_img">
-        <p className="title">영화 제목</p>
-        <p className="release_date">출시 년도</p>
-        <p className="time"><a href={`/movie?genre=${genre[0]}`}>#{genre[0]}</a><a href={`/movie?genre=${genre[1]}`}>#{genre[1]}</a></p>
         <img src={pamyo} alt="" className="movie_img2"/>
         <div className="overlay">
           <p className="title">영화 제목</p>
           <p className="release_date">출시 년도</p>
-          <p className="time">런타임</p>
+          <p className="time"><a href={`/movie?genre=${genre[0]}`}>#{genre[0]}</a><a href={`/movie?genre=${genre[1]}`}>#{genre[1]}</a></p>
         </div>
       </div>
       <div className="all">
