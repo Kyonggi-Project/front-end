@@ -1,7 +1,7 @@
 /* div.css-1sik4bq-StyledWallpaper */
 .movie_img {
   position: relative;
-  height: 40vh;
+  height: 60vh;
   background: url(../../public/logo192.png);
   background-color: black;
   text-align: left;
@@ -12,7 +12,7 @@
 
 .movie_img2 {
   object-fit: cover;
-  max-height: 40vh;
+  max-height: 100%;
 }
 
 .movie_img p {
