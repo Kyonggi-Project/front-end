@@ -6,7 +6,7 @@
   background: #EEF2F5;
 }
 
-.board_details {
+.comment-detail-board_details {
   position: relative;
   width: 90%;
   margin: auto;
@@ -14,7 +14,7 @@
 }
 
 /* edit, delete button */
-.user_buttons {
+.comment-detail-user_buttons {
   background: #4e8195;
   border-radius: 5px;
   width: 90px;
@@ -32,12 +32,12 @@
   text-decoration: none;
 }
 
-.user_buttons:hover {
+.comment-detail-user_buttons:hover {
   background-color: #609fb7;
 }
 
 /* text-box */
-.text-box {
+.comment-detail-text-box {
   font-family: 'Inter';
   font-style: normal;
   background-color: #FFFFFF;
@@ -50,7 +50,7 @@
 
 
 /* Title, Content */
-.text {
+.comment-detail-text {
 
   font-family: 'Inter';
   font-style: normal;
@@ -64,13 +64,13 @@
   margin-bottom: 0.5rem;
 }
 
-.profile {
+.comment-detail-profile {
   display: flex;
   align-items: center;
 }
 
 /* Link → 정영훈 */
-.profile_name {
+.comment-detail-profile_name {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
@@ -97,7 +97,7 @@
 } */
 
 /* div.css-1jf0gpy-ProfilePhotoImage-ProfilePhotoImage 프로필 사진*/
-.profile_img {
+.comment-detail-profile_img {
   box-sizing: border-box;
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 10px;
@@ -111,7 +111,7 @@
 
 
 /* Link → Movies · 2004 */
-.movie_release {
+.comment-detail-movie_release {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
@@ -127,7 +127,7 @@
 
 
 /* div.css-a5x33s-StyledUserActionStatus-makeTypeFunction 평점 박스 */
-.movie_grade_box {
+.comment-detail-movie_grade_box {
   box-sizing: border-box;
   background: #FFFFFF;
   border: 1px solid #EAEAEA;
@@ -145,7 +145,7 @@
 }
 
 /* Section → Link 영화 이미지 링크*/
-.movie_image {
+.comment-detail-movie_image {
   box-sizing: border-box;
   background: #F8F8F8;
   width: 100%;
@@ -156,12 +156,12 @@
 }
 
 
-.totals_box {
+.comment-detail-totals_box {
   display: flex;
 }
 
 /* Section → 101 likes */
-.totals {
+.comment-detail-totals {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
@@ -176,13 +176,13 @@
   color: #787878;
 }
 
-.button2_box1 {
+.comment-detail-button2_box1 {
   display: flex;
 }
 
 /* Section → Section → Button → Like */
 /*like, share, comment button*/
-.button2 {
+.comment-detail-button2 {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
@@ -196,25 +196,25 @@
   margin-left: 1.2rem;
 }
 
-.button2:hover {
+.comment-detail-button2:hover {
   background-color: #609fb7;
   font-weight: bold;
 }
 
 
 /* Section → Section → Separator */
-.separator11 {
+.comment-detail-separator11 {
   box-sizing: border-box;
   border-bottom: 1px solid #e1e1e1;
   width: 100%;
 }
 
-.separator22 {
+.comment-detail-separator22 {
   border-right: 1px solid #e1e1e1;
 }
 
 /* Section → List → replyEmptyMessage */
-.empty_msg_text {
+.comment-detail-empty_msg_text {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;

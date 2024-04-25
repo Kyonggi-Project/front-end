@@ -1,7 +1,7 @@
 
 import { Link, useNavigate } from "react-router-dom";
-import "./Signup.css";
 import axios from "axios";
+import "./Signup.css";
 
 function Signup() {
 
@@ -46,23 +46,23 @@ function Signup() {
     <form className="signup-form" onSubmit={handleSubmit}>
       <div>
         <h1 className="signup-title">Create an account</h1>
-        <p className="option">Choose one of the option to go</p>
+        <p className="signup-option">Choose one of the option to go</p>
         <div>
-          <input type="text" placeholder="Nickname" className="input-box" required name="nickname" />
+          <input type="text" placeholder="Nickname" className="signup-input-box" required name="nickname" />
         </div>
         <div>
-          <input type="email" placeholder="Email" className="input-box" required name="email" />
+          <input type="email" placeholder="Email" className="signup-input-box" required name="email" />
         </div>
         <div>
-          <input type="password" placeholder="Password" className="input-box" required name="password" />
+          <input type="password" placeholder="Password" className="signup-input-box" required name="password" />
         </div>
         <div>
-          <input type="password" placeholder="Confirm Password" className="input-box" required name="confirm_password" />
+          <input type="password" placeholder="Confirm Password" className="signup-input-box" required name="confirm_password" />
         </div>
         <p className="a-text">
           Already have an account? <Link to="/login" className="login-link">Login</Link>
         </p>
-        <button className="button1" type="submit">
+        <button className="signup-button" type="submit">
           Signup
         </button>
       </div>

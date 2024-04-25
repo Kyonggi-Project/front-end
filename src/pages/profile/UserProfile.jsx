@@ -1,11 +1,11 @@
 // UserProfile.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./UserProfile.css";
 import EditModal from "../profile/EditModal";
 import defaultProfile from "../../images/profilePicture.png";
 import CommentList from "../comment/CommentList1";
 import { useSearchParams } from "react-router-dom";
+import "./UserProfile.css";
 
 const UserProfile = () => {
   const [userInfo, setUserInfo] = useState({
@@ -88,36 +88,36 @@ const UserProfile = () => {
   return (
     <div>
       <h3>Settings</h3>
-      <div className="my-page-container">
-        <div className="left-section">
-          <div className="profile-picture">
+      <div className="user-profile-container">
+        <div className="user-profile-left-section">
+          <div className="user-profile-picture">
             <img src={defaultProfile} alt="Profile" />
           </div>
-          <div className="user-details">
+          <div className="user-profile-user-details">
             <p>{userInfo.nickname}</p>
           </div>
-          <div className="user-stats">
-            <div className="stat-item">
+          <div className="user-profile-user-stats">
+            <div className="user-profile-stat-item">
               <p>Followers</p>
               <p>{userInfo.followers}</p>
             </div>
-            <div className="stat-item">
+            <div className="user-profile-stat-item">
               <p>Following</p>
               <p>{userInfo.following}</p>
             </div>
-            <div className="stat-item">
+            <div className="user-profile-stat-item">
               <p>Liked</p>
               <p>{userInfo.likedWorks}</p>
             </div>
           </div>
 
           <div>
-            <button className="info-button" onClick={handleEditProfileClick}>
+            <button className="user-profile-info-button" onClick={handleEditProfileClick}>
               Edit Profile Information
             </button>
           </div>
         </div>
-        <div className="right-section">
+        <div className="user-profile-right-section">
           <h4>Comments</h4>
           <ul>
             {comments.map((comment) => (

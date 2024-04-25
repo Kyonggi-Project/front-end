@@ -1,7 +1,7 @@
 import axios from "axios";
-import "./ReplyList.css";
 import { useEffect, useState } from "react";
 import profilePicture from "../../images/profilePicture.png";
+import "./ReplyList.css"
 
 export default function ReplyList() {
   const [comments, setComments] = useState([]);
@@ -24,18 +24,18 @@ export default function ReplyList() {
   }, []);
 
   return (
-    <div className="color1">
+    <div className="reply-list-color1">
       <ul>
         {comments.map(comment => (
           <>
             <div key={comment.id}>
-              <div className="user_info">
-                <img src={profilePicture} alt="profile_img" className="profile_img" />
+              <div className="reply-list-user_info">
+                <img src={profilePicture} alt="profile_img" className="reply-list-profile_img" />
                 <p>{comment.author}</p>
               </div>
               {comment.content}
             </div >
-            <div className="separator" />
+            <div className="reply-list-separator" />
           </>
         ))}
       </ul>
