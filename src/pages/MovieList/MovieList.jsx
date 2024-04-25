@@ -5,8 +5,8 @@ import Malo from "../../images/malo.jpg";
 import Mukspark from "../../images/mukspark.jpg";
 import Concert from "../../images/concert.jpg";
 import Whatslove from "../../images/whatslove.jpg";
-import './MovieList.css';
 import { useEffect, useState } from "react";
+import "./MovieList.css";
 
 const imagePaths = [Pamyo, Spyfamily, Dune, Malo, Mukspark, Concert, Whatslove, Spyfamily, Dune, Malo, Mukspark, Concert, Whatslove, Dune, Malo, Mukspark, Concert, Whatslove, Malo, Mukspark, Concert];
 
@@ -32,10 +32,10 @@ export default function MovieList() {
       }, []);
 
     return (
-        <div className="image-gallery">
-            <h1 className="title">{genre}</h1>
+        <div className="movie-list-image-gallery">
+            <h1 className="movie-list-title">{genre}</h1>
             {chunkedImages.map((chunk, index) => (
-            <div key={index} className="image-list">
+            <div key={index} className="movie-list-image-list">
                 {chunk.map((image, i) => (
                 <a href={`/details?index=${index*7+i}`}>
                     <img key={i} src={image} alt={`이미지 ${index * 7 + i + 1}`} />

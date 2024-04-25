@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import './Tag.css';
+import "./Tag.css";
 
 const TagList = ({ updateSelectedTags }) => {
   const predefinedTags = ['React', 'JavaScript', 'HTML', 'CSS'];

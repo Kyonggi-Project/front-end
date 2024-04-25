@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import './CommentList1.css';
 import profilePicture from '../../images/profilePicture.png';
 import { Link, useLocation } from 'react-router-dom';
+import "./CommentList1.css";
 
 export default function CommentList() {
   const [commentList, setCommentList] = useState([]);
@@ -31,31 +31,31 @@ export default function CommentList() {
 
   return (
     // map 함수로 구현
-    <div className='wid'>
+    <div className='comment-list-1-wid'>
       {moreButton &&
-        <div className='more_button'>
+        <div className='comment-list-1-more_button'>
           <Link to="/list">
-            <button className='btn'>더보기</button>
+            <button className='comment-list-1-btn'>더보기</button>
           </Link>
         </div>
       }
-      <ul className='lli'>
+      <ul className='comment-list-1-lli'>
         {commentList.map((commentList) => (
           <>
-            <section className='comment_board1' key={commentList.id}>
-              <div className='user_info_box1'>
-                <img src={profilePicture} alt="프로필" className='user_img1' />
-                <p className='name1'>{commentList.author}</p>
-                <div className='rating_box1'>
-                  <p className='rating31'>{commentList.rating}</p>
+            <section className='comment-list-1-comment_board1' key={commentList.id}>
+              <div className='comment-list-1-user_info_box1'>
+                <img src={profilePicture} alt="프로필" className='comment-list-1-user_img1' />
+                <p className='comment-list-1-name1'>{commentList.author}</p>
+                <div className='comment-list-1-rating_box1'>
+                  <p className='comment-list-1-rating31'>{commentList.rating}</p>
                 </div>
               </div>
-              <Link to={`/comments?index=${commentList.id}`} className='comment21'>
+              <Link to={`/comments?index=${commentList.id}`} className='comment-list-1-comment21'>
                 {commentList.content}
               </Link>
-              <div className='like_reply_box1'>
-                <p className='like_number1'>Like {commentList.like}</p>
-                <p className='like_number1'>Reply {commentList.reply}</p>
+              <div className='comment-list-1-like_reply_box1'>
+                <p className='comment-list-1-like_number1'>Like {commentList.like}</p>
+                <p className='comment-list-1-like_number1'>Reply {commentList.reply}</p>
               </div>
             </section>
           </>

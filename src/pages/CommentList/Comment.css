@@ -1,4 +1,4 @@
-.ll {
+.comment-ll {
   display: flex;
   gap: 2rem;
   margin-bottom: 3rem;
@@ -14,44 +14,54 @@
   margin-bottom: 1rem;
 }
 
-.titlebox{
+.comment-titlebox {
   padding-top: 1rem;
   padding-bottom: 1rem;
 }
 
-.prevbutton{
+.comment-titlebox h1 {
+  display: flex;
+  justify-content: center;
+  color: #f3fbff;
+  margin: 0;
+  font-size: 3vh;
+  font-family: "Ultra", serif;
+  font-weight: 400;
+  font-style: normal;
+  text-shadow: 2px 2px 6px #2b4c58;
+}
+
+.comment-prevbutton {
   border: none;
   background-color: #eef4ff;
   margin-top: 0rem;
 }
 
 /* div.css-jqudug */
-.user_info_box {
-  border-bottom: 1px solid #E5E5E5;
+.comment-user_info_box {
+  border-bottom: 1px solid #e5e5e5;
   display: flex;
   align-items: center;
   width: 100%;
   height: 2.5rem;
 }
 
-
 /* mingi */
-.name {
-  font-family: 'Inter';
+.comment-name {
+  font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
   line-height: 22px;
   letter-spacing: -0.7px;
   margin-left: 0.3rem;
-  color: #1F1F1F;
+  color: #1f1f1f;
   margin-bottom: 0;
   margin-top: 0;
 }
 
-
 /* div.css-k8a4hh */
-.user_img {
+.comment-user_img {
   box-sizing: border-box;
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 16px;
@@ -60,15 +70,14 @@
   height: 18px;
 }
 
-
 /* div.css-31ods0 */
-.rating_box {
+.comment-rating_box {
   position: absolute;
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  background: #FFFFFF;
-  border: 3px solid #EAEAEA;
+  background: #ffffff;
+  border: 3px solid #eaeaea;
   border-radius: 13px;
   right: 3rem;
   height: 1.5rem;
@@ -76,8 +85,8 @@
 }
 
 /* 2.5 */
-.rating3 {
-  font-family: 'Inter';
+.comment-rating3 {
+  font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 13px;
@@ -85,26 +94,24 @@
   /* identical to box height, or 162% */
   letter-spacing: -0.3px;
   margin-left: 0.6rem;
-  color: #4A4A4A;
+  color: #4a4a4a;
 }
 
-
 /* div.css-kt2ht6 */
-.like_reply_box {
+.comment-like_reply_box {
   position: absolute;
   bottom: 0;
   width: 100%;
   box-sizing: border-box;
   border-width: 1px 0px;
   border-style: solid;
-  border-color: #E5E5E5;
+  border-color: #e5e5e5;
   display: flex;
 }
 
-
 /* Emphasis → 0 */
-.like_number {
-  font-family: 'Inter';
+.comment-like_number {
+  font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 13.2344px;
@@ -117,10 +124,9 @@
   margin-left: 1rem;
 }
 
-
 /* 원작에 비해 실망스러웠다 */
-.comment2 {
-  font-family: 'Inter';
+.comment-comment2 {
+  font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 15px;

@@ -1,11 +1,11 @@
 import React from "react";
-import "./Login.css";
 import { useState } from "react";
 import axios from "axios";
 import { GoogleLogin } from "@react-oauth/google";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { jwtDecode } from 'jwt-decode';
 import { Link } from "react-router-dom";
+import "./Login.css";
 
 export default function Login() {
   const [enteredValues, setEnteredValues] = useState({
@@ -44,13 +44,13 @@ export default function Login() {
     <section className="login-form">
       <div>
         <h1 className="login-title">Login to your account</h1>
-        <p className='option'>enter email and password</p>
+        <p className='login-option'>enter email and password</p>
         <form>
           <div>
             <input
               type="username"
               placeholder="username"
-              className="input-box"
+              className="login-input-box"
               onChange={(event) => handlelInputChange('username', event.target.value)}
               value={enteredValues.username}
             />
@@ -59,12 +59,12 @@ export default function Login() {
             <input
               type="password"
               placeholder="password"
-              className="input-box"
+              className="login-input-box"
               onChange={(event) => handlelInputChange('password', event.target.value)}
               value={enteredValues.password}
             />
           </div>
-          <p className='a-text'>Don't you have a account? <Link to="/signup" className="signup-link">Sign up</Link></p>
+          <p className='login-a-text'>Don't you have a account? <Link to="/signup" className="signup-link">Sign up</Link></p>
           <a href={process.env.REACT_APP_GOOGLE_OAUTH}>
             <img src="../google.png" width="30px" alt="google"></img>
           </a>

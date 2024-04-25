@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import './Tag.css';
-
+import "./Tag.css";
 const TagInput = ({ onUpdateTags }) => {
 
   const [tags, setTags] = useState([]);
@@ -40,7 +39,7 @@ const TagInput = ({ onUpdateTags }) => {
           type="text"
           placeholder="Press button to add tags"
         />
-        <button type='button' onClick={addTags}>추가</button>
+        <button type='tag-button' onClick={addTags}>추가</button>
       </div>
     </>
   );
