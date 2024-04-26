@@ -17,6 +17,7 @@ const UserProfile = () => {
   const [comments, setComments] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
+  const url = process.env.REACT_APP_URL_PATH;
   const [searchParams, setSearchParams] = useSearchParams();
   const token = searchParams.get('token');
   if (token) {
@@ -27,7 +28,7 @@ const UserProfile = () => {
   useEffect(() => {
     // 유저 정보 가져오기 엔드포인트 수정
     axios
-      .get(`http://localhost:8080/api/user/profile/nickname/${nickname}`, {
+      .get(url + `/api/user/profile/nickname/${nickname}`, {
         withCredentials: true,
       })
       .then((response) => {
@@ -41,7 +42,7 @@ const UserProfile = () => {
       });
 
     axios
-      .get("http://localhost:8080/api/comments")
+      .get(url + "/api/comments")
       .then((response) => {
         setComments(response.data);
       })
@@ -71,7 +72,7 @@ const UserProfile = () => {
     }
 
     axios
-      .put("http://localhost:8080/api/user/update", infoToSend)
+      .put(url + "/api/user/update", infoToSend)
       .then((response) => {
         console.log("Updated info sent to server:", response.data);
         setUserInfo((prevState) => ({

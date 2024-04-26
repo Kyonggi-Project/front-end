@@ -20,13 +20,14 @@ export default function CommentDetail() {
   const [showModal, setShowModal] = useState(false);
 
   const { isLogin, isloginHandler, token } = useAuth();
+  const url = process.env.REACT_APP_URL_PATH;
 
   const id = param.boardId;
 
   useEffect(() => {
     // 게시글 정보를 가져오는 함수
     axios
-      .get(/*백엔드 url*/`http://localhost:8080/comments?id=${id}`)
+      .get(/*백엔드 url*/url + `/comments?id=${id}`)
       .then((response) => setDetails(response.data))
       .catch((error) => {
         console.error('게시글 정보를 가져오는데 실패했습니다:', error);
@@ -37,7 +38,7 @@ export default function CommentDetail() {
   useEffect(() => {
     // 서버로부터 현재 사용자 정보를 가져오는 함수
     axios
-      .get('http://localhost:8080/api/user', {
+      .get(url + '/api/user', {
         headers: {
           Authorization: `Bearer ${token}` // JWT 토큰을 Authorization 헤더에 추가
         }

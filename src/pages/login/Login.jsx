@@ -12,6 +12,7 @@ export default function Login() {
     username: "",
     password: "",
   });
+  const url = process.env.REACT_APP_URL_PATH;
 
   const formData = new FormData();
   formData.append("username", enteredValues.username);
@@ -21,7 +22,7 @@ export default function Login() {
     event.preventDefault();
 
     console.log(enteredValues);
-    axios.post('http://localhost:8080/login', formData, { withCredentials: true })
+    axios.post(url + '/login', formData, { withCredentials: true })
       .then((res) => {
         console.log(res.data);
         alert("로그인");

@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import StarRating from './stars/Star';
-import TagInput from './tag/TagInput';
 import TagList from './tag/TagList';
 import "./NewBoard.css";
 
@@ -15,21 +14,22 @@ export default function NewBoard() {
 
   const [inputTags, setInputTags] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);
+  const url = process.env.REACT_APP_URL_PATH;
 
   // 자식 컴포넌트로부터 선택된 태그를 업데이트하는 콜백 함수
   const updateSelectedTags = (tags) => {
     setSelectedTags(tags);
   };
 
-    // 태그 업데이트 함수
-    const handleInputTagUpdate = (updatedInputTags) => {
-      setInputTags(updatedInputTags);
-    };
+  // 태그 업데이트 함수
+  const handleInputTagUpdate = (updatedInputTags) => {
+    setInputTags(updatedInputTags);
+  };
 
   useEffect(() => {
     if (id) {
       // 게시글 수정 모드인 경우, 해당 ID를 사용하여 기존 게시글 데이터를 가져옴
-      axios.get(`http://localhost:8080/write/${id}`)
+      axios.get(url + `/write/${id}`)
         .then(response => {
           const { title, content, rating } = response.data;
           setTitle(title);
@@ -69,7 +69,7 @@ export default function NewBoard() {
 
     if (!id) {
       //post 요청
-      axios.post(/*백엔드 요청 주소*/'http://localhost:8080/write', formData)
+      axios.post(/*백엔드 요청 주소*/url + '/write', formData)
         .then(response => {
           console.log('응답 데이터:', response.data);
           alert("입력되었습니다.");
@@ -81,7 +81,7 @@ export default function NewBoard() {
         });
     } else {
       // 게시글 수정 모드일 때
-      axios.put(`http://localhost:8080/posts/${id}`, formData)
+      axios.put(url + `/posts/${id}`, formData)
         .then(response => {
           console.log('게시글 수정 완료:', response.data);
           alert('게시글이 수정되었습니다.');
@@ -109,8 +109,7 @@ export default function NewBoard() {
             onChange={handleContent}
             className='newboard-input-box2'
           />
-          <TagList updateSelectedTags={updateSelectedTags} />
-          <TagInput onUpdateTags={handleInputTagUpdate} />
+          <TagList updateSelectedTags={updateSelectedTags} onUpdateTags={handleInputTagUpdate} />
         </div>
         <button type='button' onClick={handleCancel} className='newboard-button'>Cancel</button>
         <button type='submit' className='newboard-button'>{id ? 'Edit' : 'Save'}</button>

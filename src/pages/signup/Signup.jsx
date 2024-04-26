@@ -6,6 +6,7 @@ import "./Signup.css";
 function Signup() {
 
   const navigate = useNavigate();
+  const url = process.env.REACT_APP_URL_PATH;
 
   function handleSubmit(event) {
     event.preventDefault(); // 폼의 기본 제출 동작을 막습니다.
@@ -16,7 +17,7 @@ function Signup() {
       password: event.target.elements.password.value,
       nickname: event.target.elements.nickname.value,
     };
-    
+
     const confirm = event.target.elements.confirm_password.value;
     if (formData.password !== confirm) {
       alert("비밀번호를 확인해 주세요");
@@ -24,7 +25,7 @@ function Signup() {
       console.log(formData);
 
       // axios를 사용하여 POST 요청 보내기
-      axios.post(/*백엔드 요청 주소*/'http://localhost:8080/api/user/signup', JSON.stringify(formData), {
+      axios.post(/*백엔드 요청 주소*/url + '/api/user/signup', JSON.stringify(formData), {
         headers: {
           'Content-Type': 'application/json'
         }
