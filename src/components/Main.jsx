@@ -83,20 +83,20 @@ function Main() {
       <div className="main-gallery-container">
         <div className="main-image-list-container">
         <ul className="main-button-list">
-          <li><button className={`button ${selectedGenre === "인기" ? "main-selected" : ""}`} onClick={() => handleGenreClick("인기")}>인기</button></li>
-          <li><button className={`button ${selectedGenre === "액션" ? "main-selected" : ""}`} onClick={() => handleGenreClick("액션")}>액션</button></li>
-          <li><button className={`button ${selectedGenre === "공포" ? "main-selected" : ""}`} onClick={() => handleGenreClick("공포")}>공포</button></li>
-          <li><button className={`button ${selectedGenre === "가족" ? "main-selected" : ""}`} onClick={() => handleGenreClick("가족")}>가족</button></li>
-          <li><button className={`button ${selectedGenre === "드라마" ? "main-selected" : ""}`} onClick={() => handleGenreClick("드라마")}>드라마</button></li>
-          <li><button className={`button ${selectedGenre === "코미디" ? "main-selected" : ""}`} onClick={() => handleGenreClick("코미디")}>코미디</button></li>
-          <li><button className={`button ${selectedGenre === "SF" ? "main-selected" : ""}`} onClick={() => handleGenreClick("SF")}>SF</button></li>
-          <li><button className={`button ${selectedGenre === "로맨스" ? "main-selected" : ""}`} onClick={() => handleGenreClick("로맨스")}>로맨스</button></li>
-          <li><button className={`button ${selectedGenre === "다큐" ? "main-selected" : ""}`} onClick={() => handleGenreClick("다큐")}>다큐</button></li>
+          <li><button className={`main-button ${selectedGenre === "인기" ? "main-selected" : ""}`} onClick={() => handleGenreClick("인기")}>인기</button></li>
+          <li><button className={`main-button ${selectedGenre === "액션" ? "main-selected" : ""}`} onClick={() => handleGenreClick("액션")}>액션</button></li>
+          <li><button className={`main-button ${selectedGenre === "공포" ? "main-selected" : ""}`} onClick={() => handleGenreClick("공포")}>공포</button></li>
+          <li><button className={`main-button ${selectedGenre === "가족" ? "main-selected" : ""}`} onClick={() => handleGenreClick("가족")}>가족</button></li>
+          <li><button className={`main-button ${selectedGenre === "드라마" ? "main-selected" : ""}`} onClick={() => handleGenreClick("드라마")}>드라마</button></li>
+          <li><button className={`main-button ${selectedGenre === "코미디" ? "main-selected" : ""}`} onClick={() => handleGenreClick("코미디")}>코미디</button></li>
+          <li><button className={`main-button ${selectedGenre === "SF" ? "main-selected" : ""}`} onClick={() => handleGenreClick("SF")}>SF</button></li>
+          <li><button className={`main-button ${selectedGenre === "로맨스" ? "main-selected" : ""}`} onClick={() => handleGenreClick("로맨스")}>로맨스</button></li>
+          <li><button className={`main-button ${selectedGenre === "다큐" ? "main-selected" : ""}`} onClick={() => handleGenreClick("다큐")}>다큐</button></li>
         </ul>
-          <h1 className="main-h1-name">{selectedGenre === "인기" ? "이번주 인기작 Top 10" : `이번주 ${selectedGenre} Top 10`}</h1>
+          <h2 className="main-h1-name">{selectedGenre === "인기" ? "이번주 인기작 Top 10" : `이번주 ${selectedGenre} Top 10`}</h2>
           <ul className="main-image-list">
             {/* 이미지 배열을 map 함수를 사용하여 동적으로 렌더링 */}
-            {(selectedGenre === "인기" ? matchedData : filterByGenre(matchedData, selectedGenre))
+            {matchedData
               .slice(startIndex, startIndex + showIndex)
               .map((image, index) => (
                 <li key={index}>
