@@ -1,0 +1,81 @@
+/* Message frame */
+.chat-container {
+  position: relative;
+  width: 656px;
+  height: 70vh;
+  background: #FFFFFF;
+  box-shadow: inset 1px 0px 0px #E5E5EA;
+}
+
+.chat-header {
+  height: 15%;
+  box-shadow: inset 0px -1px 0px #E5E5EA;
+}
+
+.chat-room-name {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0px;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.chat-room {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+  height: 70%;
+  gap: 1rem;
+  overflow-y: auto;
+}
+
+.chat-messages {
+  position: relative;
+  left: 0px;
+  top: 1rem;
+}
+
+.chat-messages div {
+  margin-top: 1rem;
+}
+
+.chat-date {
+  position: relative;
+  top: 1rem;
+  font-family: 'Eloquia Text';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  display: flex;
+
+  /* Text/gray */
+  color: #666668;
+}
+
+.chat-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+  width: 656px;
+  height: 15%;
+  background: #FFFFFF;
+  /* border-shadow/top */
+  box-shadow: inset 0px 1px 0px #E5E5EA;
+}
+
+.send-message-box {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 10px;
+
+  width: 70%;
+  height: 2rem;
+}
