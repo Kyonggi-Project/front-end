@@ -6,6 +6,7 @@
   align-items: flex-start; /* 수직 상단 정렬 */
   box-sizing: border-box;
   color: aliceblue;
+  padding-bottom: 5%;
 }
 
 .main-title-page {
@@ -187,7 +188,7 @@
 
 .main-data-info {
   font-size: 15px;
-  color: #666;
+  color: #e5e5e5;
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -195,7 +196,7 @@
 }
 .main-data-count {
   font-size: 12px;
-  color: #888;
+  color: #e5e5e5;
   font-style: italic;
   margin-top: 5px;
 }

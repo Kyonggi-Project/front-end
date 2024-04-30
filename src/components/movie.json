@@ -1,47 +1,37 @@
-{
-    "list" : "인기",
-    "movie" : [
+    [
         {
             "title": "파묘",
             "date": 2024,
-            "count": 945.3,
-            "genre" : "공포"
+            "rating": 4.3
         },
         {
             "title": "스파이패밀리",
             "date": 2024,
-            "count": 945.3,
-            "genre" : ["가족", "액션"]
+            "rating": 2.3
         },
         {
             "title": "듄2",
             "date": 2024,
-            "count": 945.3,
-            "genre" : ["액션", "SF"]
+            "rating": 4.3
         },
         {
             "title": "탐정 말로",
             "date": 2024,
-            "count": 945.3,
-            "genre" : "드라마"
+            "rating": 5.3
         },
         {
             "title": "목스박",
             "date": 2024,
-            "count": 945.3,
-            "genre" : ["코미디", "드라마"]
+            "rating": 3.3
         },
         {
             "title": "이승윤 콘서트",
             "date": 2024,
-            "count": 945.3,
-            "genre" : "다큐"
+            "rating": 2.3
         },
         {
             "title": "왓츠 러브",
             "date": 2024,
-            "count": 945.3,
-            "genre" : ["로맨스", "코미디"]
+            "rating": 1.3
         }
     ]
-}

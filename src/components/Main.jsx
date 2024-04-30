@@ -9,11 +9,12 @@ import Whatslove from "../images/whatslove.jpg";
 import JsonData from "./movie.json";
 import RecommendModal from "./RecommendModal";
 import "./Main.css"
+import { useLocation, useNavigate } from "react-router-dom";
 
 const imagePaths = [Pamyo, Spyfamily, Dune, Malo, Mukspark, Concert, Whatslove];
 const matchedData = imagePaths.map((imagePath, index) => ({
   imagePath: imagePath,
-  data: JsonData.movie[index], // 이미지 순서에 맞는 JSON 데이터를 가져옴
+  data: JsonData[index], // 이미지 순서에 맞는 JSON 데이터를 가져옴
 }));
 
 function Main() {
@@ -22,9 +23,22 @@ function Main() {
   const [showModal, setShowModal] = useState(false);
 
   const [selectedGenre, setSelectedGenre] = useState("인기");
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const genreParam = params.get("genre");
+    setSelectedGenre(genreParam || "인기");
+  }, [location]);
 
   // 장르별 순위 변화 함수
   const handleGenreClick = (genre) => {
+    if (genre === "인기") {
+      navigate(`/`);
+    } else {
+      navigate(`/?genre=${genre}`);
+    }
     setSelectedGenre(genre);
   };
 
@@ -100,7 +114,6 @@ function Main() {
               .slice(startIndex, startIndex + showIndex)
               .map((image, index) => (
                 <li key={index}>
-                  <a href="#">
                     <div className="main-image-wrapper">
                       <span className="main-image-number">
                         {startIndex + index + 1}
@@ -114,9 +127,8 @@ function Main() {
                     </div>
                     <div className="main-data-info">{image.data.title}</div>
                     <div className="main-data-count">
-                      {image.data.date} - {image.data.count}만명
+                      {image.data.date} - <b>★ {image.data.rating}</b>
                     </div>
-                  </a>
                 </li>
               ))}
           </ul>
