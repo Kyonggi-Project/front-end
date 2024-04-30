@@ -85,7 +85,7 @@ const UserProfile = () => {
       .catch((error) => {
         console.error("Error fetching comments:", error);
       });
-  }, [nickname]);
+  }, []);
 
   // 모달 표시 함수
   const handleEditProfileClick = () => {
