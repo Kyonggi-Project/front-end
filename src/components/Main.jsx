@@ -88,7 +88,7 @@ function Main() {
         <h1>Recommend for you!</h1>
         <h2>자신만의 작품을 추천받아보세요!</h2>
         <div className="main-recommend-buttonbox">
-          <button className="main-recommend-button" onClick={handleModalClick}>추천받기</button>
+          <button className="main-recommend-button" onClick={handleModalClick}>추천 받기</button>
         </div>
       </div>
       <div className="main-gallery-container">
@@ -137,7 +137,8 @@ function Main() {
 
       <div className="main-gallery-container">
         <div className="main-image-list-container">
-          <h2 className="main-h2-name">회원님에게 추천하는 작품</h2>
+          <h2 className="main-h2-name">Recommend for you</h2>
+          <p className="main-name-description"> 작성해주신 내용을 토대로 추천해드릴게요!</p>
           <ul className="main-image-list">
             {/* 이미지 배열을 map 함수를 사용하여 동적으로 렌더링 */}
             {matchedData

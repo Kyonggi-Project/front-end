@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./ReplyModal.css";
 const ReplyModal = ({ closeModal }) => {
   const [reply, setReply] = useState("");
 

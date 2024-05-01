@@ -24,8 +24,11 @@
 
 .profile-edit-close-button { /* 버튼 배경 색상 */
   margin-left: 440px;
-  color: #4e8195;
+  color: #539ADB;
   font-size: 15px;
+  font-weight: bolder;
+  background-color: white;
+  border: 0;
 }
 
 /* 폼 스타일링 */
@@ -48,7 +51,7 @@
 .profile-edit-button {
   width: 100%; /* 버튼 너비를 부모 요소에 맞춤 */
   padding: 20px;
-  background-color: #4e8195; /* 버튼 배경 색상 */
+  background-color: #539ADB; /* 버튼 배경 색상 */
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -56,5 +59,5 @@
   font-size: 15px;
 }
 .profile-edit-button:hover {
-  background-color: #3b6174; /* 버튼에 마우스를 올렸을 때의 배경 색상 */
+  background-color: #539ADB; /* 버튼에 마우스를 올렸을 때의 배경 색상 */
 }

@@ -1,4 +1,7 @@
 /* div.css-1sik4bq-StyledWallpaper */
+.movie-detail-wrap p, label{
+  font-family: "GmarketSansMedium";
+}
 .movie-detail-movie_img {
   position: relative;
   height: 60vh;
@@ -16,7 +19,6 @@
 }
 
 .movie-detail-movie_img p {
-  font-family: 'Inter';
   font-style: normal;
   color: #FFFFFF;
   margin-bottom: 0.5rem;
@@ -51,7 +53,7 @@
 
 /* div.e1dnb43p0 */
 .movie-detail-poster {
-  margin-left: 30px;
+  margin-left: 30%;
   box-sizing: border-box;
   width: 50%;
   background: #F8F8F8;
@@ -63,7 +65,6 @@
 
 /* Section → Avg */
 .movie-detail-avg {
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
   font-size: 13px;
@@ -101,12 +102,11 @@
 
 /* Rate */
 .movie-detail-r {
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
   font-size: 10px;
   line-height: 12px;
-  color: #E6F6FF;
+  color: #539ADB;
 }
 
 .movie-detail-avg_rating {
@@ -115,25 +115,23 @@
 
 /* 4.2 */
 .movie-detail-rating_num {
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
   font-size: 30px;
   line-height: 42px;
   margin-top: 0;
-  color: #E6F6FF;
+  color: #539ADB;
   margin-bottom: 0;
 }
 
 
 /* Average Rating(7k) */
 .movie-detail-rating_count {
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
   font-size: 10px;
   line-height: 12px;
-  color: #E6F6FF;
+  color: #539ADB;
 }
 
 .movie-detail-separator {
@@ -158,22 +156,23 @@
 /* Button */
 .movie-detail-buttons_icon {
   width: 50%;
+  font-family: "GmarketSansMedium";
   font-size: 14px;
   line-height: 40px;
   border: none;
-  background-color: #4e8195;
+  background-color: #539ADB;
   color: #E6F6FF ;
-
+  margin: 0 20px;
+  border-radius: 10px;
 }
 
 .movie-detail-buttons_icon:hover {
-  background-color: #e5e5e5;
+  background-color: #5b8cd5;
   font-weight: bold;
 }
 
 /* Harry Potter has lived under the stairs at his aunt and uncle's house his whole life. But on his 11th birthday, he learns he's a powerful wizard -- with a place waiting for him at the Hogwarts School of Witchcraft and Wizardry. As he learns to harness his newfound powers with the help of the school's kindly headmaster, Harry uncovers the truth about his parents' deaths -- and about the villain who's to blame. */
 .movie-detail-movie_details {
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
   font-size: 15px;
@@ -181,22 +180,23 @@
   display: flex;
   align-items: center;
 
-  color: #E6F6FF;
+  color: #539ADB;
   margin-top: 3rem;
 }
 
 /* Heading 2 → Comment */
 .movie-detail-comment {
-  font-family: 'Inter';
+  font-family:  "Ultra", serif;
   font-style: normal;
-  font-weight: 700;
-  font-size: 21px;
+  font-weight: 400;
+  font-size: 3vh;
   line-height: 28px;
+  padding: 10px 120px;
   display: flex;
   align-items: center;
   letter-spacing: -0.7px;
 
-  color: #000000;
+  color: #539ADB;
   margin-top: 3rem;
 }
 
@@ -208,6 +208,6 @@
   position: absolute;
   left: 0;
   bottom: 0;
-  color: white; /* 텍스트 색상 설정 */
+  color: #539ADB; /* 텍스트 색상 설정 */
   padding: 20px;
 }

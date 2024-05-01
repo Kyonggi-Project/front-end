@@ -7,7 +7,7 @@
   position: relative;
   overflow: hidden;
   padding-right: 0.5rem;
-  color: aliceblue;
+  color: #539ADB;
 }
 
 .left-half, .right-half {
@@ -30,5 +30,5 @@
 }
 
 .current-score {
-  color: #f5f5f5;
+  color: #539ADB;
 }

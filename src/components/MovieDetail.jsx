@@ -31,7 +31,7 @@ export default function MovieDetail() {
   }
 
   return (
-    <div>
+    <div className="movie-detail-wrap">
       <div className="movie-detail-movie_img">
         <img src={pamyo} alt="" className="movie-detail-movie_img2"/>
         <div className="movie-detail-overlay">
@@ -67,7 +67,7 @@ export default function MovieDetail() {
       </div>
       <div className="movie-detail-separator" style={{ marginTop: '3rem', width: '100%' }}></div>
       <section className="movie-detail-list">
-        <header className="movie-detail-comment">Comment</header>
+        <header className="movie-detail-comment">Comments</header>
         <CommentList />
       </section>
     </div>
