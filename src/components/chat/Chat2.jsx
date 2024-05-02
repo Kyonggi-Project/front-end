@@ -46,7 +46,7 @@ const ChatUI = () => {
 
   return (
     <div>
-      <div style={{ position: "relative", height: "50vh" }}>
+      <div style={{ position: "relative", height: "70vh" }}>
         <MainContainer>
           <ChatContainer>
             <MessageList>

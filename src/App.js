@@ -15,6 +15,7 @@ import './App.css';
 import CommentApp from "./pages/CommentList/CommentList.jsx";
 import { AuthProvider } from "./util/auth.js";
 import ChatUI from "./components/chat/Chat2.jsx";
+import ChatRoom from "./components/chat/ChatRoom.jsx";
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path="/details" element={<MovieDetail />} />
             <Route path="/list" element={<CommentApp />} />
             <Route path="/chat" element={<ChatUI />} />
+            <Route path="/chatList" element={<ChatRoom />} />
           </Routes>
         </div>
       </Router>

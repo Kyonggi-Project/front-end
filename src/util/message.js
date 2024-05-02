@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Leave : " + loginId);
         stomp.send("/app/leave/" + roomId, {}, JSON.stringify({roomId: roomId, sender: loginId,
             status: "LEAVE"}));
-        location.replace('http://localhost:8080/chat/room/list');
+        location.replace('/chat/room/list');
     };
 
     // btnLeave 버튼에 이벤트 추가
