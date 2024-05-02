@@ -10,6 +10,7 @@ import JsonData from "./movie.json";
 import RecommendModal from "./RecommendModal";
 import "./Main.css"
 import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const imagePaths = [Pamyo, Spyfamily, Dune, Malo, Mukspark, Concert, Whatslove];
 const matchedData = imagePaths.map((imagePath, index) => ({
@@ -17,10 +18,28 @@ const matchedData = imagePaths.map((imagePath, index) => ({
   data: JsonData[index], // 이미지 순서에 맞는 JSON 데이터를 가져옴
 }));
 
+const url = 'http://localhost:8080';
+
 function Main() {
   const [startIndex, setStartIndex] = useState(0); // 보여질 이미지 수 상태
   const [showIndex, setShowIndex] = useState(4);
   const [showModal, setShowModal] = useState(false);
+  const [movieList, setMovieList] = useState([{
+    posterImg: "",
+    title: "",
+    year: "",
+    score: 0,
+  }]);
+
+  useEffect(()=> {
+    axios.get(url+'/api/ottdata/top10')
+      .then(response => {
+        setMovieList(response.data);
+      })
+      .catch(
+        error => {console.error("Error fetching movie data", error);
+      });
+  },[]);
 
   const [selectedGenre, setSelectedGenre] = useState("인기");
   const navigate = useNavigate();
@@ -110,7 +129,7 @@ function Main() {
           <h2 className="main-h1-name">{selectedGenre === "인기" ? "이번주 인기작 Top 10" : `이번주 ${selectedGenre} Top 10`}</h2>
           <ul className="main-image-list">
             {/* 이미지 배열을 map 함수를 사용하여 동적으로 렌더링 */}
-            {matchedData
+            {movieList
               .slice(startIndex, startIndex + showIndex)
               .map((image, index) => (
                 <li key={index}>
@@ -120,14 +139,14 @@ function Main() {
                       </span>
                       <a href={`/details?index=${index}`}>
                         <img
-                          src={image.imagePath}
+                          src={image.posterImg}
                           alt={`Image ${startIndex + index + 1}`}
                         />
                       </a>
                     </div>
-                    <div className="main-data-info">{image.data.title}</div>
+                    <div className="main-data-info">{image.title}</div>
                     <div className="main-data-count">
-                      {image.data.date} - <b>★ {image.data.rating}</b>
+                      {image.year} - <b>★ {image.score}</b>
                     </div>
                 </li>
               ))}
