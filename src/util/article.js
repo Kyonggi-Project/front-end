@@ -61,13 +61,12 @@ export function httpRequest2(method, url, body, success, fail) {
     .catch((error) => {
       if (error && error.response.status === 401) {
         console.log('error');
-        axios.post(host + '/api/token/createToken', {
-          withCredentials: true,
-        }, {
+        axios.post(host + '/api/token/createToken', {}, {
           headers: {
             Authorization: 'Bearer ' + localStorage.getItem('access_token'),
             'Content-Type': 'application/json',
           },
+          withCredentials: true,
         })
           .then(res => {
             if (res.status === 200) {
