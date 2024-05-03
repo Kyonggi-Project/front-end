@@ -1,29 +1,21 @@
 import React, { useState, useEffect, useRef } from "react";
-import Pamyo from "../images/pamyo.jpg";
-import Spyfamily from "../images/spyfamily.jpg";
-import Dune from "../images/dune.jpg";
-import Malo from "../images/malo.jpg";
-import Mukspark from "../images/mukspark.jpg";
-import Concert from "../images/concert.jpg";
-import Whatslove from "../images/whatslove.jpg";
-import JsonData from "./movie.json";
 import RecommendModal from "./RecommendModal";
 import "./Main.css"
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const imagePaths = [Pamyo, Spyfamily, Dune, Malo, Mukspark, Concert, Whatslove];
-const matchedData = imagePaths.map((imagePath, index) => ({
-  imagePath: imagePath,
-  data: JsonData[index], // 이미지 순서에 맞는 JSON 데이터를 가져옴
-}));
-
 const url = 'http://localhost:8080';
+let belowpage = '/api/ottdata/top10';
 
 function Main() {
   const [startIndex, setStartIndex] = useState(0); // 보여질 이미지 수 상태
   const [showIndex, setShowIndex] = useState(4);
   const [showModal, setShowModal] = useState(false);
+  const [selectedGenre, setSelectedGenre] = useState("인기");
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  
   const [movieList, setMovieList] = useState([{
     posterImg: "",
     title: "",
@@ -32,18 +24,23 @@ function Main() {
   }]);
 
   useEffect(()=> {
-    axios.get(url+'/api/ottdata/top10')
+    const params = new URLSearchParams(location.search);
+    const genreParam = params.get("genre");
+    
+    if (genreParam) {
+      belowpage=`/api/ottdata/genre?genre=${genreParam}`;
+    }
+    else{
+      belowpage = '/api/ottdata/top10';
+    }
+    axios.get(url+belowpage)
       .then(response => {
         setMovieList(response.data);
       })
       .catch(
         error => {console.error("Error fetching movie data", error);
       });
-  },[]);
-
-  const [selectedGenre, setSelectedGenre] = useState("인기");
-  const navigate = useNavigate();
-  const location = useLocation();
+  },[location.search, selectedGenre]);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -96,12 +93,12 @@ function Main() {
 
   const handlePrevButtonClick = () => {
     const newStartIndex = startIndex - showIndex;
-    setStartIndex(newStartIndex >= imagePaths.length ? 0 : newStartIndex);
+    setStartIndex(newStartIndex >= movieList.length ? 0 : newStartIndex);
   };
 
   const handleNextButtonClick = () => {
     const newStartIndex = startIndex + showIndex; // 4개씩 보여주므로 4을 더해줍니다.
-    setStartIndex(newStartIndex >= imagePaths.length ? 0 : newStartIndex);
+    setStartIndex(newStartIndex >= movieList.length ? 0 : newStartIndex);
   };
 
   return (
