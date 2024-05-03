@@ -59,7 +59,7 @@ export function httpRequest2(method, url, body, success, fail) {
 
     })
     .catch((error) => {
-      if (error.response.status === 401) {
+      if (error.response && error.response.status === 401) {
         console.log('error');
         axios.post(host + '/api/token/createToken', {
           withCredentials: true,

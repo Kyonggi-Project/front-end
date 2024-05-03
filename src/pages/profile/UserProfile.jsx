@@ -18,6 +18,7 @@ const UserProfile = () => {
   });
   const [comments, setComments] = useState([]);
   const [userData, setUserData] = useState([]);
+  const [watchListData, setWatchListData] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
   const url = process.env.REACT_APP_URL_PATH;
@@ -56,6 +57,7 @@ const UserProfile = () => {
       (response) => {
         console.log(response.data);
         setUserData(response.data.user);
+        setWatchListData(response.data.watchList.bookmark.length);
       },
       (error) => {
         console.error("Error fetching user info:", error);
@@ -144,7 +146,7 @@ const UserProfile = () => {
             </div>
             <div className="user-profile-stat-item">
               <p>Liked</p>
-              <p>{userData.articlesCount}</p>
+              <p>{watchListData}</p>
             </div>
           </div>
 
