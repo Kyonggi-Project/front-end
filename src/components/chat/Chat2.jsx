@@ -18,7 +18,8 @@ const ChatUI = () => {
   const url = process.env.REACT_APP_URL_PATH;
   useEffect(() => {
     // 웹 소켓 연결 생성
-    const sockJs = new SockJS(url + "/ws/stomp");
+    const sockJs = new SockJS("http://localhost:8080/ws/stomp");
+    console.log(sockJs);
     const stompClient = Stomp.over(sockJs);
     setStompClient(stompClient);
 

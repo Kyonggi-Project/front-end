@@ -16,6 +16,7 @@ import CommentApp from "./pages/CommentList/CommentList.jsx";
 import { AuthProvider } from "./util/auth.js";
 import ChatUI from "./components/chat/Chat2.jsx";
 import ChatRoom from "./components/chat/ChatRoom.jsx";
+import Chat from "./components/chat/Chat.jsx";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
             <Route path="/list" element={<CommentApp />} />
             <Route path="/chat" element={<ChatUI />} />
             <Route path="/chatList" element={<ChatRoom />} />
+            <Route path="/chat2" element={<Chat />} />
           </Routes>
         </div>
       </Router>

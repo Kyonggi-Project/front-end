@@ -18,7 +18,7 @@ export default function ChatRoom() {
   ];
 
   function handleChat(index) {
-    window.location.href = `/chat?${index}`;
+    window.location.href = `/chat?roomId=${index}`;
   }
 
   return (
@@ -28,19 +28,21 @@ export default function ChatRoom() {
       }}
     >
       {conversations.map((conversation, index) => (
-        // <Conversation
-        //   key={index}
-        //   info={conversation.info}
-        //   lastSenderName={conversation.lastSenderName}
-        //   name={conversation.name}
-        // />
-        <Conversation key={index} onClick={() => handleChat(index)}>
-          <Conversation.Content >
-            <div>
-              {conversation.name}
-            </div>
-          </Conversation.Content>
-        </Conversation>
+        <Conversation
+          key={index}
+          info={conversation.info}
+          lastSenderName={conversation.lastSenderName}
+          name={conversation.name}
+          onClick={() => handleChat(index)}
+        />
+        
+        // <Conversation key={index} onClick={() => handleChat(index)}>
+        //   <Conversation.Content >
+        //     <div>
+        //       {conversation.name}
+        //     </div>
+        //   </Conversation.Content>
+        // </Conversation>
       ))}
     </ConversationList>
   );
