@@ -1,13 +1,23 @@
 import React, { useState } from "react";
 import "./RecommendModal.css";
+import { useNavigate } from "react-router-dom";
 const ReModal = ({ closeModal }) => {
   const [feeling, setFeeling] = useState("");
+  const [watchList, setWatchList] = useState("");
   const [formnumber, setFormNumber] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
     setFeeling("");
+    console.log(feeling);
     setFormNumber(true);
+  };
+  const handleSubmitWatchList = (e) => {
+    console.log(watchList);
+    setWatchList("");
+    navigate(`/afterModal`);
   };
 
   return (
@@ -43,11 +53,14 @@ const ReModal = ({ closeModal }) => {
             <h2 className="recommend-modal-main-title">
               <p>어떤 분위기의 영화를 보고 싶으신가요? 🧐</p>
             </h2>
-            <form className="recommend-modal-input-group">
+            <form 
+              className="recommend-modal-input-group"
+              onSubmit={handleSubmitWatchList}  
+            >
               <input
                 type="text"
-                value={feeling}
-                onChange={(e) => setFeeling(e.target.value)}
+                value={watchList}
+                onChange={(e) => setWatchList(e.target.value)}
               />
               <button className="recommend-modal-feeling-submit">Submit</button>
             </form>

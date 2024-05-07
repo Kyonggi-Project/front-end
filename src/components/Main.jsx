@@ -8,53 +8,57 @@ const url = 'http://localhost:8080';
 let belowpage = '/api/ottdata/top10';
 
 function Main() {
-  const [startIndex, setStartIndex] = useState(0); // 보여질 이미지 수 상태
-  const [showIndex, setShowIndex] = useState(4);
+  const [startIndex, setStartIndex] = useState(0); // 몇번째 이미지 인덱스부터 출력하는지
+  const [showIndex, setShowIndex] = useState(4); // 보여주는 이미지 수
   const [showModal, setShowModal] = useState(false);
-  const [selectedGenre, setSelectedGenre] = useState("인기");
+  const [selectedGenre, setSelectedGenre] = useState("인기"); //장르값 저장하는 state
 
   const navigate = useNavigate();
   const location = useLocation();
   
   const [movieList, setMovieList] = useState([{
+    id: "",
     posterImg: "",
     title: "",
     year: "",
     score: 0,
-  }]);
+  }]); //받아온 무비데이터 저장하는 state
 
+  //백엔드에서 데이터 받아오는 코드
   useEffect(()=> {
     const params = new URLSearchParams(location.search);
     const genreParam = params.get("genre");
     
     if (genreParam) {
-      belowpage=`/api/ottdata/genre?genre=${genreParam}`;
+      belowpage=`/api/ottdata/genre?genre=${genreParam}`; //장르데이터 존재시 장르리스트 받아오도록
     }
     else{
-      belowpage = '/api/ottdata/top10';
+      belowpage = '/api/ottdata/top10'; //장르데이터가 없으면 인기리스트 받아오도록
     }
     axios.get(url+belowpage)
       .then(response => {
-        setMovieList(response.data);
+        setMovieList(response.data); //받아온 데이터를 무비리스트에 배열형태로 저장
       })
       .catch(
         error => {console.error("Error fetching movie data", error);
       });
   },[location.search, selectedGenre]);
 
+  //URL파라미터에서 genre값 존재 시 해당 값을 seletedGenre에 저장, 값이 없으면 '인기'로 저장
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const genreParam = params.get("genre");
     setSelectedGenre(genreParam || "인기");
   }, [location]);
 
-  // 장르별 순위 변화 함수
+  // 장르별 순위 변화 함수, 장르가 인기면 / 경로로, 장르가 있으면 /genre=[장르]로 이동
   const handleGenreClick = (genre) => {
     if (genre === "인기") {
       navigate(`/`);
     } else {
       navigate(`/?genre=${genre}`);
     }
+    setStartIndex(0);
     setSelectedGenre(genre);
   };
 
@@ -69,6 +73,7 @@ function Main() {
     setShowModal(false);
   };
 
+  //화면 사이즈에 따라 보여주는 이미지 수를 변경
   const adjustNumImagesToShow = () => {
     const screenWidth = window.innerWidth;
     if (screenWidth > 1600) {
@@ -88,16 +93,19 @@ function Main() {
     window.addEventListener("resize", adjustNumImagesToShow);
     return () => {
       window.removeEventListener("resize", adjustNumImagesToShow);
+      
     };
   }, []);
 
+  //왼쪽으로 가는 버튼함수 현재 위치에서 보여주는 인덱스 번호만큼 뺀다
   const handlePrevButtonClick = () => {
     const newStartIndex = startIndex - showIndex;
     setStartIndex(newStartIndex >= movieList.length ? 0 : newStartIndex);
   };
 
+  //오른쪽으로 가는 버튼함수 현재 위치에서 보여주는 인덱스 번호만큼 더한다
   const handleNextButtonClick = () => {
-    const newStartIndex = startIndex + showIndex; // 4개씩 보여주므로 4을 더해줍니다.
+    const newStartIndex = startIndex + showIndex;
     setStartIndex(newStartIndex >= movieList.length ? 0 : newStartIndex);
   };
 
@@ -134,7 +142,7 @@ function Main() {
                       <span className="main-image-number">
                         {startIndex + index + 1}
                       </span>
-                      <a href={`/details?index=${index}`}>
+                      <a href={`/details/${image.id}`}>
                         <img
                           src={image.posterImg}
                           alt={`Image ${startIndex + index + 1}`}
@@ -149,7 +157,7 @@ function Main() {
               ))}
           </ul>
           <button
-            className={`main-scroll-button prev ${startIndex === 0 ? "h1" : ""}`}
+            className={`main-scroll-button prev ${startIndex === 0 ? "hidden" : ""}`}
             onClick={handlePrevButtonClick}
           >
             ←
