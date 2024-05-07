@@ -3,7 +3,6 @@ import {
   ConversationList,
   Conversation
 } from "@chatscope/chat-ui-kit-react";
-import { Link } from "react-router-dom";
 
 export default function ChatRoom() {
   const conversations = [
