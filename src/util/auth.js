@@ -19,8 +19,10 @@ export function AuthProvider({ children }) {
   }, []);
 
   const isloginHandler = (event) => {
+    if (!isLogin) {
       event.preventDefault();
       alert('로그인을 해주세요');
+    }
   }
   const token = localStorage.getItem('access_token');
 

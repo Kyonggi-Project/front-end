@@ -14,8 +14,6 @@ export default function Login() {
   });
   const url = process.env.REACT_APP_URL_PATH;
 
-  const url = process.env.REACT_APP_URL_PATH;
-
   const formData = new FormData();
   formData.append("username", enteredValues.username);
   formData.append("password", enteredValues.password);
