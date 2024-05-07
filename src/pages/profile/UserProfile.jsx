@@ -23,9 +23,9 @@ const UserProfile = () => {
 
   const url = process.env.REACT_APP_URL_PATH;
   const [searchParams, setSearchParams] = useSearchParams();
-  const token1 = searchParams.get('token');
-  if (token1) {
-    localStorage.setItem('access_token', token1);
+  const token = searchParams.get('token');
+  if (token) {
+    localStorage.setItem('access_token', token);
   }
 
   const nickname = userInfo.nickname; // 예시로 userInfo의 nickname을 사용
