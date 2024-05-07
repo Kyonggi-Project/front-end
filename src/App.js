@@ -13,6 +13,7 @@ import MovieDetail from "./components/MovieDetail.jsx";
 import './App.css';
 import CommentApp from "./pages/CommentList/CommentList.jsx";
 import MovieList from "./pages/MovieList/MovieList.jsx";
+import AfterLoginMain from "./components/AfterLoginMain.jsx";
 import { AuthProvider } from "./util/auth.js";
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
             <Route path="/details" element={<MovieDetail />} />
             <Route path="/list" element={<CommentApp />} />
             <Route path="/movie" element={<MovieList />}/>
+            <Route path="/afterModal" element={<AfterLoginMain/>}/>
           </Routes>
         </div>
       </Router>
