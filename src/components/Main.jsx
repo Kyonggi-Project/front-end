@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./Main.css";
 import Pamyo from "../images/pamyo.jpg";
 import Spyfamily from "../images/spyfamily.jpg";
 import Dune from "../images/dune.jpg";
@@ -9,6 +8,7 @@ import Concert from "../images/concert.jpg";
 import Whatslove from "../images/whatslove.jpg";
 import JsonData from "./movie.json";
 import RecommendModal from "./RecommendModal";
+import "./Main.css"
 
 const imagePaths = [Pamyo, Spyfamily, Dune, Malo, Mukspark, Concert, Whatslove];
 const matchedData = imagePaths.map((imagePath, index) => ({
@@ -84,24 +84,25 @@ function Main() {
 
   return (
     <>
-      <div className="titlepage">
-        <h1>자신만의 작품을 추천받아보세요</h1>
-        <div className="buttonbox">
-          <button className="recommend-button" onClick={handleModalClick}>추천받기</button>
+      <div className="main-title-page">
+        <h1>Recommend for you!</h1>
+        <h2>자신만의 작품을 추천받아보세요!</h2>
+        <div className="main-recommend-buttonbox">
+          <button className="main-recommend-button" onClick={handleModalClick}>추천받기</button>
         </div>
       </div>
-      <div className="gallery-container">
-        <div className="image-list-container">
-          <h1 className="h1-name">Ranking</h1>
-          <ul className="image-list">
+      <div className="main-gallery-container">
+        <div className="main-image-list-container">
+          <h1 className="main-h1-name">Ranking</h1>
+          <ul className="main-image-list">
             {/* 이미지 배열을 map 함수를 사용하여 동적으로 렌더링 */}
             {matchedData
               .slice(startIndex, startIndex + showIndex)
               .map((image, index) => (
                 <li key={index}>
                   <a href="#">
-                    <div className="image-wrapper">
-                      <span className="image-number">
+                    <div className="main-image-wrapper">
+                      <span className="main-image-number">
                         {startIndex + index + 1}
                       </span>
                       <a href={`/details?index=${index}`}>
@@ -111,8 +112,8 @@ function Main() {
                         />
                       </a>
                     </div>
-                    <div className="data-info">{image.data.title}</div>
-                    <div className="data-count">
+                    <div className="main-data-info">{image.data.title}</div>
+                    <div className="main-data-count">
                       {image.data.date} - {image.data.count}만명
                     </div>
                   </a>
@@ -120,13 +121,13 @@ function Main() {
               ))}
           </ul>
           <button
-            className={`scroll-button prev ${startIndex === 0 ? "hidden" : ""}`}
+            className={`main-scroll-button prev ${startIndex === 0 ? "h1" : ""}`}
             onClick={handlePrevButtonClick}
           >
             ←
           </button>
           <button
-            className="scroll-button next"
+            className="main-scroll-button next"
             onClick={handleNextButtonClick}
           >
             →
@@ -134,17 +135,17 @@ function Main() {
         </div>
       </div>
 
-      <div className="gallery-container">
-        <div className="image-list-container">
-          <h2 className="h2-name">회원님에게 추천하는 작품</h2>
-          <ul className="image-list">
+      <div className="main-gallery-container">
+        <div className="main-image-list-container">
+          <h2 className="main-h2-name">회원님에게 추천하는 작품</h2>
+          <ul className="main-image-list">
             {/* 이미지 배열을 map 함수를 사용하여 동적으로 렌더링 */}
             {matchedData
               .slice(recstartIndex, recstartIndex + recshowIndex)
               .map((image, index) => (
                 <li key={index}>
                   <a href="#">
-                    <div className="image-wrapper1">
+                    <div className="main-image-wrapper1">
                       <a href={`/details?index=${index}`}>
                         <img
                           src={image.imagePath}
@@ -152,8 +153,8 @@ function Main() {
                         />
                       </a>
                     </div>
-                    <div className="data-info">{image.data.title}</div>
-                    <div className="data-count">
+                    <div className="main-data-info">{image.data.title}</div>
+                    <div className="main-data-count">
                       {image.data.date} - {image.data.count}만명
                     </div>
                   </a>
@@ -161,15 +162,15 @@ function Main() {
               ))}
           </ul>
           <button
-            className={`scroll-button prev ${
-              recstartIndex === 0 ? "hidden" : ""
+            className={`main-scroll-button prev ${
+              recstartIndex === 0 ? "h1" : ""
             }`}
             onClick={handleRecPrevButtonClick}
           >
             ←
           </button>
           <button
-            className="scroll-button next"
+            className="main-scroll-button next"
             onClick={handleRecNextButtonClick}
           >
             →

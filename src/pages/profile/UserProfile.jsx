@@ -1,11 +1,13 @@
 // UserProfile.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./UserProfile.css";
 import EditModal from "../profile/EditModal";
 import defaultProfile from "../../images/profilePicture.png";
 import CommentList from "../comment/CommentList1";
+import { httpRequest2 } from "../../util/article";
+import "./UserProfile.css";
 import { useSearchParams } from "react-router-dom";
+import { useAuth } from "../../util/auth";
 
 const UserProfile = () => {
   const [userInfo, setUserInfo] = useState({
@@ -15,11 +17,12 @@ const UserProfile = () => {
     likedWorks: 0,
   });
   const [comments, setComments] = useState([]);
+  const [userData, setUserData] = useState([]);
+  const [watchListData, setWatchListData] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
-  const [searchParams, setSearchParams] = useSearchParams();
-
   const url = process.env.REACT_APP_URL_PATH;
+  const [searchParams, setSearchParams] = useSearchParams();
   const token = searchParams.get('token');
   if (token) {
     localStorage.setItem('access_token', token);
@@ -27,7 +30,20 @@ const UserProfile = () => {
 
   const nickname = userInfo.nickname; // 예시로 userInfo의 nickname을 사용
   useEffect(() => {
-    // 유저 정보 가져오기 엔드포인트 수정
+    httpRequest2(
+      'GET',
+      '/api/user/profile/myPage',
+      null,
+      (response) => {
+        setUserData(response.data.user);
+        setWatchListData(response.data.watchList.bookmark);
+      },
+      (error) => {
+        console.error("Error fetching user info:", error);
+        // 리프레시 토큰을 이용한 액세스 토큰 재발급 등의 작업을 수행할 수 있습니다.
+      }
+    );
+
     axios
       .get(url + `/api/user/profile/nickname/${nickname}`, {
         withCredentials: true,
@@ -50,7 +66,7 @@ const UserProfile = () => {
       .catch((error) => {
         console.error("Error fetching comments:", error);
       });
-  }, [nickname]);
+  }, []);
 
   // 모달 표시 함수
   const handleEditProfileClick = () => {
@@ -90,36 +106,36 @@ const UserProfile = () => {
   return (
     <div>
       <h3>Settings</h3>
-      <div className="my-page-container">
-        <div className="left-section">
-          <div className="profile-picture">
+      <div className="user-profile-container">
+        <div className="user-profile-left-section">
+          <div className="user-profile-picture">
             <img src={defaultProfile} alt="Profile" />
           </div>
-          <div className="user-details">
-            <p>{userInfo.nickname}</p>
+          <div className="user-profile-user-details">
+            <p>{userData.nickname}</p>
           </div>
-          <div className="user-stats">
-            <div className="stat-item">
+          <div className="user-profile-user-stats">
+            <div className="user-profile-stat-item">
               <p>Followers</p>
-              <p>{userInfo.followers}</p>
+              <p>{userData.followers}</p>
             </div>
-            <div className="stat-item">
+            <div className="user-profile-stat-item">
               <p>Following</p>
-              <p>{userInfo.following}</p>
+              <p>{userData.following}</p>
             </div>
-            <div className="stat-item">
+            <div className="user-profile-stat-item">
               <p>Liked</p>
-              <p>{userInfo.likedWorks}</p>
+              <p>{watchListData.length}</p>
             </div>
           </div>
 
           <div>
-            <button className="info-button" onClick={handleEditProfileClick}>
+            <button className="user-profile-info-button" onClick={handleEditProfileClick}>
               Edit Profile Information
             </button>
           </div>
         </div>
-        <div className="right-section">
+        <div className="user-profile-right-section">
           <h4>Comments</h4>
           <ul>
             {comments.map((comment) => (

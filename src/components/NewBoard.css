@@ -6,7 +6,7 @@
   background: #EEF2F5;
 }
 
-.newboard-form {
+.newboard-newboard-form {
   position: relative;
   width: 80%;
   margin: auto;
@@ -14,7 +14,7 @@
 }
 
 /* cancel, save button */
-.buttons {
+.newboard-button {
   background: #0366FF;
   border-radius: 5px;
   width: 90px;
@@ -31,12 +31,12 @@
   float: right;
 }
 
-.buttons:hover {
+.newboard-button:hover {
   background-color: #8AC0FF;
 }
 
 /* input-box */
-.input-box1 {
+.newboard-input-box1 {
   box-sizing: border-box;
 
   width: 100%;
@@ -47,7 +47,7 @@
   margin-bottom: 2rem;
 }
 
-.input-box2 {
+.newboard-input-box2 {
   box-sizing: border-box;
 
   width: 100%;
@@ -59,7 +59,7 @@
 
 
 /* Title, Content */
-.texta {
+.newboard-texta {
 
   font-family: 'Inter';
   font-style: normal;
@@ -73,7 +73,7 @@
   margin-bottom: 1rem;
 }
 
-.rating {
+.newboard-rating {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;

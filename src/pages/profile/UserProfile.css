@@ -1,41 +1,57 @@
 body {
   font-family: "Open Sans", sans-serif;
 }
-
-.my-page-container {
-  display: flex;
-  justify-content: space-around;
+h3 {
+  width: 138px;
+  height: 52px;
+  padding-left: 150px;
+  font-family: "Ultra", serif;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 38px;
+  line-height: 52px;
+  color: #e6f6ff;
 }
-.left-section,
-.right-section {
+.user-profile-container {
+  display: flex;
+  width: 80%;
+  justify-content: space-around;
+  height: 70vh;
+  margin: 20px auto;
+  padding: 20px;
+  background: #ffffff;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  align-items: flex-start;
+}
+.user-profile-left-section,
+.user-profile-right-section {
   flex: 1;
 }
-.left-section {
+.user-profile-left-section {
   display: flex;
   flex-direction: column;
-  padding-left: 100px;
   align-items: center; /* 세로 정렬을 위한 가운데 정렬 */
   justify-content: center; /* 가로 정렬을 위한 가운데 정렬 */
   text-align: center; /* 텍스트 정렬을 중앙으로 설정 */
+  height: 100%;
 }
-.profile-picture {
+.user-profile-profile-picture {
   display: flex;
   padding-left: 50px;
   justify-content: center; /* 가로 중앙 정렬 */
   align-items: center; /* 세로 중앙 정렬 */
 }
 
-.profile-picture img {
+.user-profile-picture img {
   width: 150px;
   height: 150px;
   border-radius: 50%;
   object-fit: cover;
 }
 
-.user-details {
-  padding-left: 100px;
-}
-.user-stats {
+
+.user-profile-user-stats {
   text-align: center;
   display: flex;
   justify-content: space-around;
@@ -44,22 +60,21 @@ body {
   background-color: #f1f1f1;
 }
 
-.stat-item {
+.user-profile-stat-item {
   width: 55px;
   flex: 1;
   padding: 10px;
   margin: 0 5px;
-
 }
 
-.stat-item p {
+.user-profile-stat-item p {
   margin: 5px 0;
 }
 
-.info-button {
-  width: 140%;
+.user-profile-info-button {
+  width: 30vh;
   max-width: 800px;
-  margin: 20px auto;
+  margin: 20px 0 ;
   height: 53px;
   font-family: "IBM Plex Serif";
   font-size: 1rem;
@@ -68,24 +83,24 @@ body {
   background: #4e8195;
   border: none;
   border-radius: 8px;
-  color: #E6F6FF;
+  color: #e6f6ff;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;  
 }
 
-.right-section {
+.user-profile-right-section {
   margin-left: 20px;
   height: 30rem;
   overflow-y: auto;
 }
-.right-section h3 {
+.user-profile-right-section h3 {
   color: #e6f6ff;
 }
-.right-section ul {
+.user-profile-right-section ul {
   padding: 0;
   list-style-type: none;
 }
-.right-section li {
+.user-profile-right-section li {
   margin-bottom: 10px;
   padding: 10px;
   border: 1px solid #ccc;
@@ -93,6 +108,6 @@ body {
   background-color: #f9f9f9;
 }
 
-.comments {
+.user-profile-comments {
   width: 100%;
 }

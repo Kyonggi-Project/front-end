@@ -7,6 +7,9 @@ npm install react-icons --save
 ## google o-auth
 npm install @react-oauth/google@latest
 
+## react router-dom
+npm install react-router-dom
+
 ## env 파일 생성
 1. root 디렉토리에 .env 파일 생성
 2. REACT_APP_CLIENT_ID = 클라이언트 주소

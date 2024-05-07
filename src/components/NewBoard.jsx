@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
-import './NewBoard.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import StarRating from './stars/Star';
-import TagInput from './tag/TagInput';
 import TagList from './tag/TagList';
+import "./NewBoard.css";
 
 export default function NewBoard() {
   const [title, setTitle] = useState('');
@@ -97,24 +96,23 @@ export default function NewBoard() {
   return (
     <div>
       <form onSubmit={handleSbumit} className='newboard-form'>
-        <h2 className='texta'>영화 제목</h2>
+        <h2 className='newboard-texta'>영화 제목</h2>
         <div>
-          <label className='rating'>평점</label>
+          <label className='newboard-rating'>평점</label>
           <StarRating onChange={handleRating} />
         </div>
         <div>
-          <label className='texta'>Comment</label>
+          <label className='newboard-texta'>Comment</label>
           <textarea
             name="content"
             value={content}
             onChange={handleContent}
-            className='input-box2'
+            className='newboard-input-box2'
           />
-          <TagList updateSelectedTags={updateSelectedTags} />
-          <TagInput onUpdateTags={handleInputTagUpdate} />
+          <TagList updateSelectedTags={updateSelectedTags} onUpdateTags={handleInputTagUpdate} />
         </div>
-        <button type='button' onClick={handleCancel} className='buttons'>Cancel</button>
-        <button type='submit' className='buttons'>{id ? 'Edit' : 'Save'}</button>
+        <button type='button' onClick={handleCancel} className='newboard-button'>Cancel</button>
+        <button type='submit' className='newboard-button'>{id ? 'Edit' : 'Save'}</button>
       </form>
     </div>
   );

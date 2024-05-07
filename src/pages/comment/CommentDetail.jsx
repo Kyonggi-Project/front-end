@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import './CommentDetail.css';
 import axios from 'axios';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import ReplyList from './ReplyList';
@@ -7,6 +6,7 @@ import profilePicture from "../../images/profilePicture.png";
 import SpyFamily from "../../images/spyfamily.jpg";
 import ReplyModal from './ReplyModal';
 import { useAuth } from '../../util/auth';
+import "./CommentDetail.css";
 
 export default function CommentDetail() {
 
@@ -96,42 +96,42 @@ export default function CommentDetail() {
   }
 
   return (
-    <div className='board_details'>
-      <img src={SpyFamily} alt="영화 이미지" className='movie_image' />
-      <p className='text'>{details_dummy.title}</p>
-      <p className='movie_release'>2013</p>
-      <div className='profile'>
-        <img src={profilePicture} alt="작성자 프로필" className='profile_img' />
-        <p className='profile_name'>작성자 이름</p>
+    <div className='comment-detail-board_details'>
+      <img src={SpyFamily} alt="영화 이미지" className='comment-detail-movie_image' />
+      <p className='comment-detail-text'>{details_dummy.title}</p>
+      <p className='comment-detail-movie_release'>2013</p>
+      <div className='comment-detail-profile'>
+        <img src={profilePicture} alt="작성자 프로필" className='comment-detail-profile_img' />
+        <p className='comment-detail-profile_name'>작성자 이름</p>
       </div>
 
-      <p className='movie_grade_box'>4.5</p>
-      <p className='text-box'>{details_dummy.content}</p>
+      <p className='comment-detail-movie_grade_box'>4.5</p>
+      <p className='comment-detail-text-box'>{details_dummy.content}</p>
       {/* 해당 글을 쓴 사람이면 보이게*/}
       {isUser &&
         <>
-          <button className='user_buttons' onClick={DeleteHandler}>Delete</button>
-          <button className='user_buttons' onClick={EditHandler}>Edit</button>
+          <button className='comment-detail-user_buttons' onClick={DeleteHandler}>Delete</button>
+          <button className='comment-detail-user_buttons' onClick={EditHandler}>Edit</button>
         </>
       }
 
-      <div className='totals_box'>
-        <p className='totals'>좋아요 {details_dummy.likes}</p>
-        <p className='totals'>댓글 {details_dummy.comments}</p>
+      <div className='comment-detail-totals_box'>
+        <p className='comment-detail-totals'>좋아요 {details_dummy.likes}</p>
+        <p className='comment-detail-totals'>댓글 {details_dummy.comments}</p>
       </div>
-      <div className='separator11' />
-      <div className='button2_box1'>
-        <button className='button2' onClick={handleLike}>좋아요</button>
-        <hr className='separator22' />
-        <button className='button2' onClick={handleReplyModal}>댓글</button>
-        <hr className='separator22' />
-        <button className='button2' onClick={handleShare}>공유</button>
+      <div className='comment-detail-separator11' />
+      <div className='comment-detail-button2_box1'>
+        <button className='comment-detail-button2' onClick={handleLike}>좋아요</button>
+        <hr className='comment-detail-separator22' />
+        <button className='comment-detail-button2' onClick={handleReplyModal}>댓글</button>
+        <hr className='comment-detail-separator22' />
+        <button className='comment-detail-button2' onClick={handleShare}>공유</button>
       </div>
-      <div className='separator11' />
+      <div className='comment-detail-separator11' />
 
       {/* 댓글 없을 시 */}
       {isEmptyText &&
-        <p className='empty_msg_text'>댓글 없음</p>
+        <p className='comment-detail-empty_msg_text'>댓글 없음</p>
       }
 
       {/* 댓글 있을 시 */}

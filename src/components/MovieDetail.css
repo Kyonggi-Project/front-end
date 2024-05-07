@@ -1,7 +1,7 @@
 /* div.css-1sik4bq-StyledWallpaper */
-.movie_img {
+.movie-detail-movie_img {
   position: relative;
-  height: 40vh;
+  height: 60vh;
   background: url(../../public/logo192.png);
   background-color: black;
   text-align: left;
@@ -10,12 +10,12 @@
   justify-content: flex-end;
 }
 
-.movie_img2 {
+.movie-detail-movie_img2 {
   object-fit: cover;
-  max-height: 40vh;
+  max-height: 100%;
 }
 
-.movie_img p {
+.movie-detail-movie_img p {
   font-family: 'Inter';
   font-style: normal;
   color: #FFFFFF;
@@ -24,29 +24,33 @@
 }
 
 /* Heading 1 → Harry Potter and the Sorcerer s Stone */
-.title {
+.movie-detail-title {
   font-weight: 700;
   font-size: 31px;
   line-height: 36px;
 }
 
 /* 2001 · Adventure/Family/Fantasy · UK, United States */
-.release_date {
+.movie-detail-release_date {
   font-weight: 400;
   font-size: 12px;
   line-height: 18px;
 }
 
 /* 2h 32m */
-.time {
+.movie-detail-time {
   font-weight: 400;
   font-size: 11px;
   line-height: 14px;
 }
 
+.movie-detail-time a {
+  color: #FFFFFF;
+}
+
 
 /* div.e1dnb43p0 */
-.poster {
+.movie-detail-poster {
   margin-left: 30px;
   box-sizing: border-box;
   width: 50%;
@@ -58,7 +62,7 @@
 }
 
 /* Section → Avg */
-.avg {
+.movie-detail-avg {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
@@ -71,32 +75,32 @@
 }
 
 /* Section */
-.details {
+.movie-detail-details {
   box-sizing: border-box;
   border-bottom: 1px solid #D9D9D9;
 }
 
-.all {
+.movie-detail-all {
   display: flex;
   margin-top: 3rem;
   width: 100%;
 }
 
-.section1 {
+.movie-detail-section1 {
   width: 30%;
 }
 
-.section2 {
+.movie-detail-section2 {
   display: flex;
   margin-bottom: 3rem;
 }
 
-.section3 {
+.movie-detail-section3 {
   width: 100%;
 }
 
 /* Rate */
-.r {
+.movie-detail-r {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
@@ -105,12 +109,12 @@
   color: #E6F6FF;
 }
 
-.avg_rating {
+.movie-detail-avg_rating {
   margin-left: 50%;
 }
 
 /* 4.2 */
-.rating_num {
+.movie-detail-rating_num {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
@@ -123,7 +127,7 @@
 
 
 /* Average Rating(7k) */
-.rating_count {
+.movie-detail-rating_count {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
@@ -132,27 +136,27 @@
   color: #E6F6FF;
 }
 
-.separator {
+.movie-detail-separator {
   box-sizing: border-box;
   width: 90%;
 
 }
 
-.separator2 {
+.movie-detail-separator2 {
   border-right: 1px solid #e1e1e1;
 }
 
-.button2_box {
+.movie-detail-button2_box {
   display: flex;
   width: 90%;
 }
 
-.buttons {
+.movie-detail-buttons {
   justify-content: center;
 }
 
 /* Button */
-.buttons_icon {
+.movie-detail-buttons_icon {
   width: 50%;
   font-size: 14px;
   line-height: 40px;
@@ -162,13 +166,13 @@
 
 }
 
-.buttons_icon:hover {
+.movie-detail-buttons_icon:hover {
   background-color: #e5e5e5;
   font-weight: bold;
 }
 
 /* Harry Potter has lived under the stairs at his aunt and uncle's house his whole life. But on his 11th birthday, he learns he's a powerful wizard -- with a place waiting for him at the Hogwarts School of Witchcraft and Wizardry. As he learns to harness his newfound powers with the help of the school's kindly headmaster, Harry uncovers the truth about his parents' deaths -- and about the villain who's to blame. */
-.movie_details {
+.movie-detail-movie_details {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
@@ -182,7 +186,7 @@
 }
 
 /* Heading 2 → Comment */
-.comment {
+.movie-detail-comment {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
@@ -196,11 +200,11 @@
   margin-top: 3rem;
 }
 
-.list {
+.movie-detail-list {
   width: 100%;
 }
 
-.overlay {
+.movie-detail-overlay {
   position: absolute;
   left: 0;
   bottom: 0;

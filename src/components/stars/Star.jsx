@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 /*npm install react-icons --save 이거 해야 적용됨*/
 import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';
-import './Star.css';
 import { useLocation } from 'react-router-dom';
 import { useAuth } from '../../util/auth';
+import "./Star.css";
 
 export default function StarRating({ onChange }) {
   const [score, setScore] = useState(0);

@@ -1,9 +1,9 @@
-.wid {
+.comment-list-1-wid {
   max-width: 90%;
   margin: auto;
 }
 
-.lli {
+.comment-list-1-lli {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
@@ -11,7 +11,7 @@
 }
 
 /* Section → List → Item */
-.comment_board1 {
+.comment-list-1-comment_board1 {
   position: relative;
   background: #f3f3f3;
   border-radius: 6px;
@@ -21,7 +21,7 @@
 
 
 /* div.css-jqudug */
-.user_info_box1 {
+.comment-list-1-user_info_box1 {
   border-bottom: 1px solid #E5E5E5;
   display: flex;
   align-items: center;
@@ -31,7 +31,7 @@
 
 
 /* mingi */
-.name1 {
+.comment-list-1-name1 {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
@@ -46,7 +46,7 @@
 
 
 /* div.css-k8a4hh */
-.user_img1 {
+.comment-list-1-user_img1 {
   box-sizing: border-box;
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 16px;
@@ -57,7 +57,7 @@
 
 
 /* div.css-31ods0 */
-.rating_box1 {
+.comment-list-1-rating_box1 {
   box-sizing: border-box;
   display: flex;
   align-items: center;
@@ -71,7 +71,7 @@
 }
 
 /* 2.5 */
-.rating31 {
+.comment-list-1-rating31 {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
@@ -84,7 +84,7 @@
 
 
 /* div.css-kt2ht6 */
-.like_reply_box1 {
+.comment-list-1-like_reply_box1 {
   position: absolute;
   bottom: 0;
   width: 100%;
@@ -97,7 +97,7 @@
 
 
 /* Emphasis → 0 */
-.like_number1 {
+.comment-list-1-like_number1 {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
@@ -113,7 +113,7 @@
 
 
 /* 원작에 비해 실망스러웠다 */
-.comment21 {
+.comment-list-1-comment21 {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
@@ -127,13 +127,13 @@
   margin-left: 1rem;
 }
 
-.more_button {
+.comment-list-1-more_button {
   margin-top: 1rem;
   margin-right: 2rem;
   text-align: right;
 }
 
-.btn {
+.comment-list-1-btn {
   background-color: #4e8195;
   color: #E6F6FF;
 }

@@ -1,15 +1,15 @@
-.color1 {
+.reply-list-color1 {
   background-color: #e6e6e6;
   margin-top: 2rem;
   border-radius: 7px;
 }
 
-.separator {
+.reply-list-separator {
   box-sizing: border-box;
   border-bottom: 1px solid #a9a9a9;
 }
 
-.profile_img {
+.reply-list-profile_img {
   box-sizing: border-box;
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 10px;
@@ -21,7 +21,7 @@
   /*background: url(.jpg);*/
 }
 
-.user_info {
+.reply-list-user_info {
   display: flex;
   align-items: center;
 }

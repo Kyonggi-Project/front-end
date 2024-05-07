@@ -1,4 +1,4 @@
-.wrap-modal {
+.reply-wrap-modal {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,12 +13,12 @@
   z-index: 1000;
 }
 
-.modal-main-title {
+.reply-modal-main-title {
   color: #4e8195;
   padding-bottom: 20px;
 }
 
-.modal-box {
+.reply-modal-box {
   background-color: #fff;
   border-radius: 5px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -33,26 +33,26 @@
   /* 패딩이 너비에 포함되도록 */
 }
 
-.close-button {
+.reply-close-button {
   /* 버튼 배경 색상 */
   margin-left: 440px;
   color: #4e8195;
   font-size: 15px;
 }
 
-.form-group {
+.reply-form-group {
   margin-bottom: 20px;
   /* 폼 요소 간의 여백 증가 */
 }
 
-.input-group label {
+.reply-input-group label {
   display: block;
   /* 라벨을 블록 요소로 설정 */
   margin-bottom: 5px;
   /* 라벨과 입력 필드 사이의 여백 */
 }
 
-.input-group input {
+.reply-input-group input {
   width: 70%;
   /* 입력 필드 너비를 부모 요소에 맞춤 */
   padding: 8px 20px;
@@ -76,7 +76,7 @@
   font-size: 15px;
 }
 
-.modal-close-button {
+.reply-modal-close-button {
   /* 버튼 배경 색상 */
   margin-left: 630px;
   color: #4e8195;

@@ -31,35 +31,35 @@ body {
 }
 
 /* Choose one of the option to go */
-.option {
+.signup-option {
   font-family: 'IBM Plex Serif';
   font-style: normal;
   font-weight: 40;
   font-size: 15px; /* 상대적인 크기로 변경 */
   line-height: 1.2;
-  color: #545454;
+  color: #5F647C;
 }
 
 /* Rectangle 2, Rectangle 3 */
-.input-box {
+.signup-input-box {
   width: 90%; /* 상대적인 크기로 변경 */
   max-width: 800px; /* 최대 너비 지정 */
   margin: 5px auto; /* 수평 가운데 정렬 및 간격 추가 */
   padding: 10px; /* 내부 여백 추가 */
   background: #FFFFFF;
-  border: 1px solid #4e8195;
+  border: 1px solid #5F647C;
   border-radius: 10px;
   font-size: 15px;
   font-style: normal;
   font-weight: 40;
 }
 
-.input-box2 {
+.signup-input-box2 {
   border: 1px solid #E6E6E6;
 }
 
 /* Line 1 */
-.line {
+.signup-line {
   width: 90%; /* 상대적인 크기로 변경 */
   max-width: 800px; /* 최대 너비 지정 */
   margin: 20px auto; /* 수평 가운데 정렬 및 간격 추가 */
@@ -67,7 +67,7 @@ body {
 }
 
 /* Rectangle 7 */
-.button1 {
+.signup-button {
   width: 100%; /* 상대적인 크기로 변경 */
   max-width: 800px; /* 최대 너비 지정 */
   margin: 20px auto; /* 수평 가운데 정렬 및 간격 추가 */
@@ -75,24 +75,19 @@ body {
   font-family: "IBM Plex Serif";
   font-style: normal;
   font-weight:  bold;
-  background: #4e8195;
+  background: #5F647C;
   border-radius: 8px;
   color: #E6F6FF;
   border: none;
   font-size: 15px;
 }
 
-.button1:hover {
-  background-color: #619fb7;
-}
-
-/* Create account */
-.c-text {
-  font-size: 3vw; /* 상대적인 크기로 변경 */
+.signup-button:hover {
+  background-color: #353b56;
 }
 
 /* Already have an account? */
-.a-text {
+.signup-a-text {
   font-family: Poppins;
   color: #969AB8;
   font-style: normal;
@@ -104,7 +99,7 @@ body {
 /* Following */
 .login-link {
   font-family: Poppins;
-  color: #4e8195; /* 상대적인 크기로 변경 */
+  color: #5F647C; /* 상대적인 크기로 변경 */
   font-style: normal;
   font-weight: 400;
 }
