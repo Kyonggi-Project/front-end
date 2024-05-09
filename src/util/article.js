@@ -19,8 +19,7 @@ export function httpRequest2(method, url, body, success, fail) {
 
     })
     .catch((error) => {
-      if (error && error.response.status === 401) {
-        console.log('error');
+      if (error.response && error.response.status === 401) {
         axios.post(host + '/api/token/createToken', {}, {
           headers: {
             Authorization: 'Bearer ' + localStorage.getItem('access_token'),
@@ -30,7 +29,6 @@ export function httpRequest2(method, url, body, success, fail) {
         })
           .then(res => {
             if (res.status === 200) {
-              console.log(res.data)
               localStorage.setItem('access_token', res.data.accessToken);
               httpRequest2(method, url, body, success, fail);
             }

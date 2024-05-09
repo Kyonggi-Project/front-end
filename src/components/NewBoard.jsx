@@ -10,7 +10,8 @@ export default function NewBoard() {
   const [content, setContent] = useState('');
   const [rating, setRating] = useState(0);
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { ottId } = useParams();
+  const [userId, setUserId] = useState('');
 
   const [inputTags, setInputTags] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);
@@ -27,11 +28,13 @@ export default function NewBoard() {
   };
 
   useEffect(() => {
-    if (id) {
-      // 게시글 수정 모드인 경우, 해당 ID를 사용하여 기존 게시글 데이터를 가져옴
-      axios.get(url + `/write/${id}`)
+    if (ottId) {
+      // 코멘트 수정 모드인 경우, 해당 ID를 사용하여 기존 게시글 데이터를 가져옴
+      axios.get(url + `api/ottReview/reviews/user?userId=${ottId}`)
         .then(response => {
           const { title, content, rating } = response.data;
+          setInputTags(response.data.inputTags);
+          setSelectedTags(response.data.selectedTags)
           setTitle(title);
           setContent(content);
           setRating(rating);
@@ -40,7 +43,7 @@ export default function NewBoard() {
           console.error('게시글 가져오기 오류:', error);
         });
     }
-  }, [id]);
+  }, [ottId]);
 
   function handleContent(event) {
     setContent(event.target.value);
@@ -67,9 +70,9 @@ export default function NewBoard() {
     };
     console.log(formData);
 
-    if (!id) {
-      //post 요청
-      axios.post(/*백엔드 요청 주소*/url + '/write', formData)
+    if (!ottId) {
+      //post 요청, 코멘트 추가
+      axios.post(/*백엔드 요청 주소*/url + `/api/ottReview/add/${ottId}?userId=${userId}`, formData)
         .then(response => {
           console.log('응답 데이터:', response.data);
           alert("입력되었습니다.");
@@ -81,11 +84,11 @@ export default function NewBoard() {
         });
     } else {
       // 게시글 수정 모드일 때
-      axios.put(url + `/posts/${id}`, formData)
+      axios.put(url + `/api/ottReview/modify/${ottId}?userId=${userId}`, formData)
         .then(response => {
           console.log('게시글 수정 완료:', response.data);
           alert('게시글이 수정되었습니다.');
-          navigate('/board');
+          navigate(`details/${ottId}`);
         })
         .catch(error => {
           console.error('게시글 수정 오류:', error);
@@ -112,7 +115,7 @@ export default function NewBoard() {
           <TagList updateSelectedTags={updateSelectedTags} onUpdateTags={handleInputTagUpdate} />
         </div>
         <button type='button' onClick={handleCancel} className='newboard-button'>Cancel</button>
-        <button type='submit' className='newboard-button'>{id ? 'Edit' : 'Save'}</button>
+        <button type='submit' className='newboard-button'>{ottId ? 'Edit' : 'Save'}</button>
       </form>
     </div>
   );
