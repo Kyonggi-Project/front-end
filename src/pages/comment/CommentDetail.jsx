@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import ReplyList from './ReplyList';
 import profilePicture from "../../images/profilePicture.png";
 import SpyFamily from "../../images/spyfamily.jpg";
 import ReplyModal from './ReplyModal';
 import { useAuth } from '../../util/auth';
 import "./CommentDetail.css";
+import { httpRequest2 } from '../../util/article';
 
 export default function CommentDetail() {
 
   const [details, setDetails] = useState([]);
   const param = useParams();
-  // const { id } = useParams();
   const navigate = useNavigate();
 
   const [isUser, setIsUser] = useState(false);
@@ -21,32 +21,52 @@ export default function CommentDetail() {
 
   const { isLogin, isloginHandler, token } = useAuth();
   const url = process.env.REACT_APP_URL_PATH;
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const id = searchParams.get('id');
 
-  const id = param.boardId;
+  const userId = "";
 
   useEffect(() => {
-    // 게시글 정보를 가져오는 함수
+    // 코멘트 정보를 가져오는 함수
+    // httpRequest2(
+    //   'GET',
+    //   url + `/api/article/viewArticle/${id}`,
+    //   null,
+    //   (response) => {
+    //     setDetails(response.data);
+    //     userId = details.author;
+    //   },
+    //   (error) => {
+    //     console.error('게시글 정보를 가져오는데 실패했습니다:', error);
+    //   }
+    // );
     axios
-      .get(/*백엔드 url*/url + `/comments?id=${id}`)
-      .then((response) => setDetails(response.data))
+      .get(/*백엔드 url*/url + `/api/ottReview/reviews/user?userId=${userId}`)
+      .then(
+        (response) => {
+          setDetails(response.data);
+          userId = details.userId;
+        },
+      )
       .catch((error) => {
         console.error('게시글 정보를 가져오는데 실패했습니다:', error);
       });
 
   }, [id]);
 
-  useEffect(() => {
-    // 서버로부터 현재 사용자 정보를 가져오는 함수
-    axios
-      .get(url + '/api/user', {
-        headers: {
-          Authorization: `Bearer ${token}` // JWT 토큰을 Authorization 헤더에 추가
-        }
-      })
-      .then((response) => console.log(response.data))
-      .catch((error) => console.error('게시글 정보를 가져오는데 실패했습니다:', error));
+  // useEffect(() => {
+  //   // 서버로부터 현재 사용자 정보를 가져오는 함수
+  //   axios
+  //     .get(url + '/api/user', {
+  //       headers: {
+  //         Authorization: `Bearer ${token}` // JWT 토큰을 Authorization 헤더에 추가
+  //       }
+  //     })
+  //     .then((response) => console.log(response.data))
+  //     .catch((error) => console.error('게시글 정보를 가져오는데 실패했습니다:', error));
 
-  }, []);
+  // }, []);
 
   //임시 데이터
   const details_dummy = {
@@ -61,7 +81,19 @@ export default function CommentDetail() {
   }
 
   function DeleteHandler() {
-    navigate("..");
+    httpRequest2(
+      'DELETE',
+      url + `/api/ottReview/delete/${id}?userId=${userId}`,
+      null,
+      (response) => {
+        alert('삭제되었습니다');
+        navigate(`/comments/${id}`);
+      },
+      (error) => {
+        alert('오류');
+        console.error('삭제에 실패했습니다.', error);
+      }
+    );
   }
 
   function handleReplyModal(event) {
@@ -82,7 +114,14 @@ export default function CommentDetail() {
       isloginHandler(event);
     }
     else {
-
+      axios
+        .post(url + `/api/ottReview-like/toggle/${id}?userId=${userId}`)
+        .then(() => {
+          alert("좋아요 +1");
+        })
+        .catch((error) => {
+          console.error('좋아요 실패', error);
+        });
     }
   }
 
@@ -91,7 +130,15 @@ export default function CommentDetail() {
       isloginHandler(event);
     }
     else {
+      const currentUrl = window.location.href;
 
+      navigator.clipboard.writeText(currentUrl)
+        .then(() => {
+          alert('URL이 복사되었습니다.');
+        })
+        .catch((error) => {
+          console.error('URL 복사에 실패했습니다:', error);
+        });
     }
   }
 
@@ -99,13 +146,13 @@ export default function CommentDetail() {
     <div className='comment-detail-board_details'>
       <img src={SpyFamily} alt="영화 이미지" className='comment-detail-movie_image' />
       <p className='comment-detail-text'>{details_dummy.title}</p>
-      <p className='comment-detail-movie_release'>2013</p>
+      <p className='comment-detail-movie_release'>작성날짜</p>
       <div className='comment-detail-profile'>
         <img src={profilePicture} alt="작성자 프로필" className='comment-detail-profile_img' />
         <p className='comment-detail-profile_name'>작성자 이름</p>
       </div>
 
-      <p className='comment-detail-movie_grade_box'>4.5</p>
+      <p className='comment-detail-movie_grade_box'>{4.5}</p>
       <p className='comment-detail-text-box'>{details_dummy.content}</p>
       {/* 해당 글을 쓴 사람이면 보이게*/}
       {isUser &&

@@ -1,10 +1,29 @@
 import React, { useState } from "react";
+import './ReplyModal.css';
+import axios from "axios";
+
 const ReplyModal = ({ closeModal }) => {
   const [reply, setReply] = useState("");
+  const [articleId, setArticleId] = useState('');
+  const [userId, setUserId] = useState('');
+  const url = process.env.REACT_APP_URL_PATH;
 
+  const formdata = {
+    reply: reply
+  }
   const handleSubmitForm = (e) => {
     e.preventDefault();
-    setReply("");
+    axios
+    .post(url+`/api/comment/addComment/${articleId}?userId=${userId}`, formdata)
+    .then(() => {
+      alert("댓글을 작성했습니다.");
+    })
+    .catch((error) => {
+      alert("댓글 작성에 실패했습니다.");
+      console.error("댓글 작성 실패",error);
+    });
+
+    closeModal();
   }
 
   return (

@@ -15,6 +15,9 @@ import CommentApp from "./pages/CommentList/CommentList.jsx";
 import MovieList from "./pages/MovieList/MovieList.jsx";
 import AfterLoginMain from "./components/AfterLoginMain.jsx";
 import { AuthProvider } from "./util/auth.js";
+import ChatUI from "./components/chat/Chat2.jsx";
+import ChatRoom from "./components/chat/ChatRoom.jsx";
+import Chat from "./components/chat/Chat.jsx";
 
 function App() {
   return (
@@ -27,7 +30,6 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/userprofile" element={<UserProfile />} />
-            <Route path="/board" element={<Board />} />
             <Route path="/write" element={<NewBoard />} />
             <Route path="/comments" element={<CommentDetail />} />
             <Route path="/details" element={<MovieDetail />} />

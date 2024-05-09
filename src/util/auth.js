@@ -23,7 +23,6 @@ export function AuthProvider({ children }) {
       event.preventDefault();
       alert('로그인을 해주세요');
     }
-
   }
   const token = localStorage.getItem('access_token');
 

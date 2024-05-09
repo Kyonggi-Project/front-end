@@ -18,44 +18,25 @@ const UserProfile = () => {
   });
   const [comments, setComments] = useState([]);
   const [userData, setUserData] = useState([]);
+  const [watchListData, setWatchListData] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
   const url = process.env.REACT_APP_URL_PATH;
   const [searchParams, setSearchParams] = useSearchParams();
-  const token1 = searchParams.get('token');
-  if (token1) {
-    localStorage.setItem('access_token', token1);
+  const token = searchParams.get('token');
+  if (token) {
+    localStorage.setItem('access_token', token);
   }
 
   const nickname = userInfo.nickname; // 예시로 userInfo의 nickname을 사용
   useEffect(() => {
-    //유저 정보 가져오기 엔드포인트 수정
-    // axios
-    //   .get(url + '/api/user/profile/myPage', {
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       'Authorization': 'Bearer '+localStorage.getItem('access_token'),
-    //     },
-    //     withCredentials: true
-    //   })
-    //   .then((response) => {
-    //     if (response.status === 200 || response.status === 201) {
-    //       console.log(response.data);
-    //       setUserData(response.data.user);
-    //     } else {
-    //       // 리프레시 토큰을 이용한 액세스 토큰 재발급 코드를 가지는 전역 함수 설정 후, 사용
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error fetching user info:", error);
-    //   });
     httpRequest2(
       'GET',
       '/api/user/profile/myPage',
       null,
       (response) => {
-        console.log(response.data);
         setUserData(response.data.user);
+        setWatchListData(response.data.watchList.bookmark);
       },
       (error) => {
         console.error("Error fetching user info:", error);
@@ -85,7 +66,7 @@ const UserProfile = () => {
       .catch((error) => {
         console.error("Error fetching comments:", error);
       });
-  }, [nickname]);
+  }, []);
 
   // 모달 표시 함수
   const handleEditProfileClick = () => {
@@ -144,7 +125,7 @@ const UserProfile = () => {
             </div>
             <div className="user-profile-stat-item">
               <p>Liked</p>
-              <p>{userData.articlesCount}</p>
+              <p>{watchListData.length}</p>
             </div>
           </div>
 
