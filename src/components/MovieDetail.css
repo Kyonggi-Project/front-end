@@ -165,6 +165,9 @@
   color: #E6F6FF ;
 
 }
+.movie-detail-watchlist_select {
+  background-color: #304e5b;
+}
 
 .movie-detail-buttons_icon:hover {
   background-color: #e5e5e5;
@@ -187,7 +190,7 @@
 
 /* Heading 2 → Comment */
 .movie-detail-comment {
-  font-family: 'Inter';
+  font-family: GmarketSansMedium;
   font-style: normal;
   font-weight: 700;
   font-size: 21px;
@@ -196,8 +199,8 @@
   align-items: center;
   letter-spacing: -0.7px;
 
-  color: #000000;
-  margin-top: 3rem;
+  color: #E5E5E5;
+  margin-top: 1.5rem;
 }
 
 .movie-detail-list {
@@ -210,4 +213,43 @@
   bottom: 0;
   color: white; /* 텍스트 색상 설정 */
   padding: 20px;
+}
+
+.movie-detail-OTTLogo{
+  border-radius: 50%;
+  margin-right: 10px;
+  height: 75%;
+}
+
+/* after*/
+.movie-detail-metadata {
+  display: flex;
+  justify-content: center;
+  margin: 20px auto;
+  color: #e5e5e5;
+  font-family: GmarketSansMedium;
+  flex-direction: column;
+  padding: 3% 20% 0% 20%;
+  
+}
+
+.movie-detail-metadata-list {
+  margin-bottom: 5%;
+  border-top: 1px solid #555;
+}
+
+.movie-detail-metadata-list li{
+  list-style-type: none;
+  padding: 10px;
+}
+
+.metadata-content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10% 30%;
+  padding: 10px;
+}
+
+.metadata-item {
+  margin-bottom: 5px;
 }
