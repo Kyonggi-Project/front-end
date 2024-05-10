@@ -33,7 +33,7 @@ function App() {
             <Route path="/userprofile" element={<UserProfile />} />
             <Route path="/write" element={<NewBoard />} />
             <Route path="/comments" element={<CommentDetail />} />
-            <Route path="/details" element={<MovieDetail />} />
+            <Route path="/details/:id" element={<MovieDetail />} />
             <Route path="/list" element={<CommentApp />} />
             <Route path="/movie" element={<MovieList />}/>
             <Route path="/afterModal" element={<AfterLoginMain/>}/>
