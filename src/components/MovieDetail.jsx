@@ -104,7 +104,7 @@ export default function MovieDetail() {
   }
 
   return (
-    <div>
+    <div className="movie-detail-wrap">
       <div className="movie-detail-movie_img">
         <img src={movieData.backgroundImg} alt="" className="movie-detail-movie_img2"/>
         <div className="movie-detail-overlay">
@@ -119,14 +119,15 @@ export default function MovieDetail() {
         </section>
         <section className="movie-detail-section3">
           <div className="movie-detail-section2">
-            <div>
+            <div className="movie-detail-rating-box">
+              <StarRating/>
+              <p className="movie-detail-rating_num">{movieData.score}</p>
+              <label className="movie-detail-rating_count">평균 평점</label>
+            </div>
+            <div className="movie-detail-avg_rating">
               {OTTimg.map((img, index) => (
                 <img key={index} src={img} className="movie-detail-OTTLogo"/>
               ))}
-            </div>
-            <div className="movie-detail-avg_rating">
-              <p className="movie-detail-rating_num">{movieData.score}</p>
-              <label className="movie-detail-rating_count">평균 평점</label>
             </div>
           </div>
           <div className="movie-detail-separator"></div>
@@ -152,23 +153,27 @@ export default function MovieDetail() {
       </div>
       <div className="movie-detail-metadata-list">
         <h1>출연진</h1>
-        <ul>
-          {Object.entries(movieData.actorList).map(([key, value], index) => (
-            <li key={index}><strong>{key}:</strong> {value}</li>
+        <div className="metadata-content-1">
+          {Object.keys(movieData.actorList).map((key, index) => (
+            <div key={index} className="metadata-item">
+              <strong>{key}:</strong> {movieData.actorList[key]}
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
       <div className="movie-detail-metadata-list">
         <h1>제작진</h1>
-        <ul>
-          {Object.entries(movieData.staffList).map(([key, value], index) => (
-            <li key={index}><strong>{key}:</strong> {value}</li>
+        <div className="metadata-content-1">
+          {Object.keys(movieData.staffList).map((key, index) => (
+            <div key={index} className="metadata-item">
+              <strong>{key}:</strong> {movieData.staffList[key]}
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </div>
       <section className="movie-detail-list">
-        <header className="movie-detail-comment">Comment</header>
+        <header className="movie-detail-comment">Comments</header>
         <CommentList />
       </section>
     </div>

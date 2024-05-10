@@ -1,9 +1,11 @@
 /* div.css-1sik4bq-StyledWallpaper */
+.movie-detail-wrap p, label{
+  font-family: "GmarketSansMedium";
+}
 .movie-detail-movie_img {
   position: relative;
   height: 60vh;
-  background: url(../../public/logo192.png);
-  background-color: black;
+  background :linear-gradient(to top, black, white);
   text-align: left;
   display: flex;
   flex-direction: column;
@@ -13,14 +15,23 @@
 .movie-detail-movie_img2 {
   object-fit: cover;
   max-height: 100%;
+  opacity: 0.7;
+  object-position: center top;
 }
 
 .movie-detail-movie_img p {
-  font-family: 'Inter';
   font-style: normal;
   color: #FFFFFF;
   margin-bottom: 0.5rem;
   margin-left: 3rem;
+}
+.movie-detail-overlay {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  color: #539ADB; /* 텍스트 색상 설정 */
+  padding: 20px;
+
 }
 
 /* Heading 1 → Harry Potter and the Sorcerer s Stone */
@@ -51,19 +62,18 @@
 
 /* div.e1dnb43p0 */
 .movie-detail-poster {
-  margin-left: 30px;
+  margin-right: 5%;
+  float: right;
   box-sizing: border-box;
-  width: 50%;
+  width: 72.5%;
+  height: auto;
   background: #F8F8F8;
   border: 1px solid #D4D4D4;
   border-radius: 2px;
-
-  background: url(../../public/logo512.png);
 }
 
 /* Section → Avg */
 .movie-detail-avg {
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
   font-size: 13px;
@@ -87,7 +97,7 @@
 }
 
 .movie-detail-section1 {
-  width: 30%;
+  width: 25%;
 }
 
 .movie-detail-section2 {
@@ -101,39 +111,40 @@
 
 /* Rate */
 .movie-detail-r {
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
   font-size: 10px;
   line-height: 12px;
-  color: #E6F6FF;
+  color: #539ADB;
 }
 
 .movie-detail-avg_rating {
-  margin-left: 50%;
+  margin-top: 2%;
+  margin-left: 45%;
 }
 
 /* 4.2 */
 .movie-detail-rating_num {
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
-  font-size: 30px;
-  line-height: 42px;
+  font-size: 20px;
+  line-height: 22px;
   margin-top: 0;
-  color: #E6F6FF;
+  color: #539ADB;
   margin-bottom: 0;
 }
 
+.movie-detail-rating-box{
+  margin-top: 3%;
+}
 
 /* Average Rating(7k) */
 .movie-detail-rating_count {
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
   font-size: 10px;
   line-height: 12px;
-  color: #E6F6FF;
+  color: #539ADB;
 }
 
 .movie-detail-separator {
@@ -148,7 +159,7 @@
 
 .movie-detail-button2_box {
   display: flex;
-  width: 90%;
+  width: 80%;
 }
 
 .movie-detail-buttons {
@@ -158,33 +169,37 @@
 /* Button */
 .movie-detail-buttons_icon {
   width: 50%;
+  font-family: "GmarketSansMedium";
   font-size: 14px;
   line-height: 40px;
   border: none;
-  background-color: #4e8195;
+  background-color: #539ADB;
   color: #E6F6FF ;
-
+  margin: 0 0 0 10px;
+  border-radius: 10px;
+}
+.movie-detail-buttons_icon:first-child{
+  margin: 0 10px 0 0;
 }
 .movie-detail-watchlist_select {
   background-color: #304e5b;
 }
 
 .movie-detail-buttons_icon:hover {
-  background-color: #e5e5e5;
+  background-color: #5b8cd5;
   font-weight: bold;
 }
 
 /* Harry Potter has lived under the stairs at his aunt and uncle's house his whole life. But on his 11th birthday, he learns he's a powerful wizard -- with a place waiting for him at the Hogwarts School of Witchcraft and Wizardry. As he learns to harness his newfound powers with the help of the school's kindly headmaster, Harry uncovers the truth about his parents' deaths -- and about the villain who's to blame. */
 .movie-detail-movie_details {
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 500;
   font-size: 15px;
   line-height: 22px;
   display: flex;
   align-items: center;
-
-  color: #E6F6FF;
+  padding-right: 20%;
+  color: #539ADB;
   margin-top: 3rem;
 }
 
@@ -192,33 +207,26 @@
 .movie-detail-comment {
   font-family: GmarketSansMedium;
   font-style: normal;
-  font-weight: 700;
-  font-size: 21px;
+  font-weight: 400;
+  font-size: 3vh;
   line-height: 28px;
+  padding: 10px 120px;
   display: flex;
   align-items: center;
   letter-spacing: -0.7px;
-
-  color: #E5E5E5;
-  margin-top: 1.5rem;
+  color: #539ADB;
+  margin-top: 3rem;
 }
 
 .movie-detail-list {
   width: 100%;
 }
 
-.movie-detail-overlay {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  color: white; /* 텍스트 색상 설정 */
-  padding: 20px;
-}
 
 .movie-detail-OTTLogo{
   border-radius: 50%;
   margin-right: 10px;
-  height: 75%;
+  height: 6vw;
 }
 
 /* after*/
@@ -226,7 +234,7 @@
   display: flex;
   justify-content: center;
   margin: 20px auto;
-  color: #e5e5e5;
+  color: #539ADB;
   font-family: GmarketSansMedium;
   flex-direction: column;
   padding: 3% 20% 0% 20%;
@@ -235,7 +243,7 @@
 
 .movie-detail-metadata-list {
   margin-bottom: 5%;
-  border-top: 1px solid #555;
+  border-top: 1.75px solid #7bcdee;
 }
 
 .movie-detail-metadata-list li{
@@ -247,6 +255,12 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10% 30%;
+  padding: 10px;
+}
+.metadata-content-1{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15% 15%;
   padding: 10px;
 }
 

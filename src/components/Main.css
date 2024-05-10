@@ -1,4 +1,3 @@
-
 .main-gallery-container {
   width: 100%;
   display: flex;
@@ -11,7 +10,7 @@
 
 .main-title-page {
   height: 40vh;
-  background-image: url("../images/test.png");
+  background-image: url("../images/mainbg.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -20,25 +19,47 @@
   display: flex;
   justify-content: center;
   padding-top: 10vh;
-  color: #f3fbff;
+  color: #ffffff;
   margin: 0;
   font-size: 5.5vh;
   font-family: "Ultra", serif;
   font-weight: 400;
   font-style: normal;
-  text-shadow: 2px 2px 6px #2b4c58;
+  text-shadow: 2px 2px 6px #3190b3;
 }
 .main-title-page h2 {
   display: flex;
   justify-content: center;
   padding: 20px 0;
-  color: #f3fbff;
+  color: #ffffff;
   margin: 0;
   font-family: GmarketSansMedium;
   font-weight: 400;
   font-size: 2.5vh;
   font-style: normal;
-  text-shadow: 2px 2px 6px #2b4c58;
+  text-shadow: 2px 2px 6px #3190b3;
+}
+.main-h1-name {
+  padding-left: 5%;
+  padding-bottom: 3%;
+  color: #539ADB;
+  font-family: "Ultra", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 30px;
+}
+.main-h2-name {
+  padding-left: 5%;
+  color: #539ADB;
+  font-family: "Ultra", serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 30px;
+}
+.main-name-description{
+  color: #539ADB;
+  padding-left: 5%;
+  padding-bottom: 3%;
 }
 .main-recommend-buttonbox {
   display: flex;
@@ -52,12 +73,11 @@
   height: 7vh;
   font-family: GmarketSansMedium;
   font-weight: 400;
-  font-size: 2vh;
+  font-size: 2.5vh;
   font-style: normal;
-  text-shadow: 2px 2px 6px #2b4c58;
-  background: transparent;
-  color: #FFFFFF;
-  border: 2px solid #81708d;
+  background-color: #ffffff;
+  color: #539ADB;
+  border: 0;
   padding: 10px 20px;
   font-size: 16px;
   border-radius: 20px;
@@ -80,8 +100,9 @@
   scroll-snap-type: x mandatory;
   justify-content: center;
   align-items: flex-start; /* 수직 상단 정렬 */
-  margin-top: 20px;
+  margin: 20px 0;
   transition: margin-left 0.3s ease;
+  
 }
 
 .main-image-list li {
@@ -126,10 +147,11 @@
 }
 
 .main-image-wrapper img {
-  width: 300px; /* 이미지 너비 조정을 원하는 크기로 지정하세요 */
-  height: auto;
+  width: 240px; /* 이미지 너비 조정을 원하는 크기로 지정하세요 */
+  height: 344px;
   display: block;
   border-radius: 8px;
+  object-fit: cover;
   transition: transform 0.3s ease-in-out;
 }
 
@@ -152,38 +174,33 @@
   opacity: 0.95;
 }
 
-.h1-name {
-  padding-left: 5%;
-}
-.h2-name {
-  padding-left: 5%;
-}
 
 .main-scroll-button {
   position: absolute;
-  top: 55%;
+  top: 63%;
   transform: translateY(-50%);
   width: 40px;
   height: 40px;
   border: none;
   border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(83, 154, 219, 0.9);
   color: white;
+  
   font-size: 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .main-scroll-button:hover {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(113, 205, 238, 0.7);
 }
 
 .main-scroll-button.prev {
-  left: 5px;
+  left: 15px;
 }
 
 .main-scroll-button.next {
-  right: 5px;
+  right: 15px;
 }
 
 .main-data-info {
@@ -219,15 +236,15 @@
 }
 
 .main-button-list button {
-  padding: 10px 10px; /* 버튼의 안쪽 여백을 설정합니다. */
-  background-color: #4e8195; /* 배경색을 지정합니다. */
-  color: white; /* 텍스트 색상을 지정합니다. */
-  border: none; /* 테두리를 없앱니다. */
-  font-size: large;
-  font-family: GmarketSansMedium;
-  border-radius: 10px; /* 버튼의 모서리를 둥글게 만듭니다. */
-  cursor: pointer; /* 커서를 포인터로 변경하여 버튼임을 강조합니다. */
-  margin-right: 20px; /* 각 버튼 사이의 간격을 조정합니다. */
+  margin: 20px 0;
+  height: 40px;
+  font-family: "GmarketSansMedium";
+  background-color: #539adb;
+  color: #e6f6ff;
+  border-radius: 8px;
+  border: 0;
+  padding: 8px 15px;
+  margin-bottom: 20px;
 }
 
 .main-button-list .main-button:last-child {
@@ -235,11 +252,11 @@
 }
 
 .main-button-list button:hover {
-  background-color: #31515e; /* 마우스 호버 시 배경색을 변경합니다. */
-  color: black;
+  background-color: #7bcdee; /* 마우스 호버 시 배경색을 변경합니다. */
+  color: black; 
 }
 
-.main-button-list .main-selected{
-  background-color: #31515e;
+.main-button-list .main-selected {
+  background-color: #7bcdee;  
   color: black;
 }
