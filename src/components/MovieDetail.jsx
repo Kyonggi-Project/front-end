@@ -104,7 +104,7 @@ export default function MovieDetail() {
   }
 
   return (
-    <div>
+    <div className="movie-detail-wrap">
       <div className="movie-detail-movie_img">
         <img src={movieData.backgroundImg} alt="" className="movie-detail-movie_img2"/>
         <div className="movie-detail-overlay">
@@ -168,7 +168,7 @@ export default function MovieDetail() {
       </div>
     </div>
       <section className="movie-detail-list">
-        <header className="movie-detail-comment">Comment</header>
+        <header className="movie-detail-comment">Comments</header>
         <CommentList />
       </section>
     </div>

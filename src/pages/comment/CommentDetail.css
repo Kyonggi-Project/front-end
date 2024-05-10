@@ -3,7 +3,9 @@
   position: flex;
   width: 100%;
   height: 100vh;
-  background: #EEF2F5;
+  background: #eef2f5;
+  font-family: "GmarketSansMedium";
+  font-style: normal;
 }
 
 .comment-detail-board_details {
@@ -11,56 +13,47 @@
   width: 90%;
   margin: auto;
   margin-top: 70px;
+  font-family: "GmarketSansMedium";
 }
 
 /* edit, delete button */
 .comment-detail-user_buttons {
-  background: #4e8195;
+  background: #539adb;
   border-radius: 5px;
   width: 90px;
   border: none;
-
-  font-family: 'IBM Plex Serif';
-  font-style: normal;
   font-weight: 40;
   font-size: 22px;
   line-height: 25px;
   text-align: center;
-  color: #FFFFFF;
+  color: #ffffff;
   margin-left: 10px;
   float: right;
   text-decoration: none;
 }
 
 .comment-detail-user_buttons:hover {
-  background-color: #609fb7;
+  background-color: #315f8a;
 }
 
 /* text-box */
 .comment-detail-text-box {
-  font-family: 'Inter';
-  font-style: normal;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   border-radius: 7px;
   padding-bottom: 2rem;
-  color: #4A4A4A;
+  color: #4a4a4a;
   font-size: 15px;
   margin-top: 0;
 }
 
-
 /* Title, Content */
 .comment-detail-text {
-
-  font-family: 'Inter';
-  font-style: normal;
   font-weight: bold;
   font-size: 25px;
   line-height: 19px;
   display: flex;
   align-items: center;
-
-  color: #f3f3f3;
+  color: #4a4a4a;
   margin-bottom: 0.5rem;
 }
 
@@ -71,7 +64,6 @@
 
 /* Link → 정영훈 */
 .comment-detail-profile_name {
-  font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
@@ -83,9 +75,8 @@
   margin-bottom: 0;
   margin-top: 0;
 
-  color: #4A4A4A;
+  color: #4a4a4a;
 }
-
 
 /* Link 사이트 링크 사진*/
 /* .link_img1 {
@@ -103,17 +94,14 @@
   border-radius: 10px;
   width: 18px;
   height: 18px;
-  left: calc(50% - 18px/2);
-  top: calc(50% - 18px/2);
+  left: calc(50% - 18px / 2);
+  top: calc(50% - 18px / 2);
   margin-right: 0.3rem;
   /*background: url(.jpg);*/
 }
 
-
 /* Link → Movies · 2004 */
 .comment-detail-movie_release {
-  font-family: 'Inter';
-  font-style: normal;
   font-weight: 400;
   font-size: 10px;
   line-height: 16px;
@@ -125,16 +113,13 @@
   color: #787878;
 }
 
-
 /* div.css-a5x33s-StyledUserActionStatus-makeTypeFunction 평점 박스 */
 .comment-detail-movie_grade_box {
   box-sizing: border-box;
-  background: #FFFFFF;
-  border: 1px solid #EAEAEA;
+  background: #ffffff;
+  border: 1px solid #eaeaea;
   border-radius: 15px;
-  color: #4A4A4A;
-  font-family: 'Inter';
-  font-style: normal;
+  color: #4a4a4a;
   display: inline-block;
   align-items: center;
   font-weight: 400;
@@ -147,7 +132,7 @@
 /* Section → Link 영화 이미지 링크*/
 .comment-detail-movie_image {
   box-sizing: border-box;
-  background: #F8F8F8;
+  background: #f8f8f8;
   width: 100%;
   max-height: 15rem;
   object-fit: cover;
@@ -155,15 +140,12 @@
   border-radius: 3px;
 }
 
-
 .comment-detail-totals_box {
   display: flex;
 }
 
 /* Section → 101 likes */
 .comment-detail-totals {
-  font-family: 'Inter';
-  font-style: normal;
   font-weight: 400;
   font-size: 11px;
   line-height: 16px;
@@ -198,17 +180,17 @@
 /* Section → Section → Button → Like */
 /*like, share, comment button*/
 .comment-detail-button2 {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
+  width: 50%;
+  font-family: "GmarketSansMedium";
   font-size: 14px;
-  line-height: 25px;
-  justify-content: center;
-  text-align: center;
-  width: calc(90% / 3);
+  line-height: 40px;
   border: none;
-  background-color: #4e8195;
-  margin-left: 1.2rem;
+  background-color: #539adb;
+  color: #e6f6ff;
+  margin: 0 20px;
+  border-radius: 10px;
+  font-family: "GmarketSansMedium";
+  font-style: normal;
 }
 
 .comment-detail-button2-1 {
@@ -226,10 +208,9 @@
 }
 
 .comment-detail-button2:hover {
-  background-color: #609fb7;
+  background-color: #3a75ad;
   font-weight: bold;
 }
-
 
 /* Section → Section → Separator */
 .comment-detail-separator11 {
@@ -244,13 +225,11 @@
 
 /* Section → List → replyEmptyMessage */
 .comment-detail-empty_msg_text {
-  font-family: 'Inter';
-  font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
   /* identical to box height, or 157% */
   text-align: center;
 
-  color: #A0A0A0;
+  color: #a0a0a0;
 }

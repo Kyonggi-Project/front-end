@@ -60,7 +60,7 @@ function Signup() {
         <div>
           <input type="password" placeholder="Confirm Password" className="signup-input-box" required name="confirm_password" />
         </div>
-        <p className="a-text">
+        <p className="signup-a-text">
           Already have an account? <Link to="/login" className="login-link">Login</Link>
         </p>
         <button className="signup-button" type="submit">

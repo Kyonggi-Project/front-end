@@ -1,5 +1,5 @@
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: "GmarketSansMedium";
 }
 h3 {
   width: 138px;
@@ -10,7 +10,7 @@ h3 {
   font-weight: 300;
   font-size: 38px;
   line-height: 52px;
-  color: #e6f6ff;
+  color: #539ADB;
 }
 .user-profile-container {
   display: flex;
@@ -20,7 +20,7 @@ h3 {
   margin: 20px auto;
   padding: 20px;
   background: #ffffff;
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
   border-radius: 15px;
   align-items: flex-start;
 }
@@ -69,23 +69,21 @@ h3 {
 
 .user-profile-stat-item p {
   margin: 5px 0;
+  font-size: smaller;
 }
 
 .user-profile-info-button {
-  width: 30vh;
+  width: 33vh;
   max-width: 800px;
   margin: 20px 0 ;
   height: 53px;
-  font-family: "IBM Plex Serif";
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 400;
-  background: #4e8195;
-  border: none;
+  font-family: "GmarketSansMedium";
+  background-color: #539ADB;
+  color: #E6F6FF;
   border-radius: 8px;
-  color: #e6f6ff;
-  cursor: pointer;
-  transition: background-color 0.3s ease;  
+  border: 0;
+  padding: 8px 15px;
+  margin-bottom: 20px;
 }
 
 .user-profile-right-section {

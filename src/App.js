@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header.jsx";
+import Footer from "./Footer.jsx";
 import Main from "./components/Main.jsx";
 import Login from "./pages/login/Login.jsx";
 import Signup from "./pages/signup/Signup.jsx";
@@ -37,6 +38,7 @@ function App() {
             <Route path="/movie" element={<MovieList />}/>
             <Route path="/afterModal" element={<AfterLoginMain/>}/>
           </Routes>
+          <Footer/>
         </div>
       </Router>
     </AuthProvider>

@@ -41,7 +41,7 @@ const CommentList = ({ data }) => (
 const CommentApp = () => (
   <>
     <div className='comment-titlebox'>
-      <h1>Comment</h1>
+      <h1>Comments</h1>
     </div>
     <ul className='comment-ll'>
         <CommentList data={commentsData} />

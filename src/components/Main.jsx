@@ -115,7 +115,7 @@ function Main() {
         <h1>Recommend for you!</h1>
         <h2>자신만의 작품을 추천받아보세요!</h2>
         <div className="main-recommend-buttonbox">
-          <button className="main-recommend-button" onClick={handleModalClick}>추천받기</button>
+          <button className="main-recommend-button" onClick={handleModalClick}>추천 받기</button>
         </div>
       </div>
       <div className="main-gallery-container">

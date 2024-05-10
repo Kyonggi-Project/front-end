@@ -11,8 +11,9 @@
     z-index: 1000;
   }
   .recommend-modal-main-title{
-    color: #896C9A;
+    color: rgb(100, 102, 106);
     padding-bottom: 20px;
+    font-size: 22px;
 }
   .recommendd-modal-box {
     background-color: #fff;
@@ -37,14 +38,14 @@
     width: 70%; /* 입력 필드 너비를 부모 요소에 맞춤 */
     padding: 8px 20px;
     height: 30px;
-    border: 1px solid #896C9A; /* 더 세련된 테두리 스타일 */
+    border: 1px solid #539ADB; /* 더 세련된 테두리 스타일 */
     border-radius: 4px; /* 입력 필드의 모서리 둥글게 */
   }
   
   .recommend-modal-feeling-submit {
     width: 18%; /* 버튼 너비를 부모 요소에 맞춤 */
     height: 50px;
-    background-color: #896C9A; /* 버튼 배경 색상 */
+    background-color: #539ADB; /* 버튼 배경 색상 */
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -54,7 +55,10 @@
 
   .recommend-modal-close-button { /* 버튼 배경 색상 */
     margin-left: 630px;
-    color: #896C9A;
+    color: #539ADB;
     font-size: 15px;
+    font-weight: bolder;
+    background-color: white;
+    border: 0;
   }
   

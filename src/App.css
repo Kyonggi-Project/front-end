@@ -3,12 +3,13 @@
   font-family: "GmarketSansMedium";
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
     format("woff");
-  font-weight: normal;
+  font-family: "GmarketSansMedium";
   font-style: normal;
+  font-weight: normal;
 }
 
-body{
-  background-color: #191b20 !important;
+body {
+  background-color: #feffff !important;
 }
 
 .App {
@@ -20,7 +21,6 @@ body{
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
 
 .App-link {
   color: #61dafb;
