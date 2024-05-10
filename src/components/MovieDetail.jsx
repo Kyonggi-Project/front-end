@@ -11,16 +11,17 @@ import watcha from '../images/watcha.png';
 import disney from '../images/disney.jpg';
 import tving from '../images/tving.png';
 import wavve from '../images/wavve.png';
+import { httpRequest2 } from "../util/article.js";
 
-const LogoImg = {'Netflix':netflix , "Watcha":watcha, "Disney":disney, "Tving":tving, "Wavve":wavve};
+const LogoImg = { 'Netflix': netflix, "Watcha": watcha, "Disney": disney, "Tving": tving, "Wavve": wavve };
 //let OTTimg = [];
 
 export default function MovieDetail() {
   const navigate = useNavigate();
   const { isLogin, isloginHandler } = useAuth();
-  const [ isWatchList, setIsWatchList ] = useState(false);
-  let [ OTTimg, setOTTimg ] = useState([]);
-  const [ movieData, setMovieData ] = useState({
+  const [isWatchList, setIsWatchList] = useState(false);
+  let [OTTimg, setOTTimg] = useState([]);
+  const [movieData, setMovieData] = useState({
     title: "title",
     year: 0,
     posterImg: "",
@@ -29,7 +30,7 @@ export default function MovieDetail() {
       "string"
     ],
     synopsis: "",
-    score : 0,
+    score: 0,
     metaData: {
       additionalProp1: "string",
       additionalProp2: "string",
@@ -66,47 +67,74 @@ export default function MovieDetail() {
         setMovieData(response.data); //받아온 데이터를 무비리스트에 배열형태로 저장
       })
       .catch(
-        error => {console.error("Error fetching movie data", error);
-      });
+        error => {
+          console.error("Error fetching movie data", error);
+        });
   }, [id]);
 
-  useEffect(()=>{
+  useEffect(() => {
     let updatedOTTimg = [];
-    for(let i=0;i<movieData.ottList.length;i++){
+    for (let i = 0; i < movieData.ottList.length; i++) {
       let arrayList = movieData.ottList[i];
       let correctOTT = LogoImg[arrayList];
-      if(correctOTT !== undefined ) {updatedOTTimg = [...updatedOTTimg, correctOTT];}
+      if (correctOTT !== undefined) { updatedOTTimg = [...updatedOTTimg, correctOTT]; }
     }
     setOTTimg(updatedOTTimg);
   }, [movieData]);
 
   const handleAddComment = (event) => {
-    if(!isLogin) {
+    if (!isLogin) {
       isloginHandler(event);
     }
     else {
-      navigate('/write');
+      localStorage.setItem('movie-title', movieData.title);
+      navigate(`/details/write/${id}`);
     }
   }
 
   const handleWatchlist = (event) => {
-    if(!isLogin) {
+    if (!isLogin) {
       isloginHandler(event);
     }
     else {
-      if(!isWatchList){
+      if (!isWatchList) {
         setIsWatchList(true);
       }
-      else{
+      else {
         setIsWatchList(false);
       }
     }
   }
 
+  const [commentList, setCommentList] = useState([
+    //임시 데이터
+    { id: 1, author: 'User1', rating: 3.5, content: 'Comment 1', likesCount: 100, reply: 3 },
+    { id: 2, author: 'User2', rating: 4, content: 'Comment 2', likesCount: 200, reply: 4 },
+    { id: 3, author: 'User3', rating: 1.5, content: 'Comment 3', likesCount: 300, reply: 5 },
+    { id: 4, author: 'User4', rating: 2, content: 'Comment 4', likesCount: 400, reply: 6 },
+    { id: 5, author: 'User5', rating: 5, content: 'Comment 5', likesCount: 500, reply: 7 },
+    { id: 6, author: 'User5', rating: 5, content: 'Comment 5', likesCount: 500, reply: 7 },
+  ]);
+  //컨텐츠의 모든 코멘트 보기
+  useEffect(() => {
+    httpRequest2(
+      'GET',
+      `/api/ottReview/reviews/ott/${id}`,
+      null,
+      (response) => {
+        // setCommentList(response.data);
+        // console.log(response.data);
+      },
+      (error) => {
+        console.error('코멘트 정보를 가져오는데 실패했습니다:', error);
+      }
+    );
+  }, []);
+
   return (
     <div className="movie-detail-wrap">
       <div className="movie-detail-movie_img">
-        <img src={movieData.backgroundImg} alt="" className="movie-detail-movie_img2"/>
+        <img src={movieData.backgroundImg} alt="" className="movie-detail-movie_img2" />
         <div className="movie-detail-overlay">
           <p className="movie-detail-title">{movieData.title}</p>
           <p className="movie-detail-release_date">{movieData.year}</p>
@@ -121,7 +149,7 @@ export default function MovieDetail() {
           <div className="movie-detail-section2">
             <div>
               {OTTimg.map((img, index) => (
-                <img key={index} src={img} className="movie-detail-OTTLogo"/>
+                <img key={index} src={img} className="movie-detail-OTTLogo" />
               ))}
             </div>
             <div className="movie-detail-avg_rating">
@@ -140,36 +168,36 @@ export default function MovieDetail() {
         </section>
       </div>
       <div className="movie-detail-metadata">
-      <div className="movie-detail-metadata-list">
-        <h1>작품정보</h1>
-        <div className="metadata-content">
-          {Object.keys(movieData.metaData).map((key, index) => (
-            <div key={index} className="metadata-item">
-              <strong>{key}:</strong> {movieData.metaData[key]}
-            </div>
-          ))}
+        <div className="movie-detail-metadata-list">
+          <h1>작품정보</h1>
+          <div className="metadata-content">
+            {Object.keys(movieData.metaData).map((key, index) => (
+              <div key={index} className="metadata-item">
+                <strong>{key}:</strong> {movieData.metaData[key]}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="movie-detail-metadata-list">
+          <h1>출연진</h1>
+          <ul>
+            {Object.entries(movieData.actorList).map(([key, value], index) => (
+              <li key={index}><strong>{key}:</strong> {value}</li>
+            ))}
+          </ul>
+        </div>
+        <div className="movie-detail-metadata-list">
+          <h1>제작진</h1>
+          <ul>
+            {Object.entries(movieData.staffList).map(([key, value], index) => (
+              <li key={index}><strong>{key}:</strong> {value}</li>
+            ))}
+          </ul>
         </div>
       </div>
-      <div className="movie-detail-metadata-list">
-        <h1>출연진</h1>
-        <ul>
-          {Object.entries(movieData.actorList).map(([key, value], index) => (
-            <li key={index}><strong>{key}:</strong> {value}</li>
-          ))}
-        </ul>
-      </div>
-      <div className="movie-detail-metadata-list">
-        <h1>제작진</h1>
-        <ul>
-          {Object.entries(movieData.staffList).map(([key, value], index) => (
-            <li key={index}><strong>{key}:</strong> {value}</li>
-          ))}
-        </ul>
-      </div>
-    </div>
       <section className="movie-detail-list">
         <header className="movie-detail-comment">Comments</header>
-        <CommentList />
+        <CommentList commentList={commentList} id={id} />
       </section>
     </div>
   );

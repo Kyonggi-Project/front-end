@@ -23,24 +23,25 @@ import Chat from "./components/chat/Chat.jsx";
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <div>
-          <Header />
-          <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/userprofile" element={<UserProfile />} />
-            <Route path="/write" element={<NewBoard />} />
-            <Route path="/comments" element={<CommentDetail />} />
-            <Route path="/details/:id" element={<MovieDetail />} />
-            <Route path="/list" element={<CommentApp />} />
-            <Route path="/movie" element={<MovieList />}/>
-            <Route path="/afterModal" element={<AfterLoginMain/>}/>
-          </Routes>
-          <Footer/>
-        </div>
-      </Router>
+        <Router>
+          <div>
+            <Header />
+            <Routes>
+              <Route path="/" element={<Main />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/userprofile" element={<UserProfile />} />
+              <Route path="/details/write/:ottId" element={<NewBoard />} />
+              <Route path="/comments/:id" element={<CommentDetail />} />
+              <Route path="/details/:id" element={<MovieDetail />} />
+              <Route path="/list/:id" element={<CommentApp />} />
+              <Route path="/movie" element={<MovieList />} />
+              <Route path="/afterModal" element={<AfterLoginMain />} />
+              <Route path="/details/edit/:ottId" element={<NewBoard />} />
+            </Routes>
+            <Footer />
+          </div>
+        </Router>
     </AuthProvider>
   );
 }

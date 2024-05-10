@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import ReplyList from './ReplyList';
 import profilePicture from "../../images/profilePicture.png";
 import SpyFamily from "../../images/spyfamily.jpg";
@@ -12,7 +12,6 @@ import { httpRequest2 } from '../../util/article';
 export default function CommentDetail() {
 
   const [details, setDetails] = useState([]);
-  const param = useParams();
   const navigate = useNavigate();
 
   const [isUser, setIsUser] = useState(false);
@@ -22,32 +21,16 @@ export default function CommentDetail() {
 
   const { isLogin, isloginHandler, token } = useAuth();
   const url = process.env.REACT_APP_URL_PATH;
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const id = searchParams.get('id');
+  const { id } = useParams();
 
-  const userId = "";
 
   useEffect(() => {
     // 코멘트 정보를 가져오는 함수
-    // httpRequest2(
-    //   'GET',
-    //   url + `/api/article/viewArticle/${id}`,
-    //   null,
-    //   (response) => {
-    //     setDetails(response.data);
-    //     userId = details.author;
-    //   },
-    //   (error) => {
-    //     console.error('게시글 정보를 가져오는데 실패했습니다:', error);
-    //   }
-    // );
     axios
-      .get(/*백엔드 url*/url + `/api/ottReview/reviews/user?userId=${userId}`)
+      .get(/*백엔드 url*/url + `/api/ottReview/reviews/${id}`)
       .then(
         (response) => {
           setDetails(response.data);
-          userId = details.userId;
         },
       )
       .catch((error) => {
@@ -73,22 +56,25 @@ export default function CommentDetail() {
   const details_dummy = {
     title: '영화 제목',
     content: '코멘트',
-    likes: 100,
+    likesCount: 100,
     comments: 1,
   }
 
   function EditHandler() {
-    navigate(`/write/${id}`);
+    navigate(`/details/edit/${id}`);
   }
 
   function DeleteHandler() {
     httpRequest2(
       'DELETE',
-      url + `/api/ottReview/delete/${id}?userId=${userId}`,
+      `/api/ottReview/delete/${id}`,
       null,
       (response) => {
-        alert('삭제되었습니다');
-        navigate(`/comments/${id}`);
+        const isConfirmed = window.confirm('정말로 삭제하시겠습니까?');
+        if (isConfirmed) {
+          alert('삭제되었습니다');
+          navigate(`/comments/${id}`);
+        }
       },
       (error) => {
         alert('오류');
@@ -116,9 +102,9 @@ export default function CommentDetail() {
     }
     else {
       axios
-        .post(url + `/api/ottReview-like/toggle/${id}?userId=${userId}`)
+        .post(url + `/api/ottReview-like/toggle/${id}`)
         .then(() => {
-          if(isLiked) {
+          if (isLiked) {
             alert('좋아요 -1');
             setIsLiked(false);
           } else {
@@ -171,7 +157,7 @@ export default function CommentDetail() {
       }
 
       <div className='comment-detail-totals_box'>
-        <p className={'comment-detail-totals'}>좋아요 {details_dummy.likes}</p>
+        <p className={'comment-detail-totals'}>좋아요 {details_dummy.likesCount}</p>
         <p className='comment-detail-totals'>댓글 {details_dummy.comments}</p>
       </div>
       <div className='comment-detail-separator11' />

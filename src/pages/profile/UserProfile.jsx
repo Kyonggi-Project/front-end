@@ -29,6 +29,16 @@ const UserProfile = () => {
   }
 
   const nickname = userInfo.nickname; // 예시로 userInfo의 nickname을 사용
+
+  //임시 데이터
+  const tempComments = [
+    { id: 1, author: 'User1', rating: 3.5, content: 'Comment 1', likesCount: 100, reply: 3 },
+    { id: 2, author: 'User2', rating: 4, content: 'Comment 2', likesCount: 200, reply: 4 },
+    { id: 3, author: 'User3', rating: 1.5, content: 'Comment 3', likesCount: 300, reply: 5 },
+    { id: 4, author: 'User4', rating: 2, content: 'Comment 4', likesCount: 400, reply: 6 },
+    { id: 5, author: 'User5', rating: 5, content: 'Comment 5', likesCount: 500, reply: 7 }
+  ];
+
   useEffect(() => {
     httpRequest2(
       'GET',
@@ -40,10 +50,10 @@ const UserProfile = () => {
       },
       (error) => {
         console.error("Error fetching user info:", error);
-        // 리프레시 토큰을 이용한 액세스 토큰 재발급 등의 작업을 수행할 수 있습니다.
       }
     );
 
+    //특정 닉네임의 유저 정보 출력
     axios
       .get(url + `/api/user/profile/nickname/${nickname}`, {
         withCredentials: true,
@@ -58,8 +68,9 @@ const UserProfile = () => {
         console.error("Error fetching user info:", error);
       });
 
+    //해당 유저의 코멘트들을 출력
     axios
-      .get(url + "/api/comments")
+      .get(url + "/api/ottReview/reviews/user")
       .then((response) => {
         setComments(response.data);
       })
@@ -142,7 +153,7 @@ const UserProfile = () => {
               <li key={comment.id}>{comment.text}</li>
             ))}
             <div>
-              <CommentList />
+              <CommentList commentList={tempComments} />
             </div>
           </ul>
         </div>
