@@ -18,6 +18,7 @@ export default function CommentDetail() {
   const [isUser, setIsUser] = useState(false);
   const [isEmptyText, setIsEmptyText] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
 
   const { isLogin, isloginHandler, token } = useAuth();
   const url = process.env.REACT_APP_URL_PATH;
@@ -117,7 +118,14 @@ export default function CommentDetail() {
       axios
         .post(url + `/api/ottReview-like/toggle/${id}?userId=${userId}`)
         .then(() => {
-          alert("좋아요 +1");
+          if(isLiked) {
+            alert('좋아요 -1');
+            setIsLiked(false);
+          } else {
+            setIsLiked(true);
+            alert("좋아요 +1");
+          }
+
         })
         .catch((error) => {
           console.error('좋아요 실패', error);
@@ -163,12 +171,12 @@ export default function CommentDetail() {
       }
 
       <div className='comment-detail-totals_box'>
-        <p className='comment-detail-totals'>좋아요 {details_dummy.likes}</p>
+        <p className={'comment-detail-totals'}>좋아요 {details_dummy.likes}</p>
         <p className='comment-detail-totals'>댓글 {details_dummy.comments}</p>
       </div>
       <div className='comment-detail-separator11' />
       <div className='comment-detail-button2_box1'>
-        <button className='comment-detail-button2' onClick={handleLike}>좋아요</button>
+        <button className={!isLiked ? 'comment-detail-button2' : 'comment-detail-button2-1'} onClick={handleLike}>좋아요</button>
         <hr className='comment-detail-separator22' />
         <button className='comment-detail-button2' onClick={handleReplyModal}>댓글</button>
         <hr className='comment-detail-separator22' />

@@ -10,7 +10,7 @@ export default function CommentList() {
   const location = useLocation();
   const url = process.env.REACT_APP_URL_PATH;
   const searchParams = new URLSearchParams(location.search);
-  const id = searchParams.get('id');
+  const ottid = searchParams.get('id');
 
   useEffect(() => {
     // 경로가 '/userprofile'인 경우에만 버튼을 숨깁니다.
@@ -34,7 +34,7 @@ export default function CommentList() {
     //모든 코멘트 보기
     httpRequest2(
       'GET',
-      url + `/api/ottReview/ott/${id}`,
+      url + `/api/ottReview/ott/${ottid}`,
       null,
       (response) => {
         setCommentList(tempComments);
@@ -71,7 +71,7 @@ export default function CommentList() {
                 {commentList.content}
               </Link>
               <div className='comment-list-1-like_reply_box1'>
-                <p className='comment-list-1-like_number1'>Like {commentList.like}</p>
+                <p className='comment-list-1-like_number1'>Like {commentList.likesCount}</p>
                 <p className='comment-list-1-like_number1'>Reply {commentList.reply}</p>
               </div>
             </section>
