@@ -21,6 +21,9 @@ export default function CommentList({ commentList, id }) {
     navigate(`/list/${id}`);
   }
 
+  // 역순 정렬
+  const reverse = [...commentList].reverse();
+
   return (
     // map 함수로 구현
     <div className='comment-list-1-wid'>
@@ -33,13 +36,14 @@ export default function CommentList({ commentList, id }) {
         {commentList.length === 0 ? (
           <p className='comment-list-no_comments'>평가 없음</p>
         ) : (
-          commentList.slice(0, 5).map((comment) => (
+          // 최신 5개만 출력
+          reverse.slice(0, 5).map((comment) => (
             <section className='comment-list-1-comment_board1' key={comment.id}>
               <div className='comment-list-1-user_info_box1'>
                 <img src={profilePicture} alt="프로필" className='comment-list-1-user_img1' />
                 <p className='comment-list-1-name1'>{comment.author}</p>
                 <div className='comment-list-1-rating_box1'>
-                  <p className='comment-list-1-rating31'>{comment.rating}</p>
+                  <p className='comment-list-1-rating31'>{comment.score}</p>
                 </div>
               </div>
               <Link to={`/comments/${comment.id}`} className='comment-list-1-comment21'>
@@ -47,7 +51,7 @@ export default function CommentList({ commentList, id }) {
               </Link>
               <div className='comment-list-1-like_reply_box1'>
                 <p className='comment-list-1-like_number1'>Like {comment.likesCount}</p>
-                <p className='comment-list-1-like_number1'>Reply {comment.reply}</p>
+                <p className='comment-list-1-like_number1'>Reply {comment.repliesCount}</p>
               </div>
             </section>
           ))

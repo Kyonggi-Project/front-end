@@ -26,16 +26,33 @@ export default function CommentDetail() {
 
   useEffect(() => {
     // 코멘트 정보를 가져오는 함수
-    axios
-      .get(/*백엔드 url*/url + `/api/ottReview/reviews/${id}`)
-      .then(
-        (response) => {
-          setDetails(response.data);
-        },
-      )
-      .catch((error) => {
+    // axios
+    //   .get(/*백엔드 url*/url + `/api/ottReview/reviews/${id}`)
+    //   .then(
+    //     (response) => {
+    //       setDetails(response.data);
+    //     },
+    //   )
+    //   .catch((error) => {
+    //     console.error('게시글 정보를 가져오는데 실패했습니다:', error);
+    //   });
+
+    httpRequest2(
+      'GET',
+      `/api/ottReview/reviews/${id}`,
+      null,
+      (response) => {
+        setDetails(response.data);
+        if(details.repliesCount === 0) {
+          setIsEmptyText(true);
+        } else {
+          setIsEmptyText(false);
+        }
+      },
+      (error) => {
         console.error('게시글 정보를 가져오는데 실패했습니다:', error);
-      });
+      }
+    );
 
   }, [id]);
 
@@ -107,6 +124,7 @@ export default function CommentDetail() {
           if (isLiked) {
             alert('좋아요 -1');
             setIsLiked(false);
+            //1
           } else {
             setIsLiked(true);
             alert("좋아요 +1");
@@ -138,18 +156,18 @@ export default function CommentDetail() {
 
   return (
     <div className='comment-detail-board_details'>
-      <img src={SpyFamily} alt="영화 이미지" className='comment-detail-movie_image' />
-      <p className='comment-detail-text'>{details_dummy.title}</p>
-      <p className='comment-detail-movie_release'>작성날짜</p>
+      <img src={details.backgroundImg} alt="영화 이미지" className='comment-detail-movie_image' />
+      <p className='comment-detail-text'>{details.contentsTitle}</p>
+      <p className='comment-detail-movie_release'>{details.creatAt}</p>
       <div className='comment-detail-profile'>
         <img src={profilePicture} alt="작성자 프로필" className='comment-detail-profile_img' />
-        <p className='comment-detail-profile_name'>작성자 이름</p>
+        <p className='comment-detail-profile_name'>{details.author}</p>
       </div>
 
-      <p className='comment-detail-movie_grade_box'>{4.5}</p>
-      <p className='comment-detail-text-box'>{details_dummy.content}</p>
+      <p className='comment-detail-movie_grade_box'>{details.score}</p>
+      <p className='comment-detail-text-box'>{details.content}</p>
       {/* 해당 글을 쓴 사람이면 보이게*/}
-      {isUser &&
+      {!isUser &&
         <>
           <button className='comment-detail-user_buttons' onClick={DeleteHandler}>Delete</button>
           <button className='comment-detail-user_buttons' onClick={EditHandler}>Edit</button>
@@ -157,8 +175,8 @@ export default function CommentDetail() {
       }
 
       <div className='comment-detail-totals_box'>
-        <p className={'comment-detail-totals'}>좋아요 {details_dummy.likesCount}</p>
-        <p className='comment-detail-totals'>댓글 {details_dummy.comments}</p>
+        <p className={'comment-detail-totals'}>좋아요 {details.likesCount}</p>
+        <p className='comment-detail-totals'>댓글 {details.repliesCount}</p>
       </div>
       <div className='comment-detail-separator11' />
       <div className='comment-detail-button2_box1'>

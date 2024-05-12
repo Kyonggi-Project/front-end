@@ -122,8 +122,8 @@ export default function MovieDetail() {
       `/api/ottReview/reviews/ott/${id}`,
       null,
       (response) => {
-        // setCommentList(response.data);
-        // console.log(response.data);
+        setCommentList(response.data);
+        console.log(response.data);
       },
       (error) => {
         console.error('코멘트 정보를 가져오는데 실패했습니다:', error);

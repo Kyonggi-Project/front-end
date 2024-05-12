@@ -4,6 +4,7 @@ import axios from 'axios';
 import StarRating from './stars/Star';
 import TagList from './tag/TagList';
 import "./NewBoard.css";
+import { httpRequest2 } from '../util/article';
 
 export default function NewBoard() {
   const [title, setTitle] = useState('');
@@ -64,9 +65,9 @@ export default function NewBoard() {
 
     // 폼 데이터 수집
     const formData = {
-      title: title,
+      // title: title,
       content: content,
-      rating: rating,
+      score: rating,
       inputTags: inputTags,
       tags: selectedTags,
     };
@@ -74,17 +75,33 @@ export default function NewBoard() {
 
     if (match.params.action === 'write') {
       //post 요청, 코멘트 추가
-      axios.post(/*백엔드 요청 주소*/url + `/api/ottReview/add/${ottId}`, formData)
-        .then(response => {
+      // axios.post(/*백엔드 요청 주소*/url + `/api/ottReview/add/${ottId}`, formData)
+      //   .then(response => {
+      //     console.log('응답 데이터:', response.data);
+      //     alert("입력되었습니다.");
+      //     localStorage.removeItem('movie-title');
+      //     navigate(`/details/${ottId}`);
+      //   })
+      //   .catch(error => {
+      //     alert("오류");
+      //     console.error('데이터 전송 오류:', error);
+      //   });
+
+      httpRequest2(
+        'POST',
+        `/api/ottReview/add/${ottId}`,
+        formData,
+        response => {
           console.log('응답 데이터:', response.data);
           alert("입력되었습니다.");
           localStorage.removeItem('movie-title');
           navigate(`/details/${ottId}`);
-        })
-        .catch(error => {
+        },
+        error => {
           alert("오류");
           console.error('데이터 전송 오류:', error);
-        });
+        }
+      );
     } else {
       // 게시글 수정 모드일 때
       axios.put(url + `/api/ottReview/modify/${ottId}`, formData)
