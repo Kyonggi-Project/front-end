@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Header.module.css';
-import logoImage from '../logo9.png';
+import logoImage from '../logo.png';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../util/auth';
 

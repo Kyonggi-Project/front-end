@@ -134,6 +134,15 @@
 }
 
 .comment-list-1-btn {
-  background-color: #4e8195;
+  font-family: "GmarketSansMedium";
+  background-color: #539ADB;
   color: #E6F6FF;
+  border-radius: 8px;
+  border: 0;
+  padding: 8px 15px;
+  margin-bottom: 20px;
+}
+
+.comment-list-no_comments {
+  color: #e5e5e5;
 }

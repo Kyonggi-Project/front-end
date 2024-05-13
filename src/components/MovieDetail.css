@@ -15,8 +15,6 @@
 .movie-detail-movie_img2 {
   object-fit: cover;
   max-height: 100%;
-  opacity: 0.7;
-  object-position: center top;
 }
 
 .movie-detail-movie_img p {
@@ -62,8 +60,7 @@
 
 /* div.e1dnb43p0 */
 .movie-detail-poster {
-  margin-right: 5%;
-  float: right;
+  margin-left: 30px;
   box-sizing: border-box;
   width: 72.5%;
   height: auto;
@@ -175,11 +172,7 @@
   border: none;
   background-color: #539ADB;
   color: #E6F6FF ;
-  margin: 0 0 0 10px;
-  border-radius: 10px;
-}
-.movie-detail-buttons_icon:first-child{
-  margin: 0 10px 0 0;
+
 }
 .movie-detail-watchlist_select {
   background-color: #304e5b;
@@ -198,8 +191,8 @@
   line-height: 22px;
   display: flex;
   align-items: center;
-  padding-right: 20%;
-  color: #539ADB;
+
+  color: #E6F6FF;
   margin-top: 3rem;
 }
 

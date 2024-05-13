@@ -2,11 +2,14 @@
   background-color: #e6e6e6;
   margin-top: 2rem;
   border-radius: 7px;
+  padding: 10px 0;
+  font-size: 1.6vh;
 }
 
 .reply-list-separator {
   box-sizing: border-box;
   border-bottom: 1px solid #a9a9a9;
+  padding: 15px
 }
 
 .reply-list-profile_img {

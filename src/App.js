@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/Header.jsx";
+import Footer from "./Footer.jsx";
 import Main from "./components/Main.jsx";
 import Login from "./pages/login/Login.jsx";
 import Signup from "./pages/signup/Signup.jsx";
@@ -22,23 +23,25 @@ import Chat from "./components/chat/Chat.jsx";
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <div>
-          <Header />
-          <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/userprofile" element={<UserProfile />} />
-            <Route path="/write" element={<NewBoard />} />
-            <Route path="/comments" element={<CommentDetail />} />
-            <Route path="/details" element={<MovieDetail />} />
-            <Route path="/list" element={<CommentApp />} />
-            <Route path="/movie" element={<MovieList />}/>
-            <Route path="/afterModal" element={<AfterLoginMain/>}/>
-          </Routes>
-        </div>
-      </Router>
+        <Router>
+          <div>
+            <Header />
+            <Routes>
+              <Route path="/" element={<Main />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/userprofile" element={<UserProfile />} />
+              <Route path="/details/write/:ottId" element={<NewBoard />} />
+              <Route path="/comments/:id" element={<CommentDetail />} />
+              <Route path="/details/:id" element={<MovieDetail />} />
+              <Route path="/list/:id" element={<CommentApp />} />
+              <Route path="/movie" element={<MovieList />} />
+              <Route path="/afterModal" element={<AfterLoginMain />} />
+              <Route path="/details/edit/:ottId" element={<NewBoard />} />
+            </Routes>
+            <Footer />
+          </div>
+        </Router>
     </AuthProvider>
   );
 }

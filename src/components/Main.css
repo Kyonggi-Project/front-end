@@ -252,8 +252,8 @@
 }
 
 .main-button-list button:hover {
-  background-color: #7bcdee; /* 마우스 호버 시 배경색을 변경합니다. */
-  color: black; 
+  background-color: #31515e; /* 마우스 호버 시 배경색을 변경합니다. */
+  color: black;
 }
 
 .main-button-list .main-selected {

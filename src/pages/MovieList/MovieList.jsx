@@ -1,14 +1,7 @@
-import Pamyo from "../../images/pamyo.jpg";
-import Spyfamily from "../../images/spyfamily.jpg";
-import Dune from "../../images/dune.jpg";
-import Malo from "../../images/malo.jpg";
-import Mukspark from "../../images/mukspark.jpg";
-import Concert from "../../images/concert.jpg";
-import Whatslove from "../../images/whatslove.jpg";
 import { useEffect, useState } from "react";
 import "./MovieList.css";
 
-const imagePaths = [Pamyo, Spyfamily, Dune, Malo, Mukspark, Concert, Whatslove, Spyfamily, Dune, Malo, Mukspark, Concert, Whatslove, Dune, Malo, Mukspark, Concert, Whatslove, Malo, Mukspark, Concert];
+const imagePaths = [];
 
 function chunkArray(array, size) {
     const chunkedArray = [];

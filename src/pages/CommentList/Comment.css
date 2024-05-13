@@ -1,3 +1,7 @@
+body{
+  font-family: "GmarketSansMedium";
+  font-style: normal;
+}
 .comment-ll {
   display: flex;
   gap: 2rem;
@@ -7,7 +11,7 @@
 /* Section → List → Item */
 .comment_board {
   position: relative;
-  background: #ffffff;
+  background: #F3F3F3;
   border-radius: 6px;
   width: 45rem;
   height: 18.5rem;
@@ -22,13 +26,12 @@
 .comment-titlebox h1 {
   display: flex;
   justify-content: center;
-  color: #f3fbff;
+  color: #539ADB;
   margin: 0;
   font-size: 3vh;
   font-family: "Ultra", serif;
   font-weight: 400;
   font-style: normal;
-  text-shadow: 2px 2px 6px #2b4c58;
 }
 
 .comment-prevbutton {
@@ -48,8 +51,6 @@
 
 /* mingi */
 .comment-name {
-  font-family: "Inter";
-  font-style: normal;
   font-weight: 400;
   font-size: 15px;
   line-height: 22px;
@@ -76,24 +77,23 @@
   box-sizing: border-box;
   display: flex;
   align-items: center;
+  justify-content: center;
   background: #ffffff;
   border: 3px solid #eaeaea;
   border-radius: 13px;
   right: 3rem;
-  height: 1.5rem;
-  width: 2.5rem;
+  height: 1.8rem;
+  width: 2.8rem;
 }
 
 /* 2.5 */
 .comment-rating3 {
-  font-family: "Inter";
-  font-style: normal;
   font-weight: 400;
   font-size: 13px;
   line-height: 19px;
   /* identical to box height, or 162% */
   letter-spacing: -0.3px;
-  margin-left: 0.6rem;
+  /* margin-left: 0.6rem; */
   color: #4a4a4a;
 }
 
@@ -111,8 +111,6 @@
 
 /* Emphasis → 0 */
 .comment-like_number {
-  font-family: "Inter";
-  font-style: normal;
   font-weight: 400;
   font-size: 13.2344px;
   line-height: 19px;
@@ -124,10 +122,7 @@
   margin-left: 1rem;
 }
 
-/* 원작에 비해 실망스러웠다 */
 .comment-comment2 {
-  font-family: "Inter";
-  font-style: normal;
   font-weight: 400;
   font-size: 15px;
   line-height: 24px;
@@ -137,4 +132,5 @@
   letter-spacing: -0.2px;
   color: #000000;
   margin-left: 1rem;
+  margin-top: 10px;
 }

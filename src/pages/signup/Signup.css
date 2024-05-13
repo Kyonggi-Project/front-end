@@ -3,7 +3,9 @@ body {
   position: flex;
   width: 100%;
   min-height: 100vh; /*크기 설정 */
-  background: #EEF2F5;
+  background: #eef2f5;
+  font-family: "GmarketSansMedium";
+  font-style: normal;
 }
 
 /* Rectangle 1 */
@@ -14,15 +16,13 @@ body {
   height: 70vh;
   margin: 100px auto; /* 수평 가운데 정렬 */
   padding: 20px; /* 내부 여백 추가 */
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
   border-radius: 15px;
 }
 
 /* Create an account */
 .signup-title {
-  font-family: 'Inter';
-  font-style: normal;
   font-weight: 700;
   font-size: 2rem; /* 상대적인 크기로 변경 */
   line-height: 1.2;
@@ -32,12 +32,10 @@ body {
 
 /* Choose one of the option to go */
 .signup-option {
-  font-family: 'IBM Plex Serif';
-  font-style: normal;
   font-weight: 40;
   font-size: 15px; /* 상대적인 크기로 변경 */
   line-height: 1.2;
-  color: #5F647C;
+  color: #5f647c;
 }
 
 /* Rectangle 2, Rectangle 3 */
@@ -46,8 +44,8 @@ body {
   max-width: 800px; /* 최대 너비 지정 */
   margin: 5px auto; /* 수평 가운데 정렬 및 간격 추가 */
   padding: 10px; /* 내부 여백 추가 */
-  background: #FFFFFF;
-  border: 1px solid #5F647C;
+  background: #ffffff;
+  border: 1px solid #5f647c;
   border-radius: 10px;
   font-size: 15px;
   font-style: normal;
@@ -55,7 +53,7 @@ body {
 }
 
 .signup-input-box2 {
-  border: 1px solid #E6E6E6;
+  border: 1px solid #e6e6e6;
 }
 
 /* Line 1 */
@@ -63,7 +61,7 @@ body {
   width: 90%; /* 상대적인 크기로 변경 */
   max-width: 800px; /* 최대 너비 지정 */
   margin: 20px auto; /* 수평 가운데 정렬 및 간격 추가 */
-  border: 0.5px solid #E7E7E7;
+  border: 0.5px solid #e7e7e7;
 }
 
 /* Rectangle 7 */
@@ -72,12 +70,10 @@ body {
   max-width: 800px; /* 최대 너비 지정 */
   margin: 20px auto; /* 수평 가운데 정렬 및 간격 추가 */
   height: 53px; /* 높이 자동 조정 */
-  font-family: "IBM Plex Serif";
-  font-style: normal;
-  font-weight:  bold;
-  background: #5F647C;
+  font-weight: bold;
+  background: #539ADB;
   border-radius: 8px;
-  color: #E6F6FF;
+  color: #ffffff;
   border: none;
   font-size: 15px;
 }
@@ -88,7 +84,6 @@ body {
 
 /* Already have an account? */
 .signup-a-text {
-  font-family: Poppins;
   color: #969AB8;
   font-style: normal;
   font-size: 1rem; /* 상대적인 크기로 변경 */
@@ -98,8 +93,7 @@ body {
 
 /* Following */
 .login-link {
-  font-family: Poppins;
-  color: #5F647C; /* 상대적인 크기로 변경 */
+  color: #539ADB; /* 상대적인 크기로 변경 */
   font-style: normal;
   font-weight: 400;
 }

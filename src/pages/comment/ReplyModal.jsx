@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import './ReplyModal.css';
+import "./ReplyModal.css";
 import axios from "axios";
-
 const ReplyModal = ({ closeModal }) => {
   const [reply, setReply] = useState("");
   const [articleId, setArticleId] = useState('');

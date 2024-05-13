@@ -4,6 +4,8 @@ body {
     width: 100%;
     min-height: 100vh; /*크기 설정 */
     background: #EEF2F5;
+    font-family: "GmarketSansMedium";
+    font-style: normal;
   }
   
   /* Rectangle 1 */
@@ -21,8 +23,6 @@ body {
   
   /* Create an account */
   .login-title {
-    font-family: 'Inter';
-    font-style: normal;
     font-weight: 700;
     font-size: 2rem; /* 상대적인 크기로 변경 */
     line-height: 1.2;
@@ -32,8 +32,6 @@ body {
   
   /* Choose one of the option to go */
   .login-option {
-    font-family: 'IBM Plex Serif';
-    font-style: normal;
     font-weight: 40;
     font-size: 15px; /* 상대적인 크기로 변경 */
     line-height: 1.2;
@@ -72,22 +70,19 @@ body {
     max-width: 800px; /* 최대 너비 지정 */
     margin: 20px auto; /* 수평 가운데 정렬 및 간격 추가 */
     height: 53px; /* 높이 자동 조정 */
-    font-family: "IBM Plex Serif";
-    font-style: normal;
     font-weight:  bold;
-    background: #5F647C;
+    background: #539ADB;
     border-radius: 8px;
-    color: #E6F6FF;
+    color: #ffffff;
     border: none;
     font-size: 15px;
   }
   .login-button:hover {
-    background-color: #353b56;
+    background-color: #668fe8;
   }
   
   /* Already have an account? */
   .login-a-text {
-    font-family: Poppins;
     color: #969AB8;
     font-style: normal;
     font-size: 1rem; /* 상대적인 크기로 변경 */
@@ -97,8 +92,7 @@ body {
   
   /* Following */
   .signup-link {
-    font-family: Poppins;
-    color: #5F647C; /* 상대적인 크기로 변경 */
+    color: #539ADB; /* 상대적인 크기로 변경 */
     font-style: normal;
     font-weight: 400;
   }
