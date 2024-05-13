@@ -7,8 +7,8 @@ npm install react-icons --save
 ## google o-auth
 npm install @react-oauth/google@latest
 
-## react router-dom
-npm install react-router-dom
+##  @mui/material
+npm install @mui/material @emotion/react @emotion/styled @mui/material/TextField
 
 ## env 파일 생성
 1. root 디렉토리에 .env 파일 생성
