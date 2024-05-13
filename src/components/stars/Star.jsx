@@ -5,13 +5,17 @@ import { useLocation } from 'react-router-dom';
 import { useAuth } from '../../util/auth';
 import "./Star.css";
 
-export default function StarRating({ onChange }) {
-  const [score, setScore] = useState(0);
+export default function StarRating({ onChange, value }) {
+  const [score, setScore] = useState(value);
   const [scoreFixed, setScoreFixed] = useState(score);
 
   const [isScoreVisible, setIsScoreVisible] = useState(false);
   const location = useLocation();
   const { isLogin, isloginHandler } = useAuth();
+
+  useEffect(() => {
+    setScore(value); // value prop이 변경될 때마다 score 상태 업데이트
+  }, [value]);
 
   useEffect(() => {
     if (location.pathname === '/write') {
@@ -42,9 +46,9 @@ export default function StarRating({ onChange }) {
   };
 
   const handleStarLeave = () => {
-    if (score !== scoreFixed) {
-      setScore(scoreFixed);
-    }
+      if (score !== scoreFixed) {
+        setScore(scoreFixed);
+      }
   };
 
   return (

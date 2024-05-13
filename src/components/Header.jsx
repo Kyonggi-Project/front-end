@@ -3,6 +3,7 @@ import styles from './Header.module.css';
 import logoImage from '../logo.png';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../util/auth';
+import SearchBar from './SearchBar';
 
 function Header() {
   const { isLogin, setIsLogin, isloginHandler } = useAuth();
@@ -29,6 +30,9 @@ function Header() {
         </ul>
       </nav> */}
       <div className={styles.userActions}>
+        <div className={styles.search}>
+          <SearchBar/>
+        </div>
         {!isLogin ?
           <Link to="/login" style={{ marginRight: '10px' }}>Login</Link> :
           <Link to="/" style={{ marginRight: '10px' }} onClick={handleLogout}>Logout</Link>

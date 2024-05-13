@@ -15,6 +15,7 @@
 .movie-detail-movie_img2 {
   object-fit: cover;
   max-height: 100%;
+  object-position: center top;
 }
 
 .movie-detail-movie_img p {
@@ -172,15 +173,16 @@
   border: none;
   background-color: #539ADB;
   color: #E6F6FF ;
-
+  border-radius: 5%;
 }
 .movie-detail-watchlist_select {
-  background-color: #304e5b;
+  background-color: #4074a5;
 }
 
 .movie-detail-buttons_icon:hover {
-  background-color: #5b8cd5;
+  transform: scale(1.01);
   font-weight: bold;
+  font-size: large;
 }
 
 /* Harry Potter has lived under the stairs at his aunt and uncle's house his whole life. But on his 11th birthday, he learns he's a powerful wizard -- with a place waiting for him at the Hogwarts School of Witchcraft and Wizardry. As he learns to harness his newfound powers with the help of the school's kindly headmaster, Harry uncovers the truth about his parents' deaths -- and about the villain who's to blame. */

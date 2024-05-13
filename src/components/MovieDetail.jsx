@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import StarRating from "./stars/Star";
+import Toast from "./toast/Toast.jsx";
 import CommentList from "../pages/comment/CommentList1.jsx";
 import { useLocation, useNavigate } from "react-router-dom";
-//import { httpRequest2 } from "../util/article.js";
+import { httpRequest2 } from "../util/article.js";
 import axios from "axios";
 import { useAuth } from '../util/auth';
 import "./MovieDetail.css";
@@ -11,16 +12,18 @@ import watcha from '../images/watcha.png';
 import disney from '../images/disney.jpg';
 import tving from '../images/tving.png';
 import wavve from '../images/wavve.png';
-import { httpRequest2 } from "../util/article.js";
 
+const url = process.env.REACT_APP_URL_PATH;
 const LogoImg = { 'Netflix': netflix, "Watcha": watcha, "Disney": disney, "Tving": tving, "Wavve": wavve };
-//let OTTimg = [];
 
 export default function MovieDetail() {
   const navigate = useNavigate();
   const { isLogin, isloginHandler } = useAuth();
   const [isWatchList, setIsWatchList] = useState(false);
+  const [toast, setToast] = useState(false);
   let [OTTimg, setOTTimg] = useState([]);
+  const [userData, setUserData] = useState([]);
+
   const [movieData, setMovieData] = useState({
     title: "title",
     year: 0,
@@ -72,6 +75,21 @@ export default function MovieDetail() {
         });
   }, [id]);
 
+  //85~92: nickname 정보를 받아 /api/user/profile/myPage에서 userid 받아오기
+  useEffect(() => {
+    httpRequest2(
+      'GET',
+      '/api/user/profile/myPage',
+      null,
+      (response) => {
+        setUserData(response.data.watchList.id);
+      },
+      (error) => {
+        console.error("Error fetching user info:", error);
+      }
+    );
+  }, []);
+
   useEffect(() => {
     let updatedOTTimg = [];
     for (let i = 0; i < movieData.ottList.length; i++) {
@@ -99,9 +117,21 @@ export default function MovieDetail() {
     else {
       if (!isWatchList) {
         setIsWatchList(true);
+          axios.post('http://localhost:8080/api/watchList/toggle', {
+          ottContentsId: {id},
+          userId: {userData}
+        })
+        .then(response => {
+          console.log(response.data);
+        })
+        .catch(error => {
+          console.error('요청이 실패했습니다.', error);
+        });
+        setToast(true);
       }
       else {
         setIsWatchList(false);
+        setToast(true);
       }
     }
   }
@@ -148,7 +178,7 @@ export default function MovieDetail() {
         <section className="movie-detail-section3">
           <div className="movie-detail-section2">
             <div className="movie-detail-rating-box">
-              <StarRating/>
+              <StarRating value={movieData.score}/>
               <p className="movie-detail-rating_num">{movieData.score}</p>
               <label className="movie-detail-rating_count">평균 평점</label>
             </div>
@@ -161,6 +191,7 @@ export default function MovieDetail() {
           <div className="movie-detail-separator"></div>
           <div className="movie-detail-button2_box">
             <button className={`movie-detail-buttons_icon ${isWatchList ? "movie-detail-watchlist_select" : ""}`} onClick={handleWatchlist}>watchlist 추가</button>
+            {toast && <Toast setToast={setToast} value={isWatchList}/>}
             <hr className='movie-detail-separator2' />
             <button className="movie-detail-buttons_icon" onClick={handleAddComment}>코멘트 추가</button>
           </div>
