@@ -19,7 +19,6 @@ const UserProfile = () => {
   const [comments, setComments] = useState([]);
   const [userData, setUserData] = useState([]);
   const [watchListData, setWatchListData] = useState([]);
-  const [reviewList, setReviewList] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
   const url = process.env.REACT_APP_URL_PATH;
@@ -38,7 +37,6 @@ const UserProfile = () => {
       null,
       (response) => {
         setUserData(response.data.user);
-        setReviewList(response.data.OTTReviewList);
         setWatchListData(response.data.watchList.bookmark);
       },
       (error) => {
@@ -62,14 +60,25 @@ const UserProfile = () => {
       });
 
     //해당 유저의 코멘트들을 출력
-    axios
-      .get(url + "/api/ottReview/reviews/user")
-      .then((response) => {
+    httpRequest2(
+      'GET',
+      "/api/ottReview/reviews/user",
+      null,
+      (response) => {
         setComments(response.data);
-      })
-      .catch((error) => {
+      },
+      (error) => {
         console.error("Error fetching comments:", error);
-      });
+      }
+    )
+    // axios
+    //   .get(url + "/api/ottReview/reviews/user")
+    //   .then((response) => {
+    //     setComments(response.data);
+    //   })
+    //   .catch((error) => {
+    //     console.error("Error fetching comments:", error);
+    //   });
   }, []);
 
   // 모달 표시 함수
@@ -142,11 +151,8 @@ const UserProfile = () => {
         <div className="user-profile-right-section">
           <h4>Comments</h4>
           <ul>
-            {comments.map((comment) => (
-              <li key={comment.id}>{comment.text}</li>
-            ))}
             <div>
-              <CommentList commentList={reviewList} />
+              <CommentList commentList={comments} />
             </div>
           </ul>
         </div>
