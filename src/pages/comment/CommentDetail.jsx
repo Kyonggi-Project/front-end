@@ -30,6 +30,7 @@ export default function CommentDetail() {
       null,
       (response) => {
         setDetails(response.data);
+        setIsLiked(details.liked);
         if (details.repliesCount === 0) {
           setIsEmptyText(true);
         } else {
@@ -88,11 +89,9 @@ export default function CommentDetail() {
         .post(url + `/api/ottReview-like/toggle/${id}`)
         .then(() => {
           if (isLiked) {
-            alert('좋아요 -1');
             setIsLiked(false);
           } else {
             setIsLiked(true);
-            alert("좋아요 +1");
           }
 
         })
