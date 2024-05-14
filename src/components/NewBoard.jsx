@@ -123,7 +123,7 @@ export default function NewBoard() {
         <h2 className='newboard-texta'>{title}</h2>
         <div>
           <label className='newboard-rating'>평점</label>
-          <StarRating onChange={handleRating} initialScore={rating}/>
+          <StarRating onChange={handleRating} initialScore={rating} action={match.params.action}/>
         </div>
         <div>
           <label className='newboard-texta'>Comment</label>

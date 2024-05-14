@@ -71,14 +71,6 @@ const UserProfile = () => {
         console.error("Error fetching comments:", error);
       }
     )
-    // axios
-    //   .get(url + "/api/ottReview/reviews/user")
-    //   .then((response) => {
-    //     setComments(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.error("Error fetching comments:", error);
-    //   });
   }, []);
 
   // 모달 표시 함수

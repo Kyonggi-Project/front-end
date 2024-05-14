@@ -6,13 +6,12 @@ import { useAuth } from '../../util/auth';
 import "./Star.css";
 
 
-export default function StarRating({ onChange, initialScore }) {
+export default function StarRating({ onChange, initialScore, action }) {
   const [score, setScore] = useState(0);
   const [scoreFixed, setScoreFixed] = useState(initialScore || score);
 
   const [isScoreVisible, setIsScoreVisible] = useState(false);
   const { isLogin, isloginHandler } = useAuth();
-  const match = useMatch("/details/:action");
 
   useEffect(() => {
     if (initialScore) {
@@ -22,16 +21,16 @@ export default function StarRating({ onChange, initialScore }) {
   }, [initialScore]);
 
   useEffect(() => {
-    if (match.params.action === 'write' || match.params.action === 'edit') {
+    if (action === 'write' || action === 'edit') {
       setIsScoreVisible(true);
     } else {
       setIsScoreVisible(false);
     }
     
-  }, [match.params.action]);
+  }, [action]);
 
   const handleStarEnter = (idx, clientX) => {
-    if (match.params.action === 'write' || match.params.action === 'edit') {
+    if (action === 'write' || action === 'edit') {
       const rect = document.getElementById(`star-${idx}`).getBoundingClientRect();
       const isRightHalf = clientX - rect.left > rect.width / 2;
       const calculatedScore = isRightHalf ? idx + 1 : idx + 0.5;
@@ -48,7 +47,6 @@ export default function StarRating({ onChange, initialScore }) {
       if (onChange) {
         onChange(score); // 점수를 변경 시 부모 컴포넌트로 전달
       }
-      console.log("점수:", score);
     }
   };
 

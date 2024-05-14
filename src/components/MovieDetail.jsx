@@ -171,7 +171,7 @@ export default function MovieDetail() {
         <section className="movie-detail-section3">
           <div className="movie-detail-section2">
             <div className="movie-detail-rating-box">
-              <StarRating initialScore={movieData.score}/>
+              <StarRating initialScore={movieData.score} action="details"/>
               <p className="movie-detail-rating_num">{movieData.score}</p>
               <label className="movie-detail-rating_count">평균 평점</label>
             </div>
