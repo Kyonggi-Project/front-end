@@ -7,12 +7,13 @@ import "./Star.css";
 
 
 export default function StarRating({ onChange, initialScore }) {
+  console.log(initialScore);
   const [score, setScore] = useState(0);
   const [scoreFixed, setScoreFixed] = useState(initialScore || score);
 
   const [isScoreVisible, setIsScoreVisible] = useState(false);
   const { isLogin, isloginHandler } = useAuth();
-  const match = useMatch("/details/:action/:id");
+  const match = useMatch("/details/:action");
 
   useEffect(() => {
     if (initialScore) {
@@ -23,11 +24,11 @@ export default function StarRating({ onChange, initialScore }) {
 
   useEffect(() => {
     if (match.params.action === 'write' || match.params.action === 'edit') {
-
       setIsScoreVisible(true);
     } else {
       setIsScoreVisible(false);
     }
+    
   }, [match.params.action]);
 
   const handleStarEnter = (idx, clientX) => {
