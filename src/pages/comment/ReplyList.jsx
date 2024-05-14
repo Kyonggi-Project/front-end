@@ -17,13 +17,13 @@ export default function ReplyList() {
       { id: 4, nickname: 'User4', content: 'Reply 4' }
     ];
     setComments(tempComments);
-       axios.get(url + `/api/comment/comments/${articleId}`)
-         .then(response => {
-           setComments(response.data);
-         })
-         .catch(error => {
-           console.error('댓글을 가져오는 동안 오류가 발생했습니다:', error);
-         });
+    axios.get(url + `/api/comment/comments/${articleId}`)
+      .then(response => {
+        setComments(response.data);
+      })
+      .catch(error => {
+        console.error('댓글을 가져오는 동안 오류가 발생했습니다:', error);
+      });
   }, []);
 
   return (

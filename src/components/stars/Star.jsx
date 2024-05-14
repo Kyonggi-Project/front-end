@@ -1,35 +1,42 @@
 import { useState, useEffect } from 'react';
 /*npm install react-icons --save 이거 해야 적용됨*/
 import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';
-import { useLocation } from 'react-router-dom';
+import { useMatch } from 'react-router-dom';
 import { useAuth } from '../../util/auth';
 import "./Star.css";
 
-export default function StarRating({ onChange, value }) {
-  const [score, setScore] = useState(value);
-  const [scoreFixed, setScoreFixed] = useState(score);
+
+export default function StarRating({ onChange, initialScore }) {
+  const [score, setScore] = useState(0);
+  const [scoreFixed, setScoreFixed] = useState(initialScore || score);
 
   const [isScoreVisible, setIsScoreVisible] = useState(false);
-  const location = useLocation();
   const { isLogin, isloginHandler } = useAuth();
+  const match = useMatch("/details/:action/:id");
 
   useEffect(() => {
-    setScore(value); // value prop이 변경될 때마다 score 상태 업데이트
-  }, [value]);
+    if (initialScore) {
+      setScore(initialScore);
+      setScoreFixed(initialScore);
+    }
+  }, [initialScore]);
 
   useEffect(() => {
-    if (location.pathname === '/write') {
+    if (match.params.action === 'write' || match.params.action === 'edit') {
+
       setIsScoreVisible(true);
     } else {
       setIsScoreVisible(false);
     }
-  }, [location.pathname]);
+  }, [match.params.action]);
 
   const handleStarEnter = (idx, clientX) => {
-    const rect = document.getElementById(`star-${idx}`).getBoundingClientRect();
-    const isRightHalf = clientX - rect.left > rect.width / 2;
-    const calculatedScore = isRightHalf ? idx + 1 : idx + 0.5;
-    setScore(calculatedScore);
+    if (match.params.action === 'write' || match.params.action === 'edit') {
+      const rect = document.getElementById(`star-${idx}`).getBoundingClientRect();
+      const isRightHalf = clientX - rect.left > rect.width / 2;
+      const calculatedScore = isRightHalf ? idx + 1 : idx + 0.5;
+      setScore(calculatedScore);
+    }
   };
 
   const handleStarClick = (event) => {

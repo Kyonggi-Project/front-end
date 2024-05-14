@@ -7,7 +7,7 @@ import "./NewBoard.css";
 import { httpRequest2 } from '../util/article';
 
 export default function NewBoard() {
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState(localStorage.getItem('movie-title'));
   const [content, setContent] = useState('');
   const [rating, setRating] = useState(0);
   const navigate = useNavigate();
@@ -32,18 +32,19 @@ export default function NewBoard() {
   useEffect(() => {
     if (match.params.action === 'edit') {
       // 코멘트 수정 모드인 경우, 해당 ID를 사용하여 기존 게시글 데이터를 가져옴
-      axios.get(url + `api/ottReview/reviews/user`)
-        .then(response => {
-          const { title, content, rating } = response.data;
-          setInputTags(response.data.inputTags);
-          setSelectedTags(response.data.selectedTags)
-          setTitle(title);
-          setContent(content);
-          setRating(rating);
-        })
-        .catch(error => {
-          console.error('게시글 가져오기 오류:', error);
-        });
+      httpRequest2(
+        'GET',
+        `/api/ottReview/reviews/${ottId}`,
+        null,
+        (response) => {
+          setTitle(response.data.contentsTitle);
+          setContent(response.data.content);
+          setRating(response.data.score);
+        },
+        (error) => {
+          console.error('게시글 정보를 가져오는데 실패했습니다:', error);
+        }
+      );
     }
   }, [ottId]);
 
@@ -56,37 +57,31 @@ export default function NewBoard() {
   }
 
   function handleCancel() {
-    localStorage.removeItem('movie-title');
-    navigate(`/details/${ottId}`);
+    if (match.params.action === 'edit') {
+      navigate(`/comments/${ottId}`)
+    } else {
+      localStorage.removeItem('movie-title');
+      navigate(`/details/${ottId}`);
+    }
   }
-  useEffect(() => setTitle(localStorage.getItem('movie-title')));
+
   function handleSbumit(event) {
     event.preventDefault();
 
     // 폼 데이터 수집
-    const formData = {
-      // title: title,
+    const formData = match.params.action === 'write' ? {
       content: content,
       score: rating,
       inputTags: inputTags,
       tags: selectedTags,
+    } : {
+      content: content,
+      score: rating,
     };
     console.log(formData);
 
     if (match.params.action === 'write') {
-      //post 요청, 코멘트 추가
-      // axios.post(/*백엔드 요청 주소*/url + `/api/ottReview/add/${ottId}`, formData)
-      //   .then(response => {
-      //     console.log('응답 데이터:', response.data);
-      //     alert("입력되었습니다.");
-      //     localStorage.removeItem('movie-title');
-      //     navigate(`/details/${ottId}`);
-      //   })
-      //   .catch(error => {
-      //     alert("오류");
-      //     console.error('데이터 전송 오류:', error);
-      //   });
-
+      //리뷰 입력
       httpRequest2(
         'POST',
         `/api/ottReview/add/${ottId}`,
@@ -102,18 +97,23 @@ export default function NewBoard() {
           console.error('데이터 전송 오류:', error);
         }
       );
-    } else {
-      // 게시글 수정 모드일 때
-      axios.put(url + `/api/ottReview/modify/${ottId}`, formData)
-        .then(response => {
-          console.log('게시글 수정 완료:', response.data);
-          alert('게시글이 수정되었습니다.');
+    } else if(match.params.action === 'edit') {
+      // 리뷰 수정
+      httpRequest2(
+        'PUT',
+        `/api/ottReview/modify/${ottId}`,
+        formData,
+        response => {
+          console.log('리뷰 수정 완료:', response.data);
+          alert('리뷰를 수정되었습니다.');
           localStorage.removeItem('movie-title');
           navigate(`details/${ottId}`);
-        })
-        .catch(error => {
-          console.error('게시글 수정 오류:', error);
-        });
+        },
+        error => {
+          alert('리뷰 수정에 실패했습니다.');
+          console.error('리뷰 수정 오류:', error);
+        }
+      );
     }
   }
 
@@ -123,7 +123,7 @@ export default function NewBoard() {
         <h2 className='newboard-texta'>{title}</h2>
         <div>
           <label className='newboard-rating'>평점</label>
-          <StarRating onChange={handleRating} />
+          <StarRating onChange={handleRating} initialScore={rating}/>
         </div>
         <div>
           <label className='newboard-texta'>Comment</label>

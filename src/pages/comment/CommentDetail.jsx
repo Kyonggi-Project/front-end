@@ -3,7 +3,6 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import ReplyList from './ReplyList';
 import profilePicture from "../../images/profilePicture.png";
-import SpyFamily from "../../images/spyfamily.jpg";
 import ReplyModal from './ReplyModal';
 import { useAuth } from '../../util/auth';
 import "./CommentDetail.css";
@@ -19,85 +18,53 @@ export default function CommentDetail() {
   const [showModal, setShowModal] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
 
-  const { isLogin, isloginHandler, token } = useAuth();
+  const { isLogin, isloginHandler } = useAuth();
   const url = process.env.REACT_APP_URL_PATH;
   const { id } = useParams();
 
 
   useEffect(() => {
-    // 코멘트 정보를 가져오는 함수
-    // axios
-    //   .get(/*백엔드 url*/url + `/api/ottReview/reviews/${id}`)
-    //   .then(
-    //     (response) => {
-    //       setDetails(response.data);
-    //     },
-    //   )
-    //   .catch((error) => {
-    //     console.error('게시글 정보를 가져오는데 실패했습니다:', error);
-    //   });
-
     httpRequest2(
       'GET',
       `/api/ottReview/reviews/${id}`,
       null,
       (response) => {
         setDetails(response.data);
-        if(details.repliesCount === 0) {
+        setIsLiked(details.liked);
+        if (details.repliesCount === 0) {
           setIsEmptyText(true);
         } else {
           setIsEmptyText(false);
         }
       },
       (error) => {
-        console.error('게시글 정보를 가져오는데 실패했습니다:', error);
+        console.error('리뷰 정보를 가져오는데 실패했습니다:', error);
       }
     );
 
   }, [id]);
-
-  // useEffect(() => {
-  //   // 서버로부터 현재 사용자 정보를 가져오는 함수
-  //   axios
-  //     .get(url + '/api/user', {
-  //       headers: {
-  //         Authorization: `Bearer ${token}` // JWT 토큰을 Authorization 헤더에 추가
-  //       }
-  //     })
-  //     .then((response) => console.log(response.data))
-  //     .catch((error) => console.error('게시글 정보를 가져오는데 실패했습니다:', error));
-
-  // }, []);
-
-  //임시 데이터
-  const details_dummy = {
-    title: '영화 제목',
-    content: '코멘트',
-    likesCount: 100,
-    comments: 1,
-  }
 
   function EditHandler() {
     navigate(`/details/edit/${id}`);
   }
 
   function DeleteHandler() {
-    httpRequest2(
-      'DELETE',
-      `/api/ottReview/delete/${id}`,
-      null,
-      (response) => {
-        const isConfirmed = window.confirm('정말로 삭제하시겠습니까?');
-        if (isConfirmed) {
+    const isConfirmed = window.confirm('정말로 삭제하시겠습니까?');
+    if (isConfirmed) {
+      httpRequest2(
+        'DELETE',
+        `/api/ottReview/delete/${id}`,
+        null,
+        () => {
           alert('삭제되었습니다');
-          navigate(`/comments/${id}`);
+          navigate(`/`);
+        },
+        (error) => {
+          alert('오류');
+          console.error('삭제에 실패했습니다.', error);
         }
-      },
-      (error) => {
-        alert('오류');
-        console.error('삭제에 실패했습니다.', error);
-      }
-    );
+      );
+    }
   }
 
   function handleReplyModal(event) {
@@ -122,12 +89,9 @@ export default function CommentDetail() {
         .post(url + `/api/ottReview-like/toggle/${id}`)
         .then(() => {
           if (isLiked) {
-            alert('좋아요 -1');
             setIsLiked(false);
-            //1
           } else {
             setIsLiked(true);
-            alert("좋아요 +1");
           }
 
         })
