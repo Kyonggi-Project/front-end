@@ -102,6 +102,7 @@
   align-items: flex-start; /* 수직 상단 정렬 */
   margin: 20px 0;
   transition: margin-left 0.3s ease;
+  
 }
 
 .main-image-list li {
@@ -146,10 +147,11 @@
 }
 
 .main-image-wrapper img {
-  width: 300px; /* 이미지 너비 조정을 원하는 크기로 지정하세요 */
-  height: auto;
+  width: 240px; /* 이미지 너비 조정을 원하는 크기로 지정하세요 */
+  height: 344px;
   display: block;
   border-radius: 8px;
+  object-fit: cover;
   transition: transform 0.3s ease-in-out;
 }
 
@@ -175,29 +177,30 @@
 
 .main-scroll-button {
   position: absolute;
-  top: 55%;
+  top: 63%;
   transform: translateY(-50%);
   width: 40px;
   height: 40px;
   border: none;
   border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(83, 154, 219, 0.9);
   color: white;
+  
   font-size: 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .main-scroll-button:hover {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(113, 205, 238, 0.7);
 }
 
 .main-scroll-button.prev {
-  left: 5px;
+  left: 15px;
 }
 
 .main-scroll-button.next {
-  right: 5px;
+  right: 15px;
 }
 
 .main-data-info {
@@ -249,7 +252,7 @@
 }
 
 .main-button-list button:hover {
-  background-color: #7bcdee; /* 마우스 호버 시 배경색을 변경합니다. */
+  background-color: #31515e; /* 마우스 호버 시 배경색을 변경합니다. */
   color: black;
 }
 

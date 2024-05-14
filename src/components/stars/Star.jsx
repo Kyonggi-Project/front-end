@@ -5,6 +5,7 @@ import { useMatch } from 'react-router-dom';
 import { useAuth } from '../../util/auth';
 import "./Star.css";
 
+
 export default function StarRating({ onChange, initialScore }) {
   const [score, setScore] = useState(0);
   const [scoreFixed, setScoreFixed] = useState(initialScore || score);
@@ -22,6 +23,7 @@ export default function StarRating({ onChange, initialScore }) {
 
   useEffect(() => {
     if (match.params.action === 'write' || match.params.action === 'edit') {
+
       setIsScoreVisible(true);
     } else {
       setIsScoreVisible(false);
@@ -51,9 +53,9 @@ export default function StarRating({ onChange, initialScore }) {
   };
 
   const handleStarLeave = () => {
-    if (score !== scoreFixed) {
-      setScore(scoreFixed);
-    }
+      if (score !== scoreFixed) {
+        setScore(scoreFixed);
+      }
   };
 
   return (
