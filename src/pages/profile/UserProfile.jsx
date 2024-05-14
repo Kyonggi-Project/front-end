@@ -8,10 +8,11 @@ import { httpRequest2 } from "../../util/article";
 import "./UserProfile.css";
 import { useSearchParams } from "react-router-dom";
 import { useAuth } from "../../util/auth";
+import FollowListModal from "../Follow/FollowListModal.jsx";
 
 const UserProfile = () => {
   const [userInfo, setUserInfo] = useState({
-    nickname: "Name",
+    nickname: "",
     followers: 0,
     following: 0,
     likedWorks: 0,
@@ -21,18 +22,23 @@ const UserProfile = () => {
   const [watchListData, setWatchListData] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
+  const [followers, setFollowers] = useState([]);
+  const [following, setFollowing] = useState([]);
+  const [showFollowersModal, setShowFollowersModal] = useState(false);
+  const [showFollowingModal, setShowFollowingModal] = useState(false);
+
   const url = process.env.REACT_APP_URL_PATH;
   const [searchParams, setSearchParams] = useSearchParams();
-  const token = searchParams.get('token');
+  const token = searchParams.get("token");
   if (token) {
-    localStorage.setItem('access_token', token);
+    localStorage.setItem("access_token", token);
   }
 
   const nickname = userInfo.nickname; // 예시로 userInfo의 nickname을 사용
   useEffect(() => {
     httpRequest2(
-      'GET',
-      '/api/user/profile/myPage',
+      "GET",
+      "/api/user/profile/myPage",
       null,
       (response) => {
         setUserData(response.data.user);
@@ -59,6 +65,28 @@ const UserProfile = () => {
       });
 
     axios
+      .get(`/api/user/follower/${nickname}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        setFollowers(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching followers:", error);
+      });
+
+    axios
+      .get(`/api/user/following/${nickname}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        setFollowing(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching followings:", error);
+      });
+
+    axios
       .get(url + "/api/comments")
       .then((response) => {
         setComments(response.data);
@@ -66,7 +94,7 @@ const UserProfile = () => {
       .catch((error) => {
         console.error("Error fetching comments:", error);
       });
-  }, []);
+  }, [nickname, token, url]);
 
   // 모달 표시 함수
   const handleEditProfileClick = () => {
@@ -117,11 +145,15 @@ const UserProfile = () => {
           <div className="user-profile-user-stats">
             <div className="user-profile-stat-item">
               <p>Followers</p>
-              <p>{userData.followers}</p>
+              <p onClick={() => setShowFollowersModal(true)}>
+                {userData.followers}
+              </p>
             </div>
             <div className="user-profile-stat-item">
               <p>Following</p>
-              <p>{userData.following}</p>
+              <p onClick={() => setShowFollowingModal(true)}>
+                {userData.following}
+              </p>
             </div>
             <div className="user-profile-stat-item">
               <p>Liked</p>
@@ -130,7 +162,10 @@ const UserProfile = () => {
           </div>
 
           <div>
-            <button className="user-profile-info-button" onClick={handleEditProfileClick}>
+            <button
+              className="user-profile-info-button"
+              onClick={handleEditProfileClick}
+            >
               Edit Profile Information
             </button>
           </div>
@@ -155,6 +190,18 @@ const UserProfile = () => {
           showModal={showModal} // showModal 상태를 EditModal에 전달
         />
       )}
+      <FollowListModal
+        isOpen={showFollowersModal}
+        onRequestClose={() => setShowFollowersModal(false)}
+        followList={followers}
+        title="Followers"
+      />
+      <FollowListModal
+        isOpen={showFollowingModal}
+        onRequestClose={() => setShowFollowingModal(false)}
+        followList={following}
+        title="Following"
+      />
     </div>
   );
 };

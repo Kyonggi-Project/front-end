@@ -19,6 +19,7 @@ const OtherUserProfile = () => {
   const [watchListData, setWatchListData] = useState([]);
   const { nickname } = useParams(); // URL에서 nickname 파라미터를 가져옴
   const { user } = useAuth(); // 현재 로그인한 유저 정보
+  const [isFollowed, setIsFollowed] = useState(false);
 
   const url = process.env.REACT_APP_URL_PATH;
   const [searchParams] = useSearchParams();
@@ -42,6 +43,8 @@ const OtherUserProfile = () => {
             profilePicture: "/static/images/profilePicture.png",
           });
           setWatchListData(response.data.watchList.bookmark);
+          setUserInfo(response.data.user);
+          setIsFollowed(response.data.isFollowed);
         },
         (error) => {
           console.error("Error fetching user info:", error);

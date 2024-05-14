@@ -4,7 +4,6 @@ import "../profile/UserProfile.css";
 
 const FollowButton = ({ nickname }) => {
   const [isFollowing, setIsFollowing] = useState(false);
-  const [loading, setLoading] = useState(false);
 
   const toggleFollow = async () => {
     try {
