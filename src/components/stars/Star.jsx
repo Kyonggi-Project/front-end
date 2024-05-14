@@ -7,7 +7,6 @@ import "./Star.css";
 
 
 export default function StarRating({ onChange, initialScore }) {
-  console.log(initialScore);
   const [score, setScore] = useState(0);
   const [scoreFixed, setScoreFixed] = useState(initialScore || score);
 

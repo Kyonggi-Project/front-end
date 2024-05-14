@@ -19,6 +19,7 @@ const UserProfile = () => {
   const [comments, setComments] = useState([]);
   const [userData, setUserData] = useState([]);
   const [watchListData, setWatchListData] = useState([]);
+  const [reviewList, setReviewList] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
   const url = process.env.REACT_APP_URL_PATH;
@@ -30,15 +31,6 @@ const UserProfile = () => {
 
   const nickname = userInfo.nickname; // 예시로 userInfo의 nickname을 사용
 
-  //임시 데이터
-  const tempComments = [
-    { id: 1, author: 'User1', rating: 3.5, content: 'Comment 1', likesCount: 100, reply: 3 },
-    { id: 2, author: 'User2', rating: 4, content: 'Comment 2', likesCount: 200, reply: 4 },
-    { id: 3, author: 'User3', rating: 1.5, content: 'Comment 3', likesCount: 300, reply: 5 },
-    { id: 4, author: 'User4', rating: 2, content: 'Comment 4', likesCount: 400, reply: 6 },
-    { id: 5, author: 'User5', rating: 5, content: 'Comment 5', likesCount: 500, reply: 7 }
-  ];
-
   useEffect(() => {
     httpRequest2(
       'GET',
@@ -46,6 +38,7 @@ const UserProfile = () => {
       null,
       (response) => {
         setUserData(response.data.user);
+        setReviewList(response.data.OTTReviewList);
         setWatchListData(response.data.watchList.bookmark);
       },
       (error) => {
@@ -153,7 +146,7 @@ const UserProfile = () => {
               <li key={comment.id}>{comment.text}</li>
             ))}
             <div>
-              <CommentList commentList={tempComments} />
+              <CommentList commentList={reviewList} />
             </div>
           </ul>
         </div>
