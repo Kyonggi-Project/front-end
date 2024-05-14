@@ -3,14 +3,14 @@ import "./Comment.css";
 import { httpRequest2 } from '../../util/article';
 import { Link, useParams } from 'react-router-dom';
 
-const Comment = ({ profile, likes, comments, rating, reply, id }) => (
+const Comment = ({ profile, likes, comments, score, reply, id }) => (
   <>
     <section className='comment_board'>
       <div className='comment-user_info_box'>
         <img src="logo192.png" alt="프로필" className='comment-user_img' />
         <p className='comment-name'>{profile}</p>
         <div className='comment-rating_box'>
-          <p className='comment-rating3'>{rating}</p>
+          <p className='comment-rating3'>{score}</p>
         </div>
       </div>
       <Link to={`/comments/${id}`}  className='comment-comment2'>
@@ -33,8 +33,8 @@ const CommentList = ({ data }) => (
         profile={comment.author}
         likes={comment.likesCount}
         comments={comment.content}
-        rating={comment.rating}
-        reply={comment.reply}
+        score={comment.score}
+        reply={comment.repliesCount}
       // profileLink={comment.profileLink}
       />
     ))}
@@ -59,8 +59,8 @@ export default function CommentApp() {
       `/api/ottReview/reviews/ott/${id}`,
       null,
       (response) => {
-        // setCommentList(response.data);
-        setCommentList(commentList);
+        setCommentList(response.data);
+        // setCommentList(commentList);
         // console.log(response.data);
       },
       (error) => {

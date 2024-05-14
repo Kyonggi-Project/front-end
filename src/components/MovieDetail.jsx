@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import StarRating from "./stars/Star";
 import CommentList from "../pages/comment/CommentList1.jsx";
 import { useLocation, useNavigate } from "react-router-dom";
-//import { httpRequest2 } from "../util/article.js";
 import axios from "axios";
 import { useAuth } from '../util/auth';
 import "./MovieDetail.css";
@@ -106,15 +105,7 @@ export default function MovieDetail() {
     }
   }
 
-  const [commentList, setCommentList] = useState([
-    //임시 데이터
-    { id: 1, author: 'User1', rating: 3.5, content: 'Comment 1', likesCount: 100, reply: 3 },
-    { id: 2, author: 'User2', rating: 4, content: 'Comment 2', likesCount: 200, reply: 4 },
-    { id: 3, author: 'User3', rating: 1.5, content: 'Comment 3', likesCount: 300, reply: 5 },
-    { id: 4, author: 'User4', rating: 2, content: 'Comment 4', likesCount: 400, reply: 6 },
-    { id: 5, author: 'User5', rating: 5, content: 'Comment 5', likesCount: 500, reply: 7 },
-    { id: 6, author: 'User5', rating: 5, content: 'Comment 5', likesCount: 500, reply: 7 },
-  ]);
+  const [commentList, setCommentList] = useState([]);
   //컨텐츠의 모든 코멘트 보기
   useEffect(() => {
     httpRequest2(

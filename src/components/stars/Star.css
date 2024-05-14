@@ -31,4 +31,6 @@
 
 .current-score {
   color: #539ADB;
+  margin-top: auto;
+  margin-bottom: auto;
 }
