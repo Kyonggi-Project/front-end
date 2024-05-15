@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import ReplyList from './ReplyList';
 import profilePicture from "../../images/profilePicture.png";
@@ -17,11 +16,10 @@ export default function CommentDetail() {
   const [isEmptyText, setIsEmptyText] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
+  const [currentUser, setCurrentUser] = useState('');
 
   const { isLogin, isloginHandler } = useAuth();
-  const url = process.env.REACT_APP_URL_PATH;
   const { id } = useParams();
-
 
   useEffect(() => {
     httpRequest2(
@@ -30,8 +28,9 @@ export default function CommentDetail() {
       null,
       (response) => {
         setDetails(response.data);
-        setIsLiked(details.liked);
-        if (details.repliesCount === 0) {
+        setCurrentUser(response.data.author);
+        setIsLiked(response.data.liked);
+        if (response.data.repliesCount === 0) {
           setIsEmptyText(true);
         } else {
           setIsEmptyText(false);
@@ -43,6 +42,26 @@ export default function CommentDetail() {
     );
 
   }, [id]);
+
+  useEffect(() => {
+    if (currentUser) {
+      httpRequest2(
+        'GET',
+        `/api/authorize/${currentUser}`,
+        null,
+        (response) => {
+          if (response.data) {
+            setIsUser(true);
+          } else {
+            setIsUser(false);
+          }
+        },
+        (error) => {
+          console.error("error", error);
+        }
+      );
+    }
+  }, [currentUser]);
 
   function EditHandler() {
     navigate(`/details/edit/${id}`);
@@ -85,19 +104,23 @@ export default function CommentDetail() {
       isloginHandler(event);
     }
     else {
-      axios
-        .post(url + `/api/ottReview-like/toggle/${id}`)
-        .then(() => {
+      httpRequest2(
+        'POST',
+        `/api/ottReview-like/toggle/${id}`,
+        null,
+        () => {
           if (isLiked) {
             setIsLiked(false);
+             details.likesCount = details.likesCount - 1
           } else {
             setIsLiked(true);
+            details.likesCount = details.likesCount + 1
           }
-
-        })
-        .catch((error) => {
+        },
+        (error) => {
           console.error('좋아요 실패', error);
-        });
+        }
+      );
     }
   }
 
@@ -131,7 +154,7 @@ export default function CommentDetail() {
       <p className='comment-detail-movie_grade_box'>{details.score}</p>
       <p className='comment-detail-text-box'>{details.content}</p>
       {/* 해당 글을 쓴 사람이면 보이게*/}
-      {!isUser &&
+      {isUser &&
         <>
           <button className='comment-detail-user_buttons' onClick={DeleteHandler}>Delete</button>
           <button className='comment-detail-user_buttons' onClick={EditHandler}>Edit</button>
@@ -165,6 +188,7 @@ export default function CommentDetail() {
       {showModal &&
         <ReplyModal
           closeModal={handleCloseModal}
+          isEdit={false}
         />
       }
     </div>

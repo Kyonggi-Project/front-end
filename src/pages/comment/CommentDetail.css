@@ -194,17 +194,18 @@
 }
 
 .comment-detail-button2-1 {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
+  width: 50%;
+  font-family: "GmarketSansMedium";
   font-size: 14px;
-  line-height: 25px;
-  justify-content: center;
-  text-align: center;
-  width: calc(90% / 3);
+  line-height: 40px;
   border: none;
-  background-color: #73bdda;
-  margin-left: 1.2rem;
+  background-color: #3a75ad;
+  color: #e6f6ff;
+  margin: 0 20px;
+  border-radius: 10px;
+  font-family: "GmarketSansMedium";
+  font-style: normal;
+  font-weight: bold;
 }
 
 .comment-detail-button2:hover {

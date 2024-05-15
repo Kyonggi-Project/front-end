@@ -36,8 +36,11 @@ const UserProfile = () => {
       '/api/user/profile/myPage',
       null,
       (response) => {
+        console.log(response.data);
         setUserData(response.data.user);
-        setWatchListData(response.data.watchList.bookmark);
+        if(response.data.watchList) {
+          setWatchListData(response.data.watchList.bookmark);
+        }
       },
       (error) => {
         console.error("Error fetching user info:", error);
