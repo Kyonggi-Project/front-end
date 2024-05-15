@@ -4,7 +4,7 @@
 header {
   padding: 8px 25px;
   display: flex;
-  justify-content:space-between;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -14,10 +14,20 @@ header {
   height: auto; /* 로고 이미지의 높이 자동 조정 */
 }
 
-.search{
+.search {
   float: left;
+  padding-right: 30px;
 }
 
+.nav {
+  display: flex;
+  gap: 10px;
+}
+
+.link {
+  text-decoration: none;
+  padding-top: 60px !important;
+}
 /* 네비게이션 메뉴 스타일 */
 nav ul {
   list-style-type: none;
@@ -28,6 +38,7 @@ nav ul {
 nav ul li {
   display: inline;
   margin-right: 20px;
+  padding-top: 20px;
 }
 
 nav ul li a {
@@ -35,12 +46,16 @@ nav ul li a {
   text-decoration: none;
   font-family: "Ultra", serif;
   font-style: normal;
+  padding-bottom: 0px;
+  padding-top: 60px !important;
 }
 
 nav ul li a:hover {
   text-decoration: underline;
 }
-
+.loginlogout {
+  margin-top: 20px;
+}
 /* 로그인/마이페이지 메뉴 스타일 */
 .userActions a {
   color: #539adb;
