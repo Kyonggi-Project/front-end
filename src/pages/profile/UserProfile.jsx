@@ -44,7 +44,7 @@ const UserProfile = () => {
       (response) => {
         console.log(response.data);
         setUserData(response.data.user);
-        if(response.data.watchList) {
+        if (response.data.watchList) {
           setWatchListData(response.data.watchList.bookmark);
         }
       },
@@ -53,30 +53,51 @@ const UserProfile = () => {
       }
     );
 
-    //특정 닉네임의 유저 정보 출력
-    axios
-      .get(url + `/api/user/profile/nickname/${nickname}`, {
-        withCredentials: true,
-      })
-      .then((response) => {
-        setUserInfo({
-          ...response.data,
-          profilePicture: "/static/images/profilePicture.png",
-        });
-      })
-      .catch((error) => {
-        console.error("Error fetching user info:", error);
-      });
-
-    axios
-      .get(url + "/api/comments")
-      .then((response) => {
+    axios.get(url + "/api/comments").then(
+      (response) => {
         setComments(response.data);
       },
       (error) => {
         console.error("Error fetching comments:", error);
-      });
+      }
+    );
   }, []);
+
+  // 팔로워 목록을 가져오는 함수
+  const fetchFollowers = () => {
+    axios
+      .get(`${url}/api/user/follower/${userData.nickname}`, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("access_token"),
+        },
+        withCredentials: true,
+      })
+      .then((response) => {
+        setFollowers(response.data);
+        setShowFollowersModal(true);
+      })
+      .catch((error) => {
+        console.error("Error fetching followers:", error);
+      });
+  };
+
+  // 팔로잉 목록을 가져오는 함수
+  const fetchFollowing = () => {
+    axios
+      .get(`${url}/api/user/following/${userData.nickname}`, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("access_token"),
+        },
+        withCredentials: true,
+      })
+      .then((response) => {
+        setFollowing(response.data);
+        setShowFollowingModal(true);
+      })
+      .catch((error) => {
+        console.error("Error fetching following:", error);
+      });
+  };
 
   // 모달 표시 함수
   const handleEditProfileClick = () => {
@@ -127,15 +148,11 @@ const UserProfile = () => {
           <div className="user-profile-user-stats">
             <div className="user-profile-stat-item">
               <p>Followers</p>
-              <p onClick={() => setShowFollowersModal(true)}>
-                {userData.followers}
-              </p>
+              <p onClick={fetchFollowers}>{userData.followers}</p>
             </div>
             <div className="user-profile-stat-item">
               <p>Following</p>
-              <p onClick={() => setShowFollowingModal(true)}>
-                {userData.following}
-              </p>
+              <p onClick={fetchFollowing}>{userData.following}</p>
             </div>
             <div className="user-profile-stat-item">
               <p>Liked</p>

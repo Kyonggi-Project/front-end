@@ -23,8 +23,8 @@ function FollowListModal({ isOpen, onRequestClose, followList, title }) {
     <Modal isOpen={isOpen} onRequestClose={onRequestClose} style={customStyles}>
       <h2>{title}</h2>
       <ul>
-        {followList.map((user) => (
-          <li>{user.nickname}</li>
+        {followList.map((user, index) => (
+          <li key={index}>{user.nickname}</li>
         ))}
       </ul>
       <button onClick={onRequestClose}>Close</button>
