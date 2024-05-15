@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 /*npm install react-icons --save 이거 해야 적용됨*/
 import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';
-import { useMatch } from 'react-router-dom';
 import { useAuth } from '../../util/auth';
 import "./Star.css";
 
@@ -77,7 +76,7 @@ export default function StarRating({ onChange, initialScore, action }) {
         </div>
       ))}
       {isScoreVisible &&
-        <span className="current-score">{score}</span>
+        <span className="current-score">{score.toFixed(1)}</span>
       }
     </div>
   );

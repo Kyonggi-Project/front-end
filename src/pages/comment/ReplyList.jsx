@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import profilePicture from "../../images/profilePicture.png";
 import "./ReplyList.css"
-import { useParams } from "react-router-dom";
+import { useParams,Link } from "react-router-dom";
 import { httpRequest2 } from "../../util/article";
 import ReplyModal from "./ReplyModal";
 
@@ -97,7 +97,7 @@ export default function ReplyList() {
                     <div className="reply-list-user_info">
                       <div className="reply-list-profile-info">
                         <img src={profilePicture} alt="profile_img" className="reply-list-profile_img" />
-                        <p>{comment.nickname}</p>
+                        <Link to={`/userprofiel/${comment.nickname}`}>{comment.nickname}</Link>
                       </div>
                       <div className="buttons-container">
                         <button className="reply-list-button" onClick={() => handleEditReplyModal(comment)}>수정</button>

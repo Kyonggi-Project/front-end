@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import ReplyList from './ReplyList';
 import profilePicture from "../../images/profilePicture.png";
 import ReplyModal from './ReplyModal';
@@ -90,7 +90,9 @@ export default function CommentDetail() {
     if (!isLogin) {
       isloginHandler(event);
     }
-    else {
+    else if (currentUser) {
+      alert('본인의 리뷰에 댓글을 작성할 수 없습니다.');
+    } else {
       setShowModal(true);
     }
   }
@@ -109,9 +111,11 @@ export default function CommentDetail() {
         `/api/ottReview-like/toggle/${id}`,
         null,
         () => {
-          if (isLiked) {
+          if(currentUser) {
+            alert("본인의 리뷰에 좋아요를 누를 수 없습니다.");
+          }else if (isLiked) {
             setIsLiked(false);
-             details.likesCount = details.likesCount - 1
+            details.likesCount = details.likesCount - 1
           } else {
             setIsLiked(true);
             details.likesCount = details.likesCount + 1
@@ -148,10 +152,10 @@ export default function CommentDetail() {
       <p className='comment-detail-movie_release'>{details.creatAt}</p>
       <div className='comment-detail-profile'>
         <img src={profilePicture} alt="작성자 프로필" className='comment-detail-profile_img' />
-        <p className='comment-detail-profile_name'>{details.author}</p>
+        <Link to={`/userprofile/${details.author}`} className='comment-detail-profile_name'>{details.author}</Link>
       </div>
 
-      <p className='comment-detail-movie_grade_box'>{details.score}</p>
+      <p className='comment-detail-movie_grade_box'>{details.score ? details.score.toFixed(1) : 0}</p>
       <p className='comment-detail-text-box'>{details.content}</p>
       {/* 해당 글을 쓴 사람이면 보이게*/}
       {isUser &&
