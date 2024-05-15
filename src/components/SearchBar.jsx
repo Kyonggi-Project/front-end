@@ -13,7 +13,7 @@ function SearchBar() {
     };
     const handleSubmit = (event) => {
         event.preventDefault();
-        navigate(`/movie?path=${searchValue}`);
+        window.location.href = `/movie?search=${searchValue}`;
     };
 
     return (

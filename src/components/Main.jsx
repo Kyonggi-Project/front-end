@@ -138,7 +138,7 @@ function Main() {
           <li><button className={`main-button ${selectedGenre === "로맨스" ? "main-selected" : ""}`} onClick={() => handleGenreClick("로맨스")}>로맨스</button></li>
           <li><button className={`main-button ${selectedGenre === "다큐" ? "main-selected" : ""}`} onClick={() => handleGenreClick("다큐")}>다큐</button></li>
         </ul>
-          <h2 className="main-h1-name">{selectedGenre === "인기" ? "이번주 인기작 Top 10" : `이번주 ${selectedGenre} Top 10`}</h2>
+          <h2 className="main-h1-name">{selectedGenre === "인기" ? "이번주 인기작 Top 10" : `${selectedGenre}`}</h2>
           <ul className="main-image-list">
             {/* 이미지 배열을 map 함수를 사용하여 동적으로 렌더링 */}
             {movieList

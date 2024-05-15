@@ -6,7 +6,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { httpRequest2 } from "../util/article.js";
 
-import axios from "axios";
 import { useAuth } from '../util/auth';
 import "./MovieDetail.css";
 import netflix from '../images/netflix.png';
@@ -24,8 +23,7 @@ export default function MovieDetail() {
   const [isWatchList, setIsWatchList] = useState(false);
   const [toast, setToast] = useState(false);
   let [OTTimg, setOTTimg] = useState([]);
-  const [userData, setUserData] = useState([]);
-
+  
   const [movieData, setMovieData] = useState({
     title: "title",
     year: 0,
@@ -54,6 +52,7 @@ export default function MovieDetail() {
     ottList: [
       ""
     ],
+    bookmarked: false,
   });
 
   const location = useLocation();
@@ -67,30 +66,20 @@ export default function MovieDetail() {
   const id = extractIdFromPathname(pathname);
 
   useEffect(() => {
-    axios.get(`http://localhost:8080/api/ottdata/${id}`)
-      .then(response => {
-        setMovieData(response.data); //받아온 데이터를 무비리스트에 배열형태로 저장
-      })
-      .catch(
-        error => {
-          console.error("Error fetching movie data", error);
-        });
-  }, [id]);
-
-  //85~92: nickname 정보를 받아 /api/user/profile/myPage에서 userid 받아오기
-  useEffect(() => {
     httpRequest2(
       'GET',
-      '/api/user/profile/myPage',
+      `/api/ottdata/authorize/${id}`,
       null,
       (response) => {
-        setUserData(response.data.watchList.id);
+        setMovieData(response.data);
+        setIsWatchList(response.data.bookmarked);
+        console.log(response);
       },
       (error) => {
         console.error("Error fetching user info:", error);
       }
     );
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     let updatedOTTimg = [];
@@ -119,21 +108,33 @@ export default function MovieDetail() {
     else {
       if (!isWatchList) {
         setIsWatchList(true);
-          axios.post('http://localhost:8080/api/watchList/toggle', {
-          ottContentsId: {id},
-          userId: {userData}
-        })
-        .then(response => {
-          console.log(response.data);
-        })
-        .catch(error => {
-          console.error('요청이 실패했습니다.', error);
-        });
+        httpRequest2(
+          'POST',
+          `/api/watchList/toggle?ottContentsId=${id}`,
+          null,
+          (response) => {
+            console.log("good add! "+response.data);
+          },
+          (error) => {
+            console.error("Error fetching user info:", error);
+          }
+        );
         setToast(true);
       }
       else {
         setIsWatchList(false);
-        setToast(true);
+        httpRequest2(
+          'POST',
+          `/api/watchList/delete?ottContentsId=${id}`,
+          null,
+          (response) => {
+            console.log("good delete! "+response.data);
+          },
+          (error) => {
+            console.error("Error fetching user info:", error);
+          }
+        );
+        setToast(false);
       }
     }
   }
@@ -184,7 +185,7 @@ export default function MovieDetail() {
           <div className="movie-detail-separator"></div>
           <div className="movie-detail-button2_box">
             <button className={`movie-detail-buttons_icon ${isWatchList ? "movie-detail-watchlist_select" : ""}`} onClick={handleWatchlist}>watchlist 추가</button>
-            {toast && <Toast setToast={setToast} value={isWatchList}/>}
+            {toast && <Toast setToast={setToast} value={toast}/>}
             <hr className='movie-detail-separator2' />
             <button className="movie-detail-buttons_icon" onClick={handleAddComment}>코멘트 추가</button>
           </div>
