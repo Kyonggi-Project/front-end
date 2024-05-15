@@ -1,0 +1,22 @@
+.toast {
+    position: fixed;
+    top: 80%;
+    right: 42%;
+    z-index: 1000;
+    background-color: #6badeb;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+    transition: opacity 0.3s ease;
+  }
+
+  .toast p {
+    margin: 0;
+  }
+  
+  .toast.show {
+    opacity: 1;
+  }
+  

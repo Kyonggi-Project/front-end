@@ -4,7 +4,7 @@
 header {
   padding: 8px 25px;
   display: flex;
-  justify-content: space-between;
+  justify-content:space-between;
   align-items: center;
 }
 
@@ -12,6 +12,10 @@ header {
 .logo img {
   width: 170px; /* 로고 이미지의 너비 조정 */
   height: auto; /* 로고 이미지의 높이 자동 조정 */
+}
+
+.search{
+  float: left;
 }
 
 /* 네비게이션 메뉴 스타일 */

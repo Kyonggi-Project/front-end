@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import ReplyList from './ReplyList';
 import profilePicture from "../../images/profilePicture.png";
-import SpyFamily from "../../images/spyfamily.jpg";
 import ReplyModal from './ReplyModal';
 import { useAuth } from '../../util/auth';
 import "./CommentDetail.css";
@@ -12,96 +10,89 @@ import { httpRequest2 } from '../../util/article';
 export default function CommentDetail() {
 
   const [details, setDetails] = useState([]);
-  const param = useParams();
   const navigate = useNavigate();
 
   const [isUser, setIsUser] = useState(false);
   const [isEmptyText, setIsEmptyText] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
+  const [currentUser, setCurrentUser] = useState('');
 
-  const { isLogin, isloginHandler, token } = useAuth();
-  const url = process.env.REACT_APP_URL_PATH;
-  const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const id = searchParams.get('id');
-
-  const userId = "";
+  const { isLogin, isloginHandler } = useAuth();
+  const { id } = useParams();
 
   useEffect(() => {
-    // 코멘트 정보를 가져오는 함수
-    // httpRequest2(
-    //   'GET',
-    //   url + `/api/article/viewArticle/${id}`,
-    //   null,
-    //   (response) => {
-    //     setDetails(response.data);
-    //     userId = details.author;
-    //   },
-    //   (error) => {
-    //     console.error('게시글 정보를 가져오는데 실패했습니다:', error);
-    //   }
-    // );
-    axios
-      .get(/*백엔드 url*/url + `/api/ottReview/reviews/user?userId=${userId}`)
-      .then(
-        (response) => {
-          setDetails(response.data);
-          userId = details.userId;
-        },
-      )
-      .catch((error) => {
-        console.error('게시글 정보를 가져오는데 실패했습니다:', error);
-      });
+    httpRequest2(
+      'GET',
+      `/api/ottReview/reviews/${id}`,
+      null,
+      (response) => {
+        setDetails(response.data);
+        setCurrentUser(response.data.author);
+        setIsLiked(response.data.liked);
+        if (response.data.repliesCount === 0) {
+          setIsEmptyText(true);
+        } else {
+          setIsEmptyText(false);
+        }
+      },
+      (error) => {
+        console.error('리뷰 정보를 가져오는데 실패했습니다:', error);
+      }
+    );
 
   }, [id]);
 
-  // useEffect(() => {
-  //   // 서버로부터 현재 사용자 정보를 가져오는 함수
-  //   axios
-  //     .get(url + '/api/user', {
-  //       headers: {
-  //         Authorization: `Bearer ${token}` // JWT 토큰을 Authorization 헤더에 추가
-  //       }
-  //     })
-  //     .then((response) => console.log(response.data))
-  //     .catch((error) => console.error('게시글 정보를 가져오는데 실패했습니다:', error));
-
-  // }, []);
-
-  //임시 데이터
-  const details_dummy = {
-    title: '영화 제목',
-    content: '코멘트',
-    likes: 100,
-    comments: 1,
-  }
+  useEffect(() => {
+    if (currentUser) {
+      httpRequest2(
+        'GET',
+        `/api/authorize/${currentUser}`,
+        null,
+        (response) => {
+          if (response.data) {
+            setIsUser(true);
+          } else {
+            setIsUser(false);
+          }
+        },
+        (error) => {
+          console.error("error", error);
+        }
+      );
+    }
+  }, [currentUser]);
 
   function EditHandler() {
-    navigate(`/write/${id}`);
+    navigate(`/details/edit/${id}`);
   }
 
   function DeleteHandler() {
-    httpRequest2(
-      'DELETE',
-      url + `/api/ottReview/delete/${id}?userId=${userId}`,
-      null,
-      (response) => {
-        alert('삭제되었습니다');
-        navigate(`/comments/${id}`);
-      },
-      (error) => {
-        alert('오류');
-        console.error('삭제에 실패했습니다.', error);
-      }
-    );
+    const isConfirmed = window.confirm('정말로 삭제하시겠습니까?');
+    if (isConfirmed) {
+      httpRequest2(
+        'DELETE',
+        `/api/ottReview/delete/${id}`,
+        null,
+        () => {
+          alert('삭제되었습니다');
+          navigate(`/`);
+        },
+        (error) => {
+          alert('오류');
+          console.error('삭제에 실패했습니다.', error);
+        }
+      );
+    }
   }
 
   function handleReplyModal(event) {
     if (!isLogin) {
       isloginHandler(event);
     }
-    else {
+    else if (currentUser) {
+      alert('본인의 리뷰에 댓글을 작성할 수 없습니다.');
+    } else {
       setShowModal(true);
     }
   }
@@ -115,21 +106,25 @@ export default function CommentDetail() {
       isloginHandler(event);
     }
     else {
-      axios
-        .post(url + `/api/ottReview-like/toggle/${id}?userId=${userId}`)
-        .then(() => {
-          if(isLiked) {
-            alert('좋아요 -1');
+      httpRequest2(
+        'POST',
+        `/api/ottReview-like/toggle/${id}`,
+        null,
+        () => {
+          if(currentUser) {
+            alert("본인의 리뷰에 좋아요를 누를 수 없습니다.");
+          }else if (isLiked) {
             setIsLiked(false);
+            details.likesCount = details.likesCount - 1
           } else {
             setIsLiked(true);
-            alert("좋아요 +1");
+            details.likesCount = details.likesCount + 1
           }
-
-        })
-        .catch((error) => {
+        },
+        (error) => {
           console.error('좋아요 실패', error);
-        });
+        }
+      );
     }
   }
 
@@ -152,16 +147,16 @@ export default function CommentDetail() {
 
   return (
     <div className='comment-detail-board_details'>
-      <img src={SpyFamily} alt="영화 이미지" className='comment-detail-movie_image' />
-      <p className='comment-detail-text'>{details_dummy.title}</p>
-      <p className='comment-detail-movie_release'>작성날짜</p>
+      <img src={details.backgroundImg} alt="영화 이미지" className='comment-detail-movie_image' />
+      <p className='comment-detail-text'>{details.contentsTitle}</p>
+      <p className='comment-detail-movie_release'>{details.creatAt}</p>
       <div className='comment-detail-profile'>
         <img src={profilePicture} alt="작성자 프로필" className='comment-detail-profile_img' />
-        <p className='comment-detail-profile_name'>작성자 이름</p>
+        <Link to={`/userprofile/${details.author}`} className='comment-detail-profile_name'>{details.author}</Link>
       </div>
 
-      <p className='comment-detail-movie_grade_box'>{4.5}</p>
-      <p className='comment-detail-text-box'>{details_dummy.content}</p>
+      <p className='comment-detail-movie_grade_box'>{details.score ? details.score.toFixed(1) : 0}</p>
+      <p className='comment-detail-text-box'>{details.content}</p>
       {/* 해당 글을 쓴 사람이면 보이게*/}
       {isUser &&
         <>
@@ -171,8 +166,8 @@ export default function CommentDetail() {
       }
 
       <div className='comment-detail-totals_box'>
-        <p className={'comment-detail-totals'}>좋아요 {details_dummy.likes}</p>
-        <p className='comment-detail-totals'>댓글 {details_dummy.comments}</p>
+        <p className={'comment-detail-totals'}>좋아요 {details.likesCount}</p>
+        <p className='comment-detail-totals'>댓글 {details.repliesCount}</p>
       </div>
       <div className='comment-detail-separator11' />
       <div className='comment-detail-button2_box1'>
@@ -197,6 +192,7 @@ export default function CommentDetail() {
       {showModal &&
         <ReplyModal
           closeModal={handleCloseModal}
+          isEdit={false}
         />
       }
     </div>

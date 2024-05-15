@@ -9,7 +9,7 @@ let belowpage = '/api/ottdata/top10';
 
 function Main() {
   const [startIndex, setStartIndex] = useState(0); // 몇번째 이미지 인덱스부터 출력하는지
-  const [showIndex, setShowIndex] = useState(4); // 보여주는 이미지 수
+  const [showIndex, setShowIndex] = useState(5); // 보여주는 이미지 수
   const [showModal, setShowModal] = useState(false);
   const [selectedGenre, setSelectedGenre] = useState("인기"); //장르값 저장하는 state
 
@@ -76,14 +76,14 @@ function Main() {
   //화면 사이즈에 따라 보여주는 이미지 수를 변경
   const adjustNumImagesToShow = () => {
     const screenWidth = window.innerWidth;
-    if (screenWidth > 1600) {
-      setShowIndex(4);
+    if (screenWidth > 1280) {
+      setShowIndex(5);
     } else if (screenWidth > 1100) {
-      setShowIndex(3);
+      setShowIndex(4);
     } else if (screenWidth > 900) {
-      setShowIndex(2);
+      setShowIndex(3);
     } else {
-      setShowIndex(1);
+      setShowIndex(2);
     }
   };
 
@@ -109,6 +109,13 @@ function Main() {
     setStartIndex(newStartIndex >= movieList.length ? 0 : newStartIndex);
   };
 
+  function truncateText(text, maxLength) {
+    if (text.length <= maxLength) {
+      return text;
+    }
+    return text.substring(0, maxLength) + '...';
+  }  
+
   return (
     <>
       <div className="main-title-page">
@@ -131,7 +138,7 @@ function Main() {
           <li><button className={`main-button ${selectedGenre === "로맨스" ? "main-selected" : ""}`} onClick={() => handleGenreClick("로맨스")}>로맨스</button></li>
           <li><button className={`main-button ${selectedGenre === "다큐" ? "main-selected" : ""}`} onClick={() => handleGenreClick("다큐")}>다큐</button></li>
         </ul>
-          <h2 className="main-h1-name">{selectedGenre === "인기" ? "이번주 인기작 Top 10" : `이번주 ${selectedGenre} Top 10`}</h2>
+          <h2 className="main-h1-name">{selectedGenre === "인기" ? "이번주 인기작 Top 10" : `${selectedGenre}`}</h2>
           <ul className="main-image-list">
             {/* 이미지 배열을 map 함수를 사용하여 동적으로 렌더링 */}
             {movieList
@@ -149,7 +156,7 @@ function Main() {
                         />
                       </a>
                     </div>
-                    <div className="main-data-info">{image.title}</div>
+                    <div className="main-data-info">{truncateText(image.title, 20)}</div>
                     <div className="main-data-count">
                       {image.year} - <b>★ {image.score}</b>
                     </div>

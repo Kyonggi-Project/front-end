@@ -1,31 +1,40 @@
 import { useState, useEffect } from 'react';
 /*npm install react-icons --save 이거 해야 적용됨*/
 import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';
-import { useLocation } from 'react-router-dom';
 import { useAuth } from '../../util/auth';
 import "./Star.css";
 
-export default function StarRating({ onChange }) {
+
+export default function StarRating({ onChange, initialScore, action }) {
   const [score, setScore] = useState(0);
-  const [scoreFixed, setScoreFixed] = useState(score);
+  const [scoreFixed, setScoreFixed] = useState(initialScore || score);
 
   const [isScoreVisible, setIsScoreVisible] = useState(false);
-  const location = useLocation();
   const { isLogin, isloginHandler } = useAuth();
 
   useEffect(() => {
-    if (location.pathname === '/write') {
+    if (initialScore) {
+      setScore(initialScore);
+      setScoreFixed(initialScore);
+    }
+  }, [initialScore]);
+
+  useEffect(() => {
+    if (action === 'write' || action === 'edit') {
       setIsScoreVisible(true);
     } else {
       setIsScoreVisible(false);
     }
-  }, [location.pathname]);
+    
+  }, [action]);
 
   const handleStarEnter = (idx, clientX) => {
-    const rect = document.getElementById(`star-${idx}`).getBoundingClientRect();
-    const isRightHalf = clientX - rect.left > rect.width / 2;
-    const calculatedScore = isRightHalf ? idx + 1 : idx + 0.5;
-    setScore(calculatedScore);
+    if (action === 'write' || action === 'edit') {
+      const rect = document.getElementById(`star-${idx}`).getBoundingClientRect();
+      const isRightHalf = clientX - rect.left > rect.width / 2;
+      const calculatedScore = isRightHalf ? idx + 1 : idx + 0.5;
+      setScore(calculatedScore);
+    }
   };
 
   const handleStarClick = (event) => {
@@ -37,14 +46,13 @@ export default function StarRating({ onChange }) {
       if (onChange) {
         onChange(score); // 점수를 변경 시 부모 컴포넌트로 전달
       }
-      console.log("점수:", score);
     }
   };
 
   const handleStarLeave = () => {
-    if (score !== scoreFixed) {
-      setScore(scoreFixed);
-    }
+      if (score !== scoreFixed) {
+        setScore(scoreFixed);
+      }
   };
 
   return (
@@ -68,7 +76,7 @@ export default function StarRating({ onChange }) {
         </div>
       ))}
       {isScoreVisible &&
-        <span className="current-score">{score}</span>
+        <span className="current-score">{score.toFixed(1)}</span>
       }
     </div>
   );

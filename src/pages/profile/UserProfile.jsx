@@ -35,21 +35,25 @@ const UserProfile = () => {
   }
 
   const nickname = userInfo.nickname; // 예시로 userInfo의 nickname을 사용
+
   useEffect(() => {
     httpRequest2(
       "GET",
       "/api/user/profile/myPage",
       null,
       (response) => {
+        console.log(response.data);
         setUserData(response.data.user);
-        setWatchListData(response.data.watchList.bookmark);
+        if(response.data.watchList) {
+          setWatchListData(response.data.watchList.bookmark);
+        }
       },
       (error) => {
         console.error("Error fetching user info:", error);
-        // 리프레시 토큰을 이용한 액세스 토큰 재발급 등의 작업을 수행할 수 있습니다.
       }
     );
 
+    //특정 닉네임의 유저 정보 출력
     axios
       .get(url + `/api/user/profile/nickname/${nickname}`, {
         withCredentials: true,
@@ -65,36 +69,14 @@ const UserProfile = () => {
       });
 
     axios
-      .get(`/api/user/follower/${nickname}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        setFollowers(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching followers:", error);
-      });
-
-    axios
-      .get(`/api/user/following/${nickname}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        setFollowing(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching followings:", error);
-      });
-
-    axios
       .get(url + "/api/comments")
       .then((response) => {
         setComments(response.data);
-      })
-      .catch((error) => {
+      },
+      (error) => {
         console.error("Error fetching comments:", error);
       });
-  }, [nickname, token, url]);
+  }, []);
 
   // 모달 표시 함수
   const handleEditProfileClick = () => {
@@ -173,11 +155,8 @@ const UserProfile = () => {
         <div className="user-profile-right-section">
           <h4>Comments</h4>
           <ul>
-            {comments.map((comment) => (
-              <li key={comment.id}>{comment.text}</li>
-            ))}
             <div>
-              <CommentList />
+              <CommentList commentList={comments} />
             </div>
           </ul>
         </div>

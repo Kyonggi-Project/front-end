@@ -16,6 +16,7 @@ import './App.css';
 import CommentApp from "./pages/CommentList/CommentList.jsx";
 import MovieList from "./pages/MovieList/MovieList.jsx";
 import AfterLoginMain from "./components/AfterLoginMain.jsx";
+import WatchList from "./pages/MovieList/WatchList.jsx"
 import { AuthProvider } from "./util/auth.js";
 import ChatUI from "./components/chat/Chat2.jsx";
 import ChatRoom from "./components/chat/ChatRoom.jsx";
@@ -24,25 +25,27 @@ import Chat from "./components/chat/Chat.jsx";
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <div>
-          <Header />
-          <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/userprofile" element={<UserProfile />} />
+        <Router>
+          <div>
+            <Header />
+            <Routes>
+              <Route path="/" element={<Main />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/userprofile" element={<UserProfile />} />
             <Route path="/userprofile/:nickname" element={<OtherUserProfile />} />
-            <Route path="/write" element={<NewBoard />} />
-            <Route path="/comments" element={<CommentDetail />} />
-            <Route path="/details/:id" element={<MovieDetail />} />
-            <Route path="/list" element={<CommentApp />} />
-            <Route path="/movie" element={<MovieList />} />
-            <Route path="/afterModal" element={<AfterLoginMain />} />
-          </Routes>
-          <Footer />
-        </div>
-      </Router>
+              <Route path="/details/write/:ottId" element={<NewBoard />} />
+              <Route path="/comments/:id" element={<CommentDetail />} />
+              <Route path="/details/:ottId" element={<MovieDetail />} />
+              <Route path="/list/:id" element={<CommentApp />} />
+              <Route path="/movie" element={<MovieList />}  />
+              <Route path="/watchlist" element={<WatchList/>}/>
+              <Route path="/afterModal" element={<AfterLoginMain  />}  />
+              <Route path="/details/edit/:ottId" element={<NewBoard />} />
+            </Routes>
+            <Footer  />
+          </div>
+        </Router>
     </AuthProvider>
   );
 }

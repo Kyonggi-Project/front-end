@@ -1,20 +1,22 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useMatch, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import StarRating from './stars/Star';
 import TagList from './tag/TagList';
 import "./NewBoard.css";
+import { httpRequest2 } from '../util/article';
 
 export default function NewBoard() {
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState(localStorage.getItem('movie-title'));
   const [content, setContent] = useState('');
   const [rating, setRating] = useState(0);
   const navigate = useNavigate();
   const { ottId } = useParams();
-  const [userId, setUserId] = useState('');
 
   const [inputTags, setInputTags] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);
+  const match = useMatch("/details/:action/:id");
+  // console.log(match.params.action);
   const url = process.env.REACT_APP_URL_PATH;
 
   // 자식 컴포넌트로부터 선택된 태그를 업데이트하는 콜백 함수
@@ -28,20 +30,21 @@ export default function NewBoard() {
   };
 
   useEffect(() => {
-    if (ottId) {
+    if (match.params.action === 'edit') {
       // 코멘트 수정 모드인 경우, 해당 ID를 사용하여 기존 게시글 데이터를 가져옴
-      axios.get(url + `api/ottReview/reviews/user?userId=${ottId}`)
-        .then(response => {
-          const { title, content, rating } = response.data;
-          setInputTags(response.data.inputTags);
-          setSelectedTags(response.data.selectedTags)
-          setTitle(title);
-          setContent(content);
-          setRating(rating);
-        })
-        .catch(error => {
-          console.error('게시글 가져오기 오류:', error);
-        });
+      httpRequest2(
+        'GET',
+        `/api/ottReview/reviews/${ottId}`,
+        null,
+        (response) => {
+          setTitle(response.data.contentsTitle);
+          setContent(response.data.content);
+          setRating(response.data.score);
+        },
+        (error) => {
+          console.error('게시글 정보를 가져오는데 실패했습니다:', error);
+        }
+      );
     }
   }, [ottId]);
 
@@ -54,55 +57,73 @@ export default function NewBoard() {
   }
 
   function handleCancel() {
-    navigate('/board');
+    if (match.params.action === 'edit') {
+      navigate(`/comments/${ottId}`)
+    } else {
+      localStorage.removeItem('movie-title');
+      navigate(`/details/${ottId}`);
+    }
   }
 
   function handleSbumit(event) {
     event.preventDefault();
 
     // 폼 데이터 수집
-    const formData = {
-      title: title,
+    const formData = match.params.action === 'write' ? {
       content: content,
-      rating: rating,
+      score: rating,
       inputTags: inputTags,
       tags: selectedTags,
+    } : {
+      content: content,
+      score: rating,
     };
     console.log(formData);
 
-    if (!ottId) {
-      //post 요청, 코멘트 추가
-      axios.post(/*백엔드 요청 주소*/url + `/api/ottReview/add/${ottId}?userId=${userId}`, formData)
-        .then(response => {
+    if (match.params.action === 'write') {
+      //리뷰 입력
+      httpRequest2(
+        'POST',
+        `/api/ottReview/add/${ottId}`,
+        formData,
+        response => {
           console.log('응답 데이터:', response.data);
           alert("입력되었습니다.");
-          navigate('/board');
-        })
-        .catch(error => {
+          localStorage.removeItem('movie-title');
+          navigate(`/details/${ottId}`);
+        },
+        error => {
           alert("오류");
           console.error('데이터 전송 오류:', error);
-        });
-    } else {
-      // 게시글 수정 모드일 때
-      axios.put(url + `/api/ottReview/modify/${ottId}?userId=${userId}`, formData)
-        .then(response => {
-          console.log('게시글 수정 완료:', response.data);
-          alert('게시글이 수정되었습니다.');
+        }
+      );
+    } else if(match.params.action === 'edit') {
+      // 리뷰 수정
+      httpRequest2(
+        'PUT',
+        `/api/ottReview/modify/${ottId}`,
+        formData,
+        response => {
+          console.log('리뷰 수정 완료:', response.data);
+          alert('리뷰를 수정되었습니다.');
+          localStorage.removeItem('movie-title');
           navigate(`details/${ottId}`);
-        })
-        .catch(error => {
-          console.error('게시글 수정 오류:', error);
-        });
+        },
+        error => {
+          alert('리뷰 수정에 실패했습니다.');
+          console.error('리뷰 수정 오류:', error);
+        }
+      );
     }
   }
 
   return (
     <div>
       <form onSubmit={handleSbumit} className='newboard-form'>
-        <h2 className='newboard-texta'>영화 제목</h2>
+        <h2 className='newboard-texta'>{title}</h2>
         <div>
           <label className='newboard-rating'>평점</label>
-          <StarRating onChange={handleRating} />
+          <StarRating onChange={handleRating} initialScore={rating} action={match.params.action}/>
         </div>
         <div>
           <label className='newboard-texta'>Comment</label>
@@ -115,7 +136,7 @@ export default function NewBoard() {
           <TagList updateSelectedTags={updateSelectedTags} onUpdateTags={handleInputTagUpdate} />
         </div>
         <button type='button' onClick={handleCancel} className='newboard-button'>Cancel</button>
-        <button type='submit' className='newboard-button'>{ottId ? 'Edit' : 'Save'}</button>
+        <button type='submit' className='newboard-button'>{match.params.action === 'edit' ? 'Edit' : 'Save'}</button>
       </form>
     </div>
   );

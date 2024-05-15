@@ -142,3 +142,7 @@
   padding: 8px 15px;
   margin-bottom: 20px;
 }
+
+.comment-list-no_comments {
+  color: #e5e5e5;
+}
