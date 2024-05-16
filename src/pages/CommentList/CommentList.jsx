@@ -4,7 +4,7 @@ import { httpRequest2 } from '../../util/article';
 import { Link, useParams } from 'react-router-dom';
 import profilePicture from '../../images/profilePicture.png';
 
-const Comment = ({ profile, likes, comments, score, reply, id }) => (
+const Comment = ({ profile, likes, comments, score, reply, id, ottId }) => (
   <>
     <section className='comment_board'>
       <div className='comment-user_info_box'>
@@ -14,7 +14,7 @@ const Comment = ({ profile, likes, comments, score, reply, id }) => (
           <p className='comment-rating3'>{score.toFixed(1)}</p>
         </div>
       </div>
-      <Link to={`/comments/${id}`}  className='comment-comment2'>
+      <Link to={`/comments/${ottId}/${id}`} className='comment-comment2'>
         {comments}
       </Link>
       <div className='comment-like_reply_box'>
@@ -25,7 +25,7 @@ const Comment = ({ profile, likes, comments, score, reply, id }) => (
   </>
 );
 
-const CommentList = ({ data }) => (
+const CommentList = ({ data, ottId }) => (
   <div>
     {data.map((comment) => (
       <Comment
@@ -36,6 +36,7 @@ const CommentList = ({ data }) => (
         comments={comment.content}
         score={comment.score}
         reply={comment.repliesCount}
+        ottId={ottId}
       // profileLink={comment.profileLink}
       />
     ))}
@@ -76,7 +77,7 @@ export default function CommentApp() {
         <h1>Comments</h1>
       </div>
       <ul className='comment-ll'>
-        <CommentList data={commentList} />
+        <CommentList data={commentList} ottId={id} />
       </ul>
     </>
   );
