@@ -8,7 +8,7 @@ export default function CommentList({ comments, id }) {
   const [moreButton, setMoreButton] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
-  const { isLogin, isloginHandler } = useAuth();
+  const { isloginHandler } = useAuth();
 
   useEffect(() => {
     if (location.pathname === '/userprofile' || (comments && comments.length <= 5) || !comments) {
