@@ -4,6 +4,9 @@ https://www.figma.com/file/D5zXtbjMYi2EbXCnHFl2dS/%EC%8B%AC%EC%BA%A1?type=design
 ## react-icons
 npm install react-icons --save
 
+## react-modal
+npm install react-modal
+
 ## google o-auth
 npm install @react-oauth/google@latest
 
