@@ -159,8 +159,10 @@ const UserProfile = () => {
               <p onClick={fetchFollowing}>{userData.following}</p>
             </div>
             <div className="user-profile-stat-item">
-              <p>Liked</p>
-              <p>{watchListData.length}</p>
+              <a href="/watchlist">
+                <p>Liked</p>
+                <p>{watchListData.length}</p>
+              </a>
             </div>
           </div>
 
