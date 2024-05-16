@@ -66,18 +66,34 @@ export default function MovieDetail() {
   const id = extractIdFromPathname(pathname);
 
   useEffect(() => {
-    httpRequest2(
-      'GET',
-      `/api/ottdata/authorize/${id}`,
-      null,
-      (response) => {
-        setMovieData(response.data);
-        setIsWatchList(response.data.bookmarked);
-      },
-      (error) => {
-        console.error("Error fetching user info:", error);
-      }
-    );
+    if(isLogin) {
+      httpRequest2(
+        'GET',
+        `/api/ottdata/authorize/${id}`,
+        null,
+        (response) => {
+          setMovieData(response.data);
+          setIsWatchList(response.data.bookmarked);
+        },
+        (error) => {
+          console.error("Error fetching user info:", error);
+        }
+      );
+    }
+    else {
+      httpRequest2(
+        'GET',
+        `/api/ottdata/${id}`,
+        null,
+        (response) => {
+          setMovieData(response.data);
+          setIsWatchList(response.data.bookmarked);
+        },
+        (error) => {
+          console.error("Error fetching user info:", error);
+        }
+      );
+    }
   }, [id]);
 
   useEffect(() => {
