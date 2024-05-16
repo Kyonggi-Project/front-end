@@ -53,6 +53,23 @@ const UserProfile = () => {
     );
   }, []);
 
+  const [commentList, setCommentList] = useState([]);
+  //해당 유저의 코멘트들을 출력
+  useEffect(() => {
+    httpRequest2(
+      "GET",
+      "/api/ottReview/reviews/user",
+      null,
+      (response) => {
+        setCommentList(response.data);
+        console.log(response.data);
+      },
+      (error) => {
+        console.error("Error fetching comments:", error);
+      }
+    );
+  }, []);
+
   // 팔로워 목록을 가져오는 함수
   const fetchFollowers = () => {
     axios
@@ -176,7 +193,7 @@ const UserProfile = () => {
           <h4>Comments</h4>
           <ul>
             <div>
-              <CommentList />
+              <CommentList comments={commentList}/>
             </div>
           </ul>
         </div>
