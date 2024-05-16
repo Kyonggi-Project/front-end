@@ -1,4 +1,3 @@
-// UserProfile.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import EditModal from "../profile/EditModal";
@@ -18,7 +17,7 @@ const UserProfile = () => {
     likedWorks: 0,
   });
   const [comments, setComments] = useState([]);
-  const [userData, setUserData] = useState([]);
+  const [userData, setUserData] = useState({});
   const [watchListData, setWatchListData] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
@@ -28,13 +27,11 @@ const UserProfile = () => {
   const [showFollowingModal, setShowFollowingModal] = useState(false);
 
   const url = process.env.REACT_APP_URL_PATH;
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
   if (token) {
     localStorage.setItem("access_token", token);
   }
-
-  const nickname = userInfo.nickname; // 예시로 userInfo의 nickname을 사용
 
   useEffect(() => {
     httpRequest2(
@@ -44,6 +41,7 @@ const UserProfile = () => {
       (response) => {
         console.log(response.data);
         setUserData(response.data.user);
+        setUserInfo(response.data.user); // userInfo 업데이트
         if (response.data.watchList) {
           setWatchListData(response.data.watchList.bookmark);
         }
@@ -61,7 +59,7 @@ const UserProfile = () => {
         console.error("Error fetching comments:", error);
       }
     );
-  }, []);
+  }, [url]);
 
   // 팔로워 목록을 가져오는 함수
   const fetchFollowers = () => {
@@ -101,7 +99,6 @@ const UserProfile = () => {
 
   // 모달 표시 함수
   const handleEditProfileClick = () => {
-    console.log("Edit profile button clicked");
     setShowModal(true);
   };
 
@@ -112,17 +109,24 @@ const UserProfile = () => {
 
   // 수정된 정보를 백엔드로 전송하는 함수
   const handleSubmitUpdatedInfo = (updatedInfo) => {
-    // confirmPassword는 백엔드로 전송하지 않음
     const { confirmPassword, ...infoToSend } = updatedInfo;
-    if (infoToSend.password !== confirmPassword) {
+    if (infoToSend.password && infoToSend.password !== confirmPassword) {
       console.error("Passwords do not match");
       return;
     }
 
     axios
-      .put(url + "/api/user/update", infoToSend)
+      .put(url + "/api/user/update", infoToSend, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("access_token"),
+        },
+      })
       .then((response) => {
         console.log("Updated info sent to server:", response.data);
+        setUserData((prevState) => ({
+          ...prevState,
+          ...response.data,
+        }));
         setUserInfo((prevState) => ({
           ...prevState,
           ...response.data,
@@ -183,7 +187,7 @@ const UserProfile = () => {
           userInfo={userInfo}
           closeModal={handleCloseModal}
           onSubmit={handleSubmitUpdatedInfo}
-          showModal={showModal} // showModal 상태를 EditModal에 전달
+          showModal={showModal}
         />
       )}
       <FollowListModal

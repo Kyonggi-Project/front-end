@@ -51,6 +51,13 @@ const OtherUserProfile = () => {
       },
       (error) => {
         console.error("Error fetching user info:", error);
+        if (error.response && error.response.status === 404) {
+          alert("가입되지 않은 사용자입니다.");
+          window.location.href = "/#";
+        } else {
+          alert("사용자 정보를 가져오는 중 오류가 발생했습니다.");
+          window.location.href = "/#";
+        }
       }
     );
 
