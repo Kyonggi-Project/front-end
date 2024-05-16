@@ -6,6 +6,7 @@ import Main from "./components/Main.jsx";
 import Login from "./pages/login/Login.jsx";
 import Signup from "./pages/signup/Signup.jsx";
 import UserProfile from "./pages/profile/UserProfile.jsx";
+import OtherUserProfile from "./pages/profile/OtherUserProfile.jsx";
 
 import Board from './components/Board.jsx'
 import NewBoard from "./components/NewBoard.jsx";
@@ -32,16 +33,17 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/userprofile" element={<UserProfile />} />
+            <Route path="/userprofile/:nickname" element={<OtherUserProfile />} />
               <Route path="/details/write/:ottId" element={<NewBoard />} />
               <Route path="/comments/:id" element={<CommentDetail />} />
               <Route path="/details/:ottId" element={<MovieDetail />} />
               <Route path="/list/:id" element={<CommentApp />} />
-              <Route path="/movie" element={<MovieList />} />
+              <Route path="/movie" element={<MovieList />}  />
               <Route path="/watchlist" element={<WatchList/>}/>
-              <Route path="/afterModal" element={<AfterLoginMain />} />
+              <Route path="/afterModal" element={<AfterLoginMain  />}  />
               <Route path="/details/edit/:ottId" element={<NewBoard />} />
             </Routes>
-            <Footer />
+            <Footer  />
           </div>
         </Router>
     </AuthProvider>

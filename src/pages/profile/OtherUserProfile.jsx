@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import EditModal from "../profile/EditModal";
 import defaultProfile from "../../images/profilePicture.png";
 import CommentList from "../comment/CommentList1";
 import { httpRequest2 } from "../../util/article";
 import "./UserProfile.css";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useParams } from "react-router-dom";
 import { useAuth } from "../../util/auth";
+import FollowButton from "../Follow/FollowButton.jsx";
 import FollowListModal from "../Follow/FollowListModal.jsx";
 
-const UserProfile = () => {
+const OtherUserProfile = () => {
   const [userInfo, setUserInfo] = useState({
     nickname: "",
     followers: 0,
@@ -17,9 +17,11 @@ const UserProfile = () => {
     likedWorks: 0,
   });
   const [comments, setComments] = useState([]);
-  const [userData, setUserData] = useState({});
   const [watchListData, setWatchListData] = useState([]);
-  const [showModal, setShowModal] = useState(false);
+  const { nickname } = useParams(); // URL에서 nickname 파라미터를 가져옴
+  const { user } = useAuth(); // 현재 로그인한 유저 정보
+  const [isFollowed, setIsFollowed] = useState(false);
+  const [userData, setUserData] = useState([]);
 
   const [followers, setFollowers] = useState([]);
   const [following, setFollowing] = useState([]);
@@ -36,18 +38,26 @@ const UserProfile = () => {
   useEffect(() => {
     httpRequest2(
       "GET",
-      "/api/user/profile/myPage",
+      `/api/user/profile/nickname/${nickname}`,
       null,
       (response) => {
-        console.log(response.data);
+        console.log("User data response:", response.data);
         setUserData(response.data.user);
-        setUserInfo(response.data.user); // userInfo 업데이트
+        console.log("followed:", response.data.user.followed); // followed 값을 출력
+        setIsFollowed(response.data.user.followed); // followed 상태 설정
         if (response.data.watchList) {
           setWatchListData(response.data.watchList.bookmark);
         }
       },
       (error) => {
         console.error("Error fetching user info:", error);
+        if (error.response && error.response.status === 404) {
+          alert("가입되지 않은 사용자입니다.");
+          window.location.href = "/#";
+        } else {
+          alert("사용자 정보를 가져오는 중 오류가 발생했습니다.");
+          window.location.href = "/#";
+        }
       }
     );
 
@@ -63,7 +73,7 @@ const UserProfile = () => {
         console.error("Error fetching comments:", error);
       }
     );
-  }, [url]);
+  }, [nickname]);
 
   // 팔로워 목록을 가져오는 함수
   const fetchFollowers = () => {
@@ -100,51 +110,16 @@ const UserProfile = () => {
         console.error("Error fetching following:", error);
       });
   };
-
-  // 모달 표시 함수
-  const handleEditProfileClick = () => {
-    setShowModal(true);
-  };
-
-  // 모달 닫기 함수
-  const handleCloseModal = () => {
-    setShowModal(false);
-  };
-
-  // 수정된 정보를 백엔드로 전송하는 함수
-  const handleSubmitUpdatedInfo = (updatedInfo) => {
-    const { confirmPassword, ...infoToSend } = updatedInfo;
-    if (infoToSend.password && infoToSend.password !== confirmPassword) {
-      console.error("Passwords do not match");
-      return;
-    }
-
-    axios
-      .put(url + "/api/user/update", infoToSend, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("access_token"),
-        },
-      })
-      .then((response) => {
-        console.log("Updated info sent to server:", response.data);
-        setUserData((prevState) => ({
-          ...prevState,
-          ...response.data,
-        }));
-        setUserInfo((prevState) => ({
-          ...prevState,
-          ...response.data,
-        }));
-        handleCloseModal();
-      })
-      .catch((error) => {
-        console.error("Error sending updated info to server:", error);
-      });
+  const updateFollowers = (newFollowers) => {
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      followers: newFollowers,
+    }));
   };
 
   return (
     <div>
-      <h3>Settings</h3>
+      <h3 style={{ width: "700px" }}>{userData.nickname}'s Profile</h3>
       <div className="user-profile-container">
         <div className="user-profile-left-section">
           <div className="user-profile-picture">
@@ -163,39 +138,26 @@ const UserProfile = () => {
               <p onClick={fetchFollowing}>{userData.following}</p>
             </div>
             <div className="user-profile-stat-item">
-              <a href="/watchlist">
-                <p>Liked</p>
-                <p>{watchListData.length}</p>
-              </a>
+              <p>Liked</p>
+              <p>{watchListData.length}</p>
             </div>
           </div>
-
           <div>
-            <button
-              className="user-profile-info-button"
-              onClick={handleEditProfileClick}
-            >
-              Edit Profile Information
-            </button>
+            <FollowButton
+              nickname={userData.nickname}
+              isFollowing={isFollowed} // isFollowed 상태 전달
+              followers={userData.followers} // 현재 팔로워 수 전달
+              updateFollowers={updateFollowers}
+            />
           </div>
         </div>
         <div className="user-profile-right-section">
           <h4>Comments</h4>
-          <ul>
-            <div>
-              <CommentList commentList={comments} />
-            </div>
-          </ul>
+          <div>
+            <CommentList commentList={comments} />
+          </div>
         </div>
       </div>
-      {showModal && (
-        <EditModal
-          userInfo={userInfo}
-          closeModal={handleCloseModal}
-          onSubmit={handleSubmitUpdatedInfo}
-          showModal={showModal}
-        />
-      )}
       <FollowListModal
         isOpen={showFollowersModal}
         onRequestClose={() => setShowFollowersModal(false)}
@@ -212,4 +174,4 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile;
+export default OtherUserProfile;
