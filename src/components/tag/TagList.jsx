@@ -7,7 +7,7 @@ const TagList = ({ updateSelectedTags, onUpdateTags }) => {
     'Happy ending', '신비로운', '힐링되는', 'Hero', '재미있는', '흥미진진한',
     '소름돋는', '무서운', '우울한', 'Sad ending', '가슴이 아려오는', '눈물이 나는', '분노 유발'];
   const [selectedTags, setSelectedTags] = useState([]);
-  const match = useMatch("/details/:action/:ottId/:id");
+  const match = useMatch("/details/:action/:ottId");
 
   const toggleTag = (tag) => {
     setSelectedTags(prevTags => {
@@ -44,7 +44,7 @@ const TagList = ({ updateSelectedTags, onUpdateTags }) => {
       inputRef.current.value = '';
     }
   };
-  if(match.params.action === 'write') {
+  if(match && match.params.action === 'write') {
     return (
       <div className="tags-input-container">
           <ul id="tags">

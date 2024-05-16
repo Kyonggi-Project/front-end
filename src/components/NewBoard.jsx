@@ -16,8 +16,8 @@ export default function NewBoard() {
 
   const [inputTags, setInputTags] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);
-  const match = useMatch("/details/:action/:ottId/:id");
-  console.log(match.params.action);
+  const match = useMatch("/details/:action/:ottId");
+  const match2 = useMatch("/details/:action/:ottId/:id");
 
   // 자식 컴포넌트로부터 선택된 태그를 업데이트하는 콜백 함수
   const updateSelectedTags = (tags) => {
@@ -30,7 +30,7 @@ export default function NewBoard() {
   };
 
   useEffect(() => {
-    if (match.params.action === 'edit') {
+    if (match2 && match2.params.action === 'edit') {
       // 코멘트 수정 모드인 경우, 해당 ID를 사용하여 기존 게시글 데이터를 가져옴
       httpRequest2(
         'GET',
@@ -57,7 +57,7 @@ export default function NewBoard() {
   }
 
   function handleCancel() {
-    if (match.params.action === 'edit') {
+    if (match2 && match2.params.action === 'edit') {
       navigate(`/comments/${ottId}/${id}`)
     } else {
       localStorage.removeItem('movie-title');
@@ -69,7 +69,7 @@ export default function NewBoard() {
     event.preventDefault();
 
     // 폼 데이터 수집
-    const formData = match.params.action === 'write' ? {
+    const formData = match && match.params.action === 'write' ? {
       content: content,
       score: rating,
       inputTags: inputTags,
@@ -78,26 +78,26 @@ export default function NewBoard() {
       content: content,
       score: rating,
     };
-    console.log(formData);
+    // console.log(formData);
 
-    if (match.params.action === 'write') {
+    if (match && match.params.action === 'write') {
       //리뷰 입력
       httpRequest2(
         'POST',
-        `/api/ottReview/add/${id}`,
+        `/api/ottReview/add/${ottId}`,
         formData,
         response => {
-          console.log('응답 데이터:', response.data);
+          // console.log('응답 데이터:', response.data);
           alert("입력되었습니다.");
           localStorage.removeItem('movie-title');
-          navigate(`/details/${ottId}/${id}`);
+          navigate(`/details/${ottId}`);
         },
         error => {
           alert("오류");
           console.error('데이터 전송 오류:', error);
         }
       );
-    } else if (match.params.action === 'edit') {
+    } else if (match2 && match2.params.action === 'edit') {
       // 리뷰 수정
       httpRequest2(
         'PUT',
@@ -123,7 +123,7 @@ export default function NewBoard() {
         <h2 className='newboard-texta'>{title}</h2>
         <div>
           <label className='newboard-rating'>평점</label>
-          <StarRating onChange={handleRating} initialScore={rating} action={match.params.action} />
+          <StarRating onChange={handleRating} initialScore={rating} action={match2 ? match2.params.action : match.params.action} />
         </div>
         <div>
           <label className='newboard-texta'>Comment</label>
@@ -136,7 +136,7 @@ export default function NewBoard() {
           <TagList updateSelectedTags={updateSelectedTags} onUpdateTags={handleInputTagUpdate} />
         </div>
         <button type='button' onClick={handleCancel} className='newboard-button'>Cancel</button>
-        <button type='submit' className='newboard-button'>{match.params.action === 'edit' ? 'Edit' : 'Save'}</button>
+        <button type='submit' className='newboard-button'>{match2 && match2.params.action === 'edit' ? 'Edit' : 'Save'}</button>
       </form>
     </div>
   );
