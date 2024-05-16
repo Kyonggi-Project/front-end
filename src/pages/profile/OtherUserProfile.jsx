@@ -61,7 +61,11 @@ const OtherUserProfile = () => {
       }
     );
 
-    axios.get(url + "/api/comments").then(
+    //해당 유저의 코멘트들을 출력
+    httpRequest2(
+      "GET",
+      "/api/ottReview/reviews/user",
+      null,
       (response) => {
         setComments(response.data);
       },
