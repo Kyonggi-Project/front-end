@@ -139,21 +139,21 @@ export default function MovieDetail() {
     }
   }
 
-  const [commentList, setCommentList] = useState([]);
-  //컨텐츠의 모든 코멘트 보기
-  useEffect(() => {
-    httpRequest2(
-      'GET',
-      `/api/ottReview/reviews/ott/${id}`,
-      null,
-      (response) => {
-        setCommentList(response.data);
-      },
-      (error) => {
-        console.error('코멘트 정보를 가져오는데 실패했습니다:', error);
-      }
-    );
-  }, []);
+  // const [commentList, setCommentList] = useState([]);
+  // //컨텐츠의 모든 코멘트 보기
+  // useEffect(() => {
+  //   httpRequest2(
+  //     'GET',
+  //     `/api/ottReview/reviews/ott/${id}`,
+  //     null,
+  //     (response) => {
+  //       setCommentList(response.data);
+  //     },
+  //     (error) => {
+  //       console.error('코멘트 정보를 가져오는데 실패했습니다:', error);
+  //     }
+  //   );
+  // }, []);
 
   return (
     <div className="movie-detail-wrap">
@@ -223,7 +223,7 @@ export default function MovieDetail() {
       </div>
       <section className="movie-detail-list">
         <header className="movie-detail-comment">Comments</header>
-        <CommentList commentList={commentList} id={id} />
+        <CommentList id={id} />
       </section>
     </div>
   );

@@ -35,13 +35,13 @@ function App() {
               <Route path="/userprofile" element={<UserProfile />} />
             <Route path="/userprofile/:nickname" element={<OtherUserProfile />} />
               <Route path="/details/write/:ottId" element={<NewBoard />} />
-              <Route path="/comments/:id" element={<CommentDetail />} />
+              <Route path="/comments/:ottId/:id" element={<CommentDetail />} />
               <Route path="/details/:ottId" element={<MovieDetail />} />
               <Route path="/list/:id" element={<CommentApp />} />
               <Route path="/movie" element={<MovieList />}  />
               <Route path="/watchlist" element={<WatchList/>}/>
               <Route path="/afterModal" element={<AfterLoginMain  />}  />
-              <Route path="/details/edit/:ottId" element={<NewBoard />} />
+              <Route path="/details/edit/:ottId/:id" element={<NewBoard />} />
             </Routes>
             <Footer  />
           </div>

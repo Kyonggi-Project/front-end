@@ -19,6 +19,7 @@ export default function CommentDetail() {
   const [currentUser, setCurrentUser] = useState('');
 
   const { isLogin, isloginHandler } = useAuth();
+  const { ottId } = useParams();
   const { id } = useParams();
 
   useEffect(() => {
@@ -64,7 +65,7 @@ export default function CommentDetail() {
   }, [currentUser]);
 
   function EditHandler() {
-    navigate(`/details/edit/${id}`);
+    navigate(`/details/edit/${ottId}/${id}`);
   }
 
   function DeleteHandler() {
@@ -111,9 +112,9 @@ export default function CommentDetail() {
         `/api/ottReview-like/toggle/${id}`,
         null,
         () => {
-          if(currentUser) {
+          if (currentUser) {
             alert("본인의 리뷰에 좋아요를 누를 수 없습니다.");
-          }else if (isLiked) {
+          } else if (isLiked) {
             setIsLiked(false);
             details.likesCount = details.likesCount - 1
           } else {

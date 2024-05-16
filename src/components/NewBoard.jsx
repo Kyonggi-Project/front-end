@@ -12,12 +12,12 @@ export default function NewBoard() {
   const [rating, setRating] = useState(0);
   const navigate = useNavigate();
   const { ottId } = useParams();
+  const { id } = useParams();
 
   const [inputTags, setInputTags] = useState([]);
   const [selectedTags, setSelectedTags] = useState([]);
-  const match = useMatch("/details/:action/:id");
-  // console.log(match.params.action);
-  const url = process.env.REACT_APP_URL_PATH;
+  const match = useMatch("/details/:action/:ottId/:id");
+  console.log(match.params.action);
 
   // 자식 컴포넌트로부터 선택된 태그를 업데이트하는 콜백 함수
   const updateSelectedTags = (tags) => {
@@ -34,7 +34,7 @@ export default function NewBoard() {
       // 코멘트 수정 모드인 경우, 해당 ID를 사용하여 기존 게시글 데이터를 가져옴
       httpRequest2(
         'GET',
-        `/api/ottReview/reviews/${ottId}`,
+        `/api/ottReview/reviews/${id}`,
         null,
         (response) => {
           setTitle(response.data.contentsTitle);
@@ -46,7 +46,7 @@ export default function NewBoard() {
         }
       );
     }
-  }, [ottId]);
+  }, [id]);
 
   function handleContent(event) {
     setContent(event.target.value);
@@ -58,10 +58,10 @@ export default function NewBoard() {
 
   function handleCancel() {
     if (match.params.action === 'edit') {
-      navigate(`/comments/${ottId}`)
+      navigate(`/comments/${ottId}/${id}`)
     } else {
       localStorage.removeItem('movie-title');
-      navigate(`/details/${ottId}`);
+      navigate(`/details/${ottId}/${id}`);
     }
   }
 
@@ -84,30 +84,30 @@ export default function NewBoard() {
       //리뷰 입력
       httpRequest2(
         'POST',
-        `/api/ottReview/add/${ottId}`,
+        `/api/ottReview/add/${id}`,
         formData,
         response => {
           console.log('응답 데이터:', response.data);
           alert("입력되었습니다.");
           localStorage.removeItem('movie-title');
-          navigate(`/details/${ottId}`);
+          navigate(`/details/${ottId}/${id}`);
         },
         error => {
           alert("오류");
           console.error('데이터 전송 오류:', error);
         }
       );
-    } else if(match.params.action === 'edit') {
+    } else if (match.params.action === 'edit') {
       // 리뷰 수정
       httpRequest2(
         'PUT',
-        `/api/ottReview/modify/${ottId}`,
+        `/api/ottReview/modify/${id}`,
         formData,
         response => {
           console.log('리뷰 수정 완료:', response.data);
           alert('리뷰를 수정되었습니다.');
           localStorage.removeItem('movie-title');
-          navigate(`details/${ottId}`);
+          navigate(`/details/${ottId}`);
         },
         error => {
           alert('리뷰 수정에 실패했습니다.');
@@ -123,7 +123,7 @@ export default function NewBoard() {
         <h2 className='newboard-texta'>{title}</h2>
         <div>
           <label className='newboard-rating'>평점</label>
-          <StarRating onChange={handleRating} initialScore={rating} action={match.params.action}/>
+          <StarRating onChange={handleRating} initialScore={rating} action={match.params.action} />
         </div>
         <div>
           <label className='newboard-texta'>Comment</label>

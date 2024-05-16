@@ -14,7 +14,7 @@ export function AuthProvider({ children }) {
       setIsLogin(true);
     } else {
       //나중에 false로 변경
-      setIsLogin(true);
+      setIsLogin(false);
     }
   }, []);
 

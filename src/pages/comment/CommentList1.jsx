@@ -2,20 +2,35 @@ import { useEffect, useState } from 'react';
 import profilePicture from '../../images/profilePicture.png';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import "./CommentList1.css";
+import { httpRequest2 } from '../../util/article';
 
-export default function CommentList({ commentList, id }) {
+export default function CommentList({ id }) {
   const [moreButton, setMoreButton] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
 
+  const [commentList, setCommentList] = useState([]);
+  //컨텐츠의 모든 코멘트 보기
   useEffect(() => {
-    // 경로가 '/userprofile'인 경우 + 코멘트가 5개 이하면 버튼을 숨깁니다.
-    if (location.pathname === '/userprofile' || commentList.length <= 5) {
-      setMoreButton(false);
-    } else {
-      setMoreButton(true);
-    }
-  }, [location]);
+    httpRequest2(
+      'GET',
+      `/api/ottReview/reviews/ott/${id}`,
+      null,
+      (response) => {
+        setCommentList(response.data);
+        console.log(response.data.length);
+        // 경로가 '/userprofile'인 경우 + 코멘트가 5개 이하면 버튼을 숨깁니다.
+        if (location.pathname === '/userprofile' || response.data.length <= 5) {
+          setMoreButton(false);
+        } else {
+          setMoreButton(true);
+        }
+      },
+      (error) => {
+        console.error('코멘트 정보를 가져오는데 실패했습니다:', error);
+      }
+    );
+  }, []);
 
   function handleList() {
     navigate(`/list/${id}`);
@@ -23,7 +38,7 @@ export default function CommentList({ commentList, id }) {
 
   // 역순 정렬
   const reverse = [...commentList].reverse();
-
+  console.log(moreButton);
   return (
     // map 함수로 구현
     <div className='comment-list-1-wid'>
@@ -46,7 +61,7 @@ export default function CommentList({ commentList, id }) {
                   <p className='comment-list-1-rating31'>{comment.score.toFixed(1)}</p>
                 </div>
               </div>
-              <Link to={`/comments/${comment.id}`} className='comment-list-1-comment21'>
+              <Link to={`/comments/${id}/${comment.id}`} className='comment-list-1-comment21'>
                 {comment.content}
               </Link>
               <div className='comment-list-1-like_reply_box1'>
