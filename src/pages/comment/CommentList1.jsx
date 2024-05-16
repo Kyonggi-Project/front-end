@@ -31,6 +31,21 @@ export default function CommentList({ id }) {
     );
   }, []);
 
+  //해당 유저의 코멘트들을 출력
+  useEffect(() => {
+    httpRequest2(
+      "GET",
+      "/api/ottReview/reviews/user",
+      null,
+      (response) => {
+        setCommentList(response.data);
+      },
+      (error) => {
+        console.error("Error fetching comments:", error);
+      }
+    );
+  }, []);
+
   function handleList() {
     navigate(`/list/${id}`);
   }

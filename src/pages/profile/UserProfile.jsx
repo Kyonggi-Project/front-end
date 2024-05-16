@@ -41,7 +41,6 @@ const UserProfile = () => {
       "/api/user/profile/myPage",
       null,
       (response) => {
-        console.log(response.data);
         setUserData(response.data.user);
         setUserInfo(response.data.user); // userInfo 업데이트
         if (response.data.watchList) {
@@ -52,20 +51,7 @@ const UserProfile = () => {
         console.error("Error fetching user info:", error);
       }
     );
-
-    //해당 유저의 코멘트들을 출력
-    httpRequest2(
-      "GET",
-      "/api/ottReview/reviews/user",
-      null,
-      (response) => {
-        setComments(response.data);
-      },
-      (error) => {
-        console.error("Error fetching comments:", error);
-      }
-    );
-  }, [url]);
+  }, []);
 
   // 팔로워 목록을 가져오는 함수
   const fetchFollowers = () => {
@@ -190,7 +176,7 @@ const UserProfile = () => {
           <h4>Comments</h4>
           <ul>
             <div>
-              <CommentList commentList={comments} />
+              <CommentList />
             </div>
           </ul>
         </div>
