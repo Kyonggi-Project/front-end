@@ -106,6 +106,12 @@ const OtherUserProfile = () => {
         console.error("Error fetching following:", error);
       });
   };
+  const updateFollowers = (newFollowers) => {
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      followers: newFollowers,
+    }));
+  };
 
   return (
     <div>
@@ -136,6 +142,8 @@ const OtherUserProfile = () => {
             <FollowButton
               nickname={userData.nickname}
               isFollowing={isFollowed} // isFollowed 상태 전달
+              followers={userData.followers} // 현재 팔로워 수 전달
+              updateFollowers={updateFollowers}
             />
           </div>
         </div>
