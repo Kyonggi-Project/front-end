@@ -106,15 +106,16 @@ export default function CommentDetail() {
     if (!isLogin) {
       isloginHandler(event);
     }
+    else if (isUser) {
+      alert("본인의 리뷰에 좋아요를 누를 수 없습니다.");
+    }
     else {
       httpRequest2(
         'POST',
         `/api/ottReview-like/toggle/${id}`,
         null,
         () => {
-          if (isUser) {
-            alert("본인의 리뷰에 좋아요를 누를 수 없습니다.");
-          } else if (isLiked) {
+          if (isLiked) {
             setIsLiked(false);
             details.likesCount = details.likesCount - 1
           } else {

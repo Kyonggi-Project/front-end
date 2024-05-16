@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import EditModal from "../profile/EditModal";
+import DeleteModal from "../profile/DeleteModal.jsx";
 import defaultProfile from "../../images/profilePicture.png";
 import CommentList from "../comment/CommentList1";
 import { httpRequest2 } from "../../util/article";
@@ -19,7 +20,8 @@ const UserProfile = () => {
   const [comments, setComments] = useState([]);
   const [userData, setUserData] = useState({});
   const [watchListData, setWatchListData] = useState([]);
-  const [showModal, setShowModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const [followers, setFollowers] = useState([]);
   const [following, setFollowing] = useState([]);
@@ -39,7 +41,6 @@ const UserProfile = () => {
       "/api/user/profile/myPage",
       null,
       (response) => {
-        console.log(response.data);
         setUserData(response.data.user);
         setUserInfo(response.data.user); // userInfo 업데이트
         if (response.data.watchList) {
@@ -50,20 +51,23 @@ const UserProfile = () => {
         console.error("Error fetching user info:", error);
       }
     );
+  }, []);
 
-    //해당 유저의 코멘트들을 출력
+  const [commentList, setCommentList] = useState([]);
+  //해당 유저의 코멘트들을 출력
+  useEffect(() => {
     httpRequest2(
       "GET",
       "/api/ottReview/reviews/user",
       null,
       (response) => {
-        setComments(response.data);
+        setCommentList(response.data);
       },
       (error) => {
         console.error("Error fetching comments:", error);
       }
     );
-  }, [url]);
+  }, []);
 
   // 팔로워 목록을 가져오는 함수
   const fetchFollowers = () => {
@@ -103,12 +107,17 @@ const UserProfile = () => {
 
   // 모달 표시 함수
   const handleEditProfileClick = () => {
-    setShowModal(true);
+    console.log("Edit profile button clicked");
+    setShowEditModal(true);
   };
 
   // 모달 닫기 함수
-  const handleCloseModal = () => {
-    setShowModal(false);
+  const handleCloseEditModal = () => {
+    setShowEditModal(false);
+  };
+
+  const handleCloseDeleteModal = () => {
+    setShowDeleteModal(false);
   };
 
   // 수정된 정보를 백엔드로 전송하는 함수
@@ -135,7 +144,7 @@ const UserProfile = () => {
           ...prevState,
           ...response.data,
         }));
-        handleCloseModal();
+        handleCloseEditModal();
       })
       .catch((error) => {
         console.error("Error sending updated info to server:", error);
@@ -183,19 +192,29 @@ const UserProfile = () => {
           <h4>Comments</h4>
           <ul>
             <div>
-              <CommentList commentList={comments} />
+              <CommentList comments={commentList}/>
             </div>
           </ul>
         </div>
       </div>
-      {showModal && (
+      {showEditModal && (
         <EditModal
           userInfo={userInfo}
-          closeModal={handleCloseModal}
+          closeModal={handleCloseEditModal}
           onSubmit={handleSubmitUpdatedInfo}
-          showModal={showModal}
+          showDeleteModal={() => {
+            handleCloseEditModal();
+            setShowDeleteModal(true);
+          }}
         />
       )}
+      {showDeleteModal && <DeleteModal closeModal={handleCloseDeleteModal} />}
+      <FollowListModal
+        isOpen={showFollowersModal}
+        onRequestClose={() => setShowFollowersModal(false)}
+        followList={followers}
+        title="Followers"
+      />
       <FollowListModal
         isOpen={showFollowersModal}
         onRequestClose={() => setShowFollowersModal(false)}
