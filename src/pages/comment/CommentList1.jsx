@@ -18,7 +18,6 @@ export default function CommentList({ id }) {
       null,
       (response) => {
         setCommentList(response.data);
-        console.log(response.data.length);
         // 경로가 '/userprofile'인 경우 + 코멘트가 5개 이하면 버튼을 숨깁니다.
         if (location.pathname === '/userprofile' || response.data.length <= 5) {
           setMoreButton(false);
@@ -38,7 +37,6 @@ export default function CommentList({ id }) {
 
   // 역순 정렬
   const reverse = [...commentList].reverse();
-  console.log(moreButton);
   return (
     // map 함수로 구현
     <div className='comment-list-1-wid'>

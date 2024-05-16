@@ -91,7 +91,7 @@ export default function CommentDetail() {
     if (!isLogin) {
       isloginHandler(event);
     }
-    else if (currentUser) {
+    else if (isUser) {
       alert('본인의 리뷰에 댓글을 작성할 수 없습니다.');
     } else {
       setShowModal(true);
@@ -112,7 +112,7 @@ export default function CommentDetail() {
         `/api/ottReview-like/toggle/${id}`,
         null,
         () => {
-          if (currentUser) {
+          if (isUser) {
             alert("본인의 리뷰에 좋아요를 누를 수 없습니다.");
           } else if (isLiked) {
             setIsLiked(false);
