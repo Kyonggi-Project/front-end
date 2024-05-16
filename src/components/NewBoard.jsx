@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useMatch, useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
 import StarRating from './stars/Star';
 import TagList from './tag/TagList';
 import "./NewBoard.css";
@@ -61,7 +60,7 @@ export default function NewBoard() {
       navigate(`/comments/${ottId}/${id}`)
     } else {
       localStorage.removeItem('movie-title');
-      navigate(`/details/${ottId}/${id}`);
+      navigate(`/details/${ottId}`);
     }
   }
 
@@ -77,6 +76,7 @@ export default function NewBoard() {
     } : {
       content: content,
       score: rating,
+      inputTags: inputTags,
     };
     // console.log(formData);
 
@@ -87,7 +87,6 @@ export default function NewBoard() {
         `/api/ottReview/add/${ottId}`,
         formData,
         response => {
-          // console.log('응답 데이터:', response.data);
           alert("입력되었습니다.");
           localStorage.removeItem('movie-title');
           navigate(`/details/${ottId}`);
@@ -103,9 +102,8 @@ export default function NewBoard() {
         'PUT',
         `/api/ottReview/modify/${id}`,
         formData,
-        response => {
-          console.log('리뷰 수정 완료:', response.data);
-          alert('리뷰를 수정되었습니다.');
+        () => {
+          alert('리뷰가 수정되었습니다.');
           localStorage.removeItem('movie-title');
           navigate(`/details/${ottId}`);
         },

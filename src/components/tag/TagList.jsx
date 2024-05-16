@@ -44,38 +44,38 @@ const TagList = ({ updateSelectedTags, onUpdateTags }) => {
       inputRef.current.value = '';
     }
   };
-  if(match && match.params.action === 'write') {
-    return (
-      <div className="tags-input-container">
-          <ul id="tags">
-            {predefinedTags.map((tag, index) => (
-              <li
-                key={index}
-                className={`tag ${selectedTags.includes(tag) ? 'selected' : ''}`}
-                onClick={() => toggleTag(tag)}
-              >
-                <span className="tag-title">{tag}</span>
-              </li>
-            ))}
-          </ul>
+  return (
+    <div className="tags-input-container">
+      {match && match.params.action === 'write' && (
         <ul id="tags">
-          {tags.map((tag, index) => (
-            <li key={index} className="tag">
+          {predefinedTags.map((tag, index) => (
+            <li
+              key={index}
+              className={`tag ${selectedTags.includes(tag) ? 'selected' : ''}`}
+              onClick={() => toggleTag(tag)}
+            >
               <span className="tag-title">{tag}</span>
-              <span className="tag-close-icon" onClick={() => removeTags(index)}>x</span>
             </li>
           ))}
         </ul>
-        <input
-          ref={inputRef}
-          className="tag-input"
-          type="text"
-          placeholder="Press button to add tags"
-        />
-        <button type='button' onClick={addTags}>추가</button>
-      </div>
-    );
-  }
+      )}
+      <ul id="tags">
+        {tags.map((tag, index) => (
+          <li key={index} className="tag">
+            <span className="tag-title">{tag}</span>
+            <span className="tag-close-icon" onClick={() => removeTags(index)}>x</span>
+          </li>
+        ))}
+      </ul>
+      <input
+        ref={inputRef}
+        className="tag-input"
+        type="text"
+        placeholder="Press button to add tags"
+      />
+      <button type='button' onClick={addTags}>추가</button>
+    </div>
+  );
 };
 
 export default TagList;
