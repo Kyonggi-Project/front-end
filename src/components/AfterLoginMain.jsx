@@ -1,10 +1,21 @@
 import React, { useState, useEffect} from "react";
 import "./Main.css";
 import { useLocation } from "react-router-dom";
+//import { httpRequest2 } from "../util/article.js";
 import axios from "axios";
 
+const url = process.env.REACT_APP_URL_PATH;
+
 function AfterLoginMain() {
-  const [movieList, setMovieList] = useState([{
+  const [movieEmotionList, setMovieEmotionList] = useState([{
+    id: "",
+    posterImg: "",
+    title: "",
+    year: "",
+    score: 0,
+  }]); //받아온 무비데이터 저장하는 state
+
+  const [movieClaimList, setMovieClaimList] = useState([{
     id: "",
     posterImg: "",
     title: "",
@@ -18,17 +29,47 @@ function AfterLoginMain() {
   const [recstartIndex, setRecstartIndex] = useState(0);
   const [recshowIndex, setRecshowIndex] = useState(0);
 
-  const location = useLocation();
+  const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(()=> {
-    axios.get('http://localhost:8080/api/ottdata/top10')
-      .then(response => {
-        setMovieList(response.data); //받아온 데이터를 무비리스트에 배열형태로 저장
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+
+  useEffect(() => {
+    const emotion = params.get("emotion");
+    const claim = params.get("claim");
+    /*
+    httpRequest2(
+      'POST',
+      `/api/ottdata/sentiment`,
+      {
+        "emotion": `${emotion}`,
+        "claim": `${claim}`
+      },
+      (response) => {
+        setMovieEmotionList(response.data.contentsByEmotion);
+        setMovieClaimList(response.data.contentsByClaim);
+      },
+      (error) => {
+        console.error('코멘트 정보를 가져오는데 실패했습니다:', error);
+      },
+    );
+    */
+    axios
+      .post(url + `/api/ottdata/sentiment`, {
+        emotion: `${emotion}`,
+        claim: `${claim}`
       })
-      .catch(
-        error => {console.error("Error fetching movie data", error);
+      .then((response) => {
+        setMovieEmotionList(response.data.contentsByEmotion);
+        setMovieClaimList(response.data.contentsByClaim);
+      })
+      .catch((error) => {
+        console.error("Error fetching user info:", error);
+      })
+      .finally(() => {
+        setIsLoading(false); // API 호출 완료 후 로딩 상태를 false로 설정
       });
-  },[location.search]);
+  }, [location.search]);
 
   const adjustNumImagesToShow = () => {
     const screenWidth = window.innerWidth;
@@ -58,32 +99,33 @@ function AfterLoginMain() {
 
   const handlePrevButtonClick = () => {
     const newStartIndex = startIndex - showIndex;
-    setStartIndex(newStartIndex >= movieList.length ? 0 : newStartIndex);
+    setStartIndex(newStartIndex >= movieEmotionList.length ? 0 : newStartIndex);
   };
 
   const handleNextButtonClick = () => {
     const newStartIndex = startIndex + showIndex; // 4개씩 보여주므로 4을 더해줍니다.
-    setStartIndex(newStartIndex >= movieList.length ? 0 : newStartIndex);
+    setStartIndex(newStartIndex >= movieEmotionList.length ? 0 : newStartIndex);
   };
 
   const handleRecPrevButtonClick = () => {
     const newStartIndex = recstartIndex - recshowIndex;
-    setRecstartIndex(newStartIndex >= movieList.length ? 0 : newStartIndex);
+    setRecstartIndex(newStartIndex >= movieClaimList.length ? 0 : newStartIndex);
   };
 
   const handleRecNextButtonClick = () => {
     const newStartIndex = recstartIndex + recshowIndex; // 4개씩 보여주므로 4을 더해줍니다.
-    setRecstartIndex(newStartIndex >= movieList.length ? 0 : newStartIndex);
+    setRecstartIndex(newStartIndex >= movieClaimList.length ? 0 : newStartIndex);
   };
 
   return (
     <>
+      {isLoading ? (<div class="main-loading-spinner"></div>):(<></>)}
       <div className="main-gallery-container">
         <div className="main-image-list-container">
           <h2 className="main-h1-name">지금 감정에 맞는 영화를 추천드려요!</h2>
           <ul className="main-image-list">
             {/* 이미지 배열을 map 함수를 사용하여 동적으로 렌더링 */}
-            {movieList
+            {movieEmotionList
               .slice(startIndex, startIndex + showIndex)
               .map((image, index) => (
                 <li key={index}>
@@ -122,7 +164,7 @@ function AfterLoginMain() {
           <h2 className="main-h1-name">이런 분위기의 영화는 어떠세요?</h2>
           <ul className="main-image-list">
             {/* 이미지 배열을 map 함수를 사용하여 동적으로 렌더링 */}
-            {movieList
+            {movieClaimList
               .slice(recstartIndex, recstartIndex + recshowIndex)
               .map((image, index) => (
                 <li key={index}>

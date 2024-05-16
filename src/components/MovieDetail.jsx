@@ -11,11 +11,11 @@ import "./MovieDetail.css";
 import netflix from '../images/netflix.png';
 import watcha from '../images/watcha.png';
 import disney from '../images/disney.jpg';
-import tving from '../images/tving.png';
 import wavve from '../images/wavve.png';
+import coupang from '../images/coupangplay.png'
 
 const url = process.env.REACT_APP_URL_PATH;
-const LogoImg = { 'Netflix': netflix, "Watcha": watcha, "Disney": disney, "Tving": tving, "Wavve": wavve };
+const LogoImg = { 'Netflix': netflix, "Watcha": watcha, "Disney Plus": disney, "Coupang Play": coupang, "Wavve": wavve };
 
 export default function MovieDetail() {
   const navigate = useNavigate();
@@ -134,7 +134,7 @@ export default function MovieDetail() {
             console.error("Error fetching user info:", error);
           }
         );
-        setToast(false);
+        setToast(true);
       }
     }
   }
@@ -185,7 +185,7 @@ export default function MovieDetail() {
           <div className="movie-detail-separator"></div>
           <div className="movie-detail-button2_box">
             <button className={`movie-detail-buttons_icon ${isWatchList ? "movie-detail-watchlist_select" : ""}`} onClick={handleWatchlist}>watchlist 추가</button>
-            {toast && <Toast setToast={setToast} value={toast}/>}
+            {toast && <Toast setToast={setToast} value={isWatchList}/>}
             <hr className='movie-detail-separator2' />
             <button className="movie-detail-buttons_icon" onClick={handleAddComment}>코멘트 추가</button>
           </div>

@@ -10,14 +10,12 @@ const ReModal = ({ closeModal }) => {
 
   const handleSubmitForm = (e) => {
     e.preventDefault();
-    setFeeling("");
-    console.log(feeling);
+    setFeeling(feeling);
     setFormNumber(true);
   };
   const handleSubmitWatchList = (e) => {
-    console.log(watchList);
-    setWatchList("");
-    navigate(`/afterModal`);
+    setWatchList(watchList);
+    navigate(`/afterModal?emotion=${feeling}&claim=${watchList}`);
   };
 
   return (
