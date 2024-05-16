@@ -117,6 +117,13 @@ function AfterLoginMain() {
     setRecstartIndex(newStartIndex >= movieClaimList.length ? 0 : newStartIndex);
   };
 
+  function truncateText(text, maxLength) {
+    if (text.length <= maxLength) {
+      return text;
+    }
+    return text.substring(0, maxLength) + '...';
+  }
+
   return (
     <>
       {isLoading ? (<div class="main-loading-spinner"></div>):(<></>)}
@@ -137,7 +144,7 @@ function AfterLoginMain() {
                         />
                       </a>
                     </div>
-                    <div className="main-data-info">{image.title}</div>
+                    <div className="main-data-info">{truncateText(image.title, 20)}</div>
                     <div className="main-data-count">
                       {image.year} - <b>★ {image.score}</b>
                     </div>
@@ -176,7 +183,7 @@ function AfterLoginMain() {
                         />
                       </a>
                     </div>
-                    <div className="main-data-info">{image.title}</div>
+                    <div className="main-data-info">{truncateText(image.title, 20)}</div>
                     <div className="main-data-count">
                       {image.year} - <b>★ {image.score}</b>
                     </div>
