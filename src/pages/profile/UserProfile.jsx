@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import EditModal from "../profile/EditModal";
+import DeleteModal from "../profile/DeleteModal.jsx";
 import defaultProfile from "../../images/profilePicture.png";
 import CommentList from "../comment/CommentList1";
 import { httpRequest2 } from "../../util/article";
@@ -19,7 +20,8 @@ const UserProfile = () => {
   const [comments, setComments] = useState([]);
   const [userData, setUserData] = useState({});
   const [watchListData, setWatchListData] = useState([]);
-  const [showModal, setShowModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const [followers, setFollowers] = useState([]);
   const [following, setFollowing] = useState([]);
@@ -103,12 +105,17 @@ const UserProfile = () => {
 
   // 모달 표시 함수
   const handleEditProfileClick = () => {
-    setShowModal(true);
+    console.log("Edit profile button clicked");
+    setShowEditModal(true);
   };
 
   // 모달 닫기 함수
-  const handleCloseModal = () => {
-    setShowModal(false);
+  const handleCloseEditModal = () => {
+    setShowEditModal(false);
+  };
+
+  const handleCloseDeleteModal = () => {
+    setShowDeleteModal(false);
   };
 
   // 수정된 정보를 백엔드로 전송하는 함수
@@ -135,7 +142,7 @@ const UserProfile = () => {
           ...prevState,
           ...response.data,
         }));
-        handleCloseModal();
+        handleCloseEditModal();
       })
       .catch((error) => {
         console.error("Error sending updated info to server:", error);
@@ -188,14 +195,24 @@ const UserProfile = () => {
           </ul>
         </div>
       </div>
-      {showModal && (
+      {showEditModal && (
         <EditModal
           userInfo={userInfo}
-          closeModal={handleCloseModal}
+          closeModal={handleCloseEditModal}
           onSubmit={handleSubmitUpdatedInfo}
-          showModal={showModal}
+          showDeleteModal={() => {
+            handleCloseEditModal();
+            setShowDeleteModal(true);
+          }}
         />
       )}
+      {showDeleteModal && <DeleteModal closeModal={handleCloseDeleteModal} />}
+      <FollowListModal
+        isOpen={showFollowersModal}
+        onRequestClose={() => setShowFollowersModal(false)}
+        followList={followers}
+        title="Followers"
+      />
       <FollowListModal
         isOpen={showFollowersModal}
         onRequestClose={() => setShowFollowersModal(false)}

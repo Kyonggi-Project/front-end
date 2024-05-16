@@ -61,3 +61,15 @@
 .profile-edit-button:hover {
   background-color: #539ADB; /* 버튼에 마우스를 올렸을 때의 배경 색상 */
 }
+
+.profile-delete-button{
+  width: 100%; /* 버튼 너비를 부모 요소에 맞춤 */
+  padding: 20px;
+  margin-top: 10px;
+  background-color: #51595f; /* 버튼 배경 색상 */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+}

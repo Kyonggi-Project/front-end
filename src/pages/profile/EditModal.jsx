@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./EditModal.css";
 
-const EditModal = ({ userInfo, closeModal, onSubmit }) => {
+const EditModal = ({ userInfo, closeModal, onSubmit, showDeleteModal }) => {
   const [nickname, setNickname] = useState(userInfo.nickname || "");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -55,6 +55,13 @@ const EditModal = ({ userInfo, closeModal, onSubmit }) => {
             Save Changes
           </button>
         </form>
+        <button
+          type="button"
+          className="profile-delete-button"
+          onClick={showDeleteModal}
+        >
+          회원 탈퇴하기
+        </button>
       </div>
     </div>
   );
