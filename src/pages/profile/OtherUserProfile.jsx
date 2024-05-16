@@ -4,7 +4,7 @@ import defaultProfile from "../../images/profilePicture.png";
 import CommentList from "../comment/CommentList1";
 import { httpRequest2 } from "../../util/article";
 import "./UserProfile.css";
-import { useSearchParams, useParams } from "react-router-dom";
+import { useSearchParams, useParams, useNavigate } from "react-router-dom";
 import { useAuth } from "../../util/auth";
 import FollowButton from "../Follow/FollowButton.jsx";
 import FollowListModal from "../Follow/FollowListModal.jsx";
@@ -22,6 +22,7 @@ const OtherUserProfile = () => {
   const { user } = useAuth(); // 현재 로그인한 유저 정보
   const [isFollowed, setIsFollowed] = useState(false);
   const [userData, setUserData] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
 
   const [followers, setFollowers] = useState([]);
   const [following, setFollowing] = useState([]);
@@ -31,49 +32,75 @@ const OtherUserProfile = () => {
   const url = process.env.REACT_APP_URL_PATH;
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
+  const navigate = useNavigate();
   if (token) {
     localStorage.setItem("access_token", token);
   }
 
   useEffect(() => {
-    httpRequest2(
-      "GET",
-      `/api/user/profile/nickname/${nickname}`,
-      null,
-      (response) => {
-        console.log("User data response:", response.data);
-        setUserData(response.data.user);
-        console.log("followed:", response.data.user.followed); // followed 값을 출력
-        setIsFollowed(response.data.user.followed); // followed 상태 설정
-        if (response.data.watchList) {
-          setWatchListData(response.data.watchList.bookmark);
-        }
-      },
-      (error) => {
-        console.error("Error fetching user info:", error);
-        if (error.response && error.response.status === 404) {
-          alert("가입되지 않은 사용자입니다.");
-          window.location.href = "/#";
-        } else {
-          alert("사용자 정보를 가져오는 중 오류가 발생했습니다.");
-          window.location.href = "/#";
-        }
+    // 현재 로그인한 사용자 정보를 가져옴
+    const fetchCurrentUser = async () => {
+      try {
+        const response = await axios.get(`${url}/api/user/profile/myPage`, {
+          headers: {
+            Authorization: "Bearer " + localStorage.getItem("access_token"),
+          },
+        });
+        setCurrentUser(response.data.user);
+      } catch (error) {
+        console.error("Error fetching current user info:", error);
       }
-    );
+    };
 
-    //해당 유저의 코멘트들을 출력
-    httpRequest2(
-      "GET",
-      "/api/ottReview/reviews/user",
-      null,
-      (response) => {
-        setComments(response.data);
-      },
-      (error) => {
-        console.error("Error fetching comments:", error);
+    fetchCurrentUser();
+  }, [url]);
+
+  useEffect(() => {
+    if (currentUser) {
+      if (currentUser.nickname === nickname) {
+        // 현재 로그인한 사용자의 프로필 페이지로 접근 시 마이페이지로 리다이렉트
+        navigate("/userprofile");
+      } else {
+        httpRequest2(
+          "GET",
+          `/api/user/profile/nickname/${nickname}`,
+          null,
+          (response) => {
+            console.log("User data response:", response.data);
+            setUserData(response.data.user);
+            console.log("followed:", response.data.user.followed); // followed 값을 출력
+            setIsFollowed(response.data.user.followed); // followed 상태 설정
+            if (response.data.watchList) {
+              setWatchListData(response.data.watchList.bookmark);
+            }
+          },
+          (error) => {
+            console.error("Error fetching user info:", error);
+            if (error.response && error.response.status === 404) {
+              alert("가입되지 않은 사용자입니다.");
+              window.location.href = "/#";
+            } else {
+              alert("사용자 정보를 가져오는 중 오류가 발생했습니다.");
+              window.location.href = "/#";
+            }
+          }
+        );
+
+        // Comments 가져오는 부분
+        httpRequest2(
+          "GET",
+          "/api/ottReview/reviews/user",
+          null,
+          (response) => {
+            setComments(response.data);
+          },
+          (error) => {
+            console.error("Error fetching comments:", error);
+          }
+        );
       }
-    );
-  }, [nickname]);
+    }
+  }, [nickname, currentUser, navigate]);
 
   // 팔로워 목록을 가져오는 함수
   const fetchFollowers = () => {
