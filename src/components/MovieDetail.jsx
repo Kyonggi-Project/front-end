@@ -183,7 +183,7 @@ export default function MovieDetail() {
           </div>
           <div className="movie-detail-separator"></div>
           <div className="movie-detail-button2_box">
-            <button className={`movie-detail-buttons_icon ${isWatchList ? "movie-detail-watchlist_select" : ""}`} onClick={handleWatchlist}>watchlist 추가</button>
+            <button className={`movie-detail-buttons_icon ${(isWatchList&&isLogin) ? "movie-detail-watchlist_select" : ""}`} onClick={handleWatchlist}>watchlist 추가</button>
             {toast && <Toast setToast={setToast} value={isWatchList}/>}
             <hr className='movie-detail-separator2' />
             <button className="movie-detail-buttons_icon" onClick={handleAddComment}>코멘트 추가</button>
