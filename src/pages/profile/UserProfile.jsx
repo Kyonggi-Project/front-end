@@ -22,7 +22,7 @@ const UserProfile = () => {
   const [watchListData, setWatchListData] = useState([]);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-
+  const { setUser } = useAuth();
   const [followers, setFollowers] = useState([]);
   const [following, setFollowing] = useState([]);
   const [showFollowersModal, setShowFollowersModal] = useState(false);
@@ -43,6 +43,7 @@ const UserProfile = () => {
       (response) => {
         setUserData(response.data.user);
         setUserInfo(response.data.user); // userInfo 업데이트
+        setUser(response.data.user.nickname);
         if (response.data.watchList) {
           setWatchListData(response.data.watchList.bookmark);
         }
@@ -192,7 +193,7 @@ const UserProfile = () => {
           <h4>Comments</h4>
           <ul>
             <div>
-              <CommentList comments={commentList}/>
+              <CommentList comments={commentList} nickname={userData.nickname} />
             </div>
           </ul>
         </div>

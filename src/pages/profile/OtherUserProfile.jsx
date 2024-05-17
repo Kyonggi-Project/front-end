@@ -64,7 +64,7 @@ const OtherUserProfile = () => {
     //해당 유저의 코멘트들을 출력
     httpRequest2(
       "GET",
-      "/api/ottReview/reviews/user",
+      `/api/ottReview/reviews/otherUser/${nickname}`,
       null,
       (response) => {
         setComments(response.data);
@@ -154,7 +154,7 @@ const OtherUserProfile = () => {
         <div className="user-profile-right-section">
           <h4>Comments</h4>
           <div>
-            <CommentList commentList={comments} />
+            <CommentList comments={comments} nickname={nickname} />
           </div>
         </div>
       </div>

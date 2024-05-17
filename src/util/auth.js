@@ -8,6 +8,7 @@ export function useAuth() {
 
 export function AuthProvider({ children }) {
   const [isLogin, setIsLogin] = useState(false);
+  const [user, setUser] = useState('');
   useEffect(() => {
     const token = localStorage.getItem('access_token');
     if (token) {
@@ -24,10 +25,14 @@ export function AuthProvider({ children }) {
       alert('로그인을 해주세요');
     }
   }
+
+  const isUserHandler = () => {
+
+  }
   const token = localStorage.getItem('access_token');
 
   return (
-    <AuthContext.Provider value={{ isLogin, setIsLogin, isloginHandler, token }}>
+    <AuthContext.Provider value={{ isLogin, setIsLogin, isloginHandler, token, user, setUser }}>
       {children}
     </AuthContext.Provider>
   );
