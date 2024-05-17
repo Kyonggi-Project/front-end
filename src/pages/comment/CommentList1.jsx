@@ -38,7 +38,7 @@ export default function CommentList({ comments, id, nickname }) {
         </div>
       }
       <ul className='comment-list-1-lli'>
-        {!comments ? (
+        {!comments || comments.length === 0 ? (
           <p className='comment-list-no_comments'>평가 없음</p>
         ) : (
           // 최신 5개만 출력
