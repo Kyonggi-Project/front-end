@@ -66,18 +66,34 @@ export default function MovieDetail() {
   const id = extractIdFromPathname(pathname);
 
   useEffect(() => {
-    httpRequest2(
-      'GET',
-      `/api/ottdata/authorize/${id}`,
-      null,
-      (response) => {
-        setMovieData(response.data);
-        setIsWatchList(response.data.bookmarked);
-      },
-      (error) => {
-        console.error("Error fetching user info:", error);
-      }
-    );
+    if(isLogin) {
+      httpRequest2(
+        'GET',
+        `/api/ottdata/authorize/${id}`,
+        null,
+        (response) => {
+          setMovieData(response.data);
+          setIsWatchList(response.data.bookmarked);
+        },
+        (error) => {
+          console.error("Error fetching user info:", error);
+        }
+      );
+    }
+    else {
+      httpRequest2(
+        'GET',
+        `/api/ottdata/${id}`,
+        null,
+        (response) => {
+          setMovieData(response.data);
+          setIsWatchList(response.data.bookmarked);
+        },
+        (error) => {
+          console.error("Error fetching user info:", error);
+        }
+      );
+    }
   }, [id]);
 
   useEffect(() => {
@@ -183,7 +199,7 @@ export default function MovieDetail() {
           </div>
           <div className="movie-detail-separator"></div>
           <div className="movie-detail-button2_box">
-            <button className={`movie-detail-buttons_icon ${isWatchList ? "movie-detail-watchlist_select" : ""}`} onClick={handleWatchlist}>watchlist 추가</button>
+            <button className={`movie-detail-buttons_icon ${(isWatchList&&isLogin) ? "movie-detail-watchlist_select" : ""}`} onClick={handleWatchlist}>watchlist 추가</button>
             {toast && <Toast setToast={setToast} value={isWatchList}/>}
             <hr className='movie-detail-separator2' />
             <button className="movie-detail-buttons_icon" onClick={handleAddComment}>코멘트 추가</button>

@@ -105,7 +105,7 @@ export default function NewBoard() {
         () => {
           alert('리뷰가 수정되었습니다.');
           localStorage.removeItem('movie-title');
-          navigate(`/details/${ottId}`);
+          navigate(`/comments/${ottId}/${id}`);
         },
         error => {
           alert('리뷰 수정에 실패했습니다.');

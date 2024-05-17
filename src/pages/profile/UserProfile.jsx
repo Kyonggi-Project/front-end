@@ -62,7 +62,6 @@ const UserProfile = () => {
       null,
       (response) => {
         setCommentList(response.data);
-        console.log(response.data);
       },
       (error) => {
         console.error("Error fetching comments:", error);
