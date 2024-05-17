@@ -7,7 +7,6 @@ import CommentList from "../comment/CommentList1";
 import { httpRequest2 } from "../../util/article";
 import "./UserProfile.css";
 import { useSearchParams } from "react-router-dom";
-import { useAuth } from "../../util/auth";
 import FollowListModal from "../Follow/FollowListModal.jsx";
 
 const UserProfile = () => {
@@ -17,12 +16,10 @@ const UserProfile = () => {
     following: 0,
     likedWorks: 0,
   });
-  const [comments, setComments] = useState([]);
   const [userData, setUserData] = useState({});
   const [watchListData, setWatchListData] = useState([]);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-  const { setUser } = useAuth();
   const [followers, setFollowers] = useState([]);
   const [following, setFollowing] = useState([]);
   const [showFollowersModal, setShowFollowersModal] = useState(false);
@@ -43,7 +40,6 @@ const UserProfile = () => {
       (response) => {
         setUserData(response.data.user);
         setUserInfo(response.data.user); // userInfo 업데이트
-        setUser(response.data.user.nickname);
         if (response.data.watchList) {
           setWatchListData(response.data.watchList.bookmark);
         }

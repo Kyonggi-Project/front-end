@@ -39,7 +39,7 @@ const Comment = ({ profile, likes, comments, score, reply, id, ottId }) => {
   );
 };
 
-const CommentList = ({ data, ottId }) => (
+const CommentList = ({ data }) => (
   <div>
     {data.map((comment) => (
       <Comment
@@ -50,7 +50,7 @@ const CommentList = ({ data, ottId }) => (
         comments={comment.content}
         score={comment.score}
         reply={comment.repliesCount}
-        ottId={ottId}
+        ottId={comment.ottId}
       // profileLink={comment.profileLink}
       />
     ))}
@@ -58,20 +58,20 @@ const CommentList = ({ data, ottId }) => (
 );
 
 export default function CommentApp() {
-  const { id } = useParams();
-  const { user } = useAuth();
+  const { id, nickname } = useParams();
   const [commentList, setCommentList] = useState([]);
   //컨텐츠의 모든 코멘트 보기
   useEffect(() => {
-    if (id !== user) {
+    if(id) {
       httpRequest2(
         'GET',
         `/api/ottReview/reviews/ott/${id}`,
         null,
         (response) => {
-          setCommentList(response.data);
-          // setCommentList(commentList);
-          // console.log(response.data);
+          if (response.data && response.data.length !== 0) {
+            setCommentList(response.data);
+            console.log(response.data.ottId);
+          } 
         },
         (error) => {
           console.error('코멘트 정보를 가져오는데 실패했습니다:', error);
@@ -81,13 +81,13 @@ export default function CommentApp() {
     else {
       httpRequest2(
         "GET",
-        `/api/ottReview/reviews/otherUser/${id}`,
+        `/api/ottReview/reviews/otherUser/${nickname}`,
         null,
         (response) => {
           setCommentList(response.data);
         },
         (error) => {
-          console.error("Error fetching comments:", error);
+          console.error("Error fetching user comments:", error);
         }
       );
     }
@@ -99,7 +99,7 @@ export default function CommentApp() {
         <h1>Comments</h1>
       </div>
       <ul className='comment-ll'>
-        <CommentList data={commentList} ottId={id} />
+        <CommentList data={commentList} />
       </ul>
     </>
   );

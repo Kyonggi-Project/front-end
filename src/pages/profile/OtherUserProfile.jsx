@@ -5,21 +5,19 @@ import CommentList from "../comment/CommentList1";
 import { httpRequest2 } from "../../util/article";
 import "./UserProfile.css";
 import { useSearchParams, useParams, useNavigate } from "react-router-dom";
-import { useAuth } from "../../util/auth";
 import FollowButton from "../Follow/FollowButton.jsx";
 import FollowListModal from "../Follow/FollowListModal.jsx";
 
 const OtherUserProfile = () => {
-  const [userInfo, setUserInfo] = useState({
-    nickname: "",
-    followers: 0,
-    following: 0,
-    likedWorks: 0,
-  });
+  // const [userInfo, setUserInfo] = useState({
+  //   nickname: "",
+  //   followers: 0,
+  //   following: 0,
+  //   likedWorks: 0,
+  // });
   const [comments, setComments] = useState([]);
   const [watchListData, setWatchListData] = useState([]);
   const { nickname } = useParams(); // URL에서 nickname 파라미터를 가져옴
-  const { user } = useAuth(); // 현재 로그인한 유저 정보
   const [isFollowed, setIsFollowed] = useState(false);
   const [userData, setUserData] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
@@ -89,7 +87,7 @@ const OtherUserProfile = () => {
         // Comments 가져오는 부분
         httpRequest2(
           "GET",
-          "/api/ottReview/reviews/user",
+          `/api/ottReview/reviews/otherUser/${nickname}`,
           null,
           (response) => {
             setComments(response.data);
@@ -181,7 +179,7 @@ const OtherUserProfile = () => {
         <div className="user-profile-right-section">
           <h4>Comments</h4>
           <div>
-            <CommentList commentList={comments} />
+            <CommentList comments={comments} nickname={nickname} />
           </div>
         </div>
       </div>

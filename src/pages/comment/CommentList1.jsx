@@ -1,29 +1,28 @@
 import { useEffect, useState } from 'react';
 import profilePicture from '../../images/profilePicture.png';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import "./CommentList1.css";
 import { useAuth } from '../../util/auth';
 
 export default function CommentList({ comments, id, nickname }) {
   const [moreButton, setMoreButton] = useState(true);
-  const location = useLocation();
   const navigate = useNavigate();
   const { isloginHandler } = useAuth();
 
   useEffect(() => {
-    if (location.pathname === '/userprofile/:id' || (comments && comments.length <= 5) || !comments) {
+    if ((comments && comments.length <= 5) || !comments) {
       setMoreButton(false);
     } else {
       setMoreButton(true);
     }
-  });
+  },[]);
 
   function handleList() {
-    if(nickname) {
-      navigate(`/list/${nickname}`);
+    if (nickname) {
+      navigate(`/list/nickname/${nickname}`);
     }
     else {
-      navigate(`/list/${id}`);
+      navigate(`/list/id/${id}`);
     }
   }
 
@@ -58,7 +57,7 @@ export default function CommentList({ comments, id, nickname }) {
                 </div>
               </div>
               <Link
-                to={`/comments/${id}/${comment.id}`}
+                to={`/comments/${comment.ottId}/${comment.id}`}
                 className='comment-list-1-comment21'
                 onClick={isloginHandler}
               >
