@@ -126,8 +126,8 @@ function AfterLoginMain() {
 
   return (
     <>
-      {isLoading ? (<div class="main-loading-spinner"></div>):(<></>)}
-      <div className="main-gallery-container">
+      {isLoading ? (<div className="main-loading-background"><div class="main-loading-spinner"></div></div>):(<>
+        <div className="main-gallery-container">
         <div className="main-image-list-container">
           <h2 className="main-h1-name">지금 감정에 맞는 영화를 추천드려요!</h2>
           <ul className="main-image-list">
@@ -144,7 +144,7 @@ function AfterLoginMain() {
                         />
                       </a>
                     </div>
-                    <div className="main-data-info">{truncateText(image.title, 20)}</div>
+                    <div className="main-data-info">{truncateText(image.title, 14)}</div>
                     <div className="main-data-count">
                       {image.year} - <b>★ {image.score}</b>
                     </div>
@@ -183,7 +183,7 @@ function AfterLoginMain() {
                         />
                       </a>
                     </div>
-                    <div className="main-data-info">{truncateText(image.title, 20)}</div>
+                    <div className="main-data-info">{truncateText(image.title, 14)}</div>
                     <div className="main-data-count">
                       {image.year} - <b>★ {image.score}</b>
                     </div>
@@ -206,6 +206,7 @@ function AfterLoginMain() {
           </button>
         </div>
       </div>
+      </>)}
     </>
   );
 }
