@@ -164,8 +164,9 @@
 
 .main-image-wrapper1 img {
   width: 200px; /* 이미지 너비 조정을 원하는 크기로 지정하세요 */
-  height: auto;
+  height: 286px;
   display: block;
+  object-fit: cover;
   border-radius: 8px;
   transition: transform 0.3s ease-in-out;
 }
@@ -268,6 +269,7 @@
   width: 50px;
   height: 50px;
   animation: spin 1s linear infinite;
+  z-index: 999;
   margin: 20px auto;
   position: fixed;
   top: 47%;
@@ -277,4 +279,15 @@
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.main-loading-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.5); /* 반투명 흰색 배경 */
+  backdrop-filter: blur(5px); /* 배경 흐리게 */
+  z-index: 9998; /* 스피너 바로 아래 레이어 */
 }
