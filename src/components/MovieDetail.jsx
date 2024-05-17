@@ -19,7 +19,7 @@ const LogoImg = { 'Netflix': netflix, "Watcha": watcha, "Disney Plus": disney, "
 
 export default function MovieDetail() {
   const navigate = useNavigate();
-  const { isLogin, isloginHandler } = useAuth();
+  const { isLogin, isloginHandler, token } = useAuth();
   const [isWatchList, setIsWatchList] = useState(false);
   const [toast, setToast] = useState(false);
   let [OTTimg, setOTTimg] = useState([]);
@@ -66,7 +66,7 @@ export default function MovieDetail() {
   const id = extractIdFromPathname(pathname);
 
   useEffect(() => {
-    if(isLogin) {
+    if(token) {
       httpRequest2(
         'GET',
         `/api/ottdata/authorize/${id}`,
@@ -74,6 +74,7 @@ export default function MovieDetail() {
         (response) => {
           setMovieData(response.data);
           setIsWatchList(response.data.bookmarked);
+          // console.log(response.data.tagList);
         },
         (error) => {
           console.error("Error fetching user info:", error);
