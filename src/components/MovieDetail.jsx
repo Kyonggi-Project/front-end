@@ -74,7 +74,6 @@ export default function MovieDetail() {
         (response) => {
           setMovieData(response.data);
           setIsWatchList(response.data.bookmarked);
-          // console.log(response.data.tagList);
         },
         (error) => {
           console.error("Error fetching user info:", error);
