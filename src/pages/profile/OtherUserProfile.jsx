@@ -123,7 +123,11 @@ const OtherUserProfile = () => {
       `/api/user/following/${userData.nickname}`,
       null,
       (response) => {
-        setFollowing(response.data);
+        const followingList = response.data.map((user) => ({
+          ...user,
+          followed: true, // following 목록이므로 항상 followed는 true
+        }));
+        setFollowing(followingList);
         setShowFollowingModal(true);
       },
       (error) => {

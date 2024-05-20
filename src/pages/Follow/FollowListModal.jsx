@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import FollowButton from "../Follow/FollowButton";
 
 const customStyles = {
   content: {
@@ -17,11 +18,16 @@ const customStyles = {
   },
 };
 
-Modal.setAppElement("#root"); // 본인의 앱 루트 요소에 맞게 설정
+Modal.setAppElement("#root");
 
 function FollowListModal({ isOpen, onRequestClose, followList, title }) {
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState(null);
+  const [list, setList] = useState([]);
+
+  useEffect(() => {
+    setList(followList);
+  }, [followList]);
 
   useEffect(() => {
     const token = localStorage.getItem("access_token");
@@ -42,33 +48,55 @@ function FollowListModal({ isOpen, onRequestClose, followList, title }) {
   }, []);
 
   const handleUserClick = (nickname) => {
-    console.log("Current user:", currentUser); // 현재 로그인한 사용자의 정보를 로그로 출력합니다.
     if (currentUser && currentUser.nickname === nickname) {
-      navigate(`/userprofile`); // 현재 로그인한 사용자의 프로필 페이지로 이동
+      navigate(`/userprofile`);
     } else {
-      navigate(`/userprofile/${nickname}`); // 다른 사용자의 프로필 페이지로 이동
+      navigate(`/userprofile/${nickname}`);
     }
-    onRequestClose(); // 모달을 닫습니다.
+    onRequestClose();
+  };
+
+  const updateFollowStatus = (nickname, isFollowing) => {
+    setList((prevList) =>
+      prevList.map((user) =>
+        user.nickname === nickname ? { ...user, followed: isFollowing } : user
+      )
+    );
   };
 
   return (
     <Modal isOpen={isOpen} onRequestClose={onRequestClose} style={customStyles}>
       <h2>{title}</h2>
       <ul style={{ listStyleType: "none", padding: 0, margin: 0 }}>
-        {followList.map((user, index) => (
+        {list.map((user, index) => (
           <li
             key={index}
             style={{
               padding: "8px 0",
               cursor: "pointer",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
             }}
-            onClick={() => handleUserClick(user.nickname)}
           >
-            {user.nickname}
+            <span
+              onClick={() => handleUserClick(user.nickname)}
+              style={{ flex: 1, marginRight: "10px" }}
+            >
+              {user.nickname}
+            </span>
+            {currentUser && currentUser.nickname !== user.nickname && (
+              <FollowButton
+                nickname={user.nickname}
+                isFollowing={user.followed}
+                updateFollowStatus={updateFollowStatus}
+                isModal={true} // 모달 내부 버튼임을 표시
+              />
+            )}
           </li>
         ))}
       </ul>
-      <button onClick={onRequestClose}>Close</button>
+      <button className="list-modal-close-button" onClick={onRequestClose}>Close</button>
     </Modal>
   );
 }
