@@ -116,25 +116,21 @@ const OtherUserProfile = () => {
     );
   };
 
-  // 팔로잉 목록을 가져오는 함수
   const fetchFollowing = () => {
     httpRequest2(
       "GET",
       `/api/user/following/${userData.nickname}`,
       null,
       (response) => {
-        const followingList = response.data.map((user) => ({
-          ...user,
-          followed: true, // following 목록이므로 항상 followed는 true
-        }));
-        setFollowing(followingList);
+        setFollowing(response.data);
         setShowFollowingModal(true);
       },
       (error) => {
-        console.error("Error fetching following:", error);
+        console.error("Error fetching followers:", error);
       }
     );
   };
+
   const updateFollowers = (newFollowers) => {
     setUserData((prevUserData) => ({
       ...prevUserData,

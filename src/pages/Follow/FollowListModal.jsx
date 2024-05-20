@@ -96,7 +96,7 @@ function FollowListModal({ isOpen, onRequestClose, followList, title }) {
           </li>
         ))}
       </ul>
-      <button className="list-modal-close-button" onClick={onRequestClose}>Close</button>
+      <button onClick={onRequestClose}>Close</button>
     </Modal>
   );
 }
