@@ -42,6 +42,8 @@ function App() {
               <Route path="/watchlist" element={<WatchList/>}/>
               <Route path="/afterModal" element={<AfterLoginMain  />}  />
               <Route path="/details/edit/:ottId/:id" element={<NewBoard />} />
+              <Route path="/chat/:roomId" element={<ChatUI />} />
+              <Route path="/chat" element={<ChatRoom />} />
             </Routes>
             <Footer  />
           </div>

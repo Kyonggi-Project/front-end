@@ -1,10 +1,14 @@
 import styles from "@chatscope/chat-ui-kit-styles/dist/default/styles.min.css";
 import {
   ConversationList,
-  Conversation
+  Conversation,
+  ConversationHeader
 } from "@chatscope/chat-ui-kit-react";
+import { useNavigate } from "react-router-dom";
 
 export default function ChatRoom() {
+  const navigate =useNavigate();
+  const loginId = "111";
   const conversations = [
     { info: "Yes i can do it for you", lastSenderName: "Lilly", name: "Lilly" },
     { info: "Yes i can do it for you", lastSenderName: "Joe", name: "Joe" },
@@ -16,33 +20,42 @@ export default function ChatRoom() {
     { info: "Yes i can do it for you", lastSenderName: "Patrik", name: "Patrik" },
   ];
 
-  function handleChat(index) {
-    window.location.href = `/chat?roomId=${index}`;
+  function handleChat(roomId) {
+    navigate(`/chat/${roomId}`, {state: {loginId : loginId }});
+  }
+
+  function handleBack() {
+    navigate('/');
   }
 
   return (
-    <ConversationList
-      style={{
-        height: '70vh'
-      }}
-    >
-      {conversations.map((conversation, index) => (
-        <Conversation
-          key={index}
-          info={conversation.info}
-          lastSenderName={conversation.lastSenderName}
-          name={conversation.name}
-          onClick={() => handleChat(index)}
-        />
-        
-        // <Conversation key={index} onClick={() => handleChat(index)}>
-        //   <Conversation.Content >
-        //     <div>
-        //       {conversation.name}
-        //     </div>
-        //   </Conversation.Content>
-        // </Conversation>
-      ))}
-    </ConversationList>
+    <>
+      <ConversationHeader>
+        <ConversationHeader.Back onClick={handleBack} />
+      </ConversationHeader>
+      <ConversationList
+        style={{
+          height: '70vh'
+        }}
+      >
+        {conversations.map((conversation, roomId) => (
+          <Conversation
+            key={roomId}
+            info={conversation.info}
+            lastSenderName={conversation.lastSenderName}
+            name={conversation.name}
+            onClick={() => handleChat(roomId)}
+          />
+
+          // <Conversation key={index} onClick={() => handleChat(index)}>
+          //   <Conversation.Content >
+          //     <div>
+          //       {conversation.name}
+          //     </div>
+          //   </Conversation.Content>
+          // </Conversation>
+        ))}
+      </ConversationList>
+    </>
   );
 }
