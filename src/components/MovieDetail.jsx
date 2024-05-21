@@ -108,30 +108,31 @@ export default function MovieDetail() {
     setOTTimg(updatedOTTimg);
   }, [movieData]);
 
+  const [myId, setMyId] = useState("");
   const handleAddComment = (event) => {
     if (!isLogin) {
       isloginHandler(event);
     }
     else {
-      let myId = "";
       httpRequest2(
         'GET',
         `/api/user/profile/myPage`,
         null,
         (response) => {
-          myId = response.data.user.nickname;
+          setMyId(response.data.user.nickname);
         },
         (error) => {
           console.error(error);
         }
       );
+      console.log(myId);
       const foundItem = commentList.find(item => item.author === myId);
-      if(foundItem) {
+      // if(foundItem) {
         navigate(`/details/write/${id}`, { state: { movieTitle: movieData.title } });
-      }
-      else {
-        alert("리뷰는 하나만 작성할 수 있습니다.");
-      }
+      // }
+      // else {
+      //   alert("리뷰는 하나만 작성할 수 있습니다.");
+      // }
     }
   }
 
