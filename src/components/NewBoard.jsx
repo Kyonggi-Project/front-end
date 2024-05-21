@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useMatch, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useMatch, useNavigate, useParams } from 'react-router-dom';
 import StarRating from './stars/Star';
 import TagList from './tag/TagList';
 import "./NewBoard.css";
 import { httpRequest2 } from '../util/article';
 
 export default function NewBoard() {
-  const [title, setTitle] = useState(localStorage.getItem('movie-title'));
+  const location = useLocation();
+  const [title, setTitle] = useState(location.state.movieTitle);
   const [content, setContent] = useState('');
   const [rating, setRating] = useState(0);
   const navigate = useNavigate();
@@ -59,7 +60,6 @@ export default function NewBoard() {
     if (match2 && match2.params.action === 'edit') {
       navigate(`/comments/${ottId}/${id}`)
     } else {
-      localStorage.removeItem('movie-title');
       navigate(`/details/${ottId}`);
     }
   }
@@ -88,7 +88,6 @@ export default function NewBoard() {
         formData,
         response => {
           alert("입력되었습니다.");
-          localStorage.removeItem('movie-title');
           navigate(`/details/${ottId}`);
         },
         error => {
@@ -104,7 +103,6 @@ export default function NewBoard() {
         formData,
         () => {
           alert('리뷰가 수정되었습니다.');
-          localStorage.removeItem('movie-title');
           navigate(`/comments/${ottId}/${id}`);
         },
         error => {

@@ -28,6 +28,7 @@ export function httpRequest2(method, url, body, success, fail) {
       'Content-Type': 'application/json',
     },
     data: body,
+    withCredentials: true,
   })
     .then(response => {
       if (response.status === 200 || response.status === 201) {

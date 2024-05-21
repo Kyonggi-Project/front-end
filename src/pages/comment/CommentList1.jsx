@@ -15,7 +15,7 @@ export default function CommentList({ comments, id, nickname }) {
     } else {
       setMoreButton(true);
     }
-  },[]);
+  },[comments]);
 
   function handleList() {
     if (nickname) {

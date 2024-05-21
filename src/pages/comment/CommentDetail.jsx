@@ -65,7 +65,7 @@ export default function CommentDetail() {
   }, [currentUser]);
 
   function EditHandler() {
-    navigate(`/details/edit/${ottId}/${id}`);
+    navigate(`/details/edit/${ottId}/${id}`, { state: { movieTitle: details.contentsTitle } });
   }
 
   function DeleteHandler() {

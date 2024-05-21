@@ -23,6 +23,7 @@ export default function MovieDetail() {
   const [isWatchList, setIsWatchList] = useState(false);
   const [toast, setToast] = useState(false);
   let [OTTimg, setOTTimg] = useState([]);
+  const [commentList, setCommentList] = useState([]);
   
   const [movieData, setMovieData] = useState({
     title: "title",
@@ -65,6 +66,7 @@ export default function MovieDetail() {
 
   const id = extractIdFromPathname(pathname);
 
+  //영화 데이터
   useEffect(() => {
     if(token) {
       httpRequest2(
@@ -111,8 +113,25 @@ export default function MovieDetail() {
       isloginHandler(event);
     }
     else {
-      localStorage.setItem('movie-title', movieData.title);
-      navigate(`/details/write/${id}`);
+      let myId = "";
+      httpRequest2(
+        'GET',
+        `/api/user/profile/myPage`,
+        null,
+        (response) => {
+          myId = response.data.user.nickname;
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+      const foundItem = commentList.find(item => item.author === myId);
+      if(foundItem) {
+        navigate(`/details/write/${id}`, { state: { movieTitle: movieData.title } });
+      }
+      else {
+        alert("리뷰는 하나만 작성할 수 있습니다.");
+      }
     }
   }
 
@@ -154,7 +173,6 @@ export default function MovieDetail() {
     }
   }
 
-   const [commentList, setCommentList] = useState([]);
    //컨텐츠의 모든 코멘트 보기
    useEffect(() => {
      httpRequest2(
