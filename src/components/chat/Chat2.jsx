@@ -9,13 +9,14 @@ import {
   Message,
   MessageInput,
   ConversationHeader,
+  Avatar,
 } from "@chatscope/chat-ui-kit-react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { httpRequest2 } from "../../util/article";
 
 const ChatUI = () => {
   const [messages, setMessages] = useState([]);
   const [stompClient, setStompClient] = useState(null);
-  const [loginId, setLoginId] = useState('');
   const { roomId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -30,14 +31,28 @@ const ChatUI = () => {
     // 연결이 성공하면 구독
     stomp.connect({}, () => {
       console.log("STOMP Connection");
+      httpRequest2(
+        'GET',
+        `/api/v1/chat/messages/${roomId}/${location.state.loginId}`,
+        null,
+        (response) => {
+          console.log(response.data);
+          setMessages(response.data.list);
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
+
       stomp.subscribe(`${url}/topic/${roomId}`, (response) => {
-        // 새로운 메시지가 도착하면 처리
+        // 채팅방 입장시
+        console.log("111231 " + JSON.parse(response.body));
         const message = JSON.parse(response.body);
-        setMessages((prevMessages) => [...prevMessages, message]);
+        // setMessages((prevMessages) => [...prevMessages, message]);
       });
       stomp.send(`/app/enter/${roomId}`, {}, JSON.stringify({
         roomId: roomId,
-        sender: loginId,
+        sender: location.state.loginId,
         status: "ENTER"
       }));
     });
@@ -50,25 +65,37 @@ const ChatUI = () => {
 
   const handleSend = (input) => {
     // 사용자가 입력한 메시지를 서버로 전송
-    console.log(loginId + ":" + input);
+    if(stompClient) {
+      console.log(1);
+    }
+    console.log(location.state.loginId + ":" + input);
     stompClient.send(`${url}/app/send/${roomId}`, {}, JSON.stringify({
       roomId: roomId,
       content: input,
-      sender: loginId,
+      sender: location.state.loginId,
       status: "TALK"
     }));
+    
   };
 
   function handleBack() {
     navigate('/chat');
   }
 
-  const init = () => {
-    setLoginId(location.state.loginId);
-    console.log(location.state.loginId);
-  };
-
-  useEffect(init, []);
+  // useEffect(() => {
+  //   httpRequest2(
+  //     'GET',
+  //     `/api/v1/chat/messages/${roomId}/${location.state.loginId}`,
+  //     null,
+  //     (response) => {
+  //       console.log(response.data);
+  //       setMessages(response.data.list);
+  //     },
+  //     (error) => {
+  //       console.error(error);
+  //     }
+  //   );
+  // }, [roomId]);
 
   return (
     <div>
@@ -80,7 +107,22 @@ const ChatUI = () => {
           <ChatContainer>
             <MessageList>
               {messages.map((message, index) => (
-                <Message key={index} model={message.model}>
+                <Message
+                  key={index}
+                  model={location.state.loginId === message.sender ? {
+                    message: message.content,
+                    sentTime: message.sendDateTime,
+                    sender: message.sender,
+                  } : {
+                    message: message.content,
+                    sentTime: message.sendDateTime,
+                    sender: message.sender,
+                    direction: "incoming",
+                  }}>
+                  <Message.Header
+                    // sender="Emily"
+                    // sentTime="just now"
+                  >{message.sender}</Message.Header>
                 </Message>
               ))}
             </MessageList>
