@@ -5,15 +5,14 @@ import "../profile/UserProfile.css";
 const FollowButton = ({
   nickname,
   isFollowing: initialIsFollowing,
-  followers,
-  updateFollowers,
+  updateFollowStatus,
+  isModal = false, // 기본값은 false로 설정
 }) => {
   const [isFollowing, setIsFollowing] = useState(initialIsFollowing);
 
-  // initialIsFollowing 값이 변경될 때마다 isFollowing 상태를 업데이트
   useEffect(() => {
     setIsFollowing(initialIsFollowing);
-    console.log("FollowButton initialIsFollowing updated:", initialIsFollowing); // initialIsFollowing 값을 출력
+    console.log("FollowButton initialIsFollowing updated:", initialIsFollowing);
   }, [initialIsFollowing]);
 
   const handleFollowToggle = () => {
@@ -33,9 +32,7 @@ const FollowButton = ({
       )
       .then((response) => {
         setIsFollowing(!isFollowing);
-        // 팔로워 수 업데이트
-        const newFollowers = isFollowing ? followers - 1 : followers + 1;
-        updateFollowers(newFollowers);
+        updateFollowStatus(nickname, !isFollowing);
       })
       .catch((error) => {
         console.error("Error following/unfollowing user:", error);
@@ -44,7 +41,7 @@ const FollowButton = ({
 
   return (
     <button
-      className="other-user-profile-follow-button"
+      className={`other-user-profile-follow-button ${isModal ? "modal-style" : ""}`}
       onClick={handleFollowToggle}
     >
       {isFollowing ? "Unfollow" : "Follow"}

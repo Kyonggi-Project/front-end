@@ -68,38 +68,37 @@ const UserProfile = () => {
 
   // 팔로워 목록을 가져오는 함수
   const fetchFollowers = () => {
-    axios
-      .get(`${url}/api/user/follower/${userData.nickname}`, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("access_token"),
-        },
-        withCredentials: true,
-      })
-      .then((response) => {
+    httpRequest2(
+      "GET",
+      `/api/user/follower/${userData.nickname}`,
+      null,
+      (response) => {
         setFollowers(response.data);
         setShowFollowersModal(true);
-      })
-      .catch((error) => {
+      },
+      (error) => {
         console.error("Error fetching followers:", error);
-      });
+      }
+    );
   };
 
-  // 팔로잉 목록을 가져오는 함수
   const fetchFollowing = () => {
-    axios
-      .get(`${url}/api/user/following/${userData.nickname}`, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("access_token"),
-        },
-        withCredentials: true,
-      })
-      .then((response) => {
-        setFollowing(response.data);
+    httpRequest2(
+      "GET",
+      `/api/user/following/${userData.nickname}`,
+      null,
+      (response) => {
+        const followingList = response.data.map((user) => ({
+          ...user,
+          followed: true, // following 목록이므로 항상 followed는 true
+        }));
+        setFollowing(followingList);
         setShowFollowingModal(true);
-      })
-      .catch((error) => {
+      },
+      (error) => {
         console.error("Error fetching following:", error);
-      });
+      }
+    );
   };
 
   // 모달 표시 함수
@@ -189,7 +188,10 @@ const UserProfile = () => {
           <h4>Comments</h4>
           <ul>
             <div>
-              <CommentList comments={commentList} nickname={userData.nickname} />
+              <CommentList
+                comments={commentList}
+                nickname={userData.nickname}
+              />
             </div>
           </ul>
         </div>
@@ -206,12 +208,6 @@ const UserProfile = () => {
         />
       )}
       {showDeleteModal && <DeleteModal closeModal={handleCloseDeleteModal} />}
-      <FollowListModal
-        isOpen={showFollowersModal}
-        onRequestClose={() => setShowFollowersModal(false)}
-        followList={followers}
-        title="Followers"
-      />
       <FollowListModal
         isOpen={showFollowersModal}
         onRequestClose={() => setShowFollowersModal(false)}
