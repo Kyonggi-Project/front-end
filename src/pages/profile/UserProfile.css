@@ -98,6 +98,13 @@ h3 {
   margin-bottom: 20px;
 }
 
+.other-user-profile-follow-button.modal-style {
+  /* 모달 내부 버튼 스타일 */
+  width: 8vh;
+  height: 35px;
+  padding: 0;
+  margin: 0;
+}
 .user-profile-right-section {
   margin-left: 20px;
   height: 30rem;
@@ -125,4 +132,18 @@ h3 {
 a {
   text-decoration: none;
   color: #000000;
+}
+
+.list-modal-close-button {
+  width: 8vh;
+  max-width: 800px;
+  margin: 20px 0;
+  height: 30px;
+  font-family: "GmarketSansMedium";
+  background-color: #616a72;
+  color: #e6f6ff;
+  border-radius: 8px;
+  border: 0;
+  padding: 8px 15px;
+  margin-bottom: 20px;
 }

@@ -102,39 +102,35 @@ const OtherUserProfile = () => {
 
   // 팔로워 목록을 가져오는 함수
   const fetchFollowers = () => {
-    axios
-      .get(`${url}/api/user/follower/${userData.nickname}`, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("access_token"),
-        },
-        withCredentials: true,
-      })
-      .then((response) => {
+    httpRequest2(
+      "GET",
+      `/api/user/follower/${userData.nickname}`,
+      null,
+      (response) => {
         setFollowers(response.data);
         setShowFollowersModal(true);
-      })
-      .catch((error) => {
+      },
+      (error) => {
         console.error("Error fetching followers:", error);
-      });
+      }
+    );
   };
 
-  // 팔로잉 목록을 가져오는 함수
   const fetchFollowing = () => {
-    axios
-      .get(`${url}/api/user/following/${userData.nickname}`, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("access_token"),
-        },
-        withCredentials: true,
-      })
-      .then((response) => {
+    httpRequest2(
+      "GET",
+      `/api/user/following/${userData.nickname}`,
+      null,
+      (response) => {
         setFollowing(response.data);
         setShowFollowingModal(true);
-      })
-      .catch((error) => {
-        console.error("Error fetching following:", error);
-      });
+      },
+      (error) => {
+        console.error("Error fetching followers:", error);
+      }
+    );
   };
+
   const updateFollowers = (newFollowers) => {
     setUserData((prevUserData) => ({
       ...prevUserData,
