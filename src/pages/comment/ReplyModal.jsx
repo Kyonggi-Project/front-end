@@ -1,28 +1,55 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ReplyModal.css";
-import axios from "axios";
-const ReplyModal = ({ closeModal }) => {
+import { httpRequest2 } from "../../util/article";
+import { useParams } from "react-router-dom";
+const ReplyModal = ({ closeModal, isEdit, content, replyId }) => {
   const [reply, setReply] = useState("");
-  const [articleId, setArticleId] = useState('');
-  const [userId, setUserId] = useState('');
-  const url = process.env.REACT_APP_URL_PATH;
+  const { id } = useParams();
 
   const formdata = {
-    reply: reply
+    content: reply
   }
+
+  useEffect(() => {
+    if (isEdit) {
+      setReply(content);
+    }
+  },[isEdit]);
+
   const handleSubmitForm = (e) => {
     e.preventDefault();
-    axios
-    .post(url+`/api/comment/addComment/${articleId}?userId=${userId}`, formdata)
-    .then(() => {
-      alert("댓글을 작성했습니다.");
-    })
-    .catch((error) => {
-      alert("댓글 작성에 실패했습니다.");
-      console.error("댓글 작성 실패",error);
-    });
+    if (isEdit) {
+      httpRequest2(
+        'PUT',
+        `/api/reply/update?replyId=${replyId}`,
+        formdata,
+        () => {
+          alert("댓글을 수정했습니다.");
+          window.location.reload();
+          closeModal();
+        },
+        (error) => {
+          alert("댓글 수정에 실패했습니다.");
+          console.error("댓글 수정 실패", error);
+        }
+      );
 
-    closeModal();
+    } else {
+      httpRequest2(
+        'POST',
+        `/api/reply/add?ottReviewId=${id}`,
+        formdata,
+        () => {
+          alert("댓글을 작성했습니다.");
+          window.location.reload();
+          closeModal();
+        },
+        (error) => {
+          alert("댓글 작성에 실패했습니다.");
+          console.error("댓글 작성 실패", error);
+        }
+      );
+    }
   }
 
   return (
@@ -32,7 +59,11 @@ const ReplyModal = ({ closeModal }) => {
           X
         </button>
         <h2 className="reply-modal-main-title">
-          <p>댓글을 작성해 주세요</p>
+          {!isEdit ?
+            <p>댓글을 작성해 주세요</p> :
+            <p>댓글을 수정해 주세요</p>
+          }
+
         </h2>
         <form className="reply-input-group" onSubmit={handleSubmitForm}>
           <input type="text" value={reply} onChange={(e) => setReply(e.target.value)} />

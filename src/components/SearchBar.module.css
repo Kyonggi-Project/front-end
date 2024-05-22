@@ -1,0 +1,9 @@
+.searchBar{
+    position: relative;
+}
+.searchIcon {
+    font-size: 18px;
+    cursor: pointer;
+    color: #539adb;
+    padding-top: 2px;
+}

@@ -12,6 +12,10 @@
   padding: 15px
 }
 
+.reply-list {
+  width: 95%;
+}
+
 .reply-list-profile_img {
   box-sizing: border-box;
   border: 1px solid rgba(0, 0, 0, 0.08);
@@ -21,10 +25,41 @@
   left: calc(50% - 18px/2);
   top: calc(50% - 18px/2);
   margin-right: 0.3rem;
-  /*background: url(.jpg);*/
+  margin-right: 4px;
 }
 
 .reply-list-user_info {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  margin-top: 7px;
+  margin-bottom: 7px;
+}
+
+.reply-list-profile-info {
+  display: flex;
+  align-items: center;
+}
+
+.reply-list-no-reply {
+  margin-left: 1rem;
+}
+
+.buttons-container {
+  display: flex;
+  align-items: center;
+}
+
+.reply-list-button {
+  font-size: 1.6vh;
+  border: none;
+  background-color: transparent;
+}
+
+.reply-list-separator2 {
+  width: 1px;
+  height: 100%;
+  background-color: black;
+  margin: 2px;
+  padding-bottom: 1.6vh;
 }

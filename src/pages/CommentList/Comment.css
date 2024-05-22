@@ -51,6 +51,7 @@ body{
 
 /* mingi */
 .comment-name {
+  text-decoration: none;
   font-weight: 400;
   font-size: 15px;
   line-height: 22px;
@@ -77,6 +78,7 @@ body{
   box-sizing: border-box;
   display: flex;
   align-items: center;
+  justify-content: center;
   background: #ffffff;
   border: 3px solid #eaeaea;
   border-radius: 13px;
@@ -92,7 +94,7 @@ body{
   line-height: 19px;
   /* identical to box height, or 162% */
   letter-spacing: -0.3px;
-  margin-left: 0.6rem;
+  /* margin-left: 0.6rem; */
   color: #4a4a4a;
 }
 
@@ -122,6 +124,7 @@ body{
 }
 
 .comment-comment2 {
+  text-decoration: none;
   font-weight: 400;
   font-size: 15px;
   line-height: 24px;
@@ -131,4 +134,5 @@ body{
   letter-spacing: -0.2px;
   color: #000000;
   margin-left: 1rem;
+  margin-top: 10px;
 }

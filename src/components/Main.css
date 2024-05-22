@@ -102,6 +102,7 @@
   align-items: flex-start; /* 수직 상단 정렬 */
   margin: 20px 0;
   transition: margin-left 0.3s ease;
+  
 }
 
 .main-image-list li {
@@ -146,10 +147,11 @@
 }
 
 .main-image-wrapper img {
-  width: 300px; /* 이미지 너비 조정을 원하는 크기로 지정하세요 */
-  height: auto;
+  width: 240px; /* 이미지 너비 조정을 원하는 크기로 지정하세요 */
+  height: 344px;
   display: block;
   border-radius: 8px;
+  object-fit: cover;
   transition: transform 0.3s ease-in-out;
 }
 
@@ -162,8 +164,9 @@
 
 .main-image-wrapper1 img {
   width: 200px; /* 이미지 너비 조정을 원하는 크기로 지정하세요 */
-  height: auto;
+  height: 286px;
   display: block;
+  object-fit: cover;
   border-radius: 8px;
   transition: transform 0.3s ease-in-out;
 }
@@ -174,29 +177,30 @@
 
 .main-scroll-button {
   position: absolute;
-  top: 55%;
+  top: 63%;
   transform: translateY(-50%);
   width: 40px;
   height: 40px;
   border: none;
   border-radius: 50%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(83, 154, 219, 0.9);
   color: white;
+  
   font-size: 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .main-scroll-button:hover {
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(113, 205, 238, 0.7);
 }
 
 .main-scroll-button.prev {
-  left: 5px;
+  left: 15px;
 }
 
 .main-scroll-button.next {
-  right: 5px;
+  right: 15px;
 }
 
 .main-data-info {
@@ -241,6 +245,15 @@
   border: 0;
   padding: 8px 15px;
   margin-bottom: 20px;
+  margin: 20px 0;
+  height: 40px;
+  font-family: "GmarketSansMedium";
+  background-color: #539adb;
+  color: #e6f6ff;
+  border-radius: 8px;
+  border: 0;
+  padding: 8px 15px;
+  margin-bottom: 20px;
 }
 
 .main-button-list .main-button:last-child {
@@ -254,5 +267,37 @@
 
 .main-button-list .main-selected {
   background-color: #7bcdee;  
+.main-button-list .main-selected {
+  background-color: #7bcdee;  
   color: black;
+}
+
+.main-loading-spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  z-index: 999;
+  margin: 20px auto;
+  position: fixed;
+  top: 47%;
+  left: 47%;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.main-loading-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.5); /* 반투명 흰색 배경 */
+  backdrop-filter: blur(5px); /* 배경 흐리게 */
+  z-index: 9998; /* 스피너 바로 아래 레이어 */
 }

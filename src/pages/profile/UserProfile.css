@@ -10,7 +10,7 @@ h3 {
   font-weight: 300;
   font-size: 38px;
   line-height: 52px;
-  color: #539ADB;
+  color: #539adb;
 }
 .user-profile-container {
   display: flex;
@@ -50,7 +50,6 @@ h3 {
   object-fit: cover;
 }
 
-
 .user-profile-user-stats {
   text-align: center;
   display: flex;
@@ -75,17 +74,37 @@ h3 {
 .user-profile-info-button {
   width: 33vh;
   max-width: 800px;
-  margin: 20px 0 ;
+  margin: 20px 0;
   height: 53px;
   font-family: "GmarketSansMedium";
-  background-color: #539ADB;
-  color: #E6F6FF;
+  background-color: #539adb;
+  color: #e6f6ff;
+  border-radius: 8px;
+  border: 0;
+  padding: 8px 15px;
+  margin-bottom: 20px;
+}
+.other-user-profile-follow-button {
+  width: 33vh;
+  max-width: 800px;
+  margin: 20px 0;
+  height: 53px;
+  font-family: "GmarketSansMedium";
+  background-color: #539adb;
+  color: #e6f6ff;
   border-radius: 8px;
   border: 0;
   padding: 8px 15px;
   margin-bottom: 20px;
 }
 
+.other-user-profile-follow-button.modal-style {
+  /* 모달 내부 버튼 스타일 */
+  width: 8vh;
+  height: 35px;
+  padding: 0;
+  margin: 0;
+}
 .user-profile-right-section {
   margin-left: 20px;
   height: 30rem;
@@ -108,4 +127,23 @@ h3 {
 
 .user-profile-comments {
   width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: #000000;
+}
+
+.list-modal-close-button {
+  width: 8vh;
+  max-width: 800px;
+  margin: 20px 0;
+  height: 30px;
+  font-family: "GmarketSansMedium";
+  background-color: #616a72;
+  color: #e6f6ff;
+  border-radius: 8px;
+  border: 0;
+  padding: 8px 15px;
+  margin-bottom: 20px;
 }

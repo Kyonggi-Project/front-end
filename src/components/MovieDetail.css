@@ -4,18 +4,30 @@
 }
 .movie-detail-movie_img {
   position: relative;
-  height: 60vh;
-  background: url(../../public/logo192.png);
-  background-color: black;
+  width: 100%;
+  height: 70vh;
+  /* background :linear-gradient(to top, black, white); */
   text-align: left;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  overflow: hidden;
+}
+.movie-detail-movie_img::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
 }
 
 .movie-detail-movie_img2 {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  max-height: 100%;
+  object-position: center top;
 }
 
 .movie-detail-movie_img p {
@@ -23,6 +35,14 @@
   color: #FFFFFF;
   margin-bottom: 0.5rem;
   margin-left: 3rem;
+}
+.movie-detail-overlay {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  color: #539ADB; /* 텍스트 색상 설정 */
+  padding: 20px;
+
 }
 
 /* Heading 1 → Harry Potter and the Sorcerer s Stone */
@@ -53,14 +73,13 @@
 
 /* div.e1dnb43p0 */
 .movie-detail-poster {
-  margin-left: 30%;
+  margin-left: 30px;
   box-sizing: border-box;
-  width: 50%;
+  width: 72.5%;
+  height: auto;
   background: #F8F8F8;
   border: 1px solid #D4D4D4;
   border-radius: 2px;
-
-  background: url(../../public/logo512.png);
 }
 
 /* Section → Avg */
@@ -88,7 +107,7 @@
 }
 
 .movie-detail-section1 {
-  width: 30%;
+  width: 25%;
 }
 
 .movie-detail-section2 {
@@ -98,6 +117,8 @@
 
 .movie-detail-section3 {
   width: 100%;
+  margin-left: 4%;
+  margin-right: 15%;
 }
 
 /* Rate */
@@ -110,20 +131,24 @@
 }
 
 .movie-detail-avg_rating {
-  margin-left: 50%;
+  margin-top: 2%;
+  margin-left: 35%;
 }
 
 /* 4.2 */
 .movie-detail-rating_num {
   font-style: normal;
   font-weight: 400;
-  font-size: 30px;
-  line-height: 42px;
+  font-size: 20px;
+  line-height: 22px;
   margin-top: 0;
   color: #539ADB;
   margin-bottom: 0;
 }
 
+.movie-detail-rating-box{
+  margin-top: 3%;
+}
 
 /* Average Rating(7k) */
 .movie-detail-rating_count {
@@ -146,7 +171,6 @@
 
 .movie-detail-button2_box {
   display: flex;
-  width: 90%;
 }
 
 .movie-detail-buttons {
@@ -162,16 +186,16 @@
   border: none;
   background-color: #539ADB;
   color: #E6F6FF ;
-  margin: 0 20px;
-  border-radius: 10px;
+  border-radius: 5%;
 }
 .movie-detail-watchlist_select {
-  background-color: #304e5b;
+  background-color: #4074a5;
 }
 
 .movie-detail-buttons_icon:hover {
-  background-color: #5b8cd5;
+  transform: scale(1.01);
   font-weight: bold;
+  font-size: large;
 }
 
 /* Harry Potter has lived under the stairs at his aunt and uncle's house his whole life. But on his 11th birthday, he learns he's a powerful wizard -- with a place waiting for him at the Hogwarts School of Witchcraft and Wizardry. As he learns to harness his newfound powers with the help of the school's kindly headmaster, Harry uncovers the truth about his parents' deaths -- and about the villain who's to blame. */
@@ -182,8 +206,7 @@
   line-height: 22px;
   display: flex;
   align-items: center;
-
-  color: #539ADB;
+  color: #E6F6FF;
   margin-top: 3rem;
 }
 
@@ -206,18 +229,11 @@
   width: 100%;
 }
 
-.movie-detail-overlay {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  color: #539ADB; /* 텍스트 색상 설정 */
-  padding: 20px;
-}
 
 .movie-detail-OTTLogo{
   border-radius: 50%;
   margin-right: 10px;
-  height: 75%;
+  height: 6vw;
 }
 
 /* after*/
@@ -225,16 +241,16 @@
   display: flex;
   justify-content: center;
   margin: 20px auto;
-  color: #e5e5e5;
+  color: #539ADB;
   font-family: GmarketSansMedium;
   flex-direction: column;
-  padding: 3% 20% 0% 20%;
+  padding: 3% 15% 0% 20%;
   
 }
 
 .movie-detail-metadata-list {
   margin-bottom: 5%;
-  border-top: 1px solid #555;
+  border-top: 1.75px solid #7bcdee;
 }
 
 .movie-detail-metadata-list li{
@@ -246,6 +262,12 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10% 30%;
+  padding: 10px;
+}
+.metadata-content-1{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15% 15%;
   padding: 10px;
 }
 

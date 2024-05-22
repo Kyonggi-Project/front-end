@@ -14,7 +14,7 @@ export function AuthProvider({ children }) {
       setIsLogin(true);
     } else {
       //나중에 false로 변경
-      setIsLogin(true);
+      setIsLogin(false);
     }
   }, []);
 
@@ -24,10 +24,11 @@ export function AuthProvider({ children }) {
       alert('로그인을 해주세요');
     }
   }
+
   const token = localStorage.getItem('access_token');
 
   return (
-    <AuthContext.Provider value={{ isLogin, setIsLogin, isloginHandler, token }}>
+    <AuthContext.Provider value={{ isLogin, setIsLogin, isloginHandler, token}}>
       {children}
     </AuthContext.Provider>
   );

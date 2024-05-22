@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import "./EditModal.css"
+import "./EditModal.css";
 
-const EditModal = ({ userInfo, closeModal, onSubmit }) => {
+const EditModal = ({ userInfo, closeModal, onSubmit, showDeleteModal }) => {
   const [nickname, setNickname] = useState(userInfo.nickname || "");
-  const [password, setPassword] = useState(userInfo.password || "");
-  const [confirmPassword, setConfirmPassword] = useState(userInfo.password || "");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -15,7 +15,11 @@ const EditModal = ({ userInfo, closeModal, onSubmit }) => {
   return (
     <div className="profile-edit-modal">
       <div className="profile-edit-modal-content">
-        <button type="button" className="profile-edit-close-button" onClick={closeModal}>
+        <button
+          type="button"
+          className="profile-edit-close-button"
+          onClick={closeModal}
+        >
           X
         </button>
         <h2>Edit Profile Information</h2>
@@ -51,6 +55,13 @@ const EditModal = ({ userInfo, closeModal, onSubmit }) => {
             Save Changes
           </button>
         </form>
+        <button
+          type="button"
+          className="profile-delete-button"
+          onClick={showDeleteModal}
+        >
+          회원 탈퇴하기
+        </button>
       </div>
     </div>
   );

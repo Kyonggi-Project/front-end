@@ -1,102 +1,147 @@
-// UserProfile.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import EditModal from "../profile/EditModal";
+import DeleteModal from "../profile/DeleteModal.jsx";
 import defaultProfile from "../../images/profilePicture.png";
 import CommentList from "../comment/CommentList1";
 import { httpRequest2 } from "../../util/article";
 import "./UserProfile.css";
 import { useSearchParams } from "react-router-dom";
-import { useAuth } from "../../util/auth";
+import FollowListModal from "../Follow/FollowListModal.jsx";
 
 const UserProfile = () => {
   const [userInfo, setUserInfo] = useState({
-    nickname: "Name",
+    nickname: "",
     followers: 0,
     following: 0,
     likedWorks: 0,
   });
-  const [comments, setComments] = useState([]);
-  const [userData, setUserData] = useState([]);
+  const [userData, setUserData] = useState({});
   const [watchListData, setWatchListData] = useState([]);
-  const [showModal, setShowModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [followers, setFollowers] = useState([]);
+  const [following, setFollowing] = useState([]);
+  const [showFollowersModal, setShowFollowersModal] = useState(false);
+  const [showFollowingModal, setShowFollowingModal] = useState(false);
 
   const url = process.env.REACT_APP_URL_PATH;
-  const [searchParams, setSearchParams] = useSearchParams();
-  const token = searchParams.get('token');
+  const [searchParams] = useSearchParams();
+  const token = searchParams.get("token");
   if (token) {
-    localStorage.setItem('access_token', token);
+    localStorage.setItem("access_token", token);
   }
 
-  const nickname = userInfo.nickname; // 예시로 userInfo의 nickname을 사용
   useEffect(() => {
     httpRequest2(
-      'GET',
-      '/api/user/profile/myPage',
+      "GET",
+      "/api/user/profile/myPage",
       null,
       (response) => {
         setUserData(response.data.user);
-        setWatchListData(response.data.watchList.bookmark);
+        setUserInfo(response.data.user); // userInfo 업데이트
+        if (response.data.watchList) {
+          setWatchListData(response.data.watchList.bookmark);
+        }
       },
       (error) => {
         console.error("Error fetching user info:", error);
-        // 리프레시 토큰을 이용한 액세스 토큰 재발급 등의 작업을 수행할 수 있습니다.
       }
     );
-
-    axios
-      .get(url + `/api/user/profile/nickname/${nickname}`, {
-        withCredentials: true,
-      })
-      .then((response) => {
-        setUserInfo({
-          ...response.data,
-          profilePicture: "/static/images/profilePicture.png",
-        });
-      })
-      .catch((error) => {
-        console.error("Error fetching user info:", error);
-      });
-
-    axios
-      .get(url + "/api/comments")
-      .then((response) => {
-        setComments(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching comments:", error);
-      });
   }, []);
+
+  const [commentList, setCommentList] = useState([]);
+  //해당 유저의 코멘트들을 출력
+  useEffect(() => {
+    httpRequest2(
+      "GET",
+      "/api/ottReview/reviews/user",
+      null,
+      (response) => {
+        setCommentList(response.data);
+        console.log(response.data);
+      },
+      (error) => {
+        console.error("Error fetching comments:", error);
+      }
+    );
+  }, []);
+
+  // 팔로워 목록을 가져오는 함수
+  const fetchFollowers = () => {
+    httpRequest2(
+      "GET",
+      `/api/user/follower/${userData.nickname}`,
+      null,
+      (response) => {
+        setFollowers(response.data);
+        setShowFollowersModal(true);
+      },
+      (error) => {
+        console.error("Error fetching followers:", error);
+      }
+    );
+  };
+
+  const fetchFollowing = () => {
+    httpRequest2(
+      "GET",
+      `/api/user/following/${userData.nickname}`,
+      null,
+      (response) => {
+        const followingList = response.data.map((user) => ({
+          ...user,
+          followed: true, // following 목록이므로 항상 followed는 true
+        }));
+        setFollowing(followingList);
+        setShowFollowingModal(true);
+      },
+      (error) => {
+        console.error("Error fetching following:", error);
+      }
+    );
+  };
 
   // 모달 표시 함수
   const handleEditProfileClick = () => {
     console.log("Edit profile button clicked");
-    setShowModal(true);
+    setShowEditModal(true);
   };
 
   // 모달 닫기 함수
-  const handleCloseModal = () => {
-    setShowModal(false);
+  const handleCloseEditModal = () => {
+    setShowEditModal(false);
+  };
+
+  const handleCloseDeleteModal = () => {
+    setShowDeleteModal(false);
   };
 
   // 수정된 정보를 백엔드로 전송하는 함수
   const handleSubmitUpdatedInfo = (updatedInfo) => {
-    // confirmPassword는 백엔드로 전송하지 않음
     const { confirmPassword, ...infoToSend } = updatedInfo;
-    if (infoToSend.password !== confirmPassword) {
+    if (infoToSend.password && infoToSend.password !== confirmPassword) {
       console.error("Passwords do not match");
       return;
     }
 
     axios
-      .put(url + "/api/user/update", infoToSend)
+      .put(url + "/api/user/update", infoToSend, {
+        headers: {
+          Authorization: "Bearer " + localStorage.getItem("access_token"),
+        },
+      })
       .then((response) => {
         console.log("Updated info sent to server:", response.data);
+        setUserData((prevState) => ({
+          ...prevState,
+          ...response.data,
+        }));
         setUserInfo((prevState) => ({
           ...prevState,
           ...response.data,
         }));
-        handleCloseModal();
+        handleCloseEditModal();
       })
       .catch((error) => {
         console.error("Error sending updated info to server:", error);
@@ -117,20 +162,25 @@ const UserProfile = () => {
           <div className="user-profile-user-stats">
             <div className="user-profile-stat-item">
               <p>Followers</p>
-              <p>{userData.followers}</p>
+              <p onClick={fetchFollowers}>{userData.followers}</p>
             </div>
             <div className="user-profile-stat-item">
               <p>Following</p>
-              <p>{userData.following}</p>
+              <p onClick={fetchFollowing}>{userData.following}</p>
             </div>
             <div className="user-profile-stat-item">
-              <p>Liked</p>
-              <p>{watchListData.length}</p>
+              <a href="/watchlist">
+                <p>Liked</p>
+                <p>{watchListData.length}</p>
+              </a>
             </div>
           </div>
 
           <div>
-            <button className="user-profile-info-button" onClick={handleEditProfileClick}>
+            <button
+              className="user-profile-info-button"
+              onClick={handleEditProfileClick}
+            >
               Edit Profile Information
             </button>
           </div>
@@ -138,23 +188,40 @@ const UserProfile = () => {
         <div className="user-profile-right-section">
           <h4>Comments</h4>
           <ul>
-            {comments.map((comment) => (
-              <li key={comment.id}>{comment.text}</li>
-            ))}
             <div>
-              <CommentList />
+              <CommentList
+                comments={commentList}
+                nickname={userData.nickname}
+                pageType="UserProfile"
+              />
             </div>
           </ul>
         </div>
       </div>
-      {showModal && (
+      {showEditModal && (
         <EditModal
           userInfo={userInfo}
-          closeModal={handleCloseModal}
+          closeModal={handleCloseEditModal}
           onSubmit={handleSubmitUpdatedInfo}
-          showModal={showModal} // showModal 상태를 EditModal에 전달
+          showDeleteModal={() => {
+            handleCloseEditModal();
+            setShowDeleteModal(true);
+          }}
         />
       )}
+      {showDeleteModal && <DeleteModal closeModal={handleCloseDeleteModal} />}
+      <FollowListModal
+        isOpen={showFollowersModal}
+        onRequestClose={() => setShowFollowersModal(false)}
+        followList={followers}
+        title="Followers"
+      />
+      <FollowListModal
+        isOpen={showFollowingModal}
+        onRequestClose={() => setShowFollowingModal(false)}
+        followList={following}
+        title="Following"
+      />
     </div>
   );
 };
