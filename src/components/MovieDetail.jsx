@@ -6,16 +6,22 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 import { httpRequest2 } from "../util/article.js";
 
-import { useAuth } from '../util/auth';
+import { useAuth } from "../util/auth";
 import "./MovieDetail.css";
-import netflix from '../images/netflix.png';
-import watcha from '../images/watcha.png';
-import disney from '../images/disney.jpg';
-import wavve from '../images/wavve.png';
-import coupang from '../images/coupangplay.png'
+import netflix from "../images/netflix.png";
+import watcha from "../images/watcha.png";
+import disney from "../images/disney.jpg";
+import wavve from "../images/wavve.png";
+import coupang from "../images/coupangplay.png";
 
 const url = process.env.REACT_APP_URL_PATH;
-const LogoImg = { 'Netflix': netflix, "Watcha": watcha, "Disney Plus": disney, "Coupang Play": coupang, "Wavve": wavve };
+const LogoImg = {
+  Netflix: netflix,
+  Watcha: watcha,
+  "Disney Plus": disney,
+  "Coupang Play": coupang,
+  Wavve: wavve,
+};
 
 export default function MovieDetail() {
   const navigate = useNavigate();
@@ -24,15 +30,13 @@ export default function MovieDetail() {
   const [toast, setToast] = useState(false);
   let [OTTimg, setOTTimg] = useState([]);
   const [commentList, setCommentList] = useState([]);
-  
+
   const [movieData, setMovieData] = useState({
     title: "title",
     year: 0,
     posterImg: "",
     backgroundImg: "",
-    genreList: [
-      "string"
-    ],
+    genreList: ["string"],
     synopsis: "",
     score: 0,
     metaData: {
@@ -50,9 +54,7 @@ export default function MovieDetail() {
       additionalProp2: "string",
       additionalProp3: "string"
     },
-    ottList: [
-      ""
-    ],
+    ottList: [""],
     bookmarked: false,
   });
 
@@ -68,7 +70,7 @@ export default function MovieDetail() {
 
   //영화 데이터
   useEffect(() => {
-    if(token) {
+    if (token) {
       httpRequest2(
         'GET',
         `/api/ottdata/authorize/${id}`,
@@ -81,8 +83,7 @@ export default function MovieDetail() {
           console.error("Error fetching user info:", error);
         }
       );
-    }
-    else {
+    } else {
       httpRequest2(
         'GET',
         `/api/ottdata/${id}`,
@@ -103,7 +104,9 @@ export default function MovieDetail() {
     for (let i = 0; i < movieData.ottList.length; i++) {
       let arrayList = movieData.ottList[i];
       let correctOTT = LogoImg[arrayList];
-      if (correctOTT !== undefined) { updatedOTTimg = [...updatedOTTimg, correctOTT]; }
+      if (correctOTT !== undefined) {
+        updatedOTTimg = [...updatedOTTimg, correctOTT];
+      }
     }
     setOTTimg(updatedOTTimg);
   }, [movieData]);
@@ -112,10 +115,9 @@ export default function MovieDetail() {
   const handleAddComment = (event) => {
     if (!isLogin) {
       isloginHandler(event);
-    }
-    else {
+    } else {
       httpRequest2(
-        'GET',
+        "GET",
         `/api/user/profile/myPage`,
         null,
         (response) => {
@@ -128,19 +130,20 @@ export default function MovieDetail() {
       console.log(myId);
       const foundItem = commentList.find(item => item.author === myId);
       // if(foundItem) {
-        navigate(`/details/write/${id}`, { state: { movieTitle: movieData.title } });
+      navigate(`/details/write/${id}`, {
+        state: { movieTitle: movieData.title },
+      });
       // }
       // else {
       //   alert("리뷰는 하나만 작성할 수 있습니다.");
       // }
     }
-  }
+  };
 
   const handleWatchlist = (event) => {
     if (!isLogin) {
       isloginHandler(event);
-    }
-    else {
+    } else {
       if (!isWatchList) {
         setIsWatchList(true);
         httpRequest2(
@@ -148,22 +151,21 @@ export default function MovieDetail() {
           `/api/watchList/toggle?ottContentsId=${id}`,
           null,
           (response) => {
-            console.log("good add! "+response.data);
+            console.log("good add! " + response.data);
           },
           (error) => {
             console.error("Error fetching user info:", error);
           }
         );
         setToast(true);
-      }
-      else {
+      } else {
         setIsWatchList(false);
         httpRequest2(
           'POST',
           `/api/watchList/delete?ottContentsId=${id}`,
           null,
           (response) => {
-            console.log("good delete! "+response.data);
+            console.log("good delete! " + response.data);
           },
           (error) => {
             console.error("Error fetching user info:", error);
@@ -172,27 +174,31 @@ export default function MovieDetail() {
         setToast(true);
       }
     }
-  }
+  };
 
-   //컨텐츠의 모든 코멘트 보기
-   useEffect(() => {
-     httpRequest2(
-       'GET',
-       `/api/ottReview/reviews/ott/${id}`,
-       null,
-       (response) => {
-         setCommentList(response.data);
-       },
-       (error) => {
-         console.error('코멘트 정보를 가져오는데 실패했습니다:', error);
-       }
-     );
-   }, []);
+  //컨텐츠의 모든 코멘트 보기
+  useEffect(() => {
+    httpRequest2(
+      'GET',
+      `/api/ottReview/reviews/ott/${id}`,
+      null,
+      (response) => {
+        setCommentList(response.data);
+      },
+      (error) => {
+        console.error("코멘트 정보를 가져오는데 실패했습니다:", error);
+      }
+    );
+  }, []);
 
   return (
     <div className="movie-detail-wrap">
       <div className="movie-detail-movie_img">
-        <img src={movieData.backgroundImg} alt="" className="movie-detail-movie_img2" />
+        <img
+          src={movieData.backgroundImg}
+          alt=""
+          className="movie-detail-movie_img2"
+        />
         <div className="movie-detail-overlay">
           <p className="movie-detail-title">{movieData.title}</p>
           <p className="movie-detail-release_date">{movieData.year}</p>
@@ -201,13 +207,19 @@ export default function MovieDetail() {
       </div>
       <div className="movie-detail-all">
         <section className="movie-detail-section1">
-          <img src={movieData.posterImg} alt="포스터" className="movie-detail-poster" />
+          <img
+            src={movieData.posterImg}
+            alt="포스터"
+            className="movie-detail-poster"
+          />
         </section>
         <section className="movie-detail-section3">
           <div className="movie-detail-section2">
             <div className="movie-detail-rating-box">
-              <StarRating initialScore={movieData.score} action="details"/>
-              <p className="movie-detail-rating_num">{movieData.score.toFixed(1)}</p>
+              <StarRating initialScore={movieData.score} action="details" />
+              <p className="movie-detail-rating_num">
+                {movieData.score.toFixed(1)}
+              </p>
               <label className="movie-detail-rating_count">평균 평점</label>
             </div>
             <div className="movie-detail-avg_rating">
@@ -218,10 +230,22 @@ export default function MovieDetail() {
           </div>
           <div className="movie-detail-separator"></div>
           <div className="movie-detail-button2_box">
-            <button className={`movie-detail-buttons_icon ${(isWatchList&&isLogin) ? "movie-detail-watchlist_select" : ""}`} onClick={handleWatchlist}>watchlist 추가</button>
-            {toast && <Toast setToast={setToast} value={isWatchList}/>}
-            <hr className='movie-detail-separator2' />
-            <button className="movie-detail-buttons_icon" onClick={handleAddComment}>코멘트 추가</button>
+            <button
+              className={`movie-detail-buttons_icon ${
+                isWatchList && isLogin ? "movie-detail-watchlist_select" : ""
+              }`}
+              onClick={handleWatchlist}
+            >
+              watchlist 추가
+            </button>
+            {toast && <Toast setToast={setToast} value={isWatchList} />}
+            <hr className="movie-detail-separator2" />
+            <button
+              className="movie-detail-buttons_icon"
+              onClick={handleAddComment}
+            >
+              코멘트 추가
+            </button>
           </div>
           <div className="movie-detail-separator"></div>
           <div className="movie-detail-movie_details">{movieData.synopsis}</div>
@@ -242,7 +266,9 @@ export default function MovieDetail() {
           <h1>출연진</h1>
           <ul>
             {Object.entries(movieData.actorList).map(([key, value], index) => (
-              <li key={index}><strong>{key}:</strong> {value}</li>
+              <li key={index}>
+                <strong>{key}:</strong> {value}
+              </li>
             ))}
           </ul>
         </div>
@@ -250,14 +276,16 @@ export default function MovieDetail() {
           <h1>제작진</h1>
           <ul>
             {Object.entries(movieData.staffList).map(([key, value], index) => (
-              <li key={index}><strong>{key}:</strong> {value}</li>
+              <li key={index}>
+                <strong>{key}:</strong> {value}
+              </li>
             ))}
           </ul>
         </div>
       </div>
       <section className="movie-detail-list">
         <header className="movie-detail-comment">Comments</header>
-        <CommentList id={id} comments={commentList} />
+        <CommentList id={id} comments={commentList} pageType="MovieDetail" />
       </section>
     </div>
   );
