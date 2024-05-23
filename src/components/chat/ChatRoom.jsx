@@ -16,16 +16,6 @@ export default function ChatRoom() {
   const [loginId, setLoginId] = useState("");
   const [room, setRoom] = useState([]);
   const [showRoomModal, setShowRoomModal] = useState(false);
-  const conversations = [
-    { info: "Yes i can do it for you", lastSenderName: "Lilly", name: "Lilly" },
-    { info: "Yes i can do it for you", lastSenderName: "Joe", name: "Joe" },
-    { info: "Yes i can do it for you", lastSenderName: "Emily", name: "Emily" },
-    { info: "Yes i can do it for you", lastSenderName: "Kai", name: "Kai" },
-    { info: "Yes i can do it for you", lastSenderName: "Akane", name: "Akane" },
-    { info: "Yes i can do it for you", lastSenderName: "Eliot", name: "Eliot" },
-    { info: "Yes i can do it for you", lastSenderName: "Zoe", name: "Zoe" },
-    { info: "Yes i can do it for you", lastSenderName: "Patrik", name: "Patrik" },
-  ];
 
   //현재 로그인 유저
   useEffect(() => {
@@ -49,6 +39,7 @@ export default function ChatRoom() {
       `/api/chatroom/allChatrooms`,
       null,
       (response) => {
+        console.log(response.data);
         setRoom(response.data);
       },
       (error) => {
@@ -68,18 +59,23 @@ export default function ChatRoom() {
   function handleOption(roomId, userId, e) {
     e.stopPropagation();
     console.log(userId);
-    httpRequest2(
-      'DELETE',
-      `/api/chatroom/delete/${roomId}?userId=${userId}`,
-      null,
-      () => {
-        alert("방이 삭제되었습니다.");
-        window.location.reload();
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    if(userId === loginId) {
+      httpRequest2(
+        'DELETE',
+        `/api/chatroom/delete/${roomId}?userId=${userId}`,
+        null,
+        () => {
+          alert("방이 삭제되었습니다.");
+          window.location.reload();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+    else {
+      alert('삭제할 수 없습니다.');
+    }
 
   }
 
