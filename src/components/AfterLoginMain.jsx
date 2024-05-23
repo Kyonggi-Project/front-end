@@ -176,7 +176,7 @@ function AfterLoginMain() {
               .map((image, index) => (
                 <li key={index}>
                     <div className="main-image-wrapper1">
-                      <a href={`/details?index=${index}`}>
+                      <a href={`/details/${image.id}`}>
                         <img
                           src={image.posterImg}
                           alt={`Image ${recstartIndex + index + 1}`}
