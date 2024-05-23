@@ -137,6 +137,7 @@ const OtherUserProfile = () => {
       followers: newFollowers,
     }));
   };
+  
 
   return (
     <div>
@@ -175,7 +176,7 @@ const OtherUserProfile = () => {
         <div className="user-profile-right-section">
           <h4>Comments</h4>
           <div>
-            <CommentList comments={comments} nickname={nickname} />
+            <CommentList comments={comments} nickname={nickname} pageType="UserProfile" />
           </div>
         </div>
       </div>
