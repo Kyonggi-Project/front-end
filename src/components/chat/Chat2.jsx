@@ -12,7 +12,6 @@ import {
   Avatar,
 } from "@chatscope/chat-ui-kit-react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { httpRequest2 } from "../../util/article";
 
 const ChatUI = () => {
   const [messages, setMessages] = useState([]);
@@ -20,36 +19,31 @@ const ChatUI = () => {
   const { roomId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
+  const handleMessageReceived = (message) => {
+    setMessages((prevMessages) => [...prevMessages, message]);
+  };
 
   const url = process.env.REACT_APP_URL_PATH;
   useEffect(() => {
     // 웹 소켓 연결 생성
     const sockJs = new SockJS(url + "/ws/stomp");
     const stomp = Stomp.over(sockJs);
+    console.log(stomp);
     setStompClient(stomp);
 
     // 연결이 성공하면 구독
     stomp.connect({}, () => {
       console.log("STOMP Connection");
-      httpRequest2(
-        'GET',
-        `/api/v1/chat/messages/${roomId}/${location.state.loginId}`,
-        null,
-        (response) => {
-          console.log(response.data);
-          setMessages(response.data.list);
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
 
-      stomp.subscribe(`${url}/topic/${roomId}`, (response) => {
+      // 메시지 수신 및 처리
+      stomp.subscribe(`/topic/${roomId}`, (response) => {
         // 채팅방 입장시
-        console.log("111231 " + JSON.parse(response.body));
+        console.log(JSON.parse(response.body));
         const message = JSON.parse(response.body);
-        // setMessages((prevMessages) => [...prevMessages, message]);
+        handleMessageReceived(message);
       });
+
+      // 채팅방 입장 요청
       stomp.send(`/app/enter/${roomId}`, {}, JSON.stringify({
         roomId: roomId,
         sender: location.state.loginId,
@@ -57,45 +51,36 @@ const ChatUI = () => {
       }));
     });
 
-    // 컴포넌트가 언마운트되면 연결 닫기
+    // 컴포넌트가 언마운트되면 연결 닫기 및 채팅방 떠나기 요청 전송
     return () => {
-      stompClient && stompClient.disconnect();
+      if(stomp && stomp.connected) {
+        stomp.send(`/app/leave/${roomId}`, {}, JSON.stringify({
+          roomId: roomId,
+          sender: location.state.loginId,
+          status: "LEAVE"
+        }));
+        stomp && stomp.disconnect();
+      }
     };
   }, []);
 
   const handleSend = (input) => {
     // 사용자가 입력한 메시지를 서버로 전송
-    if(stompClient) {
+    if (stompClient) {
       console.log(1);
     }
     console.log(location.state.loginId + ":" + input);
-    stompClient.send(`${url}/app/send/${roomId}`, {}, JSON.stringify({
+    stompClient.send(`/app/send/${roomId}`, {}, JSON.stringify({
       roomId: roomId,
       content: input,
       sender: location.state.loginId,
       status: "TALK"
     }));
-    
   };
 
   function handleBack() {
     navigate('/chat');
   }
-
-  // useEffect(() => {
-  //   httpRequest2(
-  //     'GET',
-  //     `/api/v1/chat/messages/${roomId}/${location.state.loginId}`,
-  //     null,
-  //     (response) => {
-  //       console.log(response.data);
-  //       setMessages(response.data.list);
-  //     },
-  //     (error) => {
-  //       console.error(error);
-  //     }
-  //   );
-  // }, [roomId]);
 
   return (
     <div>
@@ -120,8 +105,8 @@ const ChatUI = () => {
                     direction: "incoming",
                   }}>
                   <Message.Header
-                    // sender="Emily"
-                    // sentTime="just now"
+                  // sender="Emily"
+                  // sentTime="just now"
                   >{message.sender}</Message.Header>
                 </Message>
               ))}
