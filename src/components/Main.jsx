@@ -180,6 +180,7 @@ function Main() {
           <RecommendModal showModal={showModal} closeModal={handleCloseModal} />
         )}
       </div>
+      <a href="/chat"><div className="main-chatroom">대화방</div></a>
     </>
   );
 }
