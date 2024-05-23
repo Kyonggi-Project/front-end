@@ -264,7 +264,7 @@ export default function MovieDetail() {
           <ul>
             {Object.entries(movieData.actorList).map(([key, value], index) => (
               <li key={index}>
-                <strong>{key}:</strong> {value}
+                <strong>{key}</strong> {value ? `: ${value}` : `${value}`}
               </li>
             ))}
           </ul>
