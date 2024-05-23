@@ -111,7 +111,6 @@ export default function MovieDetail() {
     setOTTimg(updatedOTTimg);
   }, [movieData]);
 
-  const [myId, setMyId] = useState("");
   const handleAddComment = (event) => {
     if (!isLogin) {
       isloginHandler(event);
@@ -121,22 +120,20 @@ export default function MovieDetail() {
         `/api/user/profile/myPage`,
         null,
         (response) => {
-          setMyId(response.data.user.nickname);
+          const foundItem = commentList.find(item => item.author === response.data.user.nickname);
+          if(!foundItem) {
+            navigate(`/details/write/${id}`, {
+              state: { movieTitle: movieData.title },
+            });
+            }
+            else {
+              alert("리뷰는 하나만 작성할 수 있습니다.");
+            }
         },
         (error) => {
           console.error(error);
         }
       );
-      console.log(myId);
-      const foundItem = commentList.find(item => item.author === myId);
-      // if(foundItem) {
-      navigate(`/details/write/${id}`, {
-        state: { movieTitle: movieData.title },
-      });
-      // }
-      // else {
-      //   alert("리뷰는 하나만 작성할 수 있습니다.");
-      // }
     }
   };
 
