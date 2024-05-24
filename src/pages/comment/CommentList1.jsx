@@ -53,7 +53,11 @@ export default function CommentList({ comments, id, nickname, pageType }) {
                   />
                 )}
                 <Link
-                  to={`/userprofile/${comment.author}`}
+                  to={
+                    pageType === "MovieDetail"
+                      ? `/userprofile/${comment.author}`
+                      : `/details/${comment.ottId}`
+                  }
                   className="comment-list-1-name1"
                   onClick={isloginHandler}
                 >
@@ -73,14 +77,17 @@ export default function CommentList({ comments, id, nickname, pageType }) {
                 onClick={isloginHandler}
               >
                 <div>
-                {pageType === "UserProfile"  && (
-                  <img
-                    src={comment.contentsPoster}
-                    alt="포스터"
-                    className="comment-list-1-comment_poster-img"
-                  />)}
+                  {pageType === "UserProfile" && (
+                    <img
+                      src={comment.contentsPoster}
+                      alt="포스터"
+                      className="comment-list-1-comment_poster-img"
+                    />
+                  )}
                 </div>
-                <div className="comment-list-1-comment_content">{comment.content}</div>
+                <div className="comment-list-1-comment_content">
+                  {comment.content}
+                </div>
               </Link>
               <div className="comment-list-1-like_reply_box1">
                 <p className="comment-list-1-like_number1">
