@@ -239,7 +239,7 @@ export default function MovieDetail() {
       </div>
       <div className="movie-detail-metadata">
         <div className="movie-detail-metadata-list">
-          <h1>작품정보</h1>
+          <h2>작품정보</h2>
           <div className="metadata-content">
             {Object.keys(movieData.metaData).map((key, index) => (
               <div key={index} className="metadata-item">
@@ -249,7 +249,7 @@ export default function MovieDetail() {
           </div>
         </div>
         <div className="movie-detail-metadata-list">
-          <h1>출연진</h1>
+          <h2>출연진</h2>
           <ul>
             {Object.entries(movieData.actorList).map(([key, value], index) => (
               <li key={index}>
@@ -259,7 +259,7 @@ export default function MovieDetail() {
           </ul>
         </div>
         <div className="movie-detail-metadata-list">
-          <h1>제작진</h1>
+          <h2>제작진</h2>
           <ul>
             {Object.entries(movieData.staffList).map(([key, value], index) => (
               <li key={index}>

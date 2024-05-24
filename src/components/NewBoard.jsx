@@ -116,13 +116,15 @@ export default function NewBoard() {
   return (
     <div>
       <form onSubmit={handleSbumit} className='newboard-form'>
-        <h2 className='newboard-texta'>{title}</h2>
+        <h2 className='newboard-texta'> " {title} "</h2>
         <div>
-          <label className='newboard-rating'>평점</label>
-          <StarRating onChange={handleRating} initialScore={rating} action={match2 ? match2.params.action : match.params.action} />
+          <label className='newboard-rating'> <p className='newboard-rating-p'>평점 : </p>
+            <StarRating onChange={handleRating} initialScore={rating} action={match2 ? match2.params.action : match.params.action} />
+          </label>
+         
         </div>
-        <div>
-          <label className='newboard-texta'>Comment</label>
+        <div className='newboard-input-box2-wrap'>
+          <label className='newboard-texta2'>Comment</label>
           <textarea
             name="content"
             value={content}
