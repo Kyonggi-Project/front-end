@@ -31,8 +31,9 @@ const FollowButton = ({
         }
       )
       .then((response) => {
-        setIsFollowing(!isFollowing);
-        updateFollowStatus(nickname, !isFollowing);
+        const newIsFollowing = !isFollowing;
+        setIsFollowing(newIsFollowing);
+        updateFollowStatus(nickname, newIsFollowing);
       })
       .catch((error) => {
         console.error("Error following/unfollowing user:", error);
@@ -41,7 +42,9 @@ const FollowButton = ({
 
   return (
     <button
-      className={`other-user-profile-follow-button ${isModal ? "modal-style" : ""}`}
+      className={`other-user-profile-follow-button ${
+        isModal ? "modal-style" : ""
+      }`}
       onClick={handleFollowToggle}
     >
       {isFollowing ? "Unfollow" : "Follow"}
