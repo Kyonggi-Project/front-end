@@ -208,6 +208,7 @@
   align-items: center;
   color: #4074a5;
   margin-top: 3rem;
+  white-space: pre-line;
 }
 
 /* Heading 2 → Comment */

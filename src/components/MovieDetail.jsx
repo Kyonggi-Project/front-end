@@ -234,7 +234,7 @@ export default function MovieDetail() {
             </button>
           </div>
           <div className="movie-detail-separator"></div>
-          <div className="movie-detail-movie_details">{movieData.synopsis}</div>
+          <div className="movie-detail-movie_details">{movieData.synopsis.replace(/\\n/g, "\n")}</div>
         </section>
       </div>
       <div className="movie-detail-metadata">
