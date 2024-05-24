@@ -115,25 +115,15 @@ export default function MovieDetail() {
     if (!isLogin) {
       isloginHandler(event);
     } else {
-      httpRequest2(
-        "GET",
-        `/api/user/profile/myPage`,
-        null,
-        (response) => {
-          const foundItem = commentList.find(item => item.author === response.data.user.nickname);
-          if(!foundItem) {
-            navigate(`/details/write/${id}`, {
-              state: { movieTitle: movieData.title },
-            });
-            }
-            else {
-              alert("리뷰는 하나만 작성할 수 있습니다.");
-            }
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
+      console.log(movieData.existOTTReview);
+      if (!movieData.existOTTReview) {
+        navigate(`/details/write/${id}`, {
+          state: { movieTitle: movieData.title },
+        });
+      }
+      else {
+        alert("리뷰는 하나만 작성할 수 있습니다.");
+      }
     }
   };
 
@@ -228,9 +218,8 @@ export default function MovieDetail() {
           <div className="movie-detail-separator"></div>
           <div className="movie-detail-button2_box">
             <button
-              className={`movie-detail-buttons_icon ${
-                isWatchList && isLogin ? "movie-detail-watchlist_select" : ""
-              }`}
+              className={`movie-detail-buttons_icon ${isWatchList && isLogin ? "movie-detail-watchlist_select" : ""
+                }`}
               onClick={handleWatchlist}
             >
               watchlist 추가
