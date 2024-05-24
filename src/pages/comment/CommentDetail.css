@@ -23,7 +23,7 @@
   width: 90px;
   border: none;
   font-weight: 40;
-  font-size: 22px;
+  font-size: 17px;
   line-height: 25px;
   text-align: center;
   color: #ffffff;
@@ -38,12 +38,14 @@
 
 /* text-box */
 .comment-detail-text-box {
-  background-color: #ffffff;
+  background-color: #f2f2f2;;
   border-radius: 7px;
   padding-bottom: 2rem;
   color: #4a4a4a;
   font-size: 15px;
-  margin-top: 0;
+  margin-top: 40px;
+  text-overflow:clip;
+  word-wrap: break-word;
 }
 
 /* Title, Content */
@@ -66,7 +68,7 @@
 .comment-detail-profile_name {
   font-style: normal;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 17px;
   line-height: 16px;
   /* identical to box height, or 267% */
   display: flex;
@@ -92,8 +94,8 @@
   box-sizing: border-box;
   border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 10px;
-  width: 18px;
-  height: 18px;
+  width: 30px;
+  height: 30px;
   left: calc(50% - 18px / 2);
   top: calc(50% - 18px / 2);
   margin-right: 0.3rem;
@@ -103,7 +105,7 @@
 /* Link → Movies · 2004 */
 .comment-detail-movie_release {
   font-weight: 400;
-  font-size: 10px;
+  font-size: 16px;
   line-height: 16px;
   /* identical to box height, or 158% */
   display: flex;
@@ -123,10 +125,17 @@
   display: inline-block;
   align-items: center;
   font-weight: 400;
-  font-size: 12px;
-  line-height: 16px;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
+  font-size: 15px;
+  line-height: 20px;
+  padding: 0.3rem 0.5rem;
+  margin-left: 1rem;
+}
+.comment-detail-wrap-box{
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  padding: 20px 50px;
+  margin-bottom: 30px;
+  background-color: #f2f2f2;
 }
 
 /* Section → Link 영화 이미지 링크*/
@@ -143,27 +152,15 @@
 
 .comment-detail-totals_box {
   display: flex;
+  padding-bottom: 20px;
 }
 
-/* Section → 101 likes */
-.comment-detail-totals {
-  font-weight: 400;
-  font-size: 11px;
-  line-height: 16px;
-  /* identical to box height, or 145% */
-  display: flex;
-  align-items: center;
-  letter-spacing: -0.2px;
-  margin-right: 1rem;
-
-  color: #787878;
-}
 
 .comment-detail-totals {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
-  font-size: 11px;
+  font-size: 17px;
   line-height: 16px;
   /* identical to box height, or 145% */
   display: flex;
@@ -181,9 +178,9 @@
 /* Section → Section → Button → Like */
 /*like, share, comment button*/
 .comment-detail-button2 {
-  width: 50%;
+  width: 30%;
   font-family: "GmarketSansMedium";
-  font-size: 14px;
+  font-size: 15px;
   line-height: 40px;
   border: none;
   background-color: #539adb;

@@ -42,7 +42,7 @@
 .main-h1-name {
   padding-left: 5%;
   padding-bottom: 3%;
-  color: #539ADB;
+  color: #539adb;
   font-family: "Ultra", serif;
   font-weight: 400;
   font-style: normal;
@@ -50,14 +50,14 @@
 }
 .main-h2-name {
   padding-left: 5%;
-  color: #539ADB;
+  color: #539adb;
   font-family: "Ultra", serif;
   font-weight: 400;
   font-style: normal;
   font-size: 30px;
 }
-.main-name-description{
-  color: #539ADB;
+.main-name-description {
+  color: #539adb;
   padding-left: 5%;
   padding-bottom: 3%;
 }
@@ -76,7 +76,7 @@
   font-size: 2.5vh;
   font-style: normal;
   background-color: #ffffff;
-  color: #539ADB;
+  color: #539adb;
   border: 0;
   padding: 10px 20px;
   font-size: 16px;
@@ -175,7 +175,6 @@
   opacity: 0.95;
 }
 
-
 .main-scroll-button {
   position: absolute;
   top: 63%;
@@ -219,7 +218,7 @@
   margin-top: 5px;
 }
 
-.main-h1-name{
+.main-h1-name {
   font-family: GmarketSansMedium;
 }
 
@@ -247,6 +246,15 @@
   border: 0;
   padding: 8px 15px;
   margin-bottom: 20px;
+  margin: 20px 0;
+  height: 40px;
+  font-family: "GmarketSansMedium";
+  background-color: #539adb;
+  color: #e6f6ff;
+  border-radius: 8px;
+  border: 0;
+  padding: 8px 15px;
+  margin-bottom: 20px;
 }
 
 .main-button-list .main-button:last-child {
@@ -254,7 +262,7 @@
 }
 
 .main-button-list button:hover {
-  background-color: #31515e; /* 마우스 호버 시 배경색을 변경합니다. */
+  background-color: #7bcdee; /* 마우스 호버 시 배경색을 변경합니다. */
   color: black;
 }
 

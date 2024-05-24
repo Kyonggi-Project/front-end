@@ -131,13 +131,14 @@ const OtherUserProfile = () => {
     );
   };
 
-  const updateFollowers = (newFollowers) => {
+  const updateFollowStatus = (nickname, newIsFollowing) => {
     setUserData((prevUserData) => ({
       ...prevUserData,
-      followers: newFollowers,
+      followers: newIsFollowing
+        ? prevUserData.followers + 1
+        : prevUserData.followers - 1,
     }));
   };
-  
 
   return (
     <div>
@@ -168,15 +169,18 @@ const OtherUserProfile = () => {
             <FollowButton
               nickname={userData.nickname}
               isFollowing={isFollowed} // isFollowed 상태 전달
-              followers={userData.followers} // 현재 팔로워 수 전달
-              updateFollowers={updateFollowers}
+              updateFollowStatus={updateFollowStatus}
             />
           </div>
         </div>
         <div className="user-profile-right-section">
           <h4>Comments</h4>
           <div>
-            <CommentList comments={comments} nickname={nickname} pageType="UserProfile" />
+            <CommentList
+              comments={comments}
+              nickname={nickname}
+              pageType="UserProfile"
+            />
           </div>
         </div>
       </div>

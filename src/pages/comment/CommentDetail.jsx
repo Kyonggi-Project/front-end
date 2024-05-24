@@ -148,13 +148,15 @@ export default function CommentDetail() {
       <img src={details.backgroundImg} alt="영화 이미지" className='comment-detail-movie_image' />
       <p className='comment-detail-text'>{details.contentsTitle}</p>
       <p className='comment-detail-movie_release'>{details.creatAt}</p>
-      <div className='comment-detail-profile'>
-        <img src={profilePicture} alt="작성자 프로필" className='comment-detail-profile_img' />
-        <Link to={`/userprofile/${details.author}`} className='comment-detail-profile_name'>{details.author}</Link>
-      </div>
-
-      <p className='comment-detail-movie_grade_box'>{details.score ? details.score.toFixed(1) : 0}</p>
+      <div className='comment-detail-wrap-box'>
+        <div className='comment-detail-profile'>
+          <img src={profilePicture} alt="작성자 프로필" className='comment-detail-profile_img' />
+          <Link to={`/userprofile/${details.author}`} className='comment-detail-profile_name'>{details.author}</Link>
+          <p className='comment-detail-movie_grade_box'>{details.score ? details.score.toFixed(1) : 0}</p>
+        </div>
+        <hr style={{color:'#eaeaea'}}></hr>
       <p className='comment-detail-text-box'>{details.content}</p>
+      </div>
       {/* 해당 글을 쓴 사람이면 보이게*/}
       {isUser &&
         <>
