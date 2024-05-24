@@ -156,7 +156,7 @@ function Main() {
                         />
                       </a>
                     </div>
-                    <div className="main-data-info">{truncateText(image.title, 20)}</div>
+                    <div className="main-data-info">{truncateText(image.title, 19)}</div>
                     <div className="main-data-count">
                       {image.year} - <b>★ {image.score}</b>
                     </div>
@@ -180,6 +180,7 @@ function Main() {
           <RecommendModal showModal={showModal} closeModal={handleCloseModal} />
         )}
       </div>
+      <a href="/chat"><div className="main-chatroom">대화방</div></a>
     </>
   );
 }
