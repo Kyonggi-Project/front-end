@@ -111,32 +111,19 @@ export default function MovieDetail() {
     setOTTimg(updatedOTTimg);
   }, [movieData]);
 
-  const [myId, setMyId] = useState("");
   const handleAddComment = (event) => {
     if (!isLogin) {
       isloginHandler(event);
     } else {
-      httpRequest2(
-        "GET",
-        `/api/user/profile/myPage`,
-        null,
-        (response) => {
-          setMyId(response.data.user.nickname);
-        },
-        (error) => {
-          console.error(error);
-        }
-      );
-      console.log(myId);
-      const foundItem = commentList.find(item => item.author === myId);
-      // if(foundItem) {
-      navigate(`/details/write/${id}`, {
-        state: { movieTitle: movieData.title },
-      });
-      // }
-      // else {
-      //   alert("리뷰는 하나만 작성할 수 있습니다.");
-      // }
+      console.log(movieData.existOTTReview);
+      if (!movieData.existOTTReview) {
+        navigate(`/details/write/${id}`, {
+          state: { movieTitle: movieData.title },
+        });
+      }
+      else {
+        alert("리뷰는 하나만 작성할 수 있습니다.");
+      }
     }
   };
 
@@ -231,9 +218,8 @@ export default function MovieDetail() {
           <div className="movie-detail-separator"></div>
           <div className="movie-detail-button2_box">
             <button
-              className={`movie-detail-buttons_icon ${
-                isWatchList && isLogin ? "movie-detail-watchlist_select" : ""
-              }`}
+              className={`movie-detail-buttons_icon ${isWatchList && isLogin ? "movie-detail-watchlist_select" : ""
+                }`}
               onClick={handleWatchlist}
             >
               watchlist 추가
@@ -267,7 +253,7 @@ export default function MovieDetail() {
           <ul>
             {Object.entries(movieData.actorList).map(([key, value], index) => (
               <li key={index}>
-                <strong>{key}:</strong> {value}
+                <strong>{key}</strong> {value ? `: ${value}` : `${value}`}
               </li>
             ))}
           </ul>
