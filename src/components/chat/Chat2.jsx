@@ -53,7 +53,7 @@ const ChatUI = () => {
 
     // 컴포넌트가 언마운트되면 연결 닫기 및 채팅방 떠나기 요청 전송
     return () => {
-      if(stomp && stomp.connected) {
+      if (stomp && stomp.connected) {
         stomp.send(`/app/leave/${roomId}`, {}, JSON.stringify({
           roomId: roomId,
           sender: location.state.loginId,
@@ -67,15 +67,14 @@ const ChatUI = () => {
   const handleSend = (input) => {
     // 사용자가 입력한 메시지를 서버로 전송
     if (stompClient) {
-      console.log(1);
+      console.log(location.state.loginId + ":" + input);
+      stompClient.send(`/app/send/${roomId}`, {}, JSON.stringify({
+        roomId: roomId,
+        content: input,
+        sender: location.state.loginId,
+        status: "TALK"
+      }));
     }
-    console.log(location.state.loginId + ":" + input);
-    stompClient.send(`/app/send/${roomId}`, {}, JSON.stringify({
-      roomId: roomId,
-      content: input,
-      sender: location.state.loginId,
-      status: "TALK"
-    }));
   };
 
   function handleBack() {
