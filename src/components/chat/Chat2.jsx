@@ -20,19 +20,28 @@ const ChatUI = () => {
   const { roomId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
-  const handleMessageReceived = (message) => {
+  const handleMessageReceived = () => {
     httpRequest2(
       'GET',
       `/api/v1/chat/messages/${roomId}/${location.state.loginId}`,
       null,
       (response) => {
-        setMessages(response.data.list);
+        let tmp = 0 - response.data.count;
+        const chatData = response.data.list;
+
+        for (let i = 0; i < chatData.length; i++) {
+          if (chatData[i].sender === location.state.loginId &&
+            chatData[i].status === 'ENTER') { tmp++; }
+          if (tmp >= 1) {
+            setMessages(chatData.slice(i));
+            break;
+          }
+        }
       },
       (error) => {
         console.error(error);
       }
     );
-    setMessages((prevMessages) => [...prevMessages, message]);
   };
 
   const url = process.env.REACT_APP_URL_PATH;
@@ -48,12 +57,9 @@ const ChatUI = () => {
     stomp.connect({}, () => {
       console.log("STOMP Connection");
       // 메시지 수신 및 처리
-      stomp.subscribe(`/topic/${roomId}`, (response) => {
+      stomp.subscribe(`/topic/${roomId}`, () => {
         // 채팅방 입장시
-        console.log(JSON.parse(response.body));
-        const message = JSON.parse(response.body);
-        handleMessageReceived(message);
-        console.log(messages);
+        handleMessageReceived();
       });
 
       // 채팅방 입장 요청
