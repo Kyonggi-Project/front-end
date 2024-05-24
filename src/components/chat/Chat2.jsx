@@ -12,6 +12,7 @@ import {
   Avatar,
 } from "@chatscope/chat-ui-kit-react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { httpRequest2 } from "../../util/article";
 
 const ChatUI = () => {
   const [messages, setMessages] = useState([]);
@@ -20,10 +21,22 @@ const ChatUI = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const handleMessageReceived = (message) => {
+    httpRequest2(
+      'GET',
+      `/api/v1/chat/messages/${roomId}/${location.state.loginId}`,
+      null,
+      (response) => {
+        setMessages(response.data.list);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
     setMessages((prevMessages) => [...prevMessages, message]);
   };
 
   const url = process.env.REACT_APP_URL_PATH;
+
   useEffect(() => {
     // 웹 소켓 연결 생성
     const sockJs = new SockJS(url + "/ws/stomp");
@@ -34,13 +47,13 @@ const ChatUI = () => {
     // 연결이 성공하면 구독
     stomp.connect({}, () => {
       console.log("STOMP Connection");
-
       // 메시지 수신 및 처리
       stomp.subscribe(`/topic/${roomId}`, (response) => {
         // 채팅방 입장시
         console.log(JSON.parse(response.body));
         const message = JSON.parse(response.body);
         handleMessageReceived(message);
+        console.log(messages);
       });
 
       // 채팅방 입장 요청
