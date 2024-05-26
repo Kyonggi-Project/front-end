@@ -15,7 +15,7 @@
   position: relative;
   background: #f3f3f3;
   border-radius: 6px;
-  width: 20rem;
+  width: 21rem;
   height: 30vh;
 }
 
@@ -54,7 +54,8 @@
 }
 
 .comment-list-1-comment_poster-img{
-  width: 130px;
+  width: 110px;
+  padding-top: 6px;
 }
 .comment-list-1-comment_content{
   width: 20vh;

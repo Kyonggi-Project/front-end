@@ -147,6 +147,9 @@ export default function CommentDetail() {
     <div className='comment-detail-board_details'>
       <img src={details.backgroundImg} alt="영화 이미지" className='comment-detail-movie_image' />
       <p className='comment-detail-text'>{details.contentsTitle}</p>
+      <p><Link
+        to={`/details/${details.ottId}`}
+      ><button className='comment-link-to-movie-detail'> 상세 페이지 보러 가기</button></Link></p>
       <p className='comment-detail-movie_release'>{details.creatAt}</p>
       <div className='comment-detail-wrap-box'>
         <div className='comment-detail-profile'>

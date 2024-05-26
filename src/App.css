@@ -8,10 +8,6 @@
   font-weight: normal;
 }
 
-body {
-  background-color: #feffff !important;
-}
-
 .App {
   text-align: center;
 }
@@ -33,4 +29,34 @@ body {
   to {
     transform: rotate(360deg);
   }
+}
+
+/* Add this to your App.css */
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: #feffff !important;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.App {
+  flex: 1;
+}
+
+footer {
+  background: #f1f1f1;
+  padding: 10px 0;
+  text-align: center;
+  width: 100%;
 }
