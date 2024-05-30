@@ -3,6 +3,7 @@ import RecommendModal from "./RecommendModal";
 import "./Main.css"
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../util/auth";
 
 const url = 'http://localhost:8080';
 let belowpage = '/api/ottdata/top10';
@@ -15,7 +16,8 @@ function Main() {
 
   const navigate = useNavigate();
   const location = useLocation();
-  
+  const { isloginHandler } = useAuth();
+
   const [movieList, setMovieList] = useState([{
     id: "",
     posterImg: "",
@@ -25,24 +27,25 @@ function Main() {
   }]); //받아온 무비데이터 저장하는 state
 
   //백엔드에서 데이터 받아오는 코드
-  useEffect(()=> {
+  useEffect(() => {
     const params = new URLSearchParams(location.search);
     const genreParam = params.get("genre");
-    
+
     if (genreParam) {
-      belowpage=`/api/ottdata/genre?genre=${genreParam}`; //장르데이터 존재시 장르리스트 받아오도록
+      belowpage = `/api/ottdata/genre?genre=${genreParam}`; //장르데이터 존재시 장르리스트 받아오도록
     }
-    else{
+    else {
       belowpage = '/api/ottdata/top10'; //장르데이터가 없으면 인기리스트 받아오도록
     }
-    axios.get(url+belowpage)
+    axios.get(url + belowpage)
       .then(response => {
         setMovieList(response.data); //받아온 데이터를 무비리스트에 배열형태로 저장
       })
       .catch(
-        error => {console.error("Error fetching movie data", error);
-      });
-  },[location.search, selectedGenre]);
+        error => {
+          console.error("Error fetching movie data", error);
+        });
+  }, [location.search, selectedGenre]);
 
   //URL파라미터에서 genre값 존재 시 해당 값을 seletedGenre에 저장, 값이 없으면 '인기'로 저장
   useEffect(() => {
@@ -93,7 +96,7 @@ function Main() {
     window.addEventListener("resize", adjustNumImagesToShow);
     return () => {
       window.removeEventListener("resize", adjustNumImagesToShow);
-      
+
     };
   }, []);
 
@@ -114,8 +117,8 @@ function Main() {
       return text;
     }
     return text.substring(0, maxLength) + '...';
-  }  
-
+  }
+  
   return (
     <>
       <div className="main-title-page">
@@ -127,17 +130,17 @@ function Main() {
       </div>
       <div className="main-gallery-container">
         <div className="main-image-list-container">
-        <ul className="main-button-list">
-          <li><button className={`main-button ${selectedGenre === "인기" ? "main-selected" : ""}`} onClick={() => handleGenreClick("인기")}>인기</button></li>
-          <li><button className={`main-button ${selectedGenre === "액션" ? "main-selected" : ""}`} onClick={() => handleGenreClick("액션")}>액션</button></li>
-          <li><button className={`main-button ${selectedGenre === "공포" ? "main-selected" : ""}`} onClick={() => handleGenreClick("공포")}>공포</button></li>
-          <li><button className={`main-button ${selectedGenre === "가족" ? "main-selected" : ""}`} onClick={() => handleGenreClick("가족")}>가족</button></li>
-          <li><button className={`main-button ${selectedGenre === "드라마" ? "main-selected" : ""}`} onClick={() => handleGenreClick("드라마")}>드라마</button></li>
-          <li><button className={`main-button ${selectedGenre === "코미디" ? "main-selected" : ""}`} onClick={() => handleGenreClick("코미디")}>코미디</button></li>
-          <li><button className={`main-button ${selectedGenre === "SF" ? "main-selected" : ""}`} onClick={() => handleGenreClick("SF")}>SF</button></li>
-          <li><button className={`main-button ${selectedGenre === "로맨스" ? "main-selected" : ""}`} onClick={() => handleGenreClick("로맨스")}>로맨스</button></li>
-          <li><button className={`main-button ${selectedGenre === "다큐" ? "main-selected" : ""}`} onClick={() => handleGenreClick("다큐")}>다큐</button></li>
-        </ul>
+          <ul className="main-button-list">
+            <li><button className={`main-button ${selectedGenre === "인기" ? "main-selected" : ""}`} onClick={() => handleGenreClick("인기")}>인기</button></li>
+            <li><button className={`main-button ${selectedGenre === "액션" ? "main-selected" : ""}`} onClick={() => handleGenreClick("액션")}>액션</button></li>
+            <li><button className={`main-button ${selectedGenre === "공포" ? "main-selected" : ""}`} onClick={() => handleGenreClick("공포")}>공포</button></li>
+            <li><button className={`main-button ${selectedGenre === "가족" ? "main-selected" : ""}`} onClick={() => handleGenreClick("가족")}>가족</button></li>
+            <li><button className={`main-button ${selectedGenre === "드라마" ? "main-selected" : ""}`} onClick={() => handleGenreClick("드라마")}>드라마</button></li>
+            <li><button className={`main-button ${selectedGenre === "코미디" ? "main-selected" : ""}`} onClick={() => handleGenreClick("코미디")}>코미디</button></li>
+            <li><button className={`main-button ${selectedGenre === "SF" ? "main-selected" : ""}`} onClick={() => handleGenreClick("SF")}>SF</button></li>
+            <li><button className={`main-button ${selectedGenre === "로맨스" ? "main-selected" : ""}`} onClick={() => handleGenreClick("로맨스")}>로맨스</button></li>
+            <li><button className={`main-button ${selectedGenre === "다큐" ? "main-selected" : ""}`} onClick={() => handleGenreClick("다큐")}>다큐</button></li>
+          </ul>
           <h2 className="main-h1-name">{selectedGenre === "인기" ? "이번주 인기작 Top 10" : `${selectedGenre}`}</h2>
           <ul className="main-image-list">
             {/* 이미지 배열을 map 함수를 사용하여 동적으로 렌더링 */}
@@ -145,21 +148,21 @@ function Main() {
               .slice(startIndex, startIndex + showIndex)
               .map((image, index) => (
                 <li key={index}>
-                    <div className="main-image-wrapper">
-                      <span className="main-image-number">
-                        {startIndex + index + 1}
-                      </span>
-                      <a href={`/details/${image.id}`}>
-                        <img
-                          src={image.posterImg}
-                          alt={`Image ${startIndex + index + 1}`}
-                        />
-                      </a>
-                    </div>
-                    <div className="main-data-info">{truncateText(image.title, 19)}</div>
-                    <div className="main-data-count">
-                      {image.year} - <b>★ {image.score}</b>
-                    </div>
+                  <div className="main-image-wrapper">
+                    <span className="main-image-number">
+                      {startIndex + index + 1}
+                    </span>
+                    <a href={`/details/${image.id}`}>
+                      <img
+                        src={image.posterImg}
+                        alt={`Image ${startIndex + index + 1}`}
+                      />
+                    </a>
+                  </div>
+                  <div className="main-data-info">{truncateText(image.title, 19)}</div>
+                  <div className="main-data-count">
+                    {image.year} - <b>★ {image.score}</b>
+                  </div>
                 </li>
               ))}
           </ul>
@@ -180,7 +183,7 @@ function Main() {
           <RecommendModal showModal={showModal} closeModal={handleCloseModal} />
         )}
       </div>
-      <a href="/chat"><div className="main-chatroom">대화방</div></a>
+      <a href="/chat" onClick={isloginHandler}><div className="main-chatroom">대화방</div></a>
     </>
   );
 }
