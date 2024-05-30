@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import data from "./data.json";
-//import { useParams } from 'react-router-dom';
 import "./Board.css";
 
 const itemsPerPage = 10;
@@ -8,7 +7,6 @@ const itemsPerPage = 10;
 export default function Board() {
   const [posts, setPosts] = useState([]);
   const [pagenum, setPagenum] = useState(1);
-  //let { params } = useParams();
 
   useEffect(() => {
     setPosts(data);

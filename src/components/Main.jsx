@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import RecommendModal from "./RecommendModal";
 import "./Main.css"
 import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { useAuth } from "../util/auth";
+import { httpRequest2 } from "../util/article";
 
-const url = 'http://localhost:8080';
 let belowpage = '/api/ottdata/top10';
 
 function Main() {
@@ -37,14 +36,18 @@ function Main() {
     else {
       belowpage = '/api/ottdata/top10'; //장르데이터가 없으면 인기리스트 받아오도록
     }
-    axios.get(url + belowpage)
-      .then(response => {
+
+    httpRequest2(
+      'GET',
+      `${belowpage}`,
+      null,
+      response => {
         setMovieList(response.data); //받아온 데이터를 무비리스트에 배열형태로 저장
-      })
-      .catch(
-        error => {
-          console.error("Error fetching movie data", error);
-        });
+      },
+      error => {
+        console.error("Error fetching movie data", error);
+      }
+    );
   }, [location.search, selectedGenre]);
 
   //URL파라미터에서 genre값 존재 시 해당 값을 seletedGenre에 저장, 값이 없으면 '인기'로 저장
@@ -118,7 +121,7 @@ function Main() {
     }
     return text.substring(0, maxLength) + '...';
   }
-  
+
   return (
     <>
       <div className="main-title-page">

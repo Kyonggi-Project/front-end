@@ -3,7 +3,6 @@ import {
   ConversationList,
   Conversation,
   ConversationHeader,
-  Avatar,
   EllipsisButton,
 } from "@chatscope/chat-ui-kit-react";
 import { useNavigate } from "react-router-dom";
@@ -39,7 +38,6 @@ export default function ChatRoom() {
       `/api/chatroom/allChatrooms`,
       null,
       (response) => {
-        console.log(response.data);
         setRoom(response.data);
       },
       (error) => {
@@ -58,7 +56,6 @@ export default function ChatRoom() {
 
   function handleOption(roomId, userId, e) {
     e.stopPropagation();
-    console.log(userId);
     if(userId === loginId) {
       httpRequest2(
         'DELETE',
@@ -113,15 +110,6 @@ export default function ChatRoom() {
           >
             <Conversation.Operations onClick={(e) => handleOption(roomInfo.id, roomInfo.masterId,e)} />
           </Conversation>
-
-
-          // <Conversation key={index} onClick={() => handleChat(index)}>
-          //   <Conversation.Content >
-          //     <div>
-          //       {conversation.name}
-          //     </div>
-          //   </Conversation.Content>
-          // </Conversation>
         ))}
       </ConversationList>
       {showRoomModal && 

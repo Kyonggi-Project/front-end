@@ -14,7 +14,6 @@ import disney from "../images/disney.jpg";
 import wavve from "../images/wavve.png";
 import coupang from "../images/coupangplay.png";
 
-const url = process.env.REACT_APP_URL_PATH;
 const LogoImg = {
   Netflix: netflix,
   Watcha: watcha,
@@ -115,7 +114,7 @@ export default function MovieDetail() {
     if (!isLogin) {
       isloginHandler(event);
     } else {
-      console.log(movieData.existOTTReview);
+      // console.log(movieData.existOTTReview);
       if (!movieData.existOTTReview) {
         navigate(`/details/write/${id}`, {
           state: { movieTitle: movieData.title },

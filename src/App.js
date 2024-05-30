@@ -19,7 +19,6 @@ import WatchList from "./pages/MovieList/WatchList.jsx"
 import { AuthProvider } from "./util/auth.js";
 import ChatUI from "./components/chat/Chat2.jsx";
 import ChatRoom from "./components/chat/ChatRoom.jsx";
-import Chat from "./components/chat/Chat.jsx";
 
 function App() {
   return (

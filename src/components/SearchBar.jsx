@@ -2,14 +2,12 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { FaSearch } from "react-icons/fa"; // react-icons 패키지 설치 필요
 import styles from "../components/SearchBar.module.css";
 
 function SearchBar() {
   const [searchValue, setSearchValue] = useState("");
   const [isFocused, setIsFocused] = useState(false);
-  const navigate = useNavigate();
 
   const handleChange = (event) => {
     setSearchValue(event.target.value);

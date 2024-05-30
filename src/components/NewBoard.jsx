@@ -78,7 +78,6 @@ export default function NewBoard() {
       score: rating,
       inputTags: inputTags,
     };
-    // console.log(formData);
 
     if (match && match.params.action === 'write') {
       //리뷰 입력

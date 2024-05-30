@@ -9,12 +9,6 @@ import FollowButton from "../Follow/FollowButton.jsx";
 import FollowListModal from "../Follow/FollowListModal.jsx";
 
 const OtherUserProfile = () => {
-  // const [userInfo, setUserInfo] = useState({
-  //   nickname: "",
-  //   followers: 0,
-  //   following: 0,
-  //   likedWorks: 0,
-  // });
   const [comments, setComments] = useState([]);
   const [watchListData, setWatchListData] = useState([]);
   const { nickname } = useParams(); // URL에서 nickname 파라미터를 가져옴
@@ -64,9 +58,9 @@ const OtherUserProfile = () => {
           `/api/user/profile/nickname/${nickname}`,
           null,
           (response) => {
-            console.log("User data response:", response.data);
+            // console.log("User data response:", response.data);
             setUserData(response.data.user);
-            console.log("followed:", response.data.user.followed); // followed 값을 출력
+            // console.log("followed:", response.data.user.followed); // followed 값을 출력
             setIsFollowed(response.data.user.followed); // followed 상태 설정
             if (response.data.watchList) {
               setWatchListData(response.data.watchList.bookmark);

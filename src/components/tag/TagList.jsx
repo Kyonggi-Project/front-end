@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import "./Tag.css";
-import { matchPath, useMatch } from 'react-router-dom';
+import { useMatch } from 'react-router-dom';
 
 const TagList = ({ updateSelectedTags, onUpdateTags }) => {
   const predefinedTags = ['기분이 좋은', '긴장감 넘치는', '신나는', '따뜻한', '시원한 액션',

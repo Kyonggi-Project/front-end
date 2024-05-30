@@ -70,7 +70,6 @@ export default function CommentApp() {
         (response) => {
           if (response.data && response.data.length !== 0) {
             setCommentList(response.data);
-            console.log(response.data.ottId);
           } 
         },
         (error) => {

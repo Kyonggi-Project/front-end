@@ -1,12 +1,11 @@
 
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import "./Signup.css";
+import { httpRequest2 } from "../../util/article";
 
 function Signup() {
 
   const navigate = useNavigate();
-  const url = process.env.REACT_APP_URL_PATH;
 
   function handleSubmit(event) {
     event.preventDefault(); // 폼의 기본 제출 동작을 막습니다.
@@ -22,23 +21,21 @@ function Signup() {
     if (formData.password !== confirm) {
       alert("비밀번호를 확인해 주세요");
     } else {
-      console.log(formData);
 
       // axios를 사용하여 POST 요청 보내기
-      axios.post(/*백엔드 요청 주소*/url + '/api/user/signup', JSON.stringify(formData), {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-        .then(response => {
-          console.log('응답 데이터:', response.data);
+      httpRequest2(
+        'POST',
+        '/api/user/signup',
+        JSON.stringify(formData),
+        response => {
           alert("회원가입 되었습니다.");
           navigate('/login');
-        })
-        .catch(error => {
+        },
+        error => {
           alert("아이디, 비밀번호 혹은 이메일을 확인해주세요.");
           console.error('데이터 전송 오류:', error);
-        });
+        }
+      )
     }
 
   }

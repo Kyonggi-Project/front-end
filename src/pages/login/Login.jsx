@@ -1,9 +1,6 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import { GoogleLogin } from "@react-oauth/google";
-import { GoogleOAuthProvider } from '@react-oauth/google';
-import { jwtDecode } from 'jwt-decode';
 import { Link } from "react-router-dom";
 import "./Login.css";
 
@@ -21,10 +18,8 @@ export default function Login() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    console.log(enteredValues);
     axios.post(url + '/login', formData, { withCredentials: true })
       .then((res) => {
-        console.log(res.data);
         alert("로그인");
         window.location.href = res.data.redirectUrl;
       })
@@ -69,17 +64,6 @@ export default function Login() {
           <a href={process.env.REACT_APP_GOOGLE_OAUTH}>
             <img src="../google.png" width="30px" alt="google"></img>
           </a>
-          {/* <GoogleOAuthProvider clientId={process.env.REACT_APP_CLIENT_ID}>
-            <GoogleLogin
-              onSuccess={(res) => {
-                console.log(res);
-                console.log(jwtDecode(res.credential)); //credential 디코딩
-              }}
-              onFailure={(err) => {
-                console.log(err);
-              }}
-            />
-          </GoogleOAuthProvider> */}
           <button className="login-button" onClick={handleSubmit}>Login</button>
         </form>
       </div>

@@ -6,7 +6,6 @@ export default function ChatRoomModal({ closeModal }) {
   function handleSubmitForm(e) {
     e.preventDefault();
     setroomName(roomName);
-    console.log(roomName);
     httpRequest2(
       'POST',
       `/api/chatroom/addChatroom`,

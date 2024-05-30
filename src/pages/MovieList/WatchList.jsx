@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import "./MovieList.css";
 import { httpRequest2 } from "../../util/article";
 
-const url = process.env.REACT_APP_URL_PATH;
-
 export default function MovieList() {
     const [movieList, setMovieList] = useState([{
       id: "",
@@ -19,7 +17,6 @@ export default function MovieList() {
             '/api/watchList/view',
             null,
             (response) => {
-              console.log(response.data);
               setMovieList(response.data.bookmark);
             },
             (error) => {

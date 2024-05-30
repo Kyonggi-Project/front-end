@@ -9,7 +9,6 @@ import {
   Message,
   MessageInput,
   ConversationHeader,
-  Avatar,
 } from "@chatscope/chat-ui-kit-react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { httpRequest2 } from "../../util/article";
@@ -50,7 +49,6 @@ const ChatUI = () => {
     // 웹 소켓 연결 생성
     const sockJs = new SockJS(url + "/ws/stomp");
     const stomp = Stomp.over(sockJs);
-    console.log(stomp);
     setStompClient(stomp);
 
     // 연결이 성공하면 구독

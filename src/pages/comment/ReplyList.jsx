@@ -10,8 +10,6 @@ export default function ReplyList() {
   const { id } = useParams();
   const [showModal, setShowModal] = useState(false);
   const [currentComment, setCurrentComment] = useState('');
-  const [isUser, setIsUser] = useState(false);
-  const [currentUser, setCurrentUser] = useState('');
   const [replyId, setReplyId] = useState('');
 
   useEffect(() => {

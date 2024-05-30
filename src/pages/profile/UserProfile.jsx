@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import EditModal from "../profile/EditModal";
 import DeleteModal from "../profile/DeleteModal.jsx";
 import defaultProfile from "../../images/profilePicture.png";
@@ -25,7 +24,6 @@ const UserProfile = () => {
   const [showFollowersModal, setShowFollowersModal] = useState(false);
   const [showFollowingModal, setShowFollowingModal] = useState(false);
 
-  const url = process.env.REACT_APP_URL_PATH;
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
   if (token) {
@@ -59,7 +57,6 @@ const UserProfile = () => {
       null,
       (response) => {
         setCommentList(response.data);
-        console.log(response.data);
       },
       (error) => {
         console.error("Error fetching comments:", error);
@@ -120,19 +117,17 @@ const UserProfile = () => {
   // 수정된 정보를 백엔드로 전송하는 함수
   const handleSubmitUpdatedInfo = (updatedInfo) => {
     const { confirmPassword, ...infoToSend } = updatedInfo;
-    if (infoToSend.password && infoToSend.password !== confirmPassword) {
+    if ((infoToSend.password &&
+      infoToSend.password !== confirmPassword) || !infoToSend.password) {
       console.error("Passwords do not match");
       return;
     }
 
-    axios
-      .put(url + "/api/user/update", infoToSend, {
-        headers: {
-          Authorization: "Bearer " + localStorage.getItem("access_token"),
-        },
-      })
-      .then((response) => {
-        console.log("Updated info sent to server:", response.data);
+    httpRequest2(
+      'PUT',
+      `/api/user/update`,
+      infoToSend,
+      (response) => {
         setUserData((prevState) => ({
           ...prevState,
           ...response.data,
@@ -142,10 +137,11 @@ const UserProfile = () => {
           ...response.data,
         }));
         handleCloseEditModal();
-      })
-      .catch((error) => {
+      },
+      (error) => {
         console.error("Error sending updated info to server:", error);
-      });
+      }
+    );
   };
 
   return (

@@ -1,7 +1,6 @@
 import React, { useState, useEffect} from "react";
 import "./Main.css";
 import { useLocation } from "react-router-dom";
-//import { httpRequest2 } from "../util/article.js";
 import axios from "axios";
 
 const url = process.env.REACT_APP_URL_PATH;
@@ -37,23 +36,7 @@ function AfterLoginMain() {
   useEffect(() => {
     const emotion = params.get("emotion");
     const claim = params.get("claim");
-    /*
-    httpRequest2(
-      'POST',
-      `/api/ottdata/sentiment`,
-      {
-        "emotion": `${emotion}`,
-        "claim": `${claim}`
-      },
-      (response) => {
-        setMovieEmotionList(response.data.contentsByEmotion);
-        setMovieClaimList(response.data.contentsByClaim);
-      },
-      (error) => {
-        console.error('코멘트 정보를 가져오는데 실패했습니다:', error);
-      },
-    );
-    */
+
     axios
       .post(url + `/api/ottdata/sentiment`, {
         emotion: `${emotion}`,
