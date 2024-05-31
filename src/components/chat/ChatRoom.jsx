@@ -104,6 +104,7 @@ export default function ChatRoom() {
       >
         {room.map((roomInfo) => (
           <Conversation
+            info="인원수"
             key={roomInfo.id}
             name={roomInfo.name}
             onClick={() => handleChat(roomInfo.id)}

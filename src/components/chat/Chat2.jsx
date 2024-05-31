@@ -9,6 +9,7 @@ import {
   Message,
   MessageInput,
   ConversationHeader,
+  Button,
 } from "@chatscope/chat-ui-kit-react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { httpRequest2 } from "../../util/article";
@@ -68,17 +69,17 @@ const ChatUI = () => {
       }));
     });
 
-    // 컴포넌트가 언마운트되면 연결 닫기 및 채팅방 떠나기 요청 전송
-    return () => {
-      if (stomp && stomp.connected) {
-        stomp.send(`/app/leave/${roomId}`, {}, JSON.stringify({
-          roomId: roomId,
-          sender: location.state.loginId,
-          status: "LEAVE"
-        }));
-        stomp && stomp.disconnect();
-      }
-    };
+    // // 컴포넌트가 언마운트되면 연결 닫기 및 채팅방 떠나기 요청 전송
+    // return () => {
+    //   if (stomp && stomp.connected) {
+    //     stomp.send(`/app/leave/${roomId}`, {}, JSON.stringify({
+    //       roomId: roomId,
+    //       sender: location.state.loginId,
+    //       status: "LEAVE"
+    //     }));
+    //     stomp && stomp.disconnect();
+    //   }
+    // };
   }, []);
 
   const handleSend = (input) => {
@@ -98,11 +99,28 @@ const ChatUI = () => {
     navigate('/chat');
   }
 
+  function handleExit(stomp) {
+    // 컴포넌트가 언마운트되면 연결 닫기 및 채팅방 떠나기 요청 전송
+    if (stomp && stomp.connected) {
+      stomp.send(`/app/leave/${roomId}`, {}, JSON.stringify({
+        roomId: roomId,
+        sender: location.state.loginId,
+        status: "LEAVE"
+      }));
+      stomp && stomp.disconnect();
+      navigate('/chat');
+    }
+  }
+
   return (
     <div>
       <div style={{ position: "relative", height: "70vh" }}>
         <ConversationHeader>
           <ConversationHeader.Back onClick={handleBack} />
+          <ConversationHeader.Actions>
+            <Button border onClick={() => handleExit(stompClient)}>퇴장하기</Button>
+            <p style={{marginLeft:"37rem"}}>채팅방 이름</p>
+          </ConversationHeader.Actions>
         </ConversationHeader>
         <MainContainer>
           <ChatContainer>
