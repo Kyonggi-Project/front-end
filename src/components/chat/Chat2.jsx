@@ -109,9 +109,11 @@ const ChatUI = () => {
       <div style={{ position: "relative", height: "70vh" }}>
         <ConversationHeader>
           <ConversationHeader.Back onClick={handleBack} />
+          <ConversationHeader.Content>
+            <p style={{textAlign: "center"}}>{location.state.roomName}</p>
+          </ConversationHeader.Content>
           <ConversationHeader.Actions>
             <Button onClick={() => handleExit(stompClient)}>퇴장하기</Button>
-            <p style={{marginLeft:"37rem"}}>{location.state.roomName}</p>
           </ConversationHeader.Actions>
         </ConversationHeader>
         <MainContainer>
