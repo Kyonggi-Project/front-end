@@ -118,7 +118,7 @@ const ChatUI = () => {
         <ConversationHeader>
           <ConversationHeader.Back onClick={handleBack} />
           <ConversationHeader.Actions>
-            <Button border onClick={() => handleExit(stompClient)}>퇴장하기</Button>
+            <Button onClick={() => handleExit(stompClient)}>퇴장하기</Button>
             <p style={{marginLeft:"37rem"}}>채팅방 이름</p>
           </ConversationHeader.Actions>
         </ConversationHeader>
