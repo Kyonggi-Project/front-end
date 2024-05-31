@@ -112,6 +112,10 @@ const ChatUI = () => {
     }
   }
 
+  function handleInfo(nickname) {
+    navigate(`/userprofile/${nickname}`)
+  }
+
   return (
     <div>
       <div style={{ position: "relative", height: "70vh" }}>
@@ -138,7 +142,7 @@ const ChatUI = () => {
                     sender: message.sender,
                     direction: "incoming",
                   }}>
-                  <Message.Header
+                  <Message.Header onClick={() => handleInfo(message.sender)}
                   // sender="Emily"
                   // sentTime="just now"
                   >{message.sender}</Message.Header>

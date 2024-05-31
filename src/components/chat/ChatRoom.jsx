@@ -4,6 +4,8 @@ import {
   Conversation,
   ConversationHeader,
   EllipsisButton,
+  AddUserButton,
+  Button,
 } from "@chatscope/chat-ui-kit-react";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -56,7 +58,7 @@ export default function ChatRoom() {
 
   function handleOption(roomId, userId, e) {
     e.stopPropagation();
-    if(userId === loginId) {
+    if (userId === loginId) {
       httpRequest2(
         'DELETE',
         `/api/chatroom/delete/${roomId}?userId=${userId}`,
@@ -93,8 +95,9 @@ export default function ChatRoom() {
           userName=""
         />
         <ConversationHeader.Actions>
-          <EllipsisButton orientation="vertical" onClick={handleNewRoom}>
-          </EllipsisButton>
+          <AddUserButton onClick={handleNewRoom} />
+          {/* <EllipsisButton orientation="vertical" onClick={handleNewRoom}>
+          </EllipsisButton> */}
         </ConversationHeader.Actions>
       </ConversationHeader>
       <ConversationList
@@ -109,12 +112,14 @@ export default function ChatRoom() {
             name={roomInfo.name}
             onClick={() => handleChat(roomInfo.id)}
           >
-            <Conversation.Operations onClick={(e) => handleOption(roomInfo.id, roomInfo.masterId,e)} />
+            <Conversation.Operations>
+              <Button onClick={(e) => handleOption(roomInfo.id, roomInfo.masterId, e)}>ㅡ</Button>
+            </Conversation.Operations>
           </Conversation>
         ))}
       </ConversationList>
-      {showRoomModal && 
-        <ChatRoomModal closeModal={handleCloseRoomModal}/>
+      {showRoomModal &&
+        <ChatRoomModal closeModal={handleCloseRoomModal} />
       }
     </>
   );
