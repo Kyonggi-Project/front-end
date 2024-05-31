@@ -3,7 +3,6 @@ import {
   ConversationList,
   Conversation,
   ConversationHeader,
-  EllipsisButton,
   AddUserButton,
   Button,
 } from "@chatscope/chat-ui-kit-react";
@@ -40,6 +39,7 @@ export default function ChatRoom() {
       `/api/chatroom/allChatrooms`,
       null,
       (response) => {
+        console.log(response.data);
         setRoom(response.data);
       },
       (error) => {
@@ -48,8 +48,8 @@ export default function ChatRoom() {
     );
   }, []);
 
-  function handleChat(roomId) {
-    navigate(`/chat/${roomId}`, { state: { loginId: loginId } });
+  function handleChat(roomId, roomName) {
+    navigate(`/chat/${roomId}`, { state: { loginId: loginId, roomName: roomName }, });
   }
 
   function handleBack() {
@@ -75,7 +75,6 @@ export default function ChatRoom() {
     else {
       alert('삭제할 수 없습니다.');
     }
-
   }
 
   function handleNewRoom() {
@@ -96,8 +95,6 @@ export default function ChatRoom() {
         />
         <ConversationHeader.Actions>
           <AddUserButton onClick={handleNewRoom} />
-          {/* <EllipsisButton orientation="vertical" onClick={handleNewRoom}>
-          </EllipsisButton> */}
         </ConversationHeader.Actions>
       </ConversationHeader>
       <ConversationList
@@ -107,10 +104,10 @@ export default function ChatRoom() {
       >
         {room.map((roomInfo) => (
           <Conversation
-            info="인원수"
+            info={roomInfo.memberCount}
             key={roomInfo.id}
             name={roomInfo.name}
-            onClick={() => handleChat(roomInfo.id)}
+            onClick={() => handleChat(roomInfo.id, roomInfo.name)}
           >
             <Conversation.Operations>
               <Button onClick={(e) => handleOption(roomInfo.id, roomInfo.masterId, e)}>ㅡ</Button>
