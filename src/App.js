@@ -23,30 +23,31 @@ import ChatRoom from "./components/chat/ChatRoom.jsx";
 function App() {
   return (
     <AuthProvider>
-        <Router>
-          <div>
-            <Header />
-            <Routes>
-              <Route path="/" element={<Main />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
-              <Route path="/userprofile" element={<UserProfile />} />
+      <Router>
+        <div>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/userprofile" element={<UserProfile />} />
             <Route path="/userprofile/:nickname" element={<OtherUserProfile />} />
-              <Route path="/details/write/:ottId" element={<NewBoard />} />
-              <Route path="/comments/:ottId/:id" element={<CommentDetail />} />
-              <Route path="/details/:ottId" element={<MovieDetail />} />
-              <Route path="/list/id/:id" element={<CommentApp />} />
-              <Route path="/list/nickname/:nickname" element={<CommentApp />} />
-              <Route path="/movie" element={<MovieList />}  />
-              <Route path="/watchlist" element={<WatchList/>}/>
-              <Route path="/afterModal" element={<AfterLoginMain  />}  />
-              <Route path="/details/edit/:ottId/:id" element={<NewBoard />} />
-              <Route path="/chat/:roomId" element={<ChatUI />} />
-              <Route path="/chat" element={<ChatRoom />} />
-            </Routes>
-            <Footer  />
-          </div>
-        </Router>
+            <Route path="/details/write/:ottId" element={<NewBoard />} />
+            <Route path="/comments/:ottId/:id" element={<CommentDetail />} />
+            <Route path="/details/:ottId" element={<MovieDetail />} />
+            <Route path="/list/id/:id" element={<CommentApp />} />
+            <Route path="/list/nickname/:nickname" element={<CommentApp />} />
+            <Route path="/movie" element={<MovieList />} />
+            <Route path="/watchlist" element={<WatchList />} />
+            <Route path="/watchlist/:nickname" element={<WatchList />} />
+            <Route path="/afterModal" element={<AfterLoginMain />} />
+            <Route path="/details/edit/:ottId/:id" element={<NewBoard />} />
+            <Route path="/chat/:roomId" element={<ChatUI />} />
+            <Route path="/chat" element={<ChatRoom />} />
+          </Routes>
+          <Footer />
+        </div>
+      </Router>
     </AuthProvider>
   );
 }

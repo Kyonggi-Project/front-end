@@ -4,7 +4,12 @@ import defaultProfile from "../../images/profilePicture.png";
 import CommentList from "../comment/CommentList1";
 import { httpRequest2 } from "../../util/article";
 import "./UserProfile.css";
-import { useSearchParams, useParams, useNavigate } from "react-router-dom";
+import {
+  useSearchParams,
+  useParams,
+  useNavigate,
+  Link,
+} from "react-router-dom";
 import FollowButton from "../Follow/FollowButton.jsx";
 import FollowListModal from "../Follow/FollowListModal.jsx";
 
@@ -155,10 +160,10 @@ const OtherUserProfile = () => {
               <p onClick={fetchFollowing}>{userData.following}</p>
             </div>
             <div className="user-profile-stat-item">
-              <a href="/watchlist">
+              <Link to={`/watchlist/${nickname}`}>
                 <p>Liked</p>
                 <p>{watchListData.length}</p>
-              </a>
+              </Link>
             </div>
           </div>
           <div>
